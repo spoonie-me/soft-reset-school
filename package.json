@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "prisma generate --schema=backend/prisma/schema.prisma && tsc -b && vite build && node scripts/prerender.mjs",
+    "build": "node scripts/build-lab-content.mjs && prisma generate --schema=backend/prisma/schema.prisma && tsc -b && vite build && node scripts/prerender.mjs",
     "postinstall": "prisma generate --schema=backend/prisma/schema.prisma",
+    "lab:generate": "node scripts/build-lab-content.mjs",
     "lint": "eslint .",
     "curriculum:plan": "node scripts/build-curriculum-plan.mjs",
     "curriculum:audit": "node scripts/curriculum-audit.mjs",

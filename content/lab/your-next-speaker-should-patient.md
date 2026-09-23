@@ -1,0 +1,24 @@
+---
+title: "Your next speaker should be a patient."
+date: 2023-09-29
+description: "Business leaders constantly seek fresh perspectives and insights to share with our teams and customers. The conventional route is to invite renowned academics, CEOs, and success..."
+tags: chronic-illness, patient-advocacy, chronically
+source: chronically.life
+slug: your-next-speaker-should-patient
+---
+
+Business leaders constantly seek fresh perspectives and insights to share with our teams and customers. The conventional route is to invite renowned academics, CEOs, and successful entrepreneurs to provide their wisdom and perspective through keynote speeches and presentations. However, we may be missing out on some of the most compelling and meaningful stories by not including patient voices.
+
+Your next speaker should be someone who has personally experienced illness, injury, or other health challenges. Rather than coming from the vantage point of management expertise or medical knowledge, a patient speaker will offer a candid view from the frontlines of healthcare. They can provide a humanizing glimpse into what it is truly like to navigate the world as a person in need of medical care, assistance, and compassion.
+
+Patients have invaluable lessons to teach about resilience, coping, advocacy, and finding meaning in difficult circumstances. While doctors and executives understand healthcare systems from the outside, patients know intimately what does and does not work from the inside. They can offer poignant anecdotes, sometimes humorous and sometimes heart-wrenching, that bring health issues down to a personal, emotional level. Rather than dry statistics or best practices, a patient speaker will share real lived experiences that attendees can relate to and remember.
+
+In addition, patient voices are crucial for emphasizing empathy, humility, and understanding different perspectives in healthcare. Patients have not had a meaningful role in decision-making processes for too long. Involving them in conferences and presentations is one small step towards shifting that dynamic. It also helps humanize an industry that can sometimes feel cold, bureaucratic and focused more on profits than people. A patient up on the main stage reminds everyone that healthcare is about individual human lives and well-being, not just business metrics or scientific progress.
+
+Naturally, find a patient speaker who feels comfortable sharing their journey and has a compelling story to tell. But remember how much people will connect with something real, vulnerable, and outside the usual expertise. A patient brings authority of a different kind: the authority of lived experience. Even for clinical or executive audiences, such an intimate human story can be far more memorable than abstract concepts, no matter how insightful. It plants a seed that may shape how people later approach their own work and the people they serve.
+
+So, the next time you are planning a conference, could you open your search beyond the traditional spheres? Please look out for candidates who have walked in the shoes of those you, your employees, and your customers ultimately exist to help. Your attendees will be richer for hearing an authentic patient voice alongside the many expert perspectives they are accustomed to. Such a balance serves as an important reminder of why this important work matters and who it is truly for.
+
+* * *
+
+Photo: Denys Michalevich

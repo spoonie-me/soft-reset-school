@@ -1,23 +1,21 @@
-> ## PAUSED - 22 August 2026
+> ## RESUMED - 23 September 2026
 >
-> This project is frozen as part of a portfolio focus decision. It is **not abandoned**, and
-> nothing is lost:
+> Frozen 2026-08-22 as part of a portfolio focus decision (see git history for the
+> original PAUSED note), resumed as part of a brand restructure that makes this repo
+> the umbrella for **Soft Reset** — split into **Lab** (ongoing blog/thought-leadership
+> content, including the migrated Chronically and rois.life archives) and **School**
+> (the original four-track AI-skills program). `roishternin.com` stays a separate,
+> unchanged personal/speaker site.
 >
-> - Full history (all refs) is bundled at `~/Backups/freeze-20260822/bundles/soft-reset-school.bundle`
->   on the Mac and in `~/backup-staging/freeze-20260822/` on the Dell.
-> - Any uncommitted work at freeze time was committed to the `freeze/wip-20260822` branch.
-> - Related Stripe products were archived, not deleted - reversible with `active=true`.
->
-> **Why:** across 24 months of live Stripe data, every product in this portfolio earned EUR 0.
-> All income came from speaking and consulting. Active development is limited to
-> `spooniversity` and `roishternin` until a platform has paying customers.
->
-> **To resume:** unarchive the Stripe products and continue from the freeze branch.
+> **Note:** the Stripe products archived at freeze time (including the €69 Credential)
+> were left archived — that's a separate decision from resuming content/dev work here.
+> Un-archive them before relying on the paid checkout flow.
 
 # Soft Reset School
 
-The app serving [softreset.school](https://softreset.school) — AI-era employable skills
-for bed- and home-bound chronically ill people. Every lesson free forever; one-time €69
+The app serving [softreset.school](https://softreset.school) — the Soft Reset umbrella,
+split into **Lab** (ongoing content) and **School** (AI-era employable skills for bed-
+and home-bound chronically ill people). Every School lesson free forever; one-time €69
 Credentials (certification exam + permanent, publicly verifiable certificate) are the
 only paid product. See `BUSINESS_MODEL.md` for the full operating model.
 

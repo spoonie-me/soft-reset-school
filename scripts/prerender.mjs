@@ -19,6 +19,13 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dir, '..', 'dist');
 const SHELL = join(DIST, 'index.html');
 
+// Lab posts are generated content (scripts/build-lab-content.mjs), so their
+// routes are read from the same metadata file instead of hardcoded here.
+const LAB_POSTS_PATH = join(__dir, '..', 'src', 'data', 'labPosts.generated.json');
+const labSlugs = existsSync(LAB_POSTS_PATH)
+  ? JSON.parse(readFileSync(LAB_POSTS_PATH, 'utf8')).map((p) => p.slug)
+  : [];
+
 if (!existsSync(SHELL)) {
   console.error('❌  dist/index.html not found — run vite build first');
   process.exit(1);
@@ -56,6 +63,10 @@ const PUBLIC_ROUTES = [
   'blog/build-your-first-ai-app',
   'blog/coding-with-chronic-illness',
   'blog/prompt-engineering-guide',
+
+  // Lab index + all posts (generated — see src/data/labPosts.generated.json)
+  'lab',
+  ...labSlugs.map((slug) => `lab/${slug}`),
 
   // Legal / compliance
   'imprint',

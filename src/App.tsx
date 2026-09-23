@@ -46,6 +46,8 @@ const WelcomeMember    = lazy$(() => import('@/pages/WelcomeMember'),    'Welcom
 const WelcomeSpecialist= lazy$(() => import('@/pages/WelcomeSpecialist'),'WelcomeSpecialist');
 const WelcomeArchitect = lazy$(() => import('@/pages/WelcomeArchitect'), 'WelcomeArchitect');
 const Blog             = lazy$(() => import('@/pages/Blog'),             'Blog');
+const Lab              = lazy$(() => import('@/pages/Lab'),              'Lab');
+const LabPost           = lazy$(() => import('@/pages/LabPost'),          'LabPost');
 const TracksCatalog    = lazy$(() => import('@/pages/TracksCatalog'),    'TracksCatalog');
 const TrackInfo        = lazy$(() => import('@/pages/TrackInfo'),        'TrackInfo');
 const VerifyEmail      = lazy$(() => import('@/pages/VerifyEmail'),      'VerifyEmail');
@@ -132,6 +134,10 @@ function AppInner() {
           <Route path="/blog/build-your-first-ai-app" element={<BuildYourFirstAiApp />} />
           <Route path="/blog/coding-with-chronic-illness" element={<CodingWithChronicIllness />} />
           <Route path="/blog/prompt-engineering-guide" element={<PromptEngineeringGuide />} />
+
+          {/* Lab — ongoing work: Dell/clinical AI, Chronically, rois.life */}
+          <Route path="/lab" element={<Lab />} />
+          <Route path="/lab/:slug" element={<LabPost />} />
 
           <Route path="/for-teams" element={<ForTeams />} />
           <Route path="/about" element={<About />} />

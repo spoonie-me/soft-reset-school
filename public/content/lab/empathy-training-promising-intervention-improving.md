@@ -1,0 +1,3 @@
+Researchers at UC Berkeley ran an empathy training package, built around role-playing, perspective-taking, and emotional labeling, delivered by trainers who gave individualized feedback. Participants showed real, measurable improvement in their ability to understand and share what other people were feeling. Empathy, in other words, is trainable. That matters for anyone arguing it should be taught in medical school rather than treated as an innate trait some clinicians happen to have and others don't.
+
+If you want to go deeper on the mechanics of it, Karla McLaren's *The Empathy Effect* is worth reading. Her point is that empathy isn't feeling sorry for someone. It's actually understanding them, which is a different and harder skill.

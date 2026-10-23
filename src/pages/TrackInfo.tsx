@@ -18,7 +18,7 @@ export function TrackInfo() {
     <div>
       <SEO
         title={`${track.title} — what's inside the track`}
-        description={`${track.pitch} Full curriculum outline, who it's for, and the €69 credential exam — every lesson free to read, no account needed.`}
+        description={`${track.pitch} Full curriculum outline, who it's for, and the credential exam — every lesson free to read, no account needed.`}
         canonical={`/tracks/${track.slug}`}
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -101,7 +101,7 @@ export function TrackInfo() {
           <Card style={{ borderColor: track.color }}>
             <div style={{ width: 32, height: 3, background: track.color, borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
             <p style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>
-              €69 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever</span>
+              €99 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever · 2 tracks €149, 3 tracks €199</span>
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} · ~{track.totalMinutes} min total
@@ -126,7 +126,7 @@ export function TrackInfo() {
               stops operating.
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-              Can't afford €69? Pay what you can, down to €0 — no proof, no application. Details on the{' '}
+              Can't afford €99? Pay what you can, down to €0 — no proof, no application. Details on the{' '}
               <Link to="/pricing" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
             </p>
           </Card>
@@ -139,7 +139,7 @@ export function TrackInfo() {
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} published so far · ~{track.totalMinutes} min total ·
               {' '}needs at least {lessonsUntilCredential(track)} more lesson{lessonsUntilCredential(track) === 1 ? '' : 's'} before a
-              {' '}€69 credential would be honest
+              {' '}credential would be honest
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
               Every lesson here is free to read right now, same as every other track. We just won't sell a

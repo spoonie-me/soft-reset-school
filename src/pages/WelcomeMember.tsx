@@ -40,20 +40,20 @@ export function WelcomeMember() {
 
     g('event', 'conversion', {
       send_to: 'AW-18029452931/UiPjCJWPqowcEIO9jpVD',
-      value: 69.0,
+      value: 99.0,
       currency: 'EUR',
       transaction_id,
     });
 
     g('event', 'purchase', {
       currency: 'EUR',
-      value: 69.0,
+      value: 99.0,
       transaction_id,
       items: [{
         item_id: 'track_credential',
         item_name: 'Soft Reset School Track Credential',
         item_category: 'credential',
-        price: 69.0,
+        price: 99.0,
         quantity: 1,
       }],
     });
@@ -121,7 +121,7 @@ export function WelcomeMember() {
           Every lesson is free, forever — no subscription, nothing to cancel. Certificates you earn are permanent and stay publicly verifiable.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-          Questions? Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
     </div>

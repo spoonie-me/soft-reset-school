@@ -20,7 +20,7 @@ export function Imprint() {
         <p style={{ color: 'var(--text-secondary)' }}><strong>Licensing Authority:</strong> Magistrat der Stadt Wien, Gewerbebeh&ouml;rde</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Supervisory Authority:</strong> Wirtschaftskammer Wien (WKW), Fachverband Unternehmensberatung, Buchhaltung und Informationstechnologie (UBIT)</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Address:</strong> 1180 Vienna, Austria <em>(full street address available on request)</em></p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Contact:</strong> <a href="mailto:legal@bedcoders.com" style={{ color: 'var(--signal)' }}>legal@bedcoders.com</a></p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Contact:</strong> <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a></p>
       </Card>
 
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
@@ -110,7 +110,7 @@ export function Imprint() {
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>External Links Disclaimer</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          We are not responsible for the content of external websites linked from bedcoders.com. At the time of linking, no illegal content was identified. Upon notification of violations, such links will be removed immediately.
+          We are not responsible for the content of external websites linked from softreset.school. At the time of linking, no illegal content was identified. Upon notification of violations, such links will be removed immediately.
         </p>
       </Card>
     </div>

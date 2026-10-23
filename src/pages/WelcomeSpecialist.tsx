@@ -75,7 +75,7 @@ export function WelcomeSpecialist() {
           Your lifetime enrollment means you can learn at your own pace, come back anytime, and revisit material whenever you need it. Your certificate, once earned, is yours forever.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-          Questions? Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
 

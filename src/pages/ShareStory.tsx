@@ -125,7 +125,7 @@ export function ShareStory() {
           </div>
 
           {status === 'error' && (
-            <p style={{ color: 'var(--rust)', fontSize: '0.875rem' }}>Something went wrong. Please try again or email hello@bedcoders.com.</p>
+            <p style={{ color: 'var(--rust)', fontSize: '0.875rem' }}>Something went wrong. Please try again or email hi@softreset.school.</p>
           )}
 
           <Button variant="primary" type="submit" disabled={status === 'loading'} style={{ alignSelf: 'flex-start' }}>

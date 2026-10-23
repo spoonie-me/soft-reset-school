@@ -113,9 +113,9 @@ export function Employers() {
       {/* Credential vouchers — the one thing with a published price */}
       <section style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-2xl) var(--space-xl)' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Credential vouchers — €69 per track, flat</h2>
+          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Credential vouchers — €99 per track, flat</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-            Sponsor certification for your own returning employees, or for candidates you're considering. Vouchers cost exactly what individual learners pay — €69 per track credential — redeemable whenever the person is ready, no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
+            Sponsor certification for your own returning employees, or for candidates you're considering. Vouchers cost exactly what individual learners pay — €99 per track credential — redeemable whenever the person is ready, no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
           </p>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
             Audit and placement pricing depends on scope — platform size, number of roles, timeline. We'd rather scope it with you directly than publish a number that doesn't fit your situation.
@@ -176,7 +176,7 @@ export function Employers() {
             )}
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.75rem', margin: 0 }}>
               Or email us directly at{' '}
-              <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>hello@bedcoders.com</a>
+              <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>hi@softreset.school</a>
             </p>
           </form>
         </Card>

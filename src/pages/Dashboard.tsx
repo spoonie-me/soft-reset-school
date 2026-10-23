@@ -94,9 +94,8 @@ function MasteryStars({ count, max = 5 }: { count: number; max?: number }) {
 // Credential product value map for GA4 conversion events (one-time payments —
 // see PRD.md §4.5, 2026-08-04. Subscription plan values retired.)
 const CREDENTIAL_VALUES: Record<string, number> = {
-  track_credential: 69,
-  program_credential: 149,
-  code_review: 25,
+  track_credential: 99,
+  program_credential: 199, // 2-track bundles are €149; GA4 value is approximate
 };
 
 export function Dashboard() {
@@ -118,7 +117,7 @@ export function Dashboard() {
 
     const g = (window as any).gtag;
     if (typeof g === 'function') {
-      const value = CREDENTIAL_VALUES[credential] ?? 69;
+      const value = CREDENTIAL_VALUES[credential] ?? 99;
       const transaction_id = `${credential}_${sessionId.slice(-8)}`;
       g('event', 'conversion', {
         send_to: 'AW-18029452931/UiPjCJWPqowcEIO9jpVD',

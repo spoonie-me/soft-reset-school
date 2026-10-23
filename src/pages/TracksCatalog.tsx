@@ -4,7 +4,6 @@ import { Card } from '@/components/Card';
 import { SEO, breadcrumbLd } from '@/components/SEO';
 import {
   CAREER_CATALOG_TRACKS,
-  FOUNDATION_CATALOG_TRACKS,
   type CatalogTrack,
 } from '@/data/trackCatalog';
 
@@ -35,7 +34,7 @@ export function TracksCatalog() {
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
       <SEO
         title="Tracks — see what's inside before you sign up"
-        description="All 8 Soft Reset School tracks, open to read before you create an account: four career tracks for the reintegration path and four foundation tracks. Every lesson is free — pay €69 once, only for the credential."
+        description="All 4 Soft Reset School career tracks, open to read before you create an account. Every lesson is free — pay once, only for the credential (€99 per track, 2 for €149, 3 for €199)."
         canonical="/tracks"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -50,8 +49,8 @@ export function TracksCatalog() {
         </p>
         <h1 style={{ marginBottom: 'var(--space-lg)' }}>see what's inside every track — before you sign up</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem' }}>
-          Eight tracks, all free to read, forever. Each page below shows the full curriculum outline, who the
-          track is for, and exactly what the €69 credential exam involves — no account needed to look around.
+          Four tracks, all free to read, forever. Each page below shows the full curriculum outline, who the
+          track is for, and exactly what the credential exam involves — no account needed to look around.
         </p>
       </div>
 
@@ -67,22 +66,10 @@ export function TracksCatalog() {
         ))}
       </div>
 
-      {/* Foundation tracks */}
-      <h2 style={{ marginBottom: 'var(--space-sm)' }}>foundation tracks</h2>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 640 }}>
-        The original coding-and-AI curriculum — programming basics through AI agents. Start here if you're
-        starting from zero.
-      </p>
-      <div className="grid-2" style={{ marginBottom: 'var(--space-3xl)' }}>
-        {FOUNDATION_CATALOG_TRACKS.map((track) => (
-          <TrackCard key={track.slug} track={track} />
-        ))}
-      </div>
-
       {/* CTA */}
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Every lesson free. No card. Pay €69 once, only when you're ready for the credential.
+          Every lesson free. No card. Pay once, only when you're ready for the credential.
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/signup"><Button variant="primary" size="lg">Start learning free</Button></Link>

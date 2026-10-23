@@ -142,16 +142,16 @@ export function Pricing() {
         </p>
       </div>
 
-      {/* Free content */}
+      {/* Free preview — the email-capture entry point */}
       <Card style={{ marginBottom: 'var(--space-2xl)', textAlign: 'center' }}>
         <div style={{ width: 40, height: 4, background: 'var(--crystal)', borderRadius: 2, margin: '0 auto var(--space-lg)' }} />
-        <h3 style={{ marginBottom: 'var(--space-xs)' }}>Every lesson, every track</h3>
-        <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>Free, forever, no card required</p>
-        <div style={{ marginBottom: 'var(--space-lg)' }}>
-          <span style={{ fontSize: '2rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€0</span>
-        </div>
+        <h3 style={{ marginBottom: 'var(--space-xs)' }}>Start here: try lesson 1</h3>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
+          Create a free account with just your email and start with the first lesson of any track. No card.
+          Everything else stays free to read too — you only pay if you want the credential.
+        </p>
         <Link to="/signup">
-          <Button variant="secondary">Start free</Button>
+          <Button variant="secondary">Try lesson 1 free</Button>
         </Link>
       </Card>
 

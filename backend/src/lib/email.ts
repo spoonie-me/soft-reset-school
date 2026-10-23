@@ -12,12 +12,13 @@ function getResend(): Resend {
   return _resend;
 }
 
-// IMPORTANT: bedcoders.com must be verified in Resend dashboard before switching back.
-// Until then, use onboarding@resend.dev (Resend's pre-verified domain) so emails deliver.
-// To verify: Resend → Domains → Add bedcoders.com → add DKIM + SPF records to DNS.
-const FROM = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev';
+// softreset.school must be verified in the Resend dashboard (Domains -> add
+// softreset.school -> add the DKIM + SPF records to DNS). Until it is, set
+// RESEND_FROM_EMAIL=onboarding@resend.dev, which only delivers to the Resend
+// account owner.
+const FROM = process.env.RESEND_FROM_EMAIL ?? 'hi@softreset.school';
 const FROM_NAME = process.env.RESEND_FROM_NAME ?? 'Soft Reset School';
-const APP_URL = () => process.env.FRONTEND_URL ?? 'https://bedcoders.com';
+const APP_URL = () => process.env.FRONTEND_URL ?? 'https://softreset.school';
 
 // ─── HTML escape helper — prevents stored XSS when user data is in email HTML ──
 function esc(str: string | undefined): string {
@@ -39,14 +40,14 @@ function emailLayout(body: string, footerNote?: string): string {
 <body style="margin:0;padding:0;background:#0a0e0f;font-family:'DM Sans',Helvetica,Arial,sans-serif;">
 <div style="max-width:560px;margin:0 auto;padding:32px 24px;">
   <div style="margin-bottom:24px;">
-    <span style="color:#00d9ff;font-family:'DM Mono',monospace;font-size:20px;font-weight:500;letter-spacing:-0.02em;">bedcoders</span>
+    <span style="color:#00d9ff;font-family:'DM Mono',monospace;font-size:20px;font-weight:500;letter-spacing:-0.02em;">soft reset school</span>
   </div>
   <div style="background:#0f1315;border:1px solid #1a2023;border-radius:8px;padding:32px;">
     ${body}
   </div>
   <div style="margin-top:24px;color:#6b7076;font-size:12px;line-height:1.5;">
     ${footerNote ?? ''}
-    <p style="margin-top:16px;">Bedcoders &middot; A coding school for people who learn lying down</p>
+    <p style="margin-top:16px;">Soft Reset School &middot; Learn at the pace your body allows</p>
     <p><a href="${APP_URL()}/privacy" style="color:#6b7076;">Privacy</a> &middot; <a href="${APP_URL()}/terms" style="color:#6b7076;">Terms</a></p>
   </div>
 </div>
@@ -65,9 +66,9 @@ export async function sendVerificationEmail(to: string, token: string) {
   await getResend().emails.send({
     from: `${FROM_NAME} <${FROM}>`,
     to,
-    subject: 'Verify your Bedcoders account',
+    subject: 'Verify your Soft Reset School account',
     html: emailLayout(`
-      <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">Welcome to Bedcoders</h1>
+      <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">Welcome to Soft Reset School</h1>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.6;margin:0 0 24px;">Click below to verify your email address and start learning:</p>
       ${btn('Verify email', verifyUrl)}
       <p style="color:#6b7076;font-size:13px;margin-top:24px;">If you didn't create this account, ignore this email.</p>
@@ -80,7 +81,7 @@ export async function sendPasswordResetEmail(to: string, token: string) {
   await getResend().emails.send({
     from: `${FROM_NAME} <${FROM}>`,
     to,
-    subject: 'Reset your Bedcoders password',
+    subject: 'Reset your Soft Reset School password',
     html: emailLayout(`
       <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">Password reset</h1>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.6;margin:0 0 24px;">Click below to reset your password. This link expires in 1 hour.</p>
@@ -97,7 +98,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
   await getResend().emails.send({
     from: `${FROM_NAME} <${FROM}>`,
     to,
-    subject: 'Welcome to Bedcoders — start coding from wherever you are',
+    subject: 'Welcome to Soft Reset School — start coding from wherever you are',
     html: emailLayout(`
       <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">${greeting} 👋</h1>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
@@ -130,16 +131,16 @@ export async function sendWelcomeEmail(to: string, name?: string) {
 
 export async function sendOnboardingDay2(to: string, name?: string) {
   await getResend().emails.send({
-    from: `Roi from Bedcoders <${FROM}>`,
+    from: `Roi from Soft Reset School <${FROM}>`,
     to,
-    subject: 'Quick tip: how to get the most from Bedcoders',
+    subject: 'Quick tip: how to get the most from Soft Reset School',
     html: emailLayout(`
       <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">Getting started${name ? `, ${esc(name)}` : ''}</h1>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
         Most learners tell us the first lesson felt surprisingly doable. That's by design — each module builds on the last, starting simple before going deeper.
       </p>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
-        A few things that make Bedcoders different:
+        A few things that make Soft Reset School different:
       </p>
       <ul style="color:#b3b8bb;font-size:14px;line-height:1.8;padding-left:20px;margin:0 0 24px;">
         <li><strong style="color:#fff;">AI feedback</strong> — every exercise gets personalised feedback, not just "correct/incorrect"</li>
@@ -154,7 +155,7 @@ export async function sendOnboardingDay2(to: string, name?: string) {
 
 export async function sendOnboardingDay5(to: string, name?: string) {
   await getResend().emails.send({
-    from: `Roi from Bedcoders <${FROM}>`,
+    from: `Roi from Soft Reset School <${FROM}>`,
     to,
     subject: `${name ? esc(name) + ', y' : 'Y'}ou've explored the free tier — here's what's next`,
     html: emailLayout(`
@@ -204,7 +205,7 @@ export async function sendPurchaseConfirmation(to: string, data: {
   await getResend().emails.send({
     from: `${FROM_NAME} <${FROM}>`,
     to,
-    subject: `Purchase confirmed — welcome to Bedcoders`,
+    subject: `Purchase confirmed — welcome to Soft Reset School`,
     html: emailLayout(`
       <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">You're in! 🎉</h1>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">

@@ -5,6 +5,7 @@ import { stripe, CREDENTIAL_PRODUCTS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
 import { sendPurchaseConfirmation } from '../lib/email.js';
 import { postWelcomeToTrack } from '../lib/discord.js';
+import { recordPurchase, sessionFullyRecorded } from '../lib/credentialGrant.js';
 
 const router = Router();
 
@@ -51,15 +52,6 @@ router.post('/stripe', async (req: Request, res: Response) => {
         const session = event.data.object;
         const sessionId = session.id;
 
-        // Idempotency: skip if we've already recorded this Stripe session
-        const alreadyProcessed = await prisma.credentialPurchase.findFirst({
-          where: { stripeSessionId: sessionId },
-        });
-        if (alreadyProcessed) {
-          console.log(`Webhook: session ${sessionId} already processed, skipping.`);
-          break;
-        }
-
         const customerId = session.customer as string;
         const productId = session.metadata?.productId as keyof typeof CREDENTIAL_PRODUCTS | undefined;
         const trackIds: string[] = session.metadata?.trackIds ? JSON.parse(session.metadata.trackIds) : [];
@@ -67,6 +59,13 @@ router.post('/stripe', async (req: Request, res: Response) => {
 
         if (!productId || trackIds.length === 0) {
           console.warn(`Webhook: checkout.session.completed missing productId/trackIds in metadata, sessionId ${sessionId}`);
+          break;
+        }
+
+        // Idempotency: skip only if EVERY track of this session is recorded.
+        // (A bundle writes several rows; one row existing means a partial run.)
+        if (await sessionFullyRecorded(prisma, sessionId, trackIds)) {
+          console.log(`Webhook: session ${sessionId} already processed, skipping.`);
           break;
         }
 
@@ -82,50 +81,14 @@ router.post('/stripe', async (req: Request, res: Response) => {
         }
 
         const amountTotal = session.amount_total ?? CREDENTIAL_PRODUCTS[productId]?.priceInCents ?? 0;
-        // Split evenly across tracks in a bundle so per-track amounts sum to
-        // the real charge — good enough for reporting, not a refund engine.
-        const perTrackAmount = Math.round(amountTotal / trackIds.length);
-
-        for (const trackId of trackIds) {
-          const existingPurchase = await prisma.credentialPurchase.findUnique({
-            where: { userId_trackId: { userId: user.id, trackId } },
-          });
-
-          if (existingPurchase && existingPurchase.stripeSessionId !== sessionId) {
-            // A DIFFERENT Stripe session already granted this track — the
-            // idempotency check above only catches redelivery of the SAME
-            // session, so this means two concurrent checkout sessions for
-            // the same user+track both completed and both charged the
-            // user. The update branch below would silently overwrite
-            // existingPurchase.stripeSessionId, losing all trace of the
-            // duplicate charge. Log it clearly (both session ids, both
-            // amounts) so it's visible/alertable, then proceed with the
-            // upsert so processing doesn't stall.
-            console.error(
-              `[webhooks] DUPLICATE CHARGE detected for user ${user.id}, track ${trackId}: ` +
-              `existing session ${existingPurchase.stripeSessionId} (amountCents=${existingPurchase.amountCents}) ` +
-              `vs new session ${sessionId} (amountCents=${perTrackAmount}). Manual refund/review required.`,
-            );
-          }
-
-          await prisma.credentialPurchase.upsert({
-            where: { userId_trackId: { userId: user.id, trackId } },
-            create: {
-              userId: user.id,
-              trackId,
-              productType: productId,
-              bundleId,
-              stripeSessionId: sessionId,
-              amountCents: perTrackAmount,
-            },
-            update: {
-              // Re-delivery of the same webhook event (Stripe retries) is a
-              // no-op here. A genuine duplicate-session case (different
-              // stripeSessionId) is logged above before this runs.
-              stripeSessionId: sessionId,
-            },
-          });
-        }
+        await recordPurchase(prisma, {
+          userId: user.id,
+          productId,
+          trackIds,
+          bundleId,
+          sessionId,
+          amountTotal,
+        });
         console.log(`Credential purchase recorded for user ${user.id}: ${productId}, tracks: ${trackIds.join(', ')}`);
 
         // Send purchase confirmation email (non-blocking)

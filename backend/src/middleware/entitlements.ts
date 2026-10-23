@@ -2,6 +2,7 @@
 import type { Response, NextFunction } from 'express';
 import { prisma } from '../lib/db.js';
 import type { AuthRequest } from './auth.js';
+import { EXAM_CREDENTIAL_PRODUCTS } from '../lib/credentialGrant.js';
 
 // ──────────────────────────────────────────
 // TYPES
@@ -51,7 +52,8 @@ export async function entitlementsMiddleware(
     }
 
     const purchases = await prisma.credentialPurchase.findMany({
-      where: { userId },
+      // Only exam credentials unlock exams — a code_review purchase must not.
+      where: { userId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
       select: { trackId: true },
     });
     req.credentialAccess = purchases.map((p) => p.trackId);

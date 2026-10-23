@@ -51,8 +51,8 @@ export function Employers() {
   return (
     <div>
       <SEO
-        title="For Employers — certification seats for your team"
-        description="Sponsor certification seats for your employees or candidates: AI-assisted software development, AI automation consulting, AI-augmented medical coding, and digital accessibility QA. €99 per seat, no expiry."
+        title="For Employers — hire-train-place talent and certification seats"
+        description="Hire graduates trained in AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA, or sponsor certification seats for your own people. €99 per seat, no expiry."
         canonical="/employers"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -66,11 +66,27 @@ export function Employers() {
           for employers
         </p>
         <h1 style={{ fontSize: 'clamp(1.75rem, 6vw, 2.75rem)', marginBottom: 'var(--space-xl)', lineHeight: 1.1 }}>
-          Certification seats for your team
+          Talent you won't find elsewhere, seats for your own people
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 620 }}>
-          Back your returning employees, new hires or candidates with a seat: the certification exam and a publicly verifiable certificate for one of our four career tracks — AI-assisted software development, AI automation consulting, AI-augmented medical coding, or digital accessibility QA.
+          Two ways to work with us: hire graduates whose expertise comes from lived experience, or back your own returning employees and candidates with a certification seat.
         </p>
+      </section>
+
+      {/* Hire-train-place talent */}
+      <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <Card>
+            <div style={{ width: 40, height: 4, background: 'var(--crystal)', borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
+            <h2 style={{ color: 'var(--crystal)', fontSize: '1.25rem', marginBottom: 'var(--space-md)' }}>Hire-train-place talent</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-lg)' }}>
+              Four career tracks, each ending in a timed, multiple-choice certification exam and a publicly verifiable certificate: AI-assisted software development, AI automation consulting, AI-augmented medical coding, and hands-on digital accessibility QA. The curricula are young and growing — ask us exactly what a specific candidate has completed and verified before hiring, and we'll tell you honestly.
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
+              We're building relationships with vocational-rehabilitation and workforce-development programs that may be able to offset placement costs depending on your jurisdiction — worth raising in the initial conversation, though nothing's formalized yet.
+            </p>
+          </Card>
+        </div>
       </section>
 
       {/* Why this talent pool */}
@@ -121,13 +137,15 @@ export function Employers() {
               <label htmlFor="em-interest" style={labelStyle}>Interested in *</label>
               <select id="em-interest" style={inputStyle} required value={form.interest} onChange={(e) => update('interest', e.target.value)}>
                 <option value="">Select…</option>
+                <option value="Hire-train-place">Hire-train-place talent</option>
                 <option value="Seats">Certification seats for employees/candidates</option>
+                <option value="Both">Both</option>
                 <option value="Not sure yet">Not sure yet</option>
               </select>
             </div>
             <div>
               <label htmlFor="em-message" style={labelStyle}>Anything else we should know?</label>
-              <textarea id="em-message" style={{ ...inputStyle, minHeight: 100, resize: 'vertical' }} value={form.message} onChange={(e) => update('message', e.target.value)} placeholder="How many seats, which tracks, timeline…" />
+              <textarea id="em-message" style={{ ...inputStyle, minHeight: 100, resize: 'vertical' }} value={form.message} onChange={(e) => update('message', e.target.value)} placeholder="Roles you're hiring for, number of seats, tracks, timeline…" />
             </div>
             {status === 'sent' ? (
               <p role="status" style={{ color: 'var(--crystal)', fontSize: '0.9375rem', margin: 0 }}>

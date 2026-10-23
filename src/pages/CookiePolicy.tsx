@@ -20,8 +20,8 @@ export function CookiePolicy() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Cookie Policy — Bedcoders"
-        description="How Bedcoders uses cookies and your consent options. Manage analytics and marketing cookie preferences. EU GDPR / ePrivacy compliant."
+        title="Cookie Policy — Soft Reset School"
+        description="How Soft Reset School uses cookies and your consent options. Manage analytics and marketing cookie preferences. EU GDPR / ePrivacy compliant."
         canonical="/cookies"
       />
       <h1 style={{ marginBottom: 'var(--space-2xl)' }}>Cookie Policy</h1>

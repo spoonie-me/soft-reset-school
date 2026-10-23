@@ -6,8 +6,8 @@ export function PrivacyPolicy() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Privacy Policy — Bedcoders"
-        description="How Bedcoders collects, uses, and protects your personal data. GDPR-compliant. Operator: Roi Shternin-Martini, Vienna, Austria."
+        title="Privacy Policy — Soft Reset School"
+        description="How Soft Reset School collects, uses, and protects your personal data. GDPR-compliant. Operator: Roi Shternin-Martini, Vienna, Austria."
         canonical="/privacy"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Privacy Policy</h1>

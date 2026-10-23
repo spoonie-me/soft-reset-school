@@ -71,14 +71,14 @@ export function ShareStory() {
   return (
     <div style={{ maxWidth: 640, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Share your Bedcoders story"
+        title="Share your Soft Reset School story"
         description="Tell us how learning to code from bed changed something for you. We feature student stories on the site (with your permission) — bed-built careers, late starts, comebacks."
         canonical="/share-story"
       />
       <div style={{ width: 40, height: 4, background: 'var(--signal)', borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
-      <h1 style={{ marginBottom: 'var(--space-sm)' }}>Share your Bedcoders story</h1>
+      <h1 style={{ marginBottom: 'var(--space-sm)' }}>Share your Soft Reset School story</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-3xl)', lineHeight: 1.6 }}>
-        Did Bedcoders help you learn to code or build something real? We'd love to hear what changed for you.
+        Did Soft Reset School help you get back to work or build something real? We'd love to hear what changed for you.
         Real stories help others make the leap.
       </p>
 

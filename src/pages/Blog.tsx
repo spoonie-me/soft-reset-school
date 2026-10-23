@@ -48,7 +48,7 @@ export function Blog() {
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
       <SEO
-        title="Bedcoders Blog — AI Literacy, Coding Guides & Builder Resources"
+        title="Soft Reset School Blog — AI Literacy, Coding Guides & Builder Resources"
         description="Deep-dives on prompt engineering, Claude API, AI agents, coding with chronic illness, and building tools that actually ship."
         canonical="/blog"
         type="website"
@@ -63,7 +63,7 @@ export function Blog() {
           textTransform: 'uppercase',
           marginBottom: 'var(--space-md)',
         }}>
-          Bedcoders Blog
+          Soft Reset School Blog
         </p>
         <h1 style={{ fontSize: '2.25rem', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}>
           Build smarter,<br />

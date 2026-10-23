@@ -1,11 +1,11 @@
 /* TEAM */
 Founder, writer, builder: Roi Shternin-Martini
-Site:    https://bedcoders.com
-Contact: hello [at] bedcoders.com
+Site:    https://softreset.school
+Contact: hi [at] softreset.school
 From:    Vienna, Austria
 
 /* SITE */
-Last update: 2026-05-08
+Last update: 2026-10-23
 Standards:   HTML5, CSS3, ES2024
 Components:  React 19, Vite, Express, Prisma, Neon Postgres
 Models:      Anthropic Claude (exercise feedback)

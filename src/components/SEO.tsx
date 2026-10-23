@@ -27,7 +27,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://softreset.school';
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-card.png`;
 
 export function SEO({
   title,

@@ -87,19 +87,6 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Origin */}
-      <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-xl)' }}>a paramedic who became the patient</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-lg)' }}>
-            Nine years responding to other people's emergencies, then years being the emergency nobody reached in time — dismissed by doctor after doctor before a diagnosis that should have come sooner. That's the actual founding story here, not a metaphor borrowed for a pitch deck.
-          </p>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem' }}>
-            <strong style={{ color: 'var(--text-primary)' }}>Machines handle information. Humans handle transformation.</strong> That's the whole organizing idea behind every track here — let AI hold what it's actually good at, and build the part of your income around what it structurally can't do.
-          </p>
-        </div>
-      </section>
-
       {/* Tracks — organized by the actual framework, not arbitrary cards */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
         <h2 style={{ marginBottom: 'var(--space-sm)' }}>two kinds of income, one honest question</h2>

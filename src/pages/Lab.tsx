@@ -29,8 +29,8 @@ export function Lab() {
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
       <SEO
-        title="Soft Reset Lab — Dell, Clinical AI, and Living With a Body That Doesn't Cooperate"
-        description="Ongoing work on machines, medicine, and what's left for humans to do: Dell/NVIDIA hardware notes, clinical AI, chronic illness, and thought leadership from Roi Shternin-Martini."
+        title="Soft Reset Lab — Clinical AI, Health IT, and Working With a Body That Doesn't Cooperate"
+        description="Writing on the topics the tracks teach: AI in healthcare, health IT, and building a working life with a chronic illness or disability."
         canonical="/lab"
         type="website"
       />
@@ -47,8 +47,8 @@ export function Lab() {
           <span style={{ color: 'var(--signal)' }}>Humans hold transformation.</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', maxWidth: 560 }}>
-          The ongoing body of work: clinical AI, Dell/NVIDIA hardware notes, and everything written
-          under Chronically and rois.life — brought under one roof.
+          Writing on what the tracks teach: AI in healthcare, health IT, and building a working life
+          with a chronic illness or disability.
         </p>
       </div>
 

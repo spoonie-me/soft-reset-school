@@ -9,15 +9,22 @@ import { NotFound } from './NotFound';
 export function LabPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = labPosts.find((p) => p.slug === slug);
-  const [body, setBody] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState<{ slug: string; text: string } | null>(null);
+  const body = loaded && loaded.slug === post?.slug ? loaded.text : null;
 
   useEffect(() => {
     if (!post) return;
-    setBody(null);
-    fetch(`/content/lab/${post.slug}.md`)
+    const postSlug = post.slug;
+    let cancelled = false;
+    fetch(`/content/lab/${postSlug}.md`)
       .then((r) => (r.ok ? r.text() : Promise.reject(new Error('not found'))))
-      .then(setBody)
-      .catch(() => setBody('_This post could not be loaded._'));
+      .catch(() => '_This post could not be loaded._')
+      .then((text) => {
+        if (!cancelled) setLoaded({ slug: postSlug, text });
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [post]);
 
   if (!post) return <NotFound />;

@@ -38,8 +38,8 @@ export function Landing() {
   return (
     <div>
       <SEO
-        title="Soft Reset School — income built from inside the illness, not after it"
-        description="AI-era employable skills for bed- and home-ridden chronically ill people. Not a cure narrative — a restart you get to take as many times as you need, directing AI tools well enough that your hours stop setting your ceiling."
+        title="Soft Reset School | A restart, not a comeback story"
+        description="Free lessons in AI-era work skills for people returning to work after illness or time away. Short units, a lower-energy path in every module, nothing timed."
         canonical="/"
       />
 

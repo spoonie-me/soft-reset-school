@@ -5,8 +5,8 @@ export function DataProcessing() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Data Processing Agreement — Bedcoders"
-        description="GDPR-compliant Data Processing Agreement (DPA) for Bedcoders team customers. Sub-processor list, security measures, and EU/EEA data residency."
+        title="Data Processing Agreement — Soft Reset School"
+        description="GDPR-compliant Data Processing Agreement (DPA) for Soft Reset School team customers. Sub-processor list, security measures, and EU/EEA data residency."
         canonical="/dpa"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Data Processing Agreement</h1>

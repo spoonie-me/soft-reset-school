@@ -51,8 +51,8 @@ export function Employers() {
   return (
     <div>
       <SEO
-        title="For Employers — accessibility audits and hire-train-place talent"
-        description="Two ways to work with Soft Reset School: accessibility compliance audits ahead of the European Accessibility Act, and hiring graduates trained in AI-assisted software development and hands-on digital accessibility QA."
+        title="For Employers — hire-train-place talent and certification seats"
+        description="Hire graduates trained in AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA, or sponsor certification seats for your own people. €99 per seat, no expiry."
         canonical="/employers"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -66,38 +66,26 @@ export function Employers() {
           for employers
         </p>
         <h1 style={{ fontSize: 'clamp(1.75rem, 6vw, 2.75rem)', marginBottom: 'var(--space-xl)', lineHeight: 1.1 }}>
-          Compliance you actually need, talent you won't find elsewhere
+          Talent you won't find elsewhere, seats for your own people
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 620 }}>
-          Two separate things, both real: audits that get you compliant, and graduates whose expertise comes from lived experience an automated scanner can't replicate.
+          Two ways to work with us: hire graduates whose expertise comes from lived experience, or back your own returning employees and candidates with a certification seat.
         </p>
       </section>
 
-      {/* Two offerings */}
+      {/* Hire-train-place talent */}
       <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div className="grid-2" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
-            <Card>
-              <div style={{ width: 40, height: 4, background: 'var(--signal)', borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
-              <h2 style={{ color: 'var(--signal)', fontSize: '1.25rem', marginBottom: 'var(--space-md)' }}>Accessibility compliance audits</h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-lg)' }}>
-                The European Accessibility Act is now in force. If your product, LMS, or digital service serves EU users, WCAG 2.1 AA compliance isn't optional anymore — it's a market-access condition.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-                Audits are conducted by reviewers who bring both technical standards knowledge and lived assistive-technology experience — the combination that catches what an automated scanner misses.
-              </p>
-            </Card>
-            <Card>
-              <div style={{ width: 40, height: 4, background: 'var(--crystal)', borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
-              <h2 style={{ color: 'var(--crystal)', fontSize: '1.25rem', marginBottom: 'var(--space-md)' }}>Hire-train-place talent</h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-lg)' }}>
-                Four career tracks, each ending in a timed, multiple-choice certification exam and a publicly verifiable certificate: AI-assisted software development, AI automation consulting, AI-augmented medical coding, and hands-on digital accessibility QA. The curricula are young and growing — ask us exactly what a specific candidate has completed and verified before hiring, and we'll tell you honestly.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-                We're building relationships with vocational-rehabilitation and workforce-development programs that may be able to offset placement costs depending on your jurisdiction — worth raising in the initial conversation, though nothing's formalized yet.
-              </p>
-            </Card>
-          </div>
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <Card>
+            <div style={{ width: 40, height: 4, background: 'var(--crystal)', borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
+            <h2 style={{ color: 'var(--crystal)', fontSize: '1.25rem', marginBottom: 'var(--space-md)' }}>Hire-train-place talent</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-lg)' }}>
+              Four career tracks, each ending in a timed, multiple-choice certification exam and a publicly verifiable certificate: AI-assisted software development, AI automation consulting, AI-augmented medical coding, and hands-on digital accessibility QA. The curricula are young and growing — ask us exactly what a specific candidate has completed and verified before hiring, and we'll tell you honestly.
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
+              We're building relationships with vocational-rehabilitation and workforce-development programs that may be able to offset placement costs depending on your jurisdiction — worth raising in the initial conversation, though nothing's formalized yet.
+            </p>
+          </Card>
         </div>
       </section>
 
@@ -110,15 +98,15 @@ export function Employers() {
         <Link to="/about" style={{ color: 'var(--signal)', fontSize: '0.9375rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Read the full reasoning behind each track &rarr;</Link>
       </section>
 
-      {/* Credential vouchers — the one thing with a published price */}
+      {/* Seats — the one thing with a published price */}
       <section style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-2xl) var(--space-xl)' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Credential vouchers — €99 per track, flat</h2>
+          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Seats — €99 per track, flat</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-            Sponsor certification for your own returning employees, or for candidates you're considering. Vouchers cost exactly what individual learners pay — €99 per track credential — redeemable whenever the person is ready, no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
+            One seat is one person's credential for one track. Every lesson is free to read, so a seat pays only for the exam and certificate. It costs exactly what an individual learner pays — €99 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
           </p>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-            Audit and placement pricing depends on scope — platform size, number of roles, timeline. We'd rather scope it with you directly than publish a number that doesn't fit your situation.
+            Buying for a team? See <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>team seats</Link>, or tell us how many below.
           </p>
         </div>
       </section>
@@ -149,16 +137,15 @@ export function Employers() {
               <label htmlFor="em-interest" style={labelStyle}>Interested in *</label>
               <select id="em-interest" style={inputStyle} required value={form.interest} onChange={(e) => update('interest', e.target.value)}>
                 <option value="">Select…</option>
-                <option value="Accessibility audit">Accessibility compliance audit</option>
-                <option value="Hire-train-place">Hire-train-place placement</option>
-                <option value="Credential vouchers">Credential vouchers for employees/candidates</option>
+                <option value="Hire-train-place">Hire-train-place talent</option>
+                <option value="Seats">Certification seats for employees/candidates</option>
                 <option value="Both">Both</option>
                 <option value="Not sure yet">Not sure yet</option>
               </select>
             </div>
             <div>
               <label htmlFor="em-message" style={labelStyle}>Anything else we should know?</label>
-              <textarea id="em-message" style={{ ...inputStyle, minHeight: 100, resize: 'vertical' }} value={form.message} onChange={(e) => update('message', e.target.value)} placeholder="Platform size, roles you're hiring for, timeline…" />
+              <textarea id="em-message" style={{ ...inputStyle, minHeight: 100, resize: 'vertical' }} value={form.message} onChange={(e) => update('message', e.target.value)} placeholder="Roles you're hiring for, number of seats, tracks, timeline…" />
             </div>
             {status === 'sent' ? (
               <p role="status" style={{ color: 'var(--crystal)', fontSize: '0.9375rem', margin: 0 }}>

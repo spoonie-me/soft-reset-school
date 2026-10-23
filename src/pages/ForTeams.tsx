@@ -74,7 +74,7 @@ export function ForTeams() {
   return (
     <div>
       <SEO
-        title="Teams & Organisations — Credential Vouchers | Bedcoders"
+        title="Teams & Organisations — Credential Vouchers | Soft Reset School"
         description="Get your team building with AI. Free content, flat €99 Credential vouchers, admin dashboard, progress reporting, GDPR-compliant DPA, and bulk onboarding. Built for distributed teams, bootcamps, and tech consultancies."
         canonical="/for-teams"
         keywords="team coding training, AI training for teams, bulk credential vouchers, GDPR DPA coding course, prompt engineering team training, Claude API team license, AI literacy enterprise training"
@@ -86,10 +86,10 @@ export function ForTeams() {
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Bedcoders for Teams',
+            name: 'Soft Reset School for Teams',
             provider: { '@type': 'Organization', name: 'Soft Reset School', url: 'https://softreset.school/' },
             description:
-              'Team subscriptions to Bedcoders coding & AI tracks. Admin dashboard, bulk onboarding, GDPR-compliant DPA.',
+              'Credential vouchers for the Soft Reset School career tracks. Admin dashboard, bulk onboarding, GDPR-compliant DPA.',
             areaServed: 'Worldwide',
             offers: [
               {

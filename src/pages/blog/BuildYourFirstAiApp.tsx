@@ -104,7 +104,7 @@ console.log(summary);`}</pre>
       </p>
 
       <p style={p}>
-        The <strong style={{ color: 'var(--text-primary)' }}>Build Cool Tools Fast</strong> track on Bedcoders takes this further — CLI tools, full web apps with React frontends, Stripe-integrated products. All from the same pattern you just learned.
+        The <strong style={{ color: 'var(--text-primary)' }}>AI-Assisted Software Development</strong> track at Soft Reset School takes this further — directing AI to build and ship real software, and reviewing what it gives back. All from the same pattern you just learned.
       </p>
     </BlogLayout>
   );

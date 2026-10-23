@@ -6,8 +6,8 @@ export function TermsOfService() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Terms of Service — Bedcoders"
-        description="Terms of service for Bedcoders. EU consumer rights, 14-day right of withdrawal, one-time Credential purchase terms, intellectual property, and dispute resolution."
+        title="Terms of Service — Soft Reset School"
+        description="Terms of service for Soft Reset School. EU consumer rights, 14-day right of withdrawal, one-time Credential purchase terms, intellectual property, and dispute resolution."
         canonical="/terms"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Terms of Service</h1>

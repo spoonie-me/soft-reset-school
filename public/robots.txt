@@ -1,5 +1,5 @@
-# Bedcoders — robots.txt
-# A coding school for people who learn lying down.
+# Soft Reset School — robots.txt
+# Free lessons in AI-era work skills for people returning to work.
 # We're a small EU sole-trader. Crawl politely.
 
 User-agent: *
@@ -72,5 +72,4 @@ Disallow: /
 User-agent: BLEXBot
 Disallow: /
 
-Sitemap: https://bedcoders.com/sitemap.xml
-Host: bedcoders.com
+Sitemap: https://softreset.school/sitemap.xml

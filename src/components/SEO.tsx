@@ -1,4 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 interface SEOProps {
@@ -44,6 +45,12 @@ export function SEO({
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
   const jsonLdArray = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
+  // scripts/prerender.mjs bakes this route's head tags into the static HTML so
+  // crawlers without JS see them; once Helmet owns the head, drop that copy.
+  useEffect(() => {
+    document.head.querySelectorAll('[data-prerender]').forEach((el) => el.remove());
+  }, []);
+
   return (
     <Helmet>
       <title>{fullTitle}</title>
@@ -86,7 +93,7 @@ export function SEO({
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@bedcoders" />
+      <meta name="twitter:site" content="@roishternin" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

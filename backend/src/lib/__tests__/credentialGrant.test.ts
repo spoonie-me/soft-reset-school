@@ -14,7 +14,14 @@ function fakeDb(initial: Row[] = []) {
     credentialPurchase: {
       count: async ({ where }: any) =>
         rows.filter((r) => r.stripeSessionId === where.stripeSessionId && where.trackId.in.includes(r.trackId)).length,
-      findUnique: async ({ where }: any) => find(where.userId_trackId_productType) ?? null,
+      findFirst: async ({ where }: any) =>
+        rows.find(
+          (r) =>
+            r.userId === where.userId &&
+            r.trackId === where.trackId &&
+            where.productType.in.includes(r.productType) &&
+            r.stripeSessionId !== where.stripeSessionId.not,
+        ) ?? null,
       upsert: async ({ where, create }: any) => {
         if (find(where.userId_trackId_productType)) return; // update: {}
         if (rows.some((r) => r.stripeSessionId === create.stripeSessionId && r.trackId === create.trackId)) {
@@ -71,6 +78,22 @@ describe('Program Credential bundle', () => {
     expect(res.duplicateCharges).toEqual(['ai']);
     expect(db.rows).toHaveLength(1);
     expect(db.rows[0].stripeSessionId).toBe('cs_1');
+  });
+});
+
+describe('duplicate charge across products', () => {
+  it('flags a bundle that re-sells a track already bought as a single credential', async () => {
+    const db = fakeDb();
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_single', amountTotal: 6900 });
+    const res = await recordPurchase(db, bundle);
+    expect(res.duplicateCharges).toEqual(['ai']);
+  });
+
+  it('does not flag a code_review next to a credential', async () => {
+    const db = fakeDb();
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_c', amountTotal: 6900 });
+    const res = await recordPurchase(db, { ...bundle, productId: 'code_review', trackIds: ['ai'], sessionId: 'cs_r', amountTotal: 2500 });
+    expect(res.duplicateCharges).toEqual([]);
   });
 });
 

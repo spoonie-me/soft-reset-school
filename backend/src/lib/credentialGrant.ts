@@ -16,7 +16,7 @@ export function uniqueTrackIds(trackIds: string[]): string[] {
 interface PurchaseDb {
   credentialPurchase: {
     count(args: unknown): Promise<number>;
-    findUnique(args: unknown): Promise<{ stripeSessionId: string; amountCents: number } | null>;
+    findFirst(args: unknown): Promise<{ stripeSessionId: string; amountCents: number } | null>;
     upsert(args: unknown): Promise<unknown>;
   };
 }
@@ -55,8 +55,18 @@ export async function recordPurchase(db: PurchaseDb, input: GrantInput): Promise
   for (const [i, trackId] of tracks.entries()) {
     const perTrackAmount = base + (i < remainder ? 1 : 0);
     const key = { userId_trackId_productType: { userId: input.userId, trackId, productType: input.productId } };
-    const existing = await db.credentialPurchase.findUnique({ where: key });
-    if (existing && existing.stripeSessionId !== input.sessionId) {
+    // Look across both exam products: buying a track as track_credential AND
+    // inside a program_credential is a double charge even though the rows
+    // don't collide. code_review is a separate service, compared to itself.
+    const existing = await db.credentialPurchase.findFirst({
+      where: {
+        userId: input.userId,
+        trackId,
+        productType: { in: isExamCredentialProduct(input.productId) ? [...EXAM_CREDENTIAL_PRODUCTS] : [input.productId] },
+        stripeSessionId: { not: input.sessionId },
+      },
+    });
+    if (existing) {
       duplicateCharges.push(trackId);
       console.error(
         `[webhooks] DUPLICATE CHARGE detected for user ${input.userId}, track ${trackId}: ` +

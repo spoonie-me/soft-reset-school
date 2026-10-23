@@ -16,7 +16,7 @@ function getResend(): Resend {
 // Until then, use onboarding@resend.dev (Resend's pre-verified domain) so emails deliver.
 // To verify: Resend → Domains → Add bedcoders.com → add DKIM + SPF records to DNS.
 const FROM = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev';
-const FROM_NAME = process.env.RESEND_FROM_NAME ?? 'Bedcoders';
+const FROM_NAME = process.env.RESEND_FROM_NAME ?? 'Soft Reset School';
 const APP_URL = () => process.env.FRONTEND_URL ?? 'https://bedcoders.com';
 
 // ─── HTML escape helper — prevents stored XSS when user data is in email HTML ──

@@ -1,8 +1,7 @@
-Contact: mailto:security@bedcoders.com
-Contact: mailto:hello@bedcoders.com
+Contact: mailto:hi@softreset.school
 Expires: 2027-05-08T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://bedcoders.com/.well-known/security.txt
-Policy: https://bedcoders.com/privacy
+Canonical: https://softreset.school/.well-known/security.txt
+Policy: https://softreset.school/privacy
 # We're a small EU sole-trader. We respond personally to every report.
 # Please give us a reasonable window before public disclosure.

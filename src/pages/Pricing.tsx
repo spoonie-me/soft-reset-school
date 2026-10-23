@@ -6,6 +6,8 @@ import { SEO } from '@/components/SEO';
 import { api } from '@/lib/api';
 import { lessonsUntilCredential } from '@/data/credentialBar';
 import { getCatalogTrack, credentialAvailable } from '@/data/trackCatalog';
+import { TRACK_PRICE, BUNDLE_PRICES, MAX_BUNDLE_SIZE, bundleSavings } from '@/data/pricing';
+import { CohortInterest } from '@/components/CohortInterest';
 
 // Career tracks are the reintegration path: each one maps to a role a
 // bed- or home-bound person can actually be hired (or bill clients) for.
@@ -26,19 +28,12 @@ const CAREER_TRACKS = [
   return { ...t, lessonCount, totalMinutes, sellable: catalogTrack ? credentialAvailable(catalogTrack) : false };
 });
 
-const FOUNDATION_TRACKS = [
-  { id: 'fundamentals', name: '🛏️ Code from Bed', color: 'var(--signal)' },
-  { id: 'ai', name: '🤖 AI Literacy for Humans', color: 'var(--gold)' },
-  { id: 'tools', name: '⚡ Build Cool Tools Fast', color: 'var(--crystal)' },
-  { id: 'advanced', name: '🚀 AI Agents that Work', color: 'var(--rust)' },
-].map((t) => ({ ...t, sellable: true })); // all 4 foundation tracks clear the depth bar today
-
 // Only sellable tracks are offered for the bundle picker and the
 // pay-what-you-can dialog — checkout would reject the rest anyway.
-const CREDENTIAL_TRACKS = [...CAREER_TRACKS, ...FOUNDATION_TRACKS].filter((t) => t.sellable);
+const CREDENTIAL_TRACKS = CAREER_TRACKS.filter((t) => t.sellable);
 
 type PendingCheckout =
-  | { productId: 'track_credential' | 'code_review'; trackId: string }
+  | { productId: 'track_credential'; trackId: string }
   | { productId: 'program_credential'; trackIds: string[] };
 
 export function Pricing() {
@@ -54,7 +49,7 @@ export function Pricing() {
   // click away, no questions asked; it just isn't pre-selected. (Business
   // review 2026-08-08: a €0-prefilled dialog next to a €69 price is
   // indistinguishable from having no price at all.)
-  const [pwycAmount, setPwycAmount] = useState('69');
+  const [pwycAmount, setPwycAmount] = useState(String(TRACK_PRICE));
   const [pwycBusy, setPwycBusy] = useState(false);
   const [pwycError, setPwycError] = useState('');
   const [pwycDone, setPwycDone] = useState(false);
@@ -62,8 +57,8 @@ export function Pricing() {
   async function submitPwyc() {
     if (!pwycTrack || pwycBusy) return;
     const euros = Number(pwycAmount);
-    if (!Number.isFinite(euros) || euros < 0 || euros > 69) {
-      setPwycError('Enter any amount from 0 to 69.');
+    if (!Number.isFinite(euros) || euros < 0 || euros > TRACK_PRICE) {
+      setPwycError(`Enter any amount from 0 to ${TRACK_PRICE}.`);
       return;
     }
     setPwycBusy(true);
@@ -88,7 +83,7 @@ export function Pricing() {
   function toggleBundleTrack(trackId: string) {
     setBundleSelection((prev) => {
       if (prev.includes(trackId)) return prev.filter((t) => t !== trackId);
-      if (prev.length >= 3) return prev; // exactly 3 for a Program Credential
+      if (prev.length >= MAX_BUNDLE_SIZE) return prev; // 2 or 3 for a Program Credential
       return [...prev, trackId];
     });
   }
@@ -132,7 +127,7 @@ export function Pricing() {
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
       <SEO
         title="Pricing — Soft Reset School"
-        description="Every lesson is free to read, forever. Pay once, €69, only when you're ready to sit a certification exam and get a permanent, publicly verifiable credential."
+        description="Every lesson is free to read, forever. Pay once — €99 per track, 2 for €149, 3 for €199 — only when you're ready to sit a certification exam and get a permanent, publicly verifiable credential."
         canonical="/pricing"
       />
 
@@ -140,10 +135,10 @@ export function Pricing() {
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <h1 style={{ marginBottom: 'var(--space-lg)' }}>All content is free. Pay once, only for the credential.</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
-          No subscription. Nothing bills you on a bad month. Read every lesson in every track for free, forever — pay €69 only when you're ready to sit the certification exam and get a permanent, publicly verifiable credential.
+          No subscription. Nothing bills you on a bad month. Read every lesson in every track for free, forever — pay only when you're ready to sit the certification exam and get a permanent, publicly verifiable credential.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
-          €69 is the standard price, not a requirement — you can choose what you pay, down to €0, no proof and no application.
+          €99 per track is the standard price, not a requirement — you can choose what you pay, down to €0, no proof and no application.
         </p>
       </div>
 
@@ -161,12 +156,12 @@ export function Pricing() {
       </Card>
 
       {/* Career credentials — the reintegration path */}
-      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Career Credential — €69, one-time</h2>
+      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Career Credential — €{TRACK_PRICE} per track, one-time</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 680 }}>
         The four reintegration tracks. Each one ends in a certification exam and a certificate: proof of
         practiced skill, not a promise of the job — the evidence an employer or client needs to trust you with
         one. No renewal, ever. Lesson count, exam format, and what the certificate does and doesn't claim are
-        on each track's page before you pay anything. A track still too new to back up a €69 credential says
+        on each track's page before you pay anything. A track still too new to back up a credential says
         so below, with no price and no buy button, rather than selling one anyway.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-3xl)' }}>
@@ -180,7 +175,7 @@ export function Pricing() {
             {track.sellable ? (
               <>
                 <div style={{ marginBottom: 'var(--space-lg)' }}>
-                  <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€69</span>
+                  <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€{TRACK_PRICE}</span>
                 </div>
                 <Button variant="primary" style={{ width: '100%' }} onClick={() => startCheckout({ productId: 'track_credential', trackId: track.id })}>
                   Get certified
@@ -200,32 +195,10 @@ export function Pricing() {
         ))}
       </div>
 
-      {/* Foundation credentials */}
-      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Foundation Credential — €69, one-time</h2>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)' }}>
-        The original coding-and-AI curriculum. Same exam, same permanent verifiable certificate.
-      </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-3xl)' }}>
-        {FOUNDATION_TRACKS.map((track) => (
-          <Card key={track.id}>
-            <div style={{ width: 40, height: 4, background: track.color, borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
-            <h3 style={{ marginBottom: 'var(--space-xs)', fontSize: '1.0625rem' }}>
-              <Link to={`/tracks/${track.id}`} style={{ color: 'inherit', textDecoration: 'underline', textDecorationColor: 'var(--bg-border)', textUnderlineOffset: '3px' }}>{track.name}</Link>
-            </h3>
-            <div style={{ marginBottom: 'var(--space-lg)' }}>
-              <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€69</span>
-            </div>
-            <Button variant="primary" style={{ width: '100%' }} onClick={() => startCheckout({ productId: 'track_credential', trackId: track.id })}>
-              Get certified
-            </Button>
-          </Card>
-        ))}
-      </div>
-
       {/* Program bundle */}
-      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Program Credential — €149, any 3 tracks</h2>
+      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Bundle — 2 tracks for €{BUNDLE_PRICES[2]}, 3 for €{BUNDLE_PRICES[3]}</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-        Pick any 3 of the 8 tracks — career, foundation, or a mix — and save €58 versus buying them one at a time.
+        Pick 2 tracks and save €{bundleSavings(2)}, or 3 and save €{bundleSavings(3)}, versus buying them one at a time.
       </p>
       <Card style={{ marginBottom: 'var(--space-3xl)' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
@@ -243,7 +216,7 @@ export function Pricing() {
                 type="checkbox"
                 checked={bundleSelection.includes(track.id)}
                 onChange={() => toggleBundleTrack(track.id)}
-                disabled={!bundleSelection.includes(track.id) && bundleSelection.length >= 3}
+                disabled={!bundleSelection.includes(track.id) && bundleSelection.length >= MAX_BUNDLE_SIZE}
                 style={{ accentColor: track.color }}
               />
               {track.name}
@@ -251,26 +224,22 @@ export function Pricing() {
           ))}
         </div>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>
-          {bundleSelection.length}/3 selected
+          {bundleSelection.length}/{MAX_BUNDLE_SIZE} selected
         </p>
         <Button
           variant="primary"
-          disabled={bundleSelection.length !== 3}
+          disabled={!(bundleSelection.length in BUNDLE_PRICES)}
           onClick={() => startCheckout({ productId: 'program_credential', trackIds: bundleSelection })}
         >
-          Get 3 tracks certified — €149
+          {bundleSelection.length in BUNDLE_PRICES
+            ? `Get ${bundleSelection.length} tracks certified — €${BUNDLE_PRICES[bundleSelection.length]}`
+            : 'Select 2 or 3 tracks'}
         </Button>
       </Card>
 
-      {/* Code review add-on */}
-      <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)', marginBottom: 'var(--space-2xl)' }}>
-        <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Human code review — €25 add-on</h3>
-        <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 500, margin: '0 auto var(--space-lg)' }}>
-          A human reads your submitted project and gives written feedback — a smaller way to get real feedback before you're ready for a full Credential exam.
-        </p>
-        <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
-          Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a> to arrange a review.
-        </p>
+      {/* Hybrid cohorts interest list */}
+      <div style={{ marginBottom: 'var(--space-3xl)' }}>
+        <CohortInterest />
       </div>
 
       {/* Choose your own price — wired to POST /checkout/hardship.
@@ -284,11 +253,11 @@ export function Pricing() {
       <div id="choose-your-price" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Choose what you pay</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
-          €69 is the standard price, not a requirement. Pick any amount that works
+          €{TRACK_PRICE} per track is the standard price, not a requirement. Pick any amount that works
           for you — down to €0. No proof, no application, no email, no judgment.
           You get exactly the same exam and the same certificate either way.
         </p>
-        <Button variant="secondary" onClick={() => { setPwycTrack(CREDENTIAL_TRACKS[0].id); setPwycAmount('69'); setPwycError(''); setPwycDone(false); }}>
+        <Button variant="secondary" onClick={() => { setPwycTrack(CREDENTIAL_TRACKS[0].id); setPwycAmount(String(TRACK_PRICE)); setPwycError(''); setPwycDone(false); }}>
           Set your own price
         </Button>
       </div>
@@ -297,10 +266,10 @@ export function Pricing() {
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)', marginTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Nonprofits & vocational rehab agencies</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 500, margin: '0 auto var(--space-lg)' }}>
-          Pre-buy Credential vouchers for the people you serve, at the same flat €69/track. No separate pricing.
+          Pre-buy Credential vouchers for the people you serve, at the same flat €{TRACK_PRICE}/track. No separate pricing.
         </p>
         <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
-          Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
 
@@ -328,7 +297,7 @@ export function Pricing() {
               <>
                 <h3 style={{ marginBottom: 'var(--space-md)' }}>Choose what you pay</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginBottom: 'var(--space-lg)' }}>
-                  Any amount from €0 to €69. You don't need to explain, and nobody
+                  Any amount from €0 to €{TRACK_PRICE}. You don't need to explain, and nobody
                   reviews this.
                 </p>
 
@@ -350,7 +319,7 @@ export function Pricing() {
                   What you'll pay (€)
                 </label>
                 <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-md)' }}>
-                  {['0', '10', '20', '35', '69'].map((v) => (
+                  {['0', '10', '25', '50', String(TRACK_PRICE)].map((v) => (
                     <button
                       key={v}
                       type="button"
@@ -366,7 +335,7 @@ export function Pricing() {
                   id="pwyc-amount"
                   type="number"
                   min={0}
-                  max={69}
+                  max={TRACK_PRICE}
                   step="1"
                   inputMode="decimal"
                   value={pwycAmount}

@@ -69,7 +69,7 @@ export function CookiePolicy() {
 
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Questions?</h2>
-        <p style={{ color: 'var(--text-secondary)' }}>Email: <strong>privacy@bedcoders.com</strong></p>
+        <p style={{ color: 'var(--text-secondary)' }}>Email: <strong>hi@softreset.school</strong></p>
       </Card>
     </div>
   );

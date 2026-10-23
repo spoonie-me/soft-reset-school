@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
  * This is the URL you paste into LinkedIn Campaign Manager → Conversions
  * as your "URL-based conversion" trigger.
  *
- * URL: https://bedcoders.com/signup-success
+ * URL: https://softreset.school/signup-success
  */
 
 export function SignupSuccess() {

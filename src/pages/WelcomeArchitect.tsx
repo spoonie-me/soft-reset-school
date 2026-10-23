@@ -91,7 +91,7 @@ export function WelcomeArchitect() {
           As an Architect, you own the complete suite. Learn the modules that interest you first, then circle back to others whenever you're ready. Your 4 certificates, once earned, are yours forever. This is your lifetime investment in your builder career.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-          Questions? Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
 

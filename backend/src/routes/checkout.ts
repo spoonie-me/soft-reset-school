@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import crypto from 'crypto';
-import { stripe, createCustomer, CREDENTIAL_PRICES, CREDENTIAL_PRODUCTS, CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
+import { stripe, createCustomer, CREDENTIAL_PRODUCTS, PROGRAM_PRICES_IN_CENTS, CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 
@@ -10,28 +10,20 @@ const router = Router();
 //
 // Replaces the old subscription checkout (2026-08-04, PRD.md §4.5). Body
 // shape depends on productId:
-//   { productId: 'track_credential', trackId: 'fundamentals' }
-//   { productId: 'program_credential', trackIds: ['fundamentals','ai','tools'] }
-//   { productId: 'code_review', trackId: 'fundamentals' }
+//   { productId: 'track_credential', trackId: 'ai-orchestrated-dev' }
+//   { productId: 'program_credential', trackIds: [<2 or 3 track ids>] }
 
 router.post('/session', authMiddleware, async (req, res) => {
   try {
     const authReq = req as AuthRequest;
     const { productId, trackId, trackIds } = req.body as {
-      productId: keyof typeof CREDENTIAL_PRICES;
+      productId: keyof typeof CREDENTIAL_PRODUCTS;
       trackId?: string;
       trackIds?: string[];
     };
 
-    if (!productId || !(productId in CREDENTIAL_PRICES)) {
+    if (!productId || !(productId in CREDENTIAL_PRODUCTS)) {
       res.status(400).json({ error: 'Invalid product ID.' });
-      return;
-    }
-
-    const stripePriceId = CREDENTIAL_PRICES[productId];
-    if (!stripePriceId) {
-      console.error(`Stripe price ID not configured for: ${productId}`);
-      res.status(500).json({ error: 'Payment not configured. Please try again later.' });
       return;
     }
 
@@ -41,10 +33,18 @@ router.post('/session', authMiddleware, async (req, res) => {
       res.status(400).json({ error: 'trackId (or trackIds for a program bundle) is required.' });
       return;
     }
-    if (productId === 'program_credential' && requestedTracks.length !== 3) {
-      res.status(400).json({ error: 'A Program Credential bundles exactly 3 tracks.' });
+    if (productId === 'program_credential' && !(requestedTracks.length in PROGRAM_PRICES_IN_CENTS)) {
+      res.status(400).json({ error: 'A Program Credential bundles 2 or 3 tracks.' });
       return;
     }
+    if (new Set(requestedTracks).size !== requestedTracks.length) {
+      res.status(400).json({ error: 'Each track can only be listed once.' });
+      return;
+    }
+    const unitAmount =
+      productId === 'program_credential'
+        ? PROGRAM_PRICES_IN_CENTS[requestedTracks.length]
+        : CREDENTIAL_PRODUCTS.track_credential.priceInCents;
     const invalidTrack = requestedTracks.find((t) => !(CREDENTIAL_SELLABLE_TRACKS as readonly string[]).includes(t));
     if (invalidTrack) {
       res.status(400).json({ error: `Track "${invalidTrack}" doesn't have a Credential available yet.` });
@@ -101,13 +101,26 @@ router.post('/session', authMiddleware, async (req, res) => {
       return;
     }
 
-    const appUrl = process.env.APP_URL ?? 'https://bedcoders.com';
+    const appUrl = process.env.APP_URL ?? 'https://softreset.school';
     const bundleId = productId === 'program_credential' ? crypto.randomUUID() : '';
 
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
       mode: 'payment', // one-time, not subscription
-      line_items: [{ price: stripePriceId, quantity: 1 }],
+      line_items: [{
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: productId === 'program_credential'
+              ? `Soft Reset School - Program Credential (${requestedTracks.length} tracks)`
+              : 'Soft Reset School - Track Credential',
+            description: CREDENTIAL_PRODUCTS[productId].description,
+          },
+          unit_amount: unitAmount,
+          tax_behavior: 'inclusive',
+        },
+        quantity: 1,
+      }],
       success_url: `${appUrl}/dashboard?session_id={CHECKOUT_SESSION_ID}&credential=${productId}`,
       cancel_url: `${appUrl}/pricing?checkout=cancelled`,
       allow_promotion_codes: true,
@@ -207,7 +220,7 @@ router.post('/hardship', authMiddleware, async (req, res) => {
       await prisma.user.update({ where: { id: user.id }, data: { stripeCustomerId } });
     }
 
-    const appUrl = process.env.APP_URL ?? 'https://bedcoders.com';
+    const appUrl = process.env.APP_URL ?? 'https://softreset.school';
 
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,

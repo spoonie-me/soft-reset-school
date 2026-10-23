@@ -19,7 +19,7 @@ export function TermsOfService() {
           These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and Roi Shternin-Martini, trading as Bedcoders, a sole trader registered in Vienna, Austria (GISA 38626050) ("Operator", "we", "us").
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          By accessing or purchasing on bedcoders.com, you confirm you have read, understood, and agree to these Terms. If you do not agree, do not use this service.
+          By accessing or purchasing on softreset.school, you confirm you have read, understood, and agree to these Terms. If you do not agree, do not use this service.
         </p>
       </Card>
 
@@ -32,7 +32,7 @@ export function TermsOfService() {
           <strong>Waiver of withdrawal right:</strong> Where you explicitly request immediate access to digital content before the 14-day period expires and acknowledge that you thereby lose your right of withdrawal, the right of withdrawal is forfeited upon commencement of access. This waiver is requested and confirmed at the point of purchase.
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          If you have not waived your right of withdrawal, submit a withdrawal request to legal@bedcoders.com within 14 days of purchase. A full refund will be processed within 14 days of receipt.
+          If you have not waived your right of withdrawal, submit a withdrawal request to hi@softreset.school within 14 days of purchase. A full refund will be processed within 14 days of receipt.
         </p>
       </Card>
 
@@ -53,7 +53,7 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>4. Intellectual Property</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          All course content, exercises, assessments, software, design, and materials on bedcoders.com are owned exclusively by or licensed to the Operator and are protected by Austrian copyright law (UrhG), EU intellectual property law, and applicable international treaties.
+          All course content, exercises, assessments, software, design, and materials on softreset.school are owned exclusively by or licensed to the Operator and are protected by Austrian copyright law (UrhG), EU intellectual property law, and applicable international treaties.
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
           You are granted a non-exclusive, non-transferable, revocable licence to access and use Bedcoders content for personal, non-commercial educational purposes only. You may not reproduce, redistribute, sell, sublicense, publish, broadcast, or create derivative works from any course content without prior written consent.
@@ -119,13 +119,13 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>8. AI-Powered Features</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          Bedcoders uses third-party AI tools (including Anthropic's Claude) to provide automated exercise feedback. By using these features, you acknowledge:
+          Soft Reset School uses third-party AI tools (including Anthropic's Claude) to provide automated exercise feedback. By using these features, you acknowledge:
         </p>
         <ul style={{ color: 'var(--text-secondary)', paddingLeft: 'var(--space-xl)', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
           <li>AI-generated feedback is automated and may not be reviewed by a human before delivery.</li>
           <li>AI feedback is indicative only and does not constitute expert or professional advice.</li>
           <li>Exercise responses may be processed by third-party AI providers subject to their own data processing terms. No personally identifying clinical data should be submitted in exercises.</li>
-          <li>You may request human review of AI feedback by contacting legal@bedcoders.com.</li>
+          <li>There is no human review of exercise feedback; it is fully automated. If you believe feedback contains an error, contact hi@softreset.school.</li>
         </ul>
       </Card>
 

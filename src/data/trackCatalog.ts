@@ -58,7 +58,9 @@ export interface CatalogTrack {
 const CAREER_CURRICULUM_NOTE =
   'This is a young track: a focused, growing curriculum — every lesson free to read before you pay anything.';
 
-export const CATALOG_TRACKS: CatalogTrack[] = [
+/** Every track definition, including archived ones. Use CATALOG_TRACKS for
+ * anything public-facing. */
+const ALL_TRACKS: CatalogTrack[] = [
   // ── Career tracks — the reintegration path ──────────────────────────────
   {
     slug: 'ai-orchestrated-dev',
@@ -69,7 +71,7 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
     pitch:
       'Direct AI coding tools well enough that your energy envelope stops setting your ceiling — and review what they produce with real judgment.',
     whoFor:
-      'For people who want to ship real software without typing every line — including on days when typing every line isn\'t physically on the table. You don\'t need to be a fast coder; you need to become a careful director and reviewer of AI output. Some prior exposure to code helps — the foundation tracks are a free on-ramp if you\'re starting from zero.',
+      'For people who want to ship real software without typing every line — including on days when typing every line isn\'t physically on the table. You don\'t need to be a fast coder; you need to become a careful director and reviewer of AI output. Some prior exposure to code helps — ',
     jobItLeadsTo:
       'Development work — freelance or employed — where the value is directing and reviewing AI-generated code: writing executable specs, catching the bugs AI confidently gets wrong, and owning correctness, security, and maintainability. A hireable dev skill that doesn\'t bill by the hour of typing.',
     curriculumNote: CAREER_CURRICULUM_NOTE,
@@ -386,14 +388,18 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
   },
 ];
 
-export const CAREER_CATALOG_TRACKS = CATALOG_TRACKS.filter((t) => t.kind === 'career');
-export const FOUNDATION_CATALOG_TRACKS = CATALOG_TRACKS.filter((t) => t.kind === 'foundation');
+/** Public catalog: the four career tracks. The four foundation tracks
+ * (kind: 'foundation') are archived — still defined above so their content
+ * and existing certificates keep working, but hidden from every public page
+ * and no longer sold. To bring them back, include them here. */
+export const CATALOG_TRACKS: CatalogTrack[] = ALL_TRACKS.filter((t) => t.kind === 'career');
+export const CAREER_CATALOG_TRACKS = CATALOG_TRACKS;
 
 export function getCatalogTrack(slug: string | undefined): CatalogTrack | undefined {
   return CATALOG_TRACKS.find((t) => t.slug === slug);
 }
 
-/** Whether this track has enough published content to sell a €69 credential
+/** Whether this track has enough published content to sell a credential
  * for — see credentialBar.ts. Backend/src/lib/stripe.ts computes the same
  * thing independently for CREDENTIAL_SELLABLE_TRACKS; the two are checked
  * against each other by src/data/__tests__/credentialBar.test.ts. */

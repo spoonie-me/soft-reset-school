@@ -81,7 +81,7 @@ router.post('/stripe', async (req: Request, res: Response) => {
           return;
         }
 
-        const amountTotal = session.amount_total ?? CREDENTIAL_PRODUCTS[productId]?.priceInCents ?? 0;
+        const amountTotal = session.amount_total ?? 0;
         // Split evenly across tracks in a bundle so per-track amounts sum to
         // the real charge — good enough for reporting, not a refund engine.
         const perTrackAmount = Math.round(amountTotal / trackIds.length);

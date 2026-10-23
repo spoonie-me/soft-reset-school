@@ -20,7 +20,7 @@ export function PrivacyPolicy() {
         <p style={{ color: 'var(--text-secondary)' }}>
           <strong>Roi Shternin-Martini</strong><br />
           1180 Vienna, Austria<br />
-          Email: privacy@bedcoders.com
+          Email: hi@softreset.school
         </p>
       </Card>
 
@@ -69,7 +69,7 @@ export function PrivacyPolicy() {
           <li><strong>Withdraw consent:</strong> Anytime, for any reason, no penalty</li>
         </ul>
         <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-lg)' }}>
-          To exercise any right: <strong>privacy@bedcoders.com</strong> with proof of identity.
+          To exercise any right: <strong>hi@softreset.school</strong> with proof of identity.
         </p>
       </Card>
 
@@ -102,7 +102,7 @@ export function PrivacyPolicy() {
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Questions?</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          Email: <strong>privacy@bedcoders.com</strong><br />
+          Email: <strong>hi@softreset.school</strong><br />
           For complaints: Contact your national Data Protection Authority
         </p>
       </Card>

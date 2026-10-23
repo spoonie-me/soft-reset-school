@@ -17,7 +17,7 @@ export interface EmailSequence {
 }
 
 const SITE = 'https://spooniversity.com';
-const UNSUBSCRIBE_URL = 'https://bedcoders.com/api/unsubscribe';
+const UNSUBSCRIBE_URL = 'https://softreset.school/api/unsubscribe';
 
 // ─── Spooniversity Launch Sequence ────────────────────────────────────────────
 const spooniversityLaunch: EmailSequence = {
@@ -128,13 +128,13 @@ const spooniversityLaunch: EmailSequence = {
 // (bedcoders_welcome) since it's referenced elsewhere as a sequence key, not
 // a brand name. Previously promised "new posts every Tuesday and Friday" —
 // a newsletter cadence that had been broken for months and, worse, never
-// mentioned the actual product (free lessons, the €69 credential). Rewritten
+// mentioned the actual product (free lessons, the €99 credential). Rewritten
 // to do the conversion work a welcome email is supposed to do.
 const bedcodersWelcome: EmailSequence = {
   id: 'bedcoders_welcome',
   name: 'Soft Reset School Welcome',
   fromName: 'Soft Reset School',
-  fromEmail: 'hello@bedcoders.com',
+  fromEmail: 'hi@softreset.school',
   steps: [
     {
       step: 0,
@@ -146,7 +146,7 @@ const bedcodersWelcome: EmailSequence = {
 
   <p>Soft Reset School teaches AI-era employable skills to people who work from bed, the couch, or wherever the body lands today — four career tracks (AI-assisted development, AI automation consulting, AI-augmented medical coding, digital accessibility QA) plus a coding foundation curriculum.</p>
 
-  <p>Every lesson is free to read, forever, no card required. There's one paid thing: a €69 certification exam and permanent, verifiable credential — only when you're ready, and pay-what-you-can down to €0 if €69 isn't there this month.</p>
+  <p>Every lesson is free to read, forever, no card required. There's one paid thing: a €99 certification exam and permanent, verifiable credential — only when you're ready, and pay-what-you-can down to €0 if €99 isn't there this month.</p>
 
   <p>No hustle culture. No streak penalties. No "10x developer" nonsense — just real skill, built at the pace your body actually allows.</p>
 
@@ -208,11 +208,37 @@ const substackMigration: EmailSequence = {
   ],
 };
 
+// ─── Learning groups interest ──────────────────────────────────────────────
+// One confirmation email for people who ask to hear about the upcoming hybrid
+// cohorts (accountability learning groups). No follow-up steps.
+const learningGroupsInterest: EmailSequence = {
+  id: 'learning_groups_interest',
+  name: 'Learning Groups Interest',
+  fromName: 'Soft Reset School',
+  fromEmail: 'hi@softreset.school',
+  steps: [
+    {
+      step: 0,
+      delayDays: 0,
+      subject: 'You\'re on the list for Soft Reset School learning groups',
+      html: `
+<div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1a1a1a; line-height: 1.7; padding: 20px;">
+  <p>Thanks — you're on the list.</p>
+  <p>We're putting together small hybrid cohorts: accountability learning groups that pair the free self-paced lessons with a regular, low-pressure check-in. When the first groups open, you'll get one email from us. Nothing else in the meantime.</p>
+  <p>Every lesson is free to read right now at <a href="https://softreset.school">softreset.school</a>.</p>
+  <p>Questions? Just reply to this email.</p>
+  <p>— Roi</p>
+</div>`,
+    },
+  ],
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 export const SEQUENCES: Record<string, EmailSequence> = {
   spooniversity_launch: spooniversityLaunch,
   bedcoders_welcome: bedcodersWelcome,
   substack_migration: substackMigration,
+  learning_groups_interest: learningGroupsInterest,
 };
 
 export function getSequence(id: string): EmailSequence | null {

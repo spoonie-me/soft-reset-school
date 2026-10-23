@@ -57,7 +57,7 @@ export function DataProcessing() {
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>5. Contact</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          For DPA inquiries or to request a signed copy: <strong>legal@bedcoders.com</strong>
+          For DPA inquiries or to request a signed copy: <strong>hi@softreset.school</strong>
         </p>
       </Card>
     </div>

@@ -75,7 +75,7 @@ export function ForTeams() {
     <div>
       <SEO
         title="Teams & Organisations — Credential Vouchers | Bedcoders"
-        description="Get your team building with AI. Free content, flat €69 Credential vouchers, admin dashboard, progress reporting, GDPR-compliant DPA, and bulk onboarding. Built for distributed teams, bootcamps, and tech consultancies."
+        description="Get your team building with AI. Free content, flat €99 Credential vouchers, admin dashboard, progress reporting, GDPR-compliant DPA, and bulk onboarding. Built for distributed teams, bootcamps, and tech consultancies."
         canonical="/for-teams"
         keywords="team coding training, AI training for teams, bulk credential vouchers, GDPR DPA coding course, prompt engineering team training, Claude API team license, AI literacy enterprise training"
         jsonLd={[
@@ -87,7 +87,7 @@ export function ForTeams() {
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: 'Bedcoders for Teams',
-            provider: { '@type': 'Organization', name: 'Bedcoders', url: 'https://bedcoders.com/' },
+            provider: { '@type': 'Organization', name: 'Soft Reset School', url: 'https://softreset.school/' },
             description:
               'Team subscriptions to Bedcoders coding & AI tracks. Admin dashboard, bulk onboarding, GDPR-compliant DPA.',
             areaServed: 'Worldwide',
@@ -161,12 +161,12 @@ export function ForTeams() {
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 900, margin: '0 auto' }}>
         <h2 style={{ marginBottom: 'var(--space-sm)' }}>Credential vouchers</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-          No subscription, no per-seat monthly billing. Every lesson is free to read for anyone — buy a block of Credential vouchers (the certification exam + permanent, publicly verifiable certificate) at the same flat €69/track individual learners pay. Redeem a voucher whenever a team member is ready, no expiry.
+          No subscription, no per-seat monthly billing. Every lesson is free to read for anyone — buy a block of Credential vouchers (the certification exam + permanent, publicly verifiable certificate) at the same flat €99/track individual learners pay. Redeem a voucher whenever a team member is ready, no expiry.
         </p>
         <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-xl)' }}>
           {[
-            { seats: '5–20 vouchers', price: '€69', note: 'per voucher, flat' },
-            { seats: '21–100 vouchers', price: '€69', note: 'per voucher, flat', highlight: true },
+            { seats: '5–20 vouchers', price: '€99', note: 'per voucher, flat' },
+            { seats: '21–100 vouchers', price: '€99', note: 'per voucher, flat', highlight: true },
             { seats: '100+ vouchers', price: 'Custom', note: 'volume conversation' },
           ].map((tier) => (
             <Card key={tier.seats} style={tier.highlight ? { borderColor: 'var(--signal)' } : {}}>
@@ -250,7 +250,7 @@ export function ForTeams() {
             )}
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.75rem', margin: 0 }}>
               Or email us directly at{' '}
-              <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>hello@bedcoders.com</a>
+              <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>hi@softreset.school</a>
             </p>
           </form>
         </Card>

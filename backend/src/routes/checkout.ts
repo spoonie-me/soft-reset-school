@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { stripe, createCustomer, CREDENTIAL_PRICES, CREDENTIAL_PRODUCTS, CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
+import { EXAM_CREDENTIAL_PRODUCTS } from '../lib/credentialGrant.js';
 
 const router = Router();
 
@@ -41,8 +42,8 @@ router.post('/session', authMiddleware, async (req, res) => {
       res.status(400).json({ error: 'trackId (or trackIds for a program bundle) is required.' });
       return;
     }
-    if (productId === 'program_credential' && requestedTracks.length !== 3) {
-      res.status(400).json({ error: 'A Program Credential bundles exactly 3 tracks.' });
+    if (productId === 'program_credential' && new Set(requestedTracks).size !== 3) {
+      res.status(400).json({ error: 'A Program Credential bundles exactly 3 different tracks.' });
       return;
     }
     const invalidTrack = requestedTracks.find((t) => !(CREDENTIAL_SELLABLE_TRACKS as readonly string[]).includes(t));
@@ -59,7 +60,8 @@ router.post('/session', authMiddleware, async (req, res) => {
 
     // Refuse to sell a credential the user already owns.
     const alreadyOwned = await prisma.credentialPurchase.findMany({
-      where: { userId: user.id, trackId: { in: requestedTracks } },
+      // code_review purchases don't count as owning the credential.
+      where: { userId: user.id, trackId: { in: requestedTracks }, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
       select: { trackId: true },
     });
     if (alreadyOwned.length > 0) {
@@ -176,8 +178,8 @@ router.post('/hardship', authMiddleware, async (req, res) => {
       return;
     }
 
-    const existing = await prisma.credentialPurchase.findUnique({
-      where: { userId_trackId: { userId: user.id, trackId } },
+    const existing = await prisma.credentialPurchase.findFirst({
+      where: { userId: user.id, trackId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
     });
     if (existing) {
       res.status(400).json({ error: 'You already have a Credential for this track.' });

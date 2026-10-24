@@ -15,11 +15,33 @@ export interface SpeechChunk {
   text: string;
 }
 
+/** Drops HTML-looking tags with a plain scan, not a regex. A single regex pass can leave
+ * "<scr<script>ipt>" re-forming itself; this never leaves an angle bracket behind. */
+function removeTags(text: string): string {
+  let out = '';
+  let i = 0;
+  while (i < text.length) {
+    const ch = text[i];
+    if (ch === '<' && /[A-Za-z/!]/.test(text[i + 1] ?? '')) {
+      const end = text.indexOf('>', i + 1);
+      i = end === -1 ? i + 1 : end + 1;
+    } else if (ch === '<' || ch === '>') {
+      i += 1;
+    } else {
+      out += ch;
+      i += 1;
+    }
+  }
+  return out;
+}
+
 /** Markdown to something a voice can read. Code is never read aloud. */
 export function stripMarkdownForSpeech(md: string): string {
-  return md
+  // Code goes first so words inside `<label for>` survive; tags are dropped after.
+  const withoutCode = md
     .replace(/```[\s\S]*?```/g, ' (code example, see the screen) ')
-    .replace(/`([^`]*)`/g, '$1')
+    .replace(/`([^`]*)`/g, (_m, code: string) => code.replace(/[<>]/g, ' '));
+  return removeTags(withoutCode)
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/^#{1,6}\s+/gm, '')
@@ -27,8 +49,6 @@ export function stripMarkdownForSpeech(md: string): string {
     .replace(/(\*|_)(.*?)\1/g, '$2')
     .replace(/^\s*[-*+]\s+/gm, '')
     .replace(/^\s*\d+\.\s+/gm, '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/[<>]/g, '') // nothing like "<scr<script>ipt>" can survive the pass above
     .replace(/\s*\n\s*/g, '. ')
     .replace(/\.\s*\.+/g, '.')
     .replace(/\s{2,}/g, ' ')

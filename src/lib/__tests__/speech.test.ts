@@ -24,6 +24,10 @@ describe('stripMarkdownForSpeech', () => {
     expect(stripMarkdownForSpeech('x <b>bold</b> y')).toBe('x bold y');
   });
 
+  it('keeps the words inside inline code that looks like a tag', () => {
+    expect(stripMarkdownForSpeech('Use a `<label for>` element.')).toBe('Use a label for element.');
+  });
+
   it('keeps inline code words, without the backticks', () => {
     expect(stripMarkdownForSpeech('Press `Tab` to move.')).toBe('Press Tab to move.');
   });

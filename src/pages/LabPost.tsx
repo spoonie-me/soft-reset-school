@@ -85,7 +85,7 @@ export function LabPost() {
           Want to build something like this?
         </p>
         <h3 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-xl)' }}>
-          Every Soft Reset School lesson is free to read.
+          Try the first Soft Reset School lesson free.
         </h3>
         <Link to="/tracks" style={{
           display: 'inline-block', background: 'var(--signal)', color: 'var(--bg-void)',

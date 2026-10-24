@@ -8,6 +8,7 @@ import { lessonsUntilCredential } from '@/data/credentialBar';
 import { getCatalogTrack, credentialAvailable } from '@/data/trackCatalog';
 import { TRACK_PRICE, BUNDLE_PRICES, MAX_BUNDLE_SIZE, bundleSavings } from '@/data/pricing';
 import { CohortInterest } from '@/components/CohortInterest';
+import { ModalDialog } from '@/components/ModalDialog';
 
 // Career tracks are the reintegration path: each one maps to a role a
 // bed- or home-bound person can actually be hired (or bill clients) for.
@@ -114,7 +115,7 @@ export function Pricing() {
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
       <SEO
         title="Pricing — Soft Reset School"
-        description="Every lesson is free to read, forever. Pay once — €99 per track, 2 for €149, 3 for €199 — only when you're ready to sit a certification exam and get a permanent, publicly verifiable credential."
+        description="Try lesson 1 free. Then pay once, €99 per track (2 for €149, 3 for €199), for every lesson, the certification exam and a permanent, publicly verifiable credential."
         canonical="/pricing"
       />
 
@@ -122,7 +123,7 @@ export function Pricing() {
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <h1 style={{ marginBottom: 'var(--space-lg)' }}>All content is free. Pay once, only for the credential.</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
-          No subscription. Nothing bills you on a bad month. Read every lesson in every track for free, forever — pay only when you're ready to sit the certification exam and get a permanent, publicly verifiable credential.
+          No subscription. Nothing bills you on a bad month. Try the first lesson of any track free, then pay once for the whole track, the certification exam and a permanent, publicly verifiable credential.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
           €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
@@ -135,7 +136,7 @@ export function Pricing() {
         <h3 style={{ marginBottom: 'var(--space-xs)' }}>Start here: try lesson 1</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
           Create a free account with just your email and start with the first lesson of any track. No card.
-          Everything else stays free to read too — you only pay if you want the credential.
+          The rest of the track, the exam and the certificate are €99 once.
         </p>
         <Link to="/signup">
           <Button variant="secondary">Try lesson 1 free</Button>
@@ -256,13 +257,7 @@ export function Pricing() {
 
       {/* Hardship code dialog */}
       {codeTrack && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Redeem a hardship code"
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 'var(--space-xl)' }}
-        >
-          <Card style={{ maxWidth: 460, width: '100%', padding: 'var(--space-2xl)' }}>
+        <ModalDialog label="Redeem a hardship code" onClose={() => setCodeTrack(null)}>
             {codeDone ? (
               <>
                 <h3 style={{ marginBottom: 'var(--space-md)' }}>Done. It's yours.</h3>
@@ -323,17 +318,12 @@ export function Pricing() {
                 </div>
               </>
             )}
-          </Card>
-        </div>
+        </ModalDialog>
       )}
 
       {/* Withdrawal right modal — shown before Stripe checkout */}
       {pending && (
-        <div
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 'var(--space-xl)' }}
-          onClick={() => setPending(null)}
-        >
-          <Card style={{ maxWidth: 480, width: '100%', padding: 'var(--space-2xl)' }} onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+        <ModalDialog label="Before you continue" maxWidth={480} onClose={() => { setPending(null); setWithdrawalAck(false); setCheckoutError(''); }}>
             <h3 style={{ marginBottom: 'var(--space-lg)', textAlign: 'center' }}>Before you continue</h3>
             <label style={{ display: 'flex', gap: 'var(--space-sm)', alignItems: 'flex-start', cursor: 'pointer', marginBottom: 'var(--space-xl)', padding: 'var(--space-md)', background: 'var(--bg-void)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-md)' }}>
               <input
@@ -360,8 +350,7 @@ export function Pricing() {
                 {checkoutLoading ? 'Starting…' : 'Continue to checkout →'}
               </Button>
             </div>
-          </Card>
-        </div>
+        </ModalDialog>
       )}
     </div>
   );

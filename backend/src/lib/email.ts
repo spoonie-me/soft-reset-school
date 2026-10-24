@@ -105,7 +105,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
         You just joined a community of coders who learn on their own terms — from bed, from the sofa, at their own pace.
       </p>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
-        Your free tier gives you access to the <strong style="color:#ffffff;">first module of every track</strong>, including lessons, knowledge checks, and sample graded exercises.
+        Lesson 1 of every track is yours to try for free. A full track is <strong style="color:#ffffff;">€99 once</strong>: every lesson, the exam and the certificate, with no subscription.
       </p>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 24px;">
         Here's what to do first:

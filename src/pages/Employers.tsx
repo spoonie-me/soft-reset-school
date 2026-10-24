@@ -103,7 +103,7 @@ export function Employers() {
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Seats — €99 per track, flat</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-            One seat is one person's credential for one track. Every lesson is free to read, so a seat pays only for the exam and certificate. It costs exactly what an individual learner pays — €99 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
+            One seat is one person's credential for one track. A seat unlocks every lesson in the track, plus the exam and certificate. It costs exactly what an individual learner pays — €99 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
           </p>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
             Buying for a team? See <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>team seats</Link>, or tell us how many below.

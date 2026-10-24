@@ -14,21 +14,21 @@ import { sanitizeExerciseConfig } from '../lib/sanitizeExercise.js';
 
 const router = Router();
 
-// Get assessment questions for a module (requires paid access for non-first modules)
+// Get assessment questions for a module (requires the track)
 router.get('/:moduleId', authMiddleware, entitlementsMiddleware, async (req, res) => {
   try {
     const entReq = req as EntitledRequest;
 
-    // Check if module is beyond free tier
+    // Module assessments cover more than the trial lesson, so they need the track
     const mod = await prisma.module.findUnique({
       where: { id: req.params.moduleId },
       include: { domain: true },
     });
 
-    if (mod && mod.order !== 1 && !entReq.trackAccess?.includes(mod.domain?.trackId ?? '')) {
+    if (mod && !entReq.trackAccess?.includes(mod.domain?.trackId ?? '')) {
       res.status(403).json({
         error: 'Track access required',
-        message: "We couldn't confirm access to this track just now. Please try again — every lesson and exercise here is free.",
+        message: "You need the full track to read this. The first lesson of every track is a free trial.",
       });
       return;
     }

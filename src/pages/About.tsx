@@ -100,7 +100,7 @@ export function About() {
             So this school works the other way. Short lessons. Resume anywhere. No streaks to lose. A lower-energy path in every module. Nothing in a lesson is timed.
           </p>
           <p style={body}>
-            Every lesson is free to read. You pay only if you want the exam and the certificate.
+            The first lesson of every track is free to try. After that it is €99 once per track, for the lessons, the exam and the certificate.
           </p>
           <p style={{ ...body, marginBottom: 0 }}>
             <strong style={strong}>This is not a cure story.</strong> A cure has an ending. Chronic illness doesn't give you one. You restart as many times as your body needs, and it still counts.

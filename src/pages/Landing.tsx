@@ -39,7 +39,7 @@ export function Landing() {
     <div>
       <SEO
         title="Soft Reset School | A restart, not a comeback story"
-        description="Free lessons in AI-era work skills for people returning to work after illness or time away. Short units, a lower-energy path in every module, nothing timed."
+        description="AI-era work skills for people returning to work after illness or time away. Try lesson 1 free. Short units, a lower-energy path in every module, nothing timed."
         canonical="/"
       />
 
@@ -75,7 +75,7 @@ export function Landing() {
                     if (typeof (window as any).umami !== 'undefined') (window as any).umami.track('get-started-hero');
                   }}
                 >
-                  Start for Free
+                  Try lesson 1 free
                 </Button>
               </Link>
               <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
@@ -159,9 +159,9 @@ export function Landing() {
       {/* Pricing */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-sm)' }}>every lesson is free. no card, no subscription.</h2>
+          <h2 style={{ marginBottom: 'var(--space-sm)' }}>try lesson 1 free. then €99 once per track.</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-            Read every lesson in every track for free, forever. Nothing bills you on a bad month — there is no monthly anything. You pay once, only when you're ready to prove it.
+            The first lesson of every track is a free trial. The full track, the exam and the certificate are €99 once. Nothing bills you on a bad month — there is no monthly anything.
           </p>
           <Card style={{ textAlign: 'center', maxWidth: 440, margin: '0 auto var(--space-2xl)', borderColor: 'var(--signal)' }}>
             <div style={{ width: 32, height: 3, background: 'var(--signal)', borderRadius: 2, margin: '0 auto var(--space-md)' }} />
@@ -179,7 +179,7 @@ export function Landing() {
       <section style={{ padding: 'var(--space-4xl) var(--space-xl)', textAlign: 'center' }}>
         <h2 style={{ marginBottom: 'var(--space-lg)' }}>restart as many times as you need to.</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)', fontSize: '1.125rem' }}>
-          Every lesson free. No card. No deadlines. No good day required.
+          Lesson 1 free. No card. No deadlines. No good day required.
         </p>
         <Link to="/signup">
           <Button
@@ -190,7 +190,7 @@ export function Landing() {
               if (typeof (window as any).umami !== 'undefined') (window as any).umami.track('get-started-footer');
             }}
           >
-            Start for Free
+            Try lesson 1 free
           </Button>
         </Link>
       </section>

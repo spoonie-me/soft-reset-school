@@ -7,6 +7,7 @@ import { ProgressBar } from '@/components/ProgressBar';
 import { LoadingSpinner } from '@/components/ProtectedRoute';
 import { learningApi, type ModuleDetailResponse } from '@/lib/api';
 import { IS_DEV_MODE } from '@/lib/useApi';
+import { getCatalogTrack } from '@/data/trackCatalog';
 
 /* ─── Types ─── */
 interface LessonItem {
@@ -17,6 +18,8 @@ interface LessonItem {
   difficulty: string;
   order: number;
   status: 'completed' | 'in_progress' | 'not_started';
+  /** Needs the full track. Only lesson 1 of each track is a free trial. */
+  locked?: boolean;
 }
 
 interface ModuleView {
@@ -100,7 +103,7 @@ export function Module() {
           bloomLevel: m.bloomLevel,
           domainName: m.domain?.name ?? '',
           trackId: m.domain?.trackId ?? 'fundamentals',
-          trackTitle: m.domain?.trackTitle ?? '',
+          trackTitle: getCatalogTrack(m.domain?.trackId ?? undefined)?.title ?? m.domain?.trackTitle ?? '',
           lessons: m.lessons.map((l) => ({
             id: l.id,
             title: l.title,
@@ -109,6 +112,7 @@ export function Module() {
             difficulty: l.difficulty,
             order: l.order,
             status: (l.progress?.status as 'completed' | 'in_progress') ?? 'not_started',
+            locked: !!l.locked,
           })),
           assessmentId: m.assessment?.id ?? null,
           assessmentTitle: m.assessment?.title ?? null,
@@ -146,6 +150,8 @@ export function Module() {
 
   // Find first incomplete lesson for "Continue" action
   const nextLesson = mod.lessons.find((l) => l.status !== 'completed');
+  const nextLocked = !!nextLesson?.locked;
+  const trackSlug = mod.trackId;
 
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
@@ -181,10 +187,17 @@ export function Module() {
       </div>
 
       {/* Continue / Start button */}
-      {nextLesson && (
+      {nextLesson && !nextLocked && (
         <Link to={`/lesson/${nextLesson.id}`} style={{ textDecoration: 'none', display: 'block', marginBottom: 'var(--space-2xl)' }}>
           <Button variant="primary" size="lg" style={{ width: '100%' }}>
             {completedCount > 0 ? 'Continue' : 'Start module'} &mdash; {nextLesson.title}
+          </Button>
+        </Link>
+      )}
+      {nextLocked && (
+        <Link to={`/tracks/${trackSlug}`} style={{ textDecoration: 'none', display: 'block', marginBottom: 'var(--space-2xl)' }}>
+          <Button variant="primary" size="lg" style={{ width: '100%' }}>
+            Unlock the full track to keep going
           </Button>
         </Link>
       )}
@@ -246,6 +259,11 @@ export function Module() {
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-display)' }}>
                   {lesson.duration} min
                 </span>
+                {lesson.locked && (
+                  <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-display)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)', border: '1px solid var(--bg-border)', borderRadius: 4, padding: '2px 6px' }}>
+                    Full track
+                  </span>
+                )}
               </div>
             </Card>
           </Link>

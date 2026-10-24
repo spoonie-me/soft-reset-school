@@ -45,7 +45,7 @@ export function Imprint() {
         <p style={{ color: 'var(--text-secondary)' }}><strong>Owner:</strong> Roi Shternin-Martini, MA, B.Ed.</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Seat:</strong> Vienna, Austria</p>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          <strong>Basic orientation:</strong> Free online lessons and paid certification exams in AI-era work skills for people returning to work after illness or time away, together with articles on AI in healthcare, health IT and working life with a chronic illness or disability.
+          <strong>Basic orientation:</strong> Online lessons, with the first lesson of every track free, and paid certification exams in AI-era work skills for people returning to work after illness or time away, together with articles on AI in healthcare, health IT and working life with a chronic illness or disability.
         </p>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
           Soft Reset School is operated by a sole trader (Einzelunternehmer). There is no separate legal entity &mdash;

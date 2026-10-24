@@ -3,6 +3,8 @@ import { Router } from 'express';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import type { Request, Response, NextFunction } from 'express';
+import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
+import { isTrialLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -19,9 +21,9 @@ function optionalAuth(req: AuthRequest, res: Response, next: NextFunction) {
 }
 
 // Get module with its lessons and user progress
-router.get('/:moduleId', optionalAuth, async (req, res) => {
+router.get('/:moduleId', optionalAuth, entitlementsMiddleware, async (req, res) => {
   try {
-    const authReq = req as AuthRequest;
+    const authReq = req as EntitledRequest;
 
     const mod = await prisma.module.findUnique({
       where: { id: req.params.moduleId },
@@ -83,6 +85,11 @@ router.get('/:moduleId', optionalAuth, async (req, res) => {
         lessons: mod.lessons.map((l) => ({
           ...l,
           progress: lessonProgress[l.id] ?? null,
+          // Same rule as GET /lessons/:id, so the list never promises a lesson the page will refuse.
+          locked:
+            !!mod.domain &&
+            !isTrialLesson({ order: l.order, module: { order: mod.order, domain: { order: mod.domain.order } } }) &&
+            !authReq.trackAccess?.includes(mod.domain.trackId),
         })),
         assessment: mod.assessment,
       },

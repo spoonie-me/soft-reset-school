@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { CATALOG_TRACKS } from '@/data/trackCatalog';
 
 /**
  * /signup-success — Post-signup conversion page.
@@ -32,20 +33,32 @@ export function SignupSuccess() {
       <div style={{ fontSize: '4rem', marginBottom: 'var(--space-lg)' }} aria-hidden="true">🎉</div>
       <h1 style={{ marginBottom: 'var(--space-md)' }}>You're in.</h1>
       <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-        Your account is set up. Every lesson in every track is free to read — all of
-        it, for as long as you want. Nothing will bill you, and nothing expires.
+        Your account is set up. Lesson 1 of every track is yours to try, for as long as you want.
+        Nothing will bill you, and nothing expires.
       </p>
       <p style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', marginBottom: 'var(--space-lg)' }}>
-        Not sure where to start? Browse the tracks — each one says who it's for and
-        what job it leads to.
+        Start with lesson 1 of whichever track you are curious about. You can try the others later.
       </p>
+      <ul style={{ listStyle: 'none', margin: '0 auto var(--space-xl)', padding: 0, display: 'grid', gap: 'var(--space-sm)', maxWidth: 420 }}>
+        {CATALOG_TRACKS.filter((t) => t.kind === 'career' && t.trialLessonId).map((t) => (
+          <li key={t.slug}>
+            <Link
+              to={`/lesson/${t.trialLessonId}`}
+              className="btn btn-secondary"
+              style={{ display: 'block', minHeight: 48, padding: '12px 20px' }}
+            >
+              <span aria-hidden="true">{t.emoji} </span>Start lesson 1: {t.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
       <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}>
         <Link
           to="/tracks"
           className="btn btn-primary btn-lg"
           style={{ fontSize: '1.1rem', padding: '16px 40px' }}
         >
-          Browse the tracks
+          Browse all tracks
         </Link>
         <Link
           to="/dashboard"

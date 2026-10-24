@@ -146,7 +146,7 @@ const bedcodersWelcome: EmailSequence = {
 
   <p>Soft Reset School teaches AI-era employable skills to people who work from bed, the couch, or wherever the body lands today — four career tracks (AI-assisted development, AI automation consulting, AI-augmented medical coding, digital accessibility QA) plus a coding foundation curriculum.</p>
 
-  <p>Every lesson is free to read, forever, no card required. There's one paid thing: a €99 certification exam and permanent, verifiable credential — only when you're ready, and if €99 is out of reach, write to hi@softreset.school for a hardship code. No reason needed.</p>
+  <p>Lesson 1 of every track is a free trial, no card required. The full track is a one-time €99: every lesson, the certification exam and a permanent, verifiable credential. If €99 is out of reach, write to hi@softreset.school for a hardship code. No reason needed.</p>
 
   <p>No hustle culture. No streak penalties. No "10x developer" nonsense — just real skill, built at the pace your body actually allows.</p>
 
@@ -224,8 +224,8 @@ const learningGroupsInterest: EmailSequence = {
       html: `
 <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1a1a1a; line-height: 1.7; padding: 20px;">
   <p>Thanks — you're on the list.</p>
-  <p>We're putting together small hybrid cohorts: accountability learning groups that pair the free self-paced lessons with a regular, low-pressure check-in. When the first groups open, you'll get one email from us. Nothing else in the meantime.</p>
-  <p>Every lesson is free to read right now at <a href="https://softreset.school">softreset.school</a>.</p>
+  <p>We're putting together small hybrid cohorts: accountability learning groups that pair the self-paced lessons with a regular, low-pressure check-in. When the first groups open, you'll get one email from us. Nothing else in the meantime.</p>
+  <p>You can try lesson 1 of any track free at <a href="https://softreset.school">softreset.school</a>.</p>
   <p>Questions? Just reply to this email.</p>
   <p>— Roi</p>
 </div>`,

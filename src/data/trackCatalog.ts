@@ -40,6 +40,10 @@ export interface CatalogTrack {
    * backend/prisma/seed-data/domains/<slug>/*\/lessons.json, summed. */
   lessonCount: number;
   totalMinutes: number;
+  /** The one lesson anyone can open without buying the track. Must be lesson 1
+   * of module 1 of the track's first domain — src/data/__tests__/trialLessons.test.ts
+   * checks it against the seed data, and backend/src/lib/access.ts enforces it. */
+  trialLessonId?: string;
   exam: {
     questionCount: number;
     timeLimitMinutes: number;
@@ -56,7 +60,7 @@ export interface CatalogTrack {
 }
 
 const CAREER_CURRICULUM_NOTE =
-  'Every lesson is free to read before you pay anything.';
+  'The first lesson is a free trial. The full track is €99 once.';
 
 /** Every track definition, including archived ones. Use CATALOG_TRACKS for
  * anything public-facing. */
@@ -97,6 +101,7 @@ const ALL_TRACKS: CatalogTrack[] = [
           'Testing, deployment, and monitoring workflows where AI handles routine work and the developer owns judgment calls and final accountability.',
       },
     ],
+    trialLessonId: 'aod-l01',
     lessonCount: 244,
     totalMinutes: 6100,
     exam: { questionCount: 22, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
@@ -136,6 +141,7 @@ const ALL_TRACKS: CatalogTrack[] = [
           'Building in checkpoints to catch AI errors at scale, and proving the actual business value of an automation, not just its existence.',
       },
     ],
+    trialLessonId: 'awc-sp1-l01',
     lessonCount: 246,
     totalMinutes: 6150,
     exam: { questionCount: 21, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
@@ -175,6 +181,7 @@ const ALL_TRACKS: CatalogTrack[] = [
           'Auditing AI-assisted clinical systems for safety-critical failures, and documenting findings in a way clinical and engineering teams can both act on.',
       },
     ],
+    trialLessonId: 'ai-oh-f-l01',
     lessonCount: 246,
     totalMinutes: 6135,
     exam: { questionCount: 22, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
@@ -224,6 +231,7 @@ const ALL_TRACKS: CatalogTrack[] = [
           'Getting and holding accessibility work — employed, contract or freelance — and structuring it so it doesn\'t cost more than it pays.',
       },
     ],
+    trialLessonId: 'aqa-l01',
     lessonCount: 243,
     totalMinutes: 6065,
     exam: { questionCount: 14, timeLimitMinutes: 30, passScore: 75, openEndedCount: 2 },

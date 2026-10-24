@@ -46,7 +46,7 @@ export function Welcome() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-2xl) var(--space-lg)' }}>
       <SEO
         title="Welcome — start coding from bed"
-        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — all content free, pay only for a €99 Credential when you're ready."
+        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — try lesson 1 free, then €99 once per track for every lesson, the exam and the credential."
         canonical="/welcome"
       />
       {/* Hero */}
@@ -79,7 +79,7 @@ export function Welcome() {
             className="btn btn-primary btn-lg"
             style={{ fontSize: '1.1rem', padding: '16px 40px' }}
           >
-            Start Learning Free
+            Try Lesson 1 Free
           </Link>
           <Link
             to="/pricing"
@@ -150,8 +150,8 @@ export function Welcome() {
       }}>
         <h3 style={{ marginBottom: 'var(--space-sm)' }}>Money is not the gate</h3>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-          Every lesson is free to read. If you want the credential and €99 isn't
-          possible right now, ask for a hardship code. No reason needed and nobody
+          The first lesson of every track is a free trial, and the full track is €99 once.
+          If €99 isn't possible right now, ask for a hardship code. No reason needed and nobody
           reviews your situation. Many people here left education or work because they
           got ill; that is exactly who this is for.
         </p>
@@ -161,7 +161,7 @@ export function Welcome() {
       <section style={{ textAlign: 'center', marginBottom: 'var(--space-2xl)' }}>
         <h2 style={{ marginBottom: 'var(--space-md)' }}>Ready to Start?</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Every lesson in every track is free to read. No credit card needed.
+          Try lesson 1 of any track free. No credit card needed.
         </p>
         <Link
           to="/signup"

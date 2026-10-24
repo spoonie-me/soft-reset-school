@@ -1,5 +1,5 @@
 # Soft Reset School — robots.txt
-# Free lessons in AI-era work skills for people returning to work.
+# AI-era work skills for people returning to work.
 # We're a small EU sole-trader. Crawl politely.
 
 User-agent: *

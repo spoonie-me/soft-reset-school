@@ -22,6 +22,10 @@ const TRACK_META: Record<string, { title: string; color: string }> = {
   'accessibility-qa-lived-experience': { title: '♿ Digital Accessibility QA', color: 'var(--signal)' },
 };
 
+/* Foundation tracks are archived: hidden from the public site and no longer sold.
+ * Learners who already started one still see it so their progress isn't lost. */
+const ARCHIVED_TRACKS = new Set(['fundamentals', 'ai', 'tools', 'advanced']);
+
 /* ─── Types ─── */
 interface DomainSummary {
   id: string;
@@ -194,7 +198,11 @@ export function Dashboard() {
           }),
         );
 
-        setTracks(trackSummaries);
+        // Career tracks first; an archived track only appears if the learner has progress in it.
+        const visible = trackSummaries
+          .filter((t) => !ARCHIVED_TRACKS.has(t.id) || t.progress > 0 || t.domains.some((d) => d.progress > 0))
+          .sort((a, b) => Number(ARCHIVED_TRACKS.has(a.id)) - Number(ARCHIVED_TRACKS.has(b.id)));
+        setTracks(visible);
         if (gamRes) setGamData(gamRes);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load dashboard');
@@ -321,7 +329,7 @@ export function Dashboard() {
               )}
 
               {track.domains.length > 0 && (
-                <div style={{ marginTop: 'var(--space-xl)', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-sm)' }}>
+                <div style={{ marginTop: 'var(--space-xl)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))', gap: 'var(--space-sm)' }}>
                   {track.domains.map((domain) => (
                     <Link
                       key={domain.id}

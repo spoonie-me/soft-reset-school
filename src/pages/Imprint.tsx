@@ -6,21 +6,29 @@ export function Imprint() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
         title="Impressum — Soft Reset School"
-        description="Legal notice (Impressum) for Soft Reset School. Operator: Roi Shternin-Martini, Vienna, Austria. GISA 38626050."
+        description="Legal notice (Impressum) for Soft Reset School. Operator: Roi Shternin-Martini, MA, B.Ed., Vienna, Austria. GISA 38626050."
         canonical="/imprint"
       />
       <h1 style={{ marginBottom: 'var(--space-2xl)' }}>Impressum (Legal Notice)</h1>
 
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Information pursuant to &sect;&nbsp;5 ECG (E-Commerce-Gesetz)</h2>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Operator:</strong> Roi Shternin-Martini (sole trader / Einzelunternehmer)</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Trading as:</strong> Bedcoders</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Business Activity:</strong> Unternehmensberatung einschlie&szlig;lich der Unternehmensorganisation — online education and consulting in software development, AI, and related technology fields</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>GISA Number:</strong> 38626050</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Licensing Authority:</strong> Magistrat der Stadt Wien, Gewerbebeh&ouml;rde</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Supervisory Authority:</strong> Wirtschaftskammer Wien (WKW), Fachverband Unternehmensberatung, Buchhaltung und Informationstechnologie (UBIT)</p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Address:</strong> 1180 Vienna, Austria <em>(full street address available on request)</em></p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Name:</strong> Roi Shternin-Martini, MA, B.Ed. (sole trader / Einzelunternehmer)</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Business purpose:</strong> Online education for people returning to work, authorship, keynote speaking and patient engagement consulting</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Trade:</strong> Management consultancy including business organisation (Unternehmensberatung einschlie&szlig;lich der Unternehmensorganisation)</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Professional title:</strong> Unternehmensberater (management consultant), awarded in Austria</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Chamber:</strong> Member of the Vienna Economic Chamber (Wirtschaftskammer Wien), professional group for Management Consultancy, Accounting and Information Technology (UBIT)</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>GISA number:</strong> 38626050</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Supervisory authority:</strong> Magistrat der Stadt Wien (Vienna City Administration), new independent trade</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Professional regulations:</strong> Trade Regulation Act (Gewerbeordnung, GewO):{' '}
+          <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--signal)' }}>www.ris.bka.gv.at</a>
+        </p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Address:</strong> Paulinengasse 18-20/4/11, 1180 Vienna, Austria</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Contact:</strong> <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a></p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Website:</strong> softreset.school</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>LinkedIn:</strong>{' '}
+          <a href="https://www.linkedin.com/in/roishternin" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--signal)' }}>linkedin.com/in/roishternin</a>
+        </p>
       </Card>
 
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
@@ -33,13 +41,25 @@ export function Imprint() {
       </Card>
 
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
-        <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Responsible for Content (&sect;&nbsp;18 MedienG)</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Roi Shternin-Martini, 1180 Vienna, Austria</p>
+        <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Media owner pursuant to &sect;&nbsp;25 MedienG</h2>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Owner:</strong> Roi Shternin-Martini, MA, B.Ed.</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Seat:</strong> Vienna, Austria</p>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
+          <strong>Basic orientation:</strong> Free online lessons and paid certification exams in AI-era work skills for people returning to work after illness or time away, together with articles on AI in healthcare, health IT and working life with a chronic illness or disability.
+        </p>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-          Soft Reset School is operated by a sole trader (Einzelunternehmer), trading as Bedcoders. There is no
-          separate legal entity — see "Continuity" below for what that means for certificates if the founder is
-          unable to continue operating the platform. Applicable professional conduct rules are available at{' '}
+          Soft Reset School is operated by a sole trader (Einzelunternehmer). There is no separate legal entity &mdash;
+          see &ldquo;Continuity&rdquo; below for what that means for certificates if the founder is unable to continue operating
+          the platform. Applicable professional conduct rules are available at{' '}
           <a href="https://www.wko.at/ubit" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--signal)' }}>wko.at/ubit</a>.
+        </p>
+      </Card>
+
+      <Card style={{ marginBottom: 'var(--space-xl)' }}>
+        <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Scope of services</h2>
+        <p style={{ color: 'var(--text-secondary)' }}>
+          Soft Reset School provides online education and consulting for professional development under Austrian trade law. It does not constitute, substitute or replace psychosocial counselling (Lebens- und Sozialberatung), psychotherapy or medical treatment.
+          Die Angebote von Soft Reset School dienen ausschlie&szlig;lich der Weiterbildung und beruflichen Entwicklung. Sie stellen keine Lebens- und Sozialberatung dar und ersetzen keine psychotherapeutische oder medizinische Behandlung.
         </p>
       </Card>
 
@@ -68,7 +88,7 @@ export function Imprint() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Educational Content Disclaimer</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          Bedcoders provides online education in software development, AI literacy, and related technology subjects for personal and professional development only. Content does not constitute legal advice, financial advice, or any form of regulated professional service.
+          Soft Reset School provides online education in software development, AI literacy, and related technology subjects for personal and professional development only. Content does not constitute legal advice, financial advice, or any form of regulated professional service.
         </p>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
           <strong>What a certificate actually confirms.</strong> A track certificate verifies two specific
@@ -104,6 +124,13 @@ export function Imprint() {
           planned rather than sudden. This is a plain statement of intent, not a legal guarantee backed by an
           entity separate from the founder &mdash; there isn't one, honestly, and the paragraph above exists so
           that isn't hidden.
+        </p>
+      </Card>
+
+      <Card style={{ marginBottom: 'var(--space-xl)' }}>
+        <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Copyright</h2>
+        <p style={{ color: 'var(--text-secondary)' }}>
+          The content published on this website (texts, images, graphics, audio and video files) is subject to Austrian and international copyright law. Any use beyond the limits of copyright law requires the express written consent of the owner. Downloads and copies of this website are permitted for private, non-commercial use only.
         </p>
       </Card>
 

@@ -83,6 +83,9 @@ router.get('/:id', authMiddleware, entitlementsMiddleware, async (req, res) => {
       })),
       prevLessonId: prevLesson?.id ?? null,
       nextLessonId: nextLesson?.id ?? null,
+      // Only the trial lesson is open without the track, and it is always lesson 1, so any next lesson is locked for non-owners.
+      nextLessonLocked: !!nextLesson && !!trackId && !entReq.trackAccess?.includes(trackId),
+      trackId: trackId ?? null,
       trackTitle: lesson.module?.domain?.trackId ?? null,
       domainTitle: lesson.module?.domain?.name ?? null,
     };

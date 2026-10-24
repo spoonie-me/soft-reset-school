@@ -179,7 +179,7 @@ export function Landing() {
       <section style={{ padding: 'var(--space-4xl) var(--space-xl)', textAlign: 'center' }}>
         <h2 style={{ marginBottom: 'var(--space-lg)' }}>restart as many times as you need to.</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)', fontSize: '1.125rem' }}>
-          Every lesson free. No card. No deadlines. No good day required.
+          Lesson 1 free. No card. No deadlines. No good day required.
         </p>
         <Link to="/signup">
           <Button

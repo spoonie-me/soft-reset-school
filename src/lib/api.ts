@@ -181,7 +181,9 @@ export interface LessonDetailResponse {
     order: number;
     exercises: LessonExercise[];
     nextLessonId?: string | null;
+    nextLessonLocked?: boolean;
     prevLessonId?: string | null;
+    trackId?: string | null;
     trackTitle?: string | null;
     domainTitle?: string | null;
   };
@@ -297,6 +299,7 @@ export interface ModuleDetailResponse {
       difficulty: string;
       order: number;
       progress: { status: string; completedAt: string | null } | null;
+      locked?: boolean;
     }>;
     assessment: {
       id: string;

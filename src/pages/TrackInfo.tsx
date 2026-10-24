@@ -153,7 +153,7 @@ export function TrackInfo() {
 
       {/* CTA */}
       <section style={{ padding: 'var(--space-2xl) var(--space-xl) var(--space-4xl)', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: 'var(--space-lg)' }}>read it all free. pay only when you're ready to prove it.</h2>
+        <h2 style={{ marginBottom: 'var(--space-lg)' }}>try lesson 1 free. then pay once for the rest.</h2>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 'var(--space-xl)' }}>
           <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>

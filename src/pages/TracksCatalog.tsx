@@ -69,7 +69,7 @@ export function TracksCatalog() {
       {/* CTA */}
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Every lesson free. No card. Pay once, only when you're ready for the credential.
+          Lesson 1 free. No card. Then pay once, €99 per track, when you're ready.
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>

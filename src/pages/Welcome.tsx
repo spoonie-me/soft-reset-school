@@ -46,7 +46,7 @@ export function Welcome() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-2xl) var(--space-lg)' }}>
       <SEO
         title="Welcome — start coding from bed"
-        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — all content free, pay only for a €99 Credential when you're ready."
+        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — try lesson 1 free, then €99 once per track for every lesson, the exam and the credential."
         canonical="/welcome"
       />
       {/* Hero */}

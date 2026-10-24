@@ -8,7 +8,8 @@
 // forever. They keep that. Set LEGACY_FREE_ACCESS_BEFORE to move the date,
 // or to "none" to switch the grandfathering off.
 
-const LEGACY_DEFAULT = '2026-10-24T00:00:00Z';
+// End of the day this shipped, so anyone who signed up before the change goes live is covered.
+const LEGACY_DEFAULT = '2026-10-25T00:00:00Z';
 
 export function legacyFreeAccessBefore(): Date | null {
   const raw = process.env.LEGACY_FREE_ACCESS_BEFORE ?? LEGACY_DEFAULT;

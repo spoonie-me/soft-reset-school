@@ -3,6 +3,7 @@ import type { Response, NextFunction } from 'express';
 import { prisma } from '../lib/db.js';
 import type { AuthRequest } from './auth.js';
 import { isGrandfathered } from '../lib/access.js';
+import { CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
 
 // ──────────────────────────────────────────
 // TYPES
@@ -52,11 +53,15 @@ export async function entitlementsMiddleware(
 
     // A purchase unlocks the track's lessons, the exam and the credential.
     // Accounts from before the cutover keep reading everything (lib/access.ts).
+    // A track that can't be bought (archived, or held back for thin content)
+    // stays open, otherwise it would be a dead end with nothing to pay for.
+    const allTracks = await prisma.track.findMany({ select: { slug: true } });
+    const sellable = new Set<string>(CREDENTIAL_SELLABLE_TRACKS);
     if (isGrandfathered(user?.createdAt)) {
-      const allTracks = await prisma.track.findMany({ select: { slug: true } });
       req.trackAccess = allTracks.map((t) => t.slug);
     } else {
-      req.trackAccess = purchases.map((p) => p.trackId);
+      const open = allTracks.map((t) => t.slug).filter((slug) => !sellable.has(slug));
+      req.trackAccess = [...new Set([...open, ...purchases.map((p) => p.trackId)])];
     }
     req.credentialAccess = purchases.map((p) => p.trackId);
     next();

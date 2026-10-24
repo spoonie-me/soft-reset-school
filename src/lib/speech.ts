@@ -28,6 +28,7 @@ export function stripMarkdownForSpeech(md: string): string {
     .replace(/^\s*[-*+]\s+/gm, '')
     .replace(/^\s*\d+\.\s+/gm, '')
     .replace(/<[^>]+>/g, '')
+    .replace(/[<>]/g, '') // nothing like "<scr<script>ipt>" can survive the pass above
     .replace(/\s*\n\s*/g, '. ')
     .replace(/\.\s*\.+/g, '.')
     .replace(/\s{2,}/g, ' ')

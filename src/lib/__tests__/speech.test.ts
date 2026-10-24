@@ -15,6 +15,15 @@ describe('stripMarkdownForSpeech', () => {
     expect(out).toContain('Then listen.');
   });
 
+  it('leaves no angle brackets behind, even for nested or broken tags', () => {
+    for (const input of ['a <scr<script>ipt> b', 'x <b>bold</b> y', 'unterminated <div', '1 < 2 and 3 > 2']) {
+      const out = stripMarkdownForSpeech(input);
+      expect(out).not.toMatch(/[<>]/);
+      expect(out).not.toContain('<script');
+    }
+    expect(stripMarkdownForSpeech('x <b>bold</b> y')).toBe('x bold y');
+  });
+
   it('keeps inline code words, without the backticks', () => {
     expect(stripMarkdownForSpeech('Press `Tab` to move.')).toBe('Press Tab to move.');
   });

@@ -146,7 +146,7 @@ const bedcodersWelcome: EmailSequence = {
 
   <p>Soft Reset School teaches AI-era employable skills to people who work from bed, the couch, or wherever the body lands today — four career tracks (AI-assisted development, AI automation consulting, AI-augmented medical coding, digital accessibility QA) plus a coding foundation curriculum.</p>
 
-  <p>Every lesson is free to read, forever, no card required. There's one paid thing: a €99 certification exam and permanent, verifiable credential — only when you're ready, and pay-what-you-can down to €0 if €99 isn't there this month.</p>
+  <p>Every lesson is free to read, forever, no card required. There's one paid thing: a €99 certification exam and permanent, verifiable credential — only when you're ready, and if €99 is out of reach, write to hi@softreset.school for a hardship code. No reason needed.</p>
 
   <p>No hustle culture. No streak penalties. No "10x developer" nonsense — just real skill, built at the pace your body actually allows.</p>
 

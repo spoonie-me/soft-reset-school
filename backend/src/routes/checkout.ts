@@ -2,6 +2,7 @@ import { Router } from 'express';
 import crypto from 'crypto';
 import { stripe, createCustomer, CREDENTIAL_PRODUCTS, PROGRAM_PRICES_IN_CENTS, CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
+import { verifyHardshipCode } from '../lib/hardship-code.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 
 const router = Router();
@@ -161,25 +162,24 @@ router.get('/credentials', authMiddleware, async (req, res) => {
   }
 });
 
-// ─── Pay-what-you-can hardship path ──────────────────────────────────────
+// ─── Hardship codes ──────────────────────────────────────────────────────
 //
-// PRD.md §4.5: "pay-what-you-can down to €0, no proof required, no
-// application." The €0 case grants the Credential purchase record
-// directly, no Stripe session. Any amount > €0 goes through a real Stripe
-// Checkout session at that custom amount via price_data (Stripe's fixed
-// Price objects don't support "any amount").
+// The credential stays €99 so it means the same thing to every employer.
+// Anyone who can't pay asks hi@softreset.school for a code, no reason
+// needed. A code unlocks one track once. See lib/hardship-code.ts.
 
 router.post('/hardship', authMiddleware, async (req, res) => {
   try {
     const authReq = req as AuthRequest;
-    const { trackId, amountCents } = req.body as { trackId: string; amountCents: number };
+    const { trackId, code } = req.body as { trackId: string; code: string };
 
     if (!trackId || !(CREDENTIAL_SELLABLE_TRACKS as readonly string[]).includes(trackId)) {
       res.status(400).json({ error: 'Invalid track.' });
       return;
     }
-    if (typeof amountCents !== 'number' || amountCents < 0 || amountCents > CREDENTIAL_PRODUCTS.track_credential.priceInCents) {
-      res.status(400).json({ error: 'Invalid amount.' });
+    const nonce = verifyHardshipCode(code);
+    if (!nonce) {
+      res.status(400).json({ error: "That code isn't valid. Check it for typos, or email hi@softreset.school." });
       return;
     }
 
@@ -197,62 +197,26 @@ router.post('/hardship', authMiddleware, async (req, res) => {
       return;
     }
 
-    if (amountCents === 0) {
-      // No payment to process — grant directly. stripeSessionId must stay
-      // unique, so synthesize one that's clearly not a real Stripe id.
+    try {
       await prisma.credentialPurchase.create({
         data: {
           userId: user.id,
           trackId,
           productType: 'track_credential',
-          stripeSessionId: `hardship_${user.id}_${trackId}_${Date.now()}`,
+          stripeSessionId: `hardship_code_${nonce}`,
           amountCents: 0,
         },
       });
-      res.json({ granted: true });
-      return;
+    } catch (err) {
+      if ((err as { code?: string }).code === 'P2002') {
+        res.status(400).json({ error: 'That code has already been used.' });
+        return;
+      }
+      throw err;
     }
-
-    let stripeCustomerId = user.stripeCustomerId;
-    if (!stripeCustomerId) {
-      const customer = await createCustomer(user.email, user.name ?? undefined);
-      stripeCustomerId = customer.id;
-      await prisma.user.update({ where: { id: user.id }, data: { stripeCustomerId } });
-    }
-
-    const appUrl = process.env.APP_URL ?? 'https://softreset.school';
-
-    const session = await stripe.checkout.sessions.create({
-      customer: stripeCustomerId,
-      mode: 'payment',
-      line_items: [{
-        price_data: {
-          currency: 'eur',
-          product_data: { name: `Soft Reset School - Track Credential (pay-what-you-can) - ${trackId}` },
-          unit_amount: amountCents,
-          // Stripe owns tax_behavior on fixed Prices, but price_data is set
-          // per-session — this is the one place the code can (and must) say
-          // the €-amount already includes VAT, same as the standard price.
-          tax_behavior: 'inclusive',
-        },
-        quantity: 1,
-      }],
-      success_url: `${appUrl}/dashboard?session_id={CHECKOUT_SESSION_ID}&credential=track_credential`,
-      cancel_url: `${appUrl}/pricing?checkout=cancelled`,
-      automatic_tax: { enabled: true },
-      customer_update: { address: 'auto', name: 'auto' },
-      tax_id_collection: { enabled: true },
-      metadata: {
-        userId: user.id,
-        productId: 'track_credential',
-        trackIds: JSON.stringify([trackId]),
-        bundleId: '',
-      },
-    });
-
-    res.json({ url: session.url });
+    res.json({ granted: true });
   } catch (err) {
-    console.error('Hardship checkout error:', err);
+    console.error('Hardship code error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

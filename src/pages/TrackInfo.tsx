@@ -126,8 +126,8 @@ export function TrackInfo() {
               stops operating.
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-              Can't afford €99? Pay what you can, down to €0 — no proof, no application. Details on the{' '}
-              <Link to="/pricing" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
+              Can't afford €99? Ask for a hardship code, no reason needed. Details on the{' '}
+              <Link to="/pricing#hardship" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
             </p>
           </Card>
         ) : (

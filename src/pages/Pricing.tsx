@@ -29,7 +29,7 @@ const CAREER_TRACKS = [
 });
 
 // Only sellable tracks are offered for the bundle picker and the
-// pay-what-you-can dialog — checkout would reject the rest anyway.
+// hardship-code dialog — checkout would reject the rest anyway.
 const CREDENTIAL_TRACKS = CAREER_TRACKS.filter((t) => t.sellable);
 
 type PendingCheckout =
@@ -42,42 +42,29 @@ export function Pricing() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [bundleSelection, setBundleSelection] = useState<string[]>([]);
-  // Pay-what-you-can. `pwycTrack` non-null means the dialog is open.
-  const [pwycTrack, setPwycTrack] = useState<string | null>(null);
-  // Defaults to the standard price, not €0 — this dialog is "choose what
-  // you pay," not "here's a free button." The €0 chip below is still one
-  // click away, no questions asked; it just isn't pre-selected. (Business
-  // review 2026-08-08: a €0-prefilled dialog next to a €69 price is
-  // indistinguishable from having no price at all.)
-  const [pwycAmount, setPwycAmount] = useState(String(TRACK_PRICE));
-  const [pwycBusy, setPwycBusy] = useState(false);
-  const [pwycError, setPwycError] = useState('');
-  const [pwycDone, setPwycDone] = useState(false);
+  // Hardship code. `codeTrack` non-null means the dialog is open.
+  const [codeTrack, setCodeTrack] = useState<string | null>(null);
+  const [code, setCode] = useState('');
+  const [codeBusy, setCodeBusy] = useState(false);
+  const [codeError, setCodeError] = useState('');
+  const [codeDone, setCodeDone] = useState(false);
 
-  async function submitPwyc() {
-    if (!pwycTrack || pwycBusy) return;
-    const euros = Number(pwycAmount);
-    if (!Number.isFinite(euros) || euros < 0 || euros > TRACK_PRICE) {
-      setPwycError(`Enter any amount from 0 to ${TRACK_PRICE}.`);
+  async function submitCode() {
+    if (!codeTrack || codeBusy) return;
+    if (!code.trim()) {
+      setCodeError('Paste your code first.');
       return;
     }
-    setPwycBusy(true);
-    setPwycError('');
+    setCodeBusy(true);
+    setCodeError('');
     try {
-      const res = await api.post<{ granted?: boolean; url?: string }>('/checkout/hardship', {
-        trackId: pwycTrack,
-        amountCents: Math.round(euros * 100),
-      });
-      if (res.url) {
-        window.location.href = res.url; // paid amount → Stripe
-        return;
-      }
-      setPwycDone(true); // €0 → granted immediately, no payment step
+      await api.post('/checkout/hardship', { trackId: codeTrack, code: code.trim() });
+      setCodeDone(true);
     } catch (err: unknown) {
       const e = err as { body?: { error?: string }; message?: string };
-      setPwycError(e?.body?.error ?? e?.message ?? 'Something went wrong. Please try again.');
+      setCodeError(e?.body?.error ?? e?.message ?? 'Something went wrong. Please try again.');
     }
-    setPwycBusy(false);
+    setCodeBusy(false);
   }
 
   function toggleBundleTrack(trackId: string) {
@@ -138,7 +125,7 @@ export function Pricing() {
           No subscription. Nothing bills you on a bad month. Read every lesson in every track for free, forever — pay only when you're ready to sit the certification exam and get a permanent, publicly verifiable credential.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
-          €99 per track is the standard price, not a requirement — you can choose what you pay, down to €0, no proof and no application.
+          €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
         </p>
       </div>
 
@@ -242,23 +229,17 @@ export function Pricing() {
         <CohortInterest />
       </div>
 
-      {/* Choose your own price — wired to POST /checkout/hardship.
-       *
-       * This used to say "Can't afford €69?" and then ask people to email a
-       * stranger naming the most they could afford. That is an application, and
-       * a harder one than a form: it named the reader by what they lacked, and
-       * asked them to compose a plea. The backend has always granted €0
-       * instantly with no human in the loop — the button was simply never
-       * built. It is built now. */}
-      <div id="choose-your-price" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
-        <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Choose what you pay</h3>
-        <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
-          €{TRACK_PRICE} per track is the standard price, not a requirement. Pick any amount that works
-          for you — down to €0. No proof, no application, no email, no judgment.
-          You get exactly the same exam and the same certificate either way.
+      {/* Hardship codes. The price stays €99 so the credential means the same
+       * thing to everyone; a code is how money isn't a barrier. No reason asked. */}
+      <div id="hardship" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
+        <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Can't afford €{TRACK_PRICE}?</h3>
+        <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
+          <a href="mailto:hi@softreset.school?subject=Hardship%20code" style={{ color: 'var(--signal)' }}>Ask for a hardship code</a>.
+          Send one line, no reason needed, and I will send you a code. It unlocks the same exam and
+          the same certificate. Nobody reviews your situation.
         </p>
-        <Button variant="secondary" onClick={() => { setPwycTrack(CREDENTIAL_TRACKS[0].id); setPwycAmount(String(TRACK_PRICE)); setPwycError(''); setPwycDone(false); }}>
-          Set your own price
+        <Button variant="secondary" onClick={() => { setCodeTrack(CREDENTIAL_TRACKS[0].id); setCode(''); setCodeError(''); setCodeDone(false); }}>
+          I have a code
         </Button>
       </div>
 
@@ -266,48 +247,47 @@ export function Pricing() {
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)', marginTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Nonprofits & vocational rehab agencies</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 500, margin: '0 auto var(--space-lg)' }}>
-          Pre-buy Credential vouchers for the people you serve, at the same flat €{TRACK_PRICE}/track. No separate pricing.
+          Pre-buy Credential vouchers for the people you serve. Tell us how many seats and which tracks, and we will send you a quote.
         </p>
         <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
-          Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
+          <a href="mailto:hi@softreset.school?subject=Voucher%20quote" style={{ color: 'var(--signal)' }}>Contact us for pricing: hi@softreset.school</a>
         </p>
       </div>
 
-      {/* Pay-what-you-can dialog */}
-      {pwycTrack && (
+      {/* Hardship code dialog */}
+      {codeTrack && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Choose what you pay"
+          aria-label="Redeem a hardship code"
           style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 'var(--space-xl)' }}
         >
           <Card style={{ maxWidth: 460, width: '100%', padding: 'var(--space-2xl)' }}>
-            {pwycDone ? (
+            {codeDone ? (
               <>
-                <h3 style={{ marginBottom: 'var(--space-md)' }}>Done — it's yours.</h3>
+                <h3 style={{ marginBottom: 'var(--space-md)' }}>Done. It's yours.</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-xl)' }}>
                   Your credential for this track is unlocked. Sit the exam whenever
-                  you're ready — there's no deadline, and nothing else to pay.
+                  you're ready. There's no deadline, and nothing else to pay.
                 </p>
-                <Button variant="primary" style={{ width: '100%' }} onClick={() => setPwycTrack(null)}>
+                <Button variant="primary" style={{ width: '100%' }} onClick={() => setCodeTrack(null)}>
                   Close
                 </Button>
               </>
             ) : (
               <>
-                <h3 style={{ marginBottom: 'var(--space-md)' }}>Choose what you pay</h3>
+                <h3 style={{ marginBottom: 'var(--space-md)' }}>Redeem a hardship code</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginBottom: 'var(--space-lg)' }}>
-                  Any amount from €0 to €{TRACK_PRICE}. You don't need to explain, and nobody
-                  reviews this.
+                  A code unlocks one track, once. You need to be signed in.
                 </p>
 
-                <label htmlFor="pwyc-track" style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)' }}>
+                <label htmlFor="hardship-track" style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)' }}>
                   Which track?
                 </label>
                 <select
-                  id="pwyc-track"
-                  value={pwycTrack}
-                  onChange={(e) => setPwycTrack(e.target.value)}
+                  id="hardship-track"
+                  value={codeTrack}
+                  onChange={(e) => setCodeTrack(e.target.value)}
                   style={{ width: '100%', minHeight: 48, background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-md)', padding: 'var(--space-sm) var(--space-md)', color: 'var(--text-primary)', fontSize: '0.9375rem', fontFamily: 'inherit', marginBottom: 'var(--space-lg)', boxSizing: 'border-box' }}
                 >
                   {CREDENTIAL_TRACKS.map((t) => (
@@ -315,43 +295,29 @@ export function Pricing() {
                   ))}
                 </select>
 
-                <label htmlFor="pwyc-amount" style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)' }}>
-                  What you'll pay (€)
+                <label htmlFor="hardship-code" style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)' }}>
+                  Your code
                 </label>
-                <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-md)' }}>
-                  {['0', '10', '25', '50', String(TRACK_PRICE)].map((v) => (
-                    <button
-                      key={v}
-                      type="button"
-                      onClick={() => setPwycAmount(v)}
-                      aria-pressed={pwycAmount === v}
-                      style={{ minHeight: 48, minWidth: 60, borderRadius: 'var(--radius-sm)', border: `1px solid ${pwycAmount === v ? 'var(--signal)' : 'var(--bg-border)'}`, background: pwycAmount === v ? 'var(--signal)' : 'var(--bg-elevated)', color: pwycAmount === v ? 'var(--bg-void)' : 'var(--text-primary)', fontSize: '0.9375rem', fontFamily: 'inherit', cursor: 'pointer' }}
-                    >
-                      €{v}
-                    </button>
-                  ))}
-                </div>
                 <input
-                  id="pwyc-amount"
-                  type="number"
-                  min={0}
-                  max={TRACK_PRICE}
-                  step="1"
-                  inputMode="decimal"
-                  value={pwycAmount}
-                  onChange={(e) => setPwycAmount(e.target.value)}
-                  style={{ width: '100%', minHeight: 48, background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-md)', padding: 'var(--space-sm) var(--space-md)', color: 'var(--text-primary)', fontSize: '0.9375rem', fontFamily: 'inherit', marginBottom: 'var(--space-lg)', boxSizing: 'border-box' }}
+                  id="hardship-code"
+                  type="text"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  style={{ width: '100%', minHeight: 48, background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-md)', padding: 'var(--space-sm) var(--space-md)', color: 'var(--text-primary)', fontSize: '0.9375rem', fontFamily: 'var(--font-code)', marginBottom: 'var(--space-lg)', boxSizing: 'border-box' }}
                 />
 
-                {pwycError && (
-                  <p role="alert" style={{ color: 'var(--rust)', fontSize: '0.875rem', marginBottom: 'var(--space-md)' }}>{pwycError}</p>
+                {codeError && (
+                  <p role="alert" style={{ color: 'var(--rust)', fontSize: '0.875rem', marginBottom: 'var(--space-md)' }}>{codeError}</p>
                 )}
 
                 <div style={{ display: 'grid', gap: 'var(--space-md)' }}>
-                  <Button variant="primary" onClick={submitPwyc} disabled={pwycBusy}>
-                    {pwycBusy ? 'Working…' : Number(pwycAmount) > 0 ? `Continue — €${Number(pwycAmount)}` : 'Unlock for €0'}
+                  <Button variant="primary" onClick={submitCode} disabled={codeBusy}>
+                    {codeBusy ? 'Working…' : 'Unlock'}
                   </Button>
-                  <Button variant="secondary" onClick={() => setPwycTrack(null)} disabled={pwycBusy}>
+                  <Button variant="secondary" onClick={() => setCodeTrack(null)} disabled={codeBusy}>
                     Cancel
                   </Button>
                 </div>

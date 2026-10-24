@@ -86,31 +86,32 @@ export function ShareStory() {
         <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
             <div>
-              <label style={labelStyle}>Your name *</label>
-              <input style={inputStyle} required value={form.name} onChange={(e) => update('name', e.target.value)} placeholder="Sarah E." />
+              <label style={labelStyle} htmlFor="ss-name">Your name *</label>
+              <input id="ss-name" style={inputStyle} required value={form.name} onChange={(e) => update('name', e.target.value)} placeholder="Sarah E." />
             </div>
             <div>
-              <label style={labelStyle}>Current role *</label>
-              <input style={inputStyle} required value={form.role} onChange={(e) => update('role', e.target.value)} placeholder="Freelance Developer, Remote" />
+              <label style={labelStyle} htmlFor="ss-role">Current role *</label>
+              <input id="ss-role" style={inputStyle} required value={form.role} onChange={(e) => update('role', e.target.value)} placeholder="Freelance Developer, Remote" />
             </div>
           </div>
 
           <div>
-            <label style={labelStyle}>Which track did you complete? *</label>
-            <select style={inputStyle} required value={form.track} onChange={(e) => update('track', e.target.value)}>
+            <label style={labelStyle} htmlFor="ss-track">Which track did you complete? *</label>
+            <select id="ss-track" style={inputStyle} required value={form.track} onChange={(e) => update('track', e.target.value)}>
               <option value="">Choose a track…</option>
               {TRACKS.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
             </select>
           </div>
 
           <div>
-            <label style={labelStyle}>What changed for you? * <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(one sentence)</span></label>
-            <input style={inputStyle} required value={form.outcome} onChange={(e) => update('outcome', e.target.value)} placeholder="Shipped my first AI-powered tool in 3 weeks." />
+            <label style={labelStyle} htmlFor="ss-outcome">What changed for you? * <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(one sentence)</span></label>
+            <input id="ss-outcome" style={inputStyle} required value={form.outcome} onChange={(e) => update('outcome', e.target.value)} placeholder="Shipped my first AI-powered tool in 3 weeks." />
           </div>
 
           <div>
-            <label style={labelStyle}>Your testimonial * <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(2–3 sentences)</span></label>
+            <label style={labelStyle} htmlFor="ss-quote">Your testimonial * <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(2–3 sentences)</span></label>
             <textarea
+              id="ss-quote"
               style={{ ...inputStyle, minHeight: 120, resize: 'vertical' }}
               required
               value={form.quote}
@@ -120,8 +121,8 @@ export function ShareStory() {
           </div>
 
           <div>
-            <label style={labelStyle}>Email <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(optional — for follow-up only, never published)</span></label>
-            <input style={inputStyle} type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="you@example.com" />
+            <label style={labelStyle} htmlFor="ss-email">Email <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>(optional — for follow-up only, never published)</span></label>
+            <input id="ss-email" style={inputStyle} type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="you@example.com" />
           </div>
 
           {status === 'error' && (

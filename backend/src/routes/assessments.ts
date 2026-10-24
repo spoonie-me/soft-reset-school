@@ -28,6 +28,7 @@ router.get('/:moduleId', authMiddleware, entitlementsMiddleware, async (req, res
     if (mod && !entReq.trackAccess?.includes(mod.domain?.trackId ?? '')) {
       res.status(403).json({
         error: 'Track access required',
+        trackId: mod.domain?.trackId,
         message: "You need the full track to read this. The first lesson of every track is a free trial.",
       });
       return;

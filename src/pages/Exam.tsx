@@ -6,6 +6,8 @@ import { ProgressBar } from '@/components/ProgressBar';
 import { LoadingSpinner } from '@/components/ProtectedRoute';
 import { learningApi, ApiError, type ExamResponse, type ExamQuestion } from '@/lib/api';
 import { IS_DEV_MODE } from '@/lib/useApi';
+import { getCatalogTrack } from '@/data/trackCatalog';
+import { LockedCard, LoadFailedCard } from '@/components/LockedCard';
 import { SEO } from "@/components/SEO";
 
 type ExamPhase = 'pre' | 'active' | 'results';
@@ -43,9 +45,15 @@ interface DomainResult { domain: string; correct: number; total: number }
 
 export function Exam() {
   const { trackId } = useParams<{ trackId: string }>();
-  const track = TRACK_META[trackId ?? ''] ?? TRACK_META.fundamentals;
+  const catalog = getCatalogTrack(trackId);
+  const track = catalog
+    ? { name: `${catalog.emoji} ${catalog.title}`, color: catalog.color }
+    : (TRACK_META[trackId ?? ''] ?? TRACK_META.fundamentals);
 
   const [loading, setLoading] = useState(!IS_DEV_MODE);
+  const [blocked, setBlocked] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [examId, setExamId] = useState<string | null>(null);
   const [examMeta, setExamMeta] = useState<{ title: string; description: string; timeLimit: number; passScore: number; questionCount: number; openEndedCount: number; cooldownUntil: string | null }>({ title: 'Certification Exam', description: '', timeLimit: 60, passScore: 75, questionCount: 50, openEndedCount: 0, cooldownUntil: null });
   const [questions, setQuestions] = useState<ExamQuestion[]>(
@@ -67,6 +75,9 @@ export function Exam() {
     if (IS_DEV_MODE) return;
 
     async function load() {
+      setLoading(true);
+      setBlocked(false);
+      setLoadFailed(false);
       try {
         const res: ExamResponse = await learningApi.getExam(trackId ?? 'fundamentals');
         setExamId(res.exam.id);
@@ -81,15 +92,17 @@ export function Exam() {
         });
         setTimeLeft(res.exam.timeLimit * 60);
         setQuestions(res.questions);
-      } catch {
-        setQuestions(generateDemoQuestions());
+      } catch (err) {
+        // Never fall back to demo questions: a locked or failed exam must say so.
+        if (err instanceof ApiError && err.status === 403) setBlocked(true);
+        else setLoadFailed(true);
       } finally {
         setLoading(false);
       }
     }
 
     load();
-  }, [trackId]);
+  }, [trackId, attempt]);
 
   const TOTAL_QUESTIONS = questions.length;
 
@@ -247,6 +260,9 @@ export function Exam() {
 
     return { correct, score, passed, domains, xpEarned };
   };
+
+  if (blocked) return <LockedCard what="exam" trackId={trackId} />;
+  if (loadFailed) return <LoadFailedCard onRetry={() => setAttempt((n) => n + 1)} />;
 
   if (loading || submitting) {
     return (

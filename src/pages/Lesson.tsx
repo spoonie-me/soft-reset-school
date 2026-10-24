@@ -26,6 +26,9 @@ import {
   CaseSim, type CaseSimProps,
   LabBrief, type LabBriefProps,
 } from '@/components/lesson-templates/DepthTemplates';
+import { ScreenReaderSim, type ScreenReaderSimProps } from '@/components/lesson-templates/ScreenReaderSim';
+import { ListenBar } from '@/components/ListenBar';
+import { lessonSpeechChunks } from '@/lib/speech';
 
 /* ─── Types for lesson content ─── */
 interface TextSection { type: 'text'; body: string }
@@ -53,11 +56,12 @@ interface WorkedExampleSection extends WorkedExampleProps { type: 'worked-exampl
 interface RetrievalCheckSection extends RetrievalCheckProps { type: 'retrieval-check' }
 interface CaseSimSection extends CaseSimProps { type: 'case-sim' }
 interface LabBriefSection extends LabBriefProps { type: 'lab-brief' }
+interface ScreenReaderSimSection extends ScreenReaderSimProps { type: 'screen-reader-sim' }
 type ContentSection =
   | TextSection | CalloutSection | ExerciseSection | HookSection | TakeawaySection | PodHeaderSection | InteractiveGuessSection
   | ConceptFlowSection | DiagnoseMechanismSection | SpotFlawSection | SequenceItSection
   | BuildItSection | EvidenceStackSection | PredictNumberSection | PromptBuildSection
-  | WorkedExampleSection | RetrievalCheckSection | CaseSimSection | LabBriefSection;
+  | WorkedExampleSection | RetrievalCheckSection | CaseSimSection | LabBriefSection | ScreenReaderSimSection;
 
 interface LessonView {
   id: string;
@@ -72,6 +76,20 @@ interface LessonView {
   exercises: ExerciseData[];
   nextLessonId?: string;
   prevLessonId?: string;
+}
+
+/* Listen bar for one lesson: reads the text sections aloud and scrolls to each as it goes. */
+function LessonListen({ lesson, sectionRefs }: { lesson: LessonView; sectionRefs: React.MutableRefObject<(HTMLElement | null)[]> }) {
+  const chunks = useMemo(() => lessonSpeechChunks(lesson), [lesson]);
+  const follow = useCallback(
+    (idx: number) => {
+      if (idx < 0) return;
+      const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      sectionRefs.current[idx]?.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+    },
+    [sectionRefs],
+  );
+  return <ListenBar chunks={chunks} lessonId={lesson.id} onSection={follow} />;
 }
 
 /* ─── Callout styling by variant ─── */
@@ -499,6 +517,8 @@ export function Lesson() {
         </ul>
       </Card>
 
+      <LessonListen lesson={lesson} sectionRefs={sectionRefs} />
+
       {/* Content sections */}
       {lesson.contentSections.map((section, i) => {
         if (section.type === 'text') {
@@ -692,6 +712,15 @@ export function Lesson() {
           return (
             <div key={i} ref={(el) => { sectionRefs.current[i] = el as HTMLElement | null; }} data-section-idx={i} onClick={() => markSectionRead(i)}>
               <BuildIt intro={s.intro} objectName={s.objectName} fields={s.fields} synthesis={s.synthesis} />
+            </div>
+          );
+        }
+
+        if (section.type === 'screen-reader-sim') {
+          const s = section as ScreenReaderSimSection;
+          return (
+            <div key={i} ref={(el) => { sectionRefs.current[i] = el as HTMLElement | null; }} data-section-idx={i} onClick={() => markSectionRead(i)}>
+              <ScreenReaderSim title={s.title} intro={s.intro} note={s.note} controls={s.controls} debrief={s.debrief} />
             </div>
           );
         }

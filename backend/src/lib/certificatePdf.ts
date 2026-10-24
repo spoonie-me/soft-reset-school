@@ -3,7 +3,7 @@
  *
  * Produces a clean, professional A4-landscape certificate with:
  * - Double border frame (gold outer, thin inner)
- * - Bedcoders branding
+ * - Soft Reset School branding
  * - Track title, recipient name, date, exam score
  * - Verification code + URL
  */
@@ -128,9 +128,9 @@ export async function generateCertificatePdf(data: CertificateData): Promise<Uin
   let y = pageHeight - 70;
   drawHLine(page, y, 80, GOLD, 2);
 
-  // ── "BEDCODERS" branding ──
+  // ── "SOFT RESET SCHOOL" branding ──
   y -= 28;
-  y = drawCentered(page, 'BEDCODERS', y, helvetica, 11, GOLD);
+  y = drawCentered(page, 'SOFT RESET SCHOOL', y, helvetica, 11, GOLD);
 
   // ── "Certificate of Completion" ──
   y -= 12;
@@ -215,17 +215,17 @@ export async function generateCertificatePdf(data: CertificateData): Promise<Uin
   y = y - boxH - 16;
   const verifyUrl = data.verifyBaseUrl
     ? `${data.verifyBaseUrl}/verify/${data.verifyCode}`
-    : `https://bedcoders.com/verify/${data.verifyCode}`;
+    : `https://softreset.school/verify/${data.verifyCode}`;
   drawCentered(page, `Verify at: ${verifyUrl}`, y, helvetica, 7.5, LIGHT);
 
   // ── Bottom accent line ──
   drawHLine(page, borderInset + 48, 80, GOLD, 2);
 
   // ── Set PDF metadata ──
-  doc.setTitle(`Bedcoders Certificate – ${trackName}`);
-  doc.setAuthor('Bedcoders');
+  doc.setTitle(`Soft Reset School Certificate – ${trackName}`);
+  doc.setAuthor('Soft Reset School');
   doc.setSubject(`Certificate of Completion: ${trackName}`);
-  doc.setCreator('Bedcoders Platform');
+  doc.setCreator('Soft Reset School Platform');
 
   return doc.save();
 }

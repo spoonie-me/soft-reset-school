@@ -27,7 +27,7 @@ async function seed() {
       create: {
         userId: adminUser.id,
         displayName: 'Roi Shternin',
-        bio: 'Building Bedcoders: micro-learning for developers with chronic illness. Author, speaker, constraint-based thinker.',
+        bio: 'Building Soft Reset School: free lessons in AI-era work skills for people returning to work. Author, speaker, constraint-based thinker.',
         avatar: 'https://bedcoders.com/roi-avatar.jpg',
         country: 'United States',
       },
@@ -54,7 +54,7 @@ async function seed() {
         slug: 'coding-with-chronic-illness',
         title: 'Coding with Chronic Illness: Building When Your Body Says No',
         excerpt: 'How developers with POTS, ME/CFS, and other chronic illnesses are shipping real projects. Constraints breed innovation.',
-        metaTitle: 'Coding with Chronic Illness | Bedcoders',
+        metaTitle: 'Coding with Chronic Illness | Soft Reset School',
         metaDescription: 'Learn how developers with chronic illness ship real projects. Building constraints-first, not productivity-obsessed.',
         keywords: 'chronic illness, disability, accessible coding, POTS, ME/CFS, remote work',
       },
@@ -140,10 +140,10 @@ async function seed() {
       },
       {
         slug: 'why-bedcoders-exists',
-        title: 'Why Bedcoders Exists: Rethinking Developer Education',
+        title: 'Why Soft Reset School Exists: Rethinking Developer Education',
         excerpt: 'A platform designed for developers who have to work differently. Energy-aware learning.',
-        metaTitle: 'Why Bedcoders Exists | Inclusive Developer Education',
-        metaDescription: 'The story behind Bedcoders. Building a learning platform for developers with chronic illness.',
+        metaTitle: 'Why Soft Reset School Exists | Inclusive Developer Education',
+        metaDescription: 'The story behind Soft Reset School. Building a learning platform for developers with chronic illness.',
         keywords: 'education, learning platform, developer, chronic illness, disability, inclusive',
       },
     ];

@@ -16,7 +16,7 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>1. Parties & Acceptance</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and Roi Shternin-Martini, trading as Bedcoders, a sole trader registered in Vienna, Austria (GISA 38626050) ("Operator", "we", "us").
+          These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and Roi Shternin-Martini, MA, B.Ed., a sole trader registered in Vienna, Austria (GISA 38626050), operating Soft Reset School ("Operator", "we", "us").
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
           By accessing or purchasing on softreset.school, you confirm you have read, understood, and agree to these Terms. If you do not agree, do not use this service.
@@ -56,7 +56,7 @@ export function TermsOfService() {
           All course content, exercises, assessments, software, design, and materials on softreset.school are owned exclusively by or licensed to the Operator and are protected by Austrian copyright law (UrhG), EU intellectual property law, and applicable international treaties.
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          You are granted a non-exclusive, non-transferable, revocable licence to access and use Bedcoders content for personal, non-commercial educational purposes only. You may not reproduce, redistribute, sell, sublicense, publish, broadcast, or create derivative works from any course content without prior written consent.
+          You are granted a non-exclusive, non-transferable, revocable licence to access and use Soft Reset School content for personal, non-commercial educational purposes only. You may not reproduce, redistribute, sell, sublicense, publish, broadcast, or create derivative works from any course content without prior written consent.
         </p>
       </Card>
 
@@ -91,7 +91,7 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>7. Educational Content Disclaimer</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          <strong>Important:</strong> The Operator is a licensed business consultant (Unternehmensberatung, GISA 38626050) specialising in technology education. Bedcoders teaches software development, AI literacy, and related technical concepts for career development purposes only.
+          <strong>Important:</strong> The Operator is a licensed business consultant (Unternehmensberatung, GISA 38626050) specialising in education and consulting. Soft Reset School teaches AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA for career development purposes only.
         </p>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
           <strong>Content is strictly educational and does not constitute:</strong> medical advice, clinical guidance, diagnosis, treatment recommendations, legal advice, regulatory advice, or professional medical practice of any kind.

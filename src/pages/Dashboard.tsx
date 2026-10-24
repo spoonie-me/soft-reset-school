@@ -229,7 +229,7 @@ export function Dashboard() {
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
-      <SEO title="Your Dashboard" description="Continue your Bedcoders training. Track progress, resume lessons, and earn certifications." noIndex />
+      <SEO title="Your Dashboard" description="Continue your Soft Reset School training. Track progress, resume lessons, and earn certifications." noIndex />
       <LearningPathModal isOpen={showPathModal} onClose={() => setShowPathModal(false)} />
       <h1 style={{ fontSize: '1.75rem', marginBottom: 'var(--space-sm)' }}>Your Dashboard</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>

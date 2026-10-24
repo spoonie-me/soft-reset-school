@@ -24,7 +24,7 @@ export function WelcomeArchitect() {
 
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-      <SEO title="Welcome — Bedcoders Architect" description="All four tracks unlocked." noIndex />
+      <SEO title="Welcome — Soft Reset School Architect" description="All four tracks unlocked." noIndex />
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <div style={{ fontSize: '3rem', marginBottom: 'var(--space-lg)' }}>✓</div>
         <h1 style={{ marginBottom: 'var(--space-lg)', color: 'var(--success)' }}>Welcome, Architect</h1>

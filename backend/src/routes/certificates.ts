@@ -58,7 +58,7 @@ router.get('/:id/pdf', authMiddleware, async (req, res) => {
       return;
     }
 
-    const origin = req.get('origin') ?? 'https://bedcoders.com';
+    const origin = req.get('origin') ?? 'https://softreset.school';
     const pdfBytes = await generateCertificatePdf({
       recipientName: certificate.user.name ?? 'Certificate Holder',
       trackId: certificate.trackId,
@@ -71,7 +71,7 @@ router.get('/:id/pdf', authMiddleware, async (req, res) => {
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
       'Content-Disposition',
-      `inline; filename="bedcoders-certificate-${certificate.verifyCode}.pdf"`,
+      `inline; filename="soft-reset-school-certificate-${certificate.verifyCode}.pdf"`,
     );
     res.setHeader('Content-Length', pdfBytes.length);
     res.send(Buffer.from(pdfBytes));

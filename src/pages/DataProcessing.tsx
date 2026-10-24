@@ -15,7 +15,7 @@ export function DataProcessing() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>1. Scope</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          This Data Processing Agreement (DPA) applies to the processing of personal data by Bedcoders, operated by Roi Shternin-Martini ("Processor") on behalf of institutional customers ("Controller") under the General Data Protection Regulation (GDPR).
+          This Data Processing Agreement (DPA) applies to the processing of personal data by Soft Reset School, operated by Roi Shternin-Martini ("Processor") on behalf of institutional customers ("Controller") under the General Data Protection Regulation (GDPR).
         </p>
       </Card>
 

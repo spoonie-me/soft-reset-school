@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470" role="img" aria-labelledby="t d" font-family="'DM Sans', Inter, system-ui, sans-serif">
+  <title id="t">What a Fitbit Air with Health Coach costs over three years versus a RingConn Gen 2</title>
+  <desc id="d">Cumulative cost. Fitbit Air with Health Coach: about $200 after year one, $300 after year two, $400 after year three. RingConn Gen 2: $299 once, no subscription.</desc>
+  <rect width="800" height="470" rx="12" fill="#211C17"/>
+  <rect x="0.5" y="0.5" width="799" height="469" rx="12" fill="none" stroke="#463D30"/>
+
+  <text x="40" y="44" fill="#EDE6DB" font-size="21" font-weight="700">What each one costs you, cumulative</text>
+  <text x="40" y="68" fill="#B8AD9C" font-size="14">List prices. Assumes you keep paying for Health Coach after the 3-month trial.</text>
+
+  <rect x="40" y="88" width="12" height="12" rx="2" fill="#3987e5"/>
+  <text x="60" y="99" fill="#EDE6DB" font-size="13">Fitbit Air + Health Coach ($99.99, then $100 a year)</text>
+  <rect x="440" y="93" width="22" height="3" rx="1.5" fill="#d95926"/>
+  <text x="470" y="99" fill="#EDE6DB" font-size="13">RingConn Gen 2 ($299 once)</text>
+
+  <g stroke="#463D30" stroke-width="1" opacity="0.7">
+    <line x1="90" y1="278.9" x2="740" y2="278.9"/>
+    <line x1="90" y1="167.8" x2="740" y2="167.8"/>
+  </g>
+  <line x1="90" y1="390" x2="740" y2="390" stroke="#A0968A" stroke-width="1"/>
+  <g fill="#B8AD9C" font-size="12" text-anchor="end">
+    <text x="82" y="394">$0</text>
+    <text x="82" y="283">$200</text>
+    <text x="82" y="172">$400</text>
+  </g>
+
+  <path d="M148,390 V282.9 Q148,278.9 152,278.9 H228 Q232,278.9 232,282.9 V390 Z" fill="#3987e5"/>
+  <path d="M358,390 V227.3 Q358,223.3 362,223.3 H438 Q442,223.3 442,227.3 V390 Z" fill="#3987e5"/>
+  <path d="M568,390 V171.8 Q568,167.8 572,167.8 H648 Q652,167.8 652,171.8 V390 Z" fill="#3987e5"/>
+
+  <line x1="90" y1="223.9" x2="740" y2="223.9" stroke="#d95926" stroke-width="2"/>
+  <text x="96" y="214" fill="#EDE6DB" font-size="13" font-weight="600">RingConn Gen 2: $299, once</text>
+
+  <g fill="#EDE6DB" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="190" y="270">$200</text>
+    <text x="400" y="215">$300</text>
+    <text x="610" y="159">$400</text>
+  </g>
+  <g fill="#B8AD9C" font-size="13" text-anchor="middle">
+    <text x="190" y="414">After year 1</text>
+    <text x="400" y="414">After year 2</text>
+    <text x="610" y="414">After year 3</text>
+  </g>
+  <text x="40" y="446" fill="#A0968A" font-size="12">Prices from launch coverage. Check current pricing. The coach is optional, the band works without it.</text>
+</svg>

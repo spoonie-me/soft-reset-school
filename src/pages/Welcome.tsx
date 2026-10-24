@@ -151,8 +151,8 @@ export function Welcome() {
         <h3 style={{ marginBottom: 'var(--space-sm)' }}>Money is not the gate</h3>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
           Every lesson is free to read. If you want the credential and €99 isn't
-          possible right now, you choose what you pay — down to €0, with no proof
-          and no application. Many people here left education or work because they
+          possible right now, ask for a hardship code. No reason needed and nobody
+          reviews your situation. Many people here left education or work because they
           got ill; that is exactly who this is for.
         </p>
       </section>

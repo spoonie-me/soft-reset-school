@@ -125,7 +125,7 @@ export function Pricing() {
           No subscription. Nothing bills you on a bad month. Read every lesson in every track for free, forever — pay only when you're ready to sit the certification exam and get a permanent, publicly verifiable credential.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
-          €99 per track is the standard price, not a requirement — you can choose what you pay, down to €0, no proof and no application.
+          €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
         </p>
       </div>
 

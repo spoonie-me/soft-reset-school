@@ -140,7 +140,8 @@ export interface DiagnoseMechanismProps {
   question: string;
   options: FlowOption[];
   correctValue: string;
-  feedback: Record<string, string>;
+  /** Optional: some authored lessons give only `mechanism`. */
+  feedback?: Record<string, string>;
   mechanism: string; // markdown, root-cause explanation revealed after
 }
 
@@ -190,7 +191,7 @@ export function DiagnoseMechanism({ scenario, question, options, correctValue, f
             <span style={{ fontSize: '1.125rem', flexShrink: 0 }} aria-hidden="true">{selected === correctValue ? '✓' : '→'}</span>
             <div aria-live="polite" style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: 1.7 }}>
               <Verdict correct={selected === correctValue} />
-              <Markdown components={markdownComponents}>{feedback[selected] ?? ''}</Markdown>
+              <Markdown components={markdownComponents}>{feedback?.[selected] ?? ''}</Markdown>
             </div>
           </div>
 
@@ -505,14 +506,32 @@ export interface BuildField {
   feedback: Record<string, string>;
 }
 
+/** Some authored lessons give `options` as plain strings and `feedback` as one
+ * string explaining the right answer. Rendered as written, that produced empty
+ * buttons and no feedback. Both shapes are accepted here. */
+type LegacyBuildField = Omit<BuildField, 'options' | 'feedback'> & {
+  options: Array<FlowOption | string>;
+  feedback: Record<string, string> | string;
+};
+
+function normalizeBuildField(field: LegacyBuildField): BuildField {
+  const options: FlowOption[] = field.options.map((o) => (typeof o === 'string' ? { label: o, value: o } : o));
+  const feedback: Record<string, string> =
+    typeof field.feedback === 'string'
+      ? Object.fromEntries(options.map((o) => [o.value, field.feedback as string]))
+      : field.feedback;
+  return { ...field, options, feedback };
+}
+
 export interface BuildItProps {
   intro: string; // markdown
   objectName: string;
-  fields: BuildField[];
+  fields: Array<BuildField | LegacyBuildField>;
   synthesis: string; // markdown
 }
 
-export function BuildIt({ intro, objectName, fields, synthesis }: BuildItProps) {
+export function BuildIt({ intro, objectName, fields: rawFields, synthesis }: BuildItProps) {
+  const fields = useMemo(() => rawFields.map((f) => normalizeBuildField(f as LegacyBuildField)), [rawFields]);
   const [fieldIndex, setFieldIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [feedbackGiven, setFeedbackGiven] = useState(false);

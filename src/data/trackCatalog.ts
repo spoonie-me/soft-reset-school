@@ -103,7 +103,7 @@ const ALL_TRACKS: CatalogTrack[] = [
     ],
     trialLessonId: 'aod-l01',
     lessonCount: 244,
-    totalMinutes: 6100,
+    totalMinutes: 6135,
     exam: { questionCount: 22, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
   },
   {

@@ -118,7 +118,7 @@ export function WelcomeMember() {
       {/* Reassurance */}
       <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-2xl)', textAlign: 'center' }}>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: 'var(--space-md)' }}>
-          Every lesson is free, forever — no subscription, nothing to cancel. Certificates you earn are permanent and stay publicly verifiable.
+          No subscription, nothing to cancel. Certificates you earn are permanent and stay publicly verifiable.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
           Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>

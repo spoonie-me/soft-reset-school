@@ -64,7 +64,7 @@ export function TermsOfService() {
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>5. Payment & Pricing</h2>
         <ul style={{ color: 'var(--text-secondary)', paddingLeft: 'var(--space-xl)', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
           <li><strong>Pricing:</strong> All prices are inclusive of applicable VAT. Prices may change for future purchases; a change never affects a Credential you've already paid for.</li>
-          <li><strong>No subscription:</strong> All lesson content is free to read, for every account, with no recurring charge. The only paid product is a Credential — a one-time payment covering a certification exam and a permanent, publicly verifiable certificate for a specific track (or a bundle of tracks). There is nothing to cancel: a Credential purchase does not renew and is not billed again.</li>
+          <li><strong>No subscription:</strong> The first lesson of every track is a free trial. Access to the rest of a track is a one-time payment, called a Credential, which also covers a certification exam and a permanent, publicly verifiable certificate for that track (or a bundle of tracks). Accounts created before 24 October 2026 keep free access to all lesson content. There is nothing to cancel: a Credential purchase does not renew and is not billed again.</li>
           <li><strong>Payment processing:</strong> Handled by Stripe, Inc. By completing a purchase you also accept Stripe's terms of service.</li>
           <li><strong>Currency:</strong> Prices are listed in Euro (€). International purchases may incur bank conversion fees outside our control.</li>
         </ul>

@@ -138,7 +138,7 @@ export function Blog() {
           Ready to go beyond the reading?
         </p>
         <h3 style={{ fontSize: '1.375rem', marginBottom: 'var(--space-xl)' }}>
-          Every lesson is free to read — no card required.
+          Try lesson 1 of any track free — no card required.
         </h3>
         <Link to="/signup" style={{
           display: 'inline-block',
@@ -151,7 +151,7 @@ export function Blog() {
           textDecoration: 'none',
           fontFamily: 'var(--font-display)',
         }}>
-          Start for free
+          Try lesson 1 free
         </Link>
       </div>
     </div>

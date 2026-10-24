@@ -79,7 +79,7 @@ export function Welcome() {
             className="btn btn-primary btn-lg"
             style={{ fontSize: '1.1rem', padding: '16px 40px' }}
           >
-            Start Learning Free
+            Try Lesson 1 Free
           </Link>
           <Link
             to="/pricing"
@@ -150,8 +150,8 @@ export function Welcome() {
       }}>
         <h3 style={{ marginBottom: 'var(--space-sm)' }}>Money is not the gate</h3>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-          Every lesson is free to read. If you want the credential and €99 isn't
-          possible right now, ask for a hardship code. No reason needed and nobody
+          The first lesson of every track is a free trial, and the full track is €99 once.
+          If €99 isn't possible right now, ask for a hardship code. No reason needed and nobody
           reviews your situation. Many people here left education or work because they
           got ill; that is exactly who this is for.
         </p>
@@ -161,7 +161,7 @@ export function Welcome() {
       <section style={{ textAlign: 'center', marginBottom: 'var(--space-2xl)' }}>
         <h2 style={{ marginBottom: 'var(--space-md)' }}>Ready to Start?</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Every lesson in every track is free to read. No credit card needed.
+          Try lesson 1 of any track free. No credit card needed.
         </p>
         <Link
           to="/signup"

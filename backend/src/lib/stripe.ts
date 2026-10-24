@@ -14,10 +14,11 @@ export const stripe = new Stripe((process.env.STRIPE_SECRET_KEY ?? '').trim(), {
 // old subscription was already quietly failing — it unlocked zero extra
 // content in 4 of 8 tracks because every lesson sat in the free tier.)
 //
-// All lesson content is free to read for every logged-in user, forever —
-// see backend/src/middleware/entitlements.ts. The ONLY paid thing is a
-// Credential: a real certification-exam attempt + a permanent, publicly
-// verifiable certificate for a specific track. See CREDENTIAL_SELLABLE_TRACKS
+// Lesson 1 of every track is a free trial; the rest of a track unlocks with
+// a one-time Credential purchase — see backend/src/middleware/entitlements.ts
+// and lib/access.ts. A Credential is every lesson in the track, a real
+// certification-exam attempt and a permanent, publicly verifiable
+// certificate. See CREDENTIAL_SELLABLE_TRACKS
 // below for which tracks currently have real exam content behind them.
 // ──────────────────────────────────────────
 

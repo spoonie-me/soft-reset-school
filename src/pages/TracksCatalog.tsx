@@ -34,7 +34,7 @@ export function TracksCatalog() {
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
       <SEO
         title="Tracks — see what's inside before you sign up"
-        description="All 4 Soft Reset School career tracks, open to read before you create an account. Every lesson is free — pay once, only for the credential (€99 per track, 2 for €149, 3 for €199)."
+        description="All 4 Soft Reset School career tracks, with the full curriculum outline before you create an account. Try lesson 1 free, then €99 per track once (2 for €149, 3 for €199). No subscription."
         canonical="/tracks"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -49,7 +49,7 @@ export function TracksCatalog() {
         </p>
         <h1 style={{ marginBottom: 'var(--space-lg)' }}>see what's inside every track — before you sign up</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem' }}>
-          Four tracks, all free to read, forever. Each page below shows the full curriculum outline, who the
+          Four tracks. Each page below shows the full curriculum outline, who the
           track is for, and exactly what the credential exam involves — no account needed to look around.
         </p>
       </div>
@@ -58,7 +58,7 @@ export function TracksCatalog() {
       <h2 style={{ marginBottom: 'var(--space-sm)' }}>career tracks — the reintegration path</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 640 }}>
         Each one maps to a role a bed- or home-bound person can actually be hired — or bill clients — for.
-        Young, focused curricula that are still growing; every lesson is free to read before you pay anything.
+        Try lesson 1 of any track free. The full track is €99 once.
       </p>
       <div className="grid-2" style={{ marginBottom: 'var(--space-3xl)' }}>
         {CAREER_CATALOG_TRACKS.map((track) => (
@@ -72,7 +72,7 @@ export function TracksCatalog() {
           Every lesson free. No card. Pay once, only when you're ready for the credential.
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/signup"><Button variant="primary" size="lg">Start learning free</Button></Link>
+          <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
 import { sanitizeExerciseConfig } from '../lib/sanitizeExercise.js';
+import { isTrialLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -44,13 +45,12 @@ router.get('/:id', authMiddleware, entitlementsMiddleware, async (req, res) => {
       return;
     }
 
-    // Check track access — allow first module (free tier) or paid
+    // Check track access — the trial lesson is open, everything else needs the track
     const trackId = lesson.module?.domain?.trackId;
-    const moduleOrder = lesson.module?.order ?? 0; // default 0 = not free tier
-    if (trackId && moduleOrder !== 1 && !entReq.trackAccess?.includes(trackId)) {
+    if (trackId && !isTrialLesson(lesson) && !entReq.trackAccess?.includes(trackId)) {
       res.status(403).json({
         error: 'Track access required',
-        message: "We couldn't confirm access to this track just now. Please try again — every lesson and exercise here is free.",
+        message: "You need the full track to read this. The first lesson of every track is a free trial.",
         trackId,
       });
       return;

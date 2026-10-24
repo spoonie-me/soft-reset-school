@@ -161,7 +161,7 @@ export function ForTeams() {
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 900, margin: '0 auto' }}>
         <h2 style={{ marginBottom: 'var(--space-sm)' }}>Credential vouchers</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-          No subscription, no per-seat monthly billing. Every lesson is free to read for anyone — buy a block of Credential vouchers (the certification exam + permanent, publicly verifiable certificate) at the same flat €99/track individual learners pay. Redeem a voucher whenever a team member is ready, no expiry.
+          No subscription, no per-seat monthly billing. The first lesson of every track is a free trial — buy a block of vouchers (every lesson in the track, the certification exam and a permanent, publicly verifiable certificate) at the same flat €99/track individual learners pay. Redeem a voucher whenever a team member is ready, no expiry.
         </p>
         <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-xl)' }}>
           {[

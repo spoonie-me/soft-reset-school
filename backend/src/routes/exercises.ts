@@ -5,6 +5,7 @@ import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
 import { XP_REWARDS, levelFromXp } from '../lib/gamification.js';
 import { getExerciseFeedback } from '../lib/claude.js';
+import { isTrialLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -43,13 +44,12 @@ router.post('/:exerciseId/submit', authMiddleware, entitlementsMiddleware, async
       return;
     }
 
-    // Check track access — allow first module (free tier) or paid access
+    // Check track access — the trial lesson is open, everything else needs the track
     const trackId = exercise.lesson?.module?.domain?.trackId;
-    const moduleOrder = exercise.lesson?.module?.order;
-    if (trackId && moduleOrder !== 1 && !authReq.trackAccess?.includes(trackId)) {
+    if (trackId && !isTrialLesson(exercise.lesson) && !authReq.trackAccess?.includes(trackId)) {
       res.status(403).json({
         error: 'Track access required',
-        message: "We couldn't confirm access to this track just now. Please try again — every lesson and exercise here is free.",
+        message: "You need the full track to read this. The first lesson of every track is a free trial.",
       });
       return;
     }

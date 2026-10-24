@@ -140,7 +140,7 @@ export function AdLanding() {
             {loading ? 'Redirecting…' : 'Get certified — €99, once'}
           </button>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-tertiary)', textAlign: 'center' }}>
-            One-time payment, no subscription, nothing renews. Every lesson is free — <Link to="/signup" style={{ color: 'var(--signal)', textDecoration: 'none' }}>read the whole track before you pay anything.</Link>
+            One-time payment, no subscription, nothing renews. <Link to="/signup" style={{ color: 'var(--signal)', textDecoration: 'none' }}>Try lesson 1 free</Link>, no card.
           </p>
         </div>
 
@@ -211,7 +211,7 @@ export function AdLanding() {
           Ready to make the move?
         </h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-          €99, one-time. The certification exam and a permanent, publicly verifiable certificate. Every lesson and exercise is free to read first — pay only when you're ready to prove it.
+          €99, one-time. Every lesson in the track, the certification exam and a permanent, publicly verifiable certificate. Try lesson 1 free first.
         </p>
         <button
           onClick={handleCTA}

@@ -6,7 +6,9 @@ import { Button } from '@/components/Button';
 import { ProgressBar } from '@/components/ProgressBar';
 import { ExerciseRenderer, type ExerciseData, type ExerciseType } from '@/components/exercises/ExerciseRenderer';
 import { LoadingSpinner } from '@/components/ProtectedRoute';
-import { learningApi, type LessonDetailResponse } from '@/lib/api';
+import { learningApi, ApiError, type LessonDetailResponse } from '@/lib/api';
+import { getCatalogTrack } from '@/data/trackCatalog';
+import { TRACK_PRICE } from '@/data/pricing';
 import { IS_DEV_MODE } from '@/lib/useApi';
 import { SEO } from '@/components/SEO';
 import { markdownComponents } from '@/components/lesson-templates/markdownComponents';
@@ -209,6 +211,8 @@ export function Lesson() {
   const { id } = useParams<{ id: string }>();
   const [lesson, setLesson] = useState<LessonView | null>(IS_DEV_MODE ? DEMO_LESSON : null);
   const [loading, setLoading] = useState(!IS_DEV_MODE);
+  // Set to the track id when the API says this lesson needs the track.
+  const [lockedTrack, setLockedTrack] = useState<string | null>(null);
   const [exerciseResults, setExerciseResults] = useState<Record<string, { feedback: string; score: number }>>({});
   // Submission failures, shown honestly instead of being papered over with a
   // fabricated score.
@@ -298,8 +302,13 @@ export function Lesson() {
             }
           }
         }
-      } catch {
-        setLesson(DEMO_LESSON);
+      } catch (err) {
+        // A locked lesson must never fall back to the demo lesson.
+        if (err instanceof ApiError && err.status === 403) {
+          setLockedTrack(String(err.body.trackId ?? ''));
+        } else {
+          setLesson(DEMO_LESSON);
+        }
       } finally {
         setLoading(false);
       }
@@ -405,6 +414,29 @@ export function Lesson() {
       learningApi.updateLessonProgress(lesson.id, 'completed', 100).catch(() => {});
     }
   }, [completedSections, lesson, cancelPendingSave]);
+
+  if (lockedTrack !== null) {
+    const track = getCatalogTrack(lockedTrack);
+    return (
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
+        <SEO title="Lesson locked" description="This lesson is part of a paid track." canonical="/pricing" noIndex />
+        <Card style={{ padding: 'var(--space-2xl)' }}>
+          <h1 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-md)' }}>This lesson is part of the full track</h1>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
+            The first lesson of every track is a free trial. {track ? `${track.title} is` : 'The track is'} €{TRACK_PRICE} once,
+            for every lesson, the exam and the certificate. No subscription, no renewal.
+          </p>
+          <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', marginBottom: 'var(--space-xl)' }}>
+            Can't afford it? You can ask for a hardship code. No reason needed.
+          </p>
+          <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+            <Link to={track ? `/tracks/${track.slug}` : '/pricing'}><Button variant="primary">See the track</Button></Link>
+            <Link to="/pricing#hardship"><Button variant="secondary">Ask for a hardship code</Button></Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   if (loading || !lesson) {
     return (

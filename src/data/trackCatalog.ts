@@ -56,7 +56,7 @@ export interface CatalogTrack {
 }
 
 const CAREER_CURRICULUM_NOTE =
-  'Every lesson is free to read before you pay anything.';
+  'The first lesson is a free trial. The full track is €99 once.';
 
 /** Every track definition, including archived ones. Use CATALOG_TRACKS for
  * anything public-facing. */

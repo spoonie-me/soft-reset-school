@@ -2,23 +2,20 @@
 import type { Response, NextFunction } from 'express';
 import { prisma } from '../lib/db.js';
 import type { AuthRequest } from './auth.js';
+import { isGrandfathered } from '../lib/access.js';
 
 // ──────────────────────────────────────────
 // TYPES
 // ──────────────────────────────────────────
 
 export interface EntitledRequest extends AuthRequest {
-  /** Track IDs the current user can access lesson/exercise CONTENT for.
-   * As of the 2026-08-04 pricing model (PRD.md §4.5), all lesson content
-   * is free to read for every logged-in user — this is intentionally
-   * populated with every known track slug, not gated by any purchase.
-   * Kept as a list (not a bare `true`) so downstream `.includes(trackId)`
-   * checks in lessons/exercises/feedback/assessments routes keep working
-   * unmodified. */
+  /** Track IDs the current user can read lesson/exercise CONTENT for: tracks
+   * they have bought, or every track for accounts that predate the paid
+   * content cutover. The first lesson of every track is a trial and is
+   * allowed separately (see lib/access.ts). */
   trackAccess: string[];
-  /** Track IDs the current user has paid a one-time Credential fee for —
-   * this is the ONLY thing gated by payment now. Used by exams.ts to gate
-   * certification-exam access and certificate issuance. */
+  /** Track IDs the current user has paid a one-time fee for. Gates the
+   * certification exam and certificate issuance as well as the content. */
   credentialAccess: string[];
 }
 
@@ -27,9 +24,9 @@ export interface EntitledRequest extends AuthRequest {
 // ──────────────────────────────────────────
 
 /**
- * Sets `req.trackAccess` (all tracks, content is free — see PRD.md §4.5)
- * and `req.credentialAccess` (tracks this user has paid a one-time
- * Credential fee for, from CredentialPurchase — gates exams/certificates).
+ * Sets `req.trackAccess` (tracks whose content this user can read) and
+ * `req.credentialAccess` (tracks this user has paid for, from
+ * CredentialPurchase — gates exams/certificates).
  *
  * Must be mounted after `authMiddleware`.
  */
@@ -41,19 +38,26 @@ export async function entitlementsMiddleware(
   try {
     const userId = req.userId;
 
-    const allTracks = await prisma.track.findMany({ select: { slug: true } });
-    req.trackAccess = allTracks.map((t) => t.slug);
-
     if (!userId) {
+      req.trackAccess = [];
       req.credentialAccess = [];
       next();
       return;
     }
 
-    const purchases = await prisma.credentialPurchase.findMany({
-      where: { userId },
-      select: { trackId: true },
-    });
+    const [user, purchases] = await Promise.all([
+      prisma.user.findUnique({ where: { id: userId }, select: { createdAt: true } }),
+      prisma.credentialPurchase.findMany({ where: { userId }, select: { trackId: true } }),
+    ]);
+
+    // A purchase unlocks the track's lessons, the exam and the credential.
+    // Accounts from before the cutover keep reading everything (lib/access.ts).
+    if (isGrandfathered(user?.createdAt)) {
+      const allTracks = await prisma.track.findMany({ select: { slug: true } });
+      req.trackAccess = allTracks.map((t) => t.slug);
+    } else {
+      req.trackAccess = purchases.map((p) => p.trackId);
+    }
     req.credentialAccess = purchases.map((p) => p.trackId);
     next();
   } catch (error) {

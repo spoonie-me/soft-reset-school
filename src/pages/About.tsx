@@ -138,24 +138,28 @@ export function About() {
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
                 Direct AI tools. Review what they hand back. Catch what they get confidently wrong. The demand is real. I am not promising you a job.
               </p>
+              <Link to="/tracks/ai-orchestrated-dev" style={{ display: 'inline-block', marginTop: 'var(--space-md)', color: 'var(--signal)', fontSize: '0.9375rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>See the track and enrol &rarr;</Link>
             </Card>
             <Card>
               <h3 style={{ color: 'var(--gold)', fontSize: '1.0625rem', marginBottom: 'var(--space-md)' }}>AI Automation Consulting</h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
                 Where AI belongs in a business process. And where it doesn't. You will not find the $200 to $500 an hour figures that circulate online here. They are bait.
               </p>
+              <Link to="/tracks/ai-workflow-consulting" style={{ display: 'inline-block', marginTop: 'var(--space-md)', color: 'var(--signal)', fontSize: '0.9375rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>See the track and enrol &rarr;</Link>
             </Card>
             <Card>
               <h3 style={{ color: 'var(--crystal)', fontSize: '1.0625rem', marginBottom: 'var(--space-md)' }}>AI-Augmented Medical Coding</h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
                 Not entry-level coding. AI is automating that layer fastest. We teach the review layer, where the hard cases get routed. That part lasts.
               </p>
+              <Link to="/tracks/ai-oversight-health-informatics" style={{ display: 'inline-block', marginTop: 'var(--space-md)', color: 'var(--signal)', fontSize: '0.9375rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>See the track and enrol &rarr;</Link>
             </Card>
             <Card>
               <h3 style={{ color: 'var(--rust)', fontSize: '1.0625rem', marginBottom: 'var(--space-md)' }}>Digital Accessibility QA</h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
                 You sit behind the real assistive technology. You tab. You listen. A scanner can read a WCAG checklist. It cannot tell you what it is like to use the page.
               </p>
+              <Link to="/tracks/accessibility-qa-lived-experience" style={{ display: 'inline-block', marginTop: 'var(--space-md)', color: 'var(--signal)', fontSize: '0.9375rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>See the track and enrol &rarr;</Link>
             </Card>
           </div>
         </div>

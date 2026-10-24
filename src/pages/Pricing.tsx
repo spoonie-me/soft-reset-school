@@ -247,10 +247,10 @@ export function Pricing() {
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)', marginTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Nonprofits & vocational rehab agencies</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 500, margin: '0 auto var(--space-lg)' }}>
-          Pre-buy Credential vouchers for the people you serve, at the same flat €{TRACK_PRICE}/track. No separate pricing.
+          Pre-buy Credential vouchers for the people you serve. Tell us how many seats and which tracks, and we will send you a quote.
         </p>
         <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
-          Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
+          <a href="mailto:hi@softreset.school?subject=Voucher%20quote" style={{ color: 'var(--signal)' }}>Contact us for pricing: hi@softreset.school</a>
         </p>
       </div>
 

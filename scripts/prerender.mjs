@@ -127,7 +127,7 @@ async function readTrackSeo() {
     `/tracks/${t.slug}`,
     {
       title: `${t.title} — what's inside the track`,
-      description: `${t.pitch} Full curriculum outline, who it's for, and the credential exam — every lesson free to read, no account needed.`,
+      description: `${t.pitch} Full curriculum outline, who it's for, and the credential exam. Lesson 1 is a free trial.`,
     },
   ]));
 }

@@ -28,7 +28,7 @@ export function WelcomeSpecialist() {
 
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 800, margin: '0 auto' }}>
-      <SEO title="Welcome — Bedcoders Specialist" description="You're in." noIndex />
+      <SEO title="Welcome — Soft Reset School Specialist" description="You're in." noIndex />
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <div style={{ fontSize: '3rem', marginBottom: 'var(--space-lg)' }}>✓</div>
         <h1 style={{ marginBottom: 'var(--space-lg)', color: 'var(--success)' }}>Welcome, Specialist</h1>

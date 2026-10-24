@@ -4,12 +4,12 @@ import prisma from '../lib/db';
 
 const router = Router();
 
-const PODCAST_TITLE = process.env.PODCAST_TITLE || 'Bedcoders Podcast';
+const PODCAST_TITLE = process.env.PODCAST_TITLE || 'Soft Reset School Podcast';
 const PODCAST_DESC = process.env.PODCAST_DESCRIPTION || 'Coding from bed, with AI.';
-const PODCAST_IMAGE = process.env.PODCAST_IMAGE || 'https://bedcoders.com/podcast-cover.jpg';
+const PODCAST_IMAGE = process.env.PODCAST_IMAGE || 'https://softreset.school/podcast-cover.jpg';
 const PODCAST_AUTHOR = process.env.PODCAST_AUTHOR || 'Roi Shternin';
 const PODCAST_EMAIL = process.env.PODCAST_EMAIL || 'hi@softreset.school';
-const SITE_URL = process.env.SITE_URL || 'https://bedcoders.com';
+const SITE_URL = process.env.SITE_URL || 'https://softreset.school';
 
 function escapeXml(str: string): string {
   return str

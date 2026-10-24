@@ -88,14 +88,14 @@ export function AdLanding() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
       <SEO
-        title={`${cfg.label} — Bedcoders`}
+        title={`${cfg.label} — Soft Reset School`}
         description={cfg.sub}
         noIndex
       />
       {/* Minimal brand bar */}
       <div style={{ borderBottom: '1px solid var(--bg-border)', padding: '14px var(--space-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--signal)', letterSpacing: '0.06em' }}>
-          🛏️ BEDCODERS
+          SOFT RESET SCHOOL
         </span>
         <Link to="/login" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', textDecoration: 'none' }}>
           Sign in
@@ -240,7 +240,7 @@ export function AdLanding() {
       {/* Footer strip */}
       <div style={{ borderTop: '1px solid var(--bg-border)', padding: 'var(--space-xl)', textAlign: 'center' }}>
         <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-          © {new Date().getFullYear()} Bedcoders &nbsp;·&nbsp;
+          © {new Date().getFullYear()} Soft Reset School &nbsp;·&nbsp;
           <Link to="/privacy" style={{ color: 'var(--text-tertiary)', textDecoration: 'none' }}>Privacy</Link>
           &nbsp;·&nbsp;
           <Link to="/terms" style={{ color: 'var(--text-tertiary)', textDecoration: 'none' }}>Terms</Link>

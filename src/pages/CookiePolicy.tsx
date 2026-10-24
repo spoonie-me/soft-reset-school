@@ -45,7 +45,7 @@ export function CookiePolicy() {
         </ul>
 
         <h3 style={{ color: 'var(--signal)', marginBottom: 'var(--space-sm)' }}>Analytics (Opt-In)</h3>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Help us understand how people use Bedcoders (via PostHog, privacy-first):</p>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Help us understand how people use Soft Reset School (via PostHog, privacy-first):</p>
         <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)', marginBottom: 'var(--space-xl)', cursor: 'pointer' }}>
           <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} style={{ width: 20, height: 20, accentColor: 'var(--signal)' }} />
           <span style={{ color: 'var(--text-secondary)' }}>Allow analytics cookies</span>

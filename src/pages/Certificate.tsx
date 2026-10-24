@@ -95,7 +95,7 @@ export function Certificate() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'bedcoders-certificate.pdf';
+      a.download = 'soft-reset-school-certificate.pdf';
       a.click();
       URL.revokeObjectURL(url);
     } catch {
@@ -128,7 +128,7 @@ export function Certificate() {
           <div style={{ position: 'absolute' as const, inset: 8, border: '1px solid var(--gold)', borderRadius: 'var(--radius-md)', opacity: 0.3, pointerEvents: 'none' as const }} />
           <div style={{ width: 60, height: 4, background: 'var(--gold)', borderRadius: 2, margin: '0 auto var(--space-xl)' }} />
 
-          <p className="cert-accent" style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'var(--gold)', marginBottom: 'var(--space-2xl)' }}>BedCoders</p>
+          <p className="cert-accent" style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'var(--gold)', marginBottom: 'var(--space-2xl)' }}>Soft Reset School</p>
 
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '0.875rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-tertiary)', marginBottom: 'var(--space-sm)' }}>Certificate of Completion</h2>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 600, marginBottom: 'var(--space-2xl)', lineHeight: 1.3 }}>{cert.trackName}</h1>

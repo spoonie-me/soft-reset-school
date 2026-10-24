@@ -122,7 +122,7 @@ router.post('/session', authMiddleware, async (req, res) => {
         },
         quantity: 1,
       }],
-      success_url: `${appUrl}/dashboard?session_id={CHECKOUT_SESSION_ID}&credential=${productId}`,
+      success_url: `${appUrl}/dashboard?session_id={CHECKOUT_SESSION_ID}&credential=${productId}&tracks=${encodeURIComponent(requestedTracks.join(','))}`,
       cancel_url: `${appUrl}/pricing?checkout=cancelled`,
       allow_promotion_codes: true,
       automatic_tax: { enabled: true },

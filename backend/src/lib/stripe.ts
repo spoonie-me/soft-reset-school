@@ -26,11 +26,11 @@ export const CREDENTIAL_PRODUCTS = {
   track_credential: {
     priceInCents: 9900, // €99, one-time
     label: 'Track Credential',
-    description: 'Certification exam + permanent, publicly verifiable certificate for one track.',
+    description: 'Every lesson in one track, its certification exam and a permanent, publicly verifiable certificate.',
   },
   program_credential: {
     label: 'Program Credential',
-    description: 'Certification exams + certificates for 2 or 3 tracks, bundled.',
+    description: 'Every lesson, certification exam and certificate for 2 or 3 tracks, bundled.',
   },
 } as const;
 

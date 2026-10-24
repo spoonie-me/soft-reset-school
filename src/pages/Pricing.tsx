@@ -8,6 +8,7 @@ import { lessonsUntilCredential } from '@/data/credentialBar';
 import { getCatalogTrack, credentialAvailable } from '@/data/trackCatalog';
 import { TRACK_PRICE, BUNDLE_PRICES, MAX_BUNDLE_SIZE, bundleSavings } from '@/data/pricing';
 import { CohortInterest } from '@/components/CohortInterest';
+import { ModalDialog } from '@/components/ModalDialog';
 
 // Career tracks are the reintegration path: each one maps to a role a
 // bed- or home-bound person can actually be hired (or bill clients) for.
@@ -256,13 +257,7 @@ export function Pricing() {
 
       {/* Hardship code dialog */}
       {codeTrack && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Redeem a hardship code"
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 'var(--space-xl)' }}
-        >
-          <Card style={{ maxWidth: 460, width: '100%', padding: 'var(--space-2xl)' }}>
+        <ModalDialog label="Redeem a hardship code" onClose={() => setCodeTrack(null)}>
             {codeDone ? (
               <>
                 <h3 style={{ marginBottom: 'var(--space-md)' }}>Done. It's yours.</h3>
@@ -323,17 +318,12 @@ export function Pricing() {
                 </div>
               </>
             )}
-          </Card>
-        </div>
+        </ModalDialog>
       )}
 
       {/* Withdrawal right modal — shown before Stripe checkout */}
       {pending && (
-        <div
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 'var(--space-xl)' }}
-          onClick={() => setPending(null)}
-        >
-          <Card style={{ maxWidth: 480, width: '100%', padding: 'var(--space-2xl)' }} onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+        <ModalDialog label="Before you continue" maxWidth={480} onClose={() => { setPending(null); setWithdrawalAck(false); setCheckoutError(''); }}>
             <h3 style={{ marginBottom: 'var(--space-lg)', textAlign: 'center' }}>Before you continue</h3>
             <label style={{ display: 'flex', gap: 'var(--space-sm)', alignItems: 'flex-start', cursor: 'pointer', marginBottom: 'var(--space-xl)', padding: 'var(--space-md)', background: 'var(--bg-void)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-md)' }}>
               <input
@@ -360,8 +350,7 @@ export function Pricing() {
                 {checkoutLoading ? 'Starting…' : 'Continue to checkout →'}
               </Button>
             </div>
-          </Card>
-        </div>
+        </ModalDialog>
       )}
     </div>
   );

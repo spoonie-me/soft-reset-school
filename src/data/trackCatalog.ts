@@ -56,7 +56,7 @@ export interface CatalogTrack {
 }
 
 const CAREER_CURRICULUM_NOTE =
-  'This is a young track: a focused, growing curriculum — every lesson free to read before you pay anything.';
+  'Every lesson is free to read before you pay anything.';
 
 /** Every track definition, including archived ones. Use CATALOG_TRACKS for
  * anything public-facing. */
@@ -90,13 +90,11 @@ const ALL_TRACKS: CatalogTrack[] = [
         name: 'Agentic Workflows',
         description:
           'Multi-step AI-driven development: planning, delegating subtasks, and verifying a chain of AI actions rather than a single completion.',
-        inDevelopment: true,
       },
       {
         name: 'Shipping with AI Assistance',
         description:
           'Testing, deployment, and monitoring workflows where AI handles routine work and the developer owns judgment calls and final accountability.',
-        inDevelopment: true,
       },
     ],
     lessonCount: 244,
@@ -204,31 +202,26 @@ const ALL_TRACKS: CatalogTrack[] = [
         name: 'Assistive Technology Fluency',
         description:
           'Beyond the WCAG checklist: how screen readers, magnifiers, switch access, and voice control actually behave in practice — the specific failures a lived-experience reviewer catches that an automated scanner misses.',
-        inDevelopment: true,
       },
       {
         name: 'Cognitive, Content and Energy Accessibility',
         description:
           'The barriers WCAG covers thinly: cognitive load, unclear content, sensory load, and interfaces that cost more energy than a person has.',
-        inDevelopment: true,
       },
       {
         name: 'Running a Real Audit',
         description:
           'Scoping, evidence, severity and reporting — the practical craft of an audit a development team can actually work from, not a list of WCAG violation codes.',
-        inDevelopment: true,
       },
       {
         name: 'Advocacy & Organizational Change',
         description:
           'Turning audit findings into real product change: making the case internally, working with design and engineering teams, and the difference between compliance theater and a genuine accessibility culture.',
-        inDevelopment: true,
       },
       {
         name: 'Working in Accessibility',
         description:
           'Getting and holding accessibility work — employed, contract or freelance — and structuring it so it doesn\'t cost more than it pays.',
-        inDevelopment: true,
       },
     ],
     lessonCount: 243,

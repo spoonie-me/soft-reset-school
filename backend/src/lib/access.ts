@@ -4,18 +4,17 @@
 // credential). The trial is the first lesson of each track: lesson 1, of
 // module 1, of the track's first domain. Everything else needs a purchase.
 //
-// People who signed up before the cutover were told every lesson was free
-// forever. They keep that. Set LEGACY_FREE_ACCESS_BEFORE to move the date,
-// or to "none" to switch the grandfathering off.
+// Earlier accounts used to keep free access. That was switched off, so by
+// default nobody is grandfathered. To bring it back for accounts created
+// before a date, set LEGACY_FREE_ACCESS_BEFORE to that ISO date.
 
-// End of the day this shipped, so anyone who signed up before the change goes live is covered.
-const LEGACY_DEFAULT = '2026-10-25T00:00:00Z';
+const LEGACY_DEFAULT = 'none';
 
 export function legacyFreeAccessBefore(): Date | null {
   const raw = process.env.LEGACY_FREE_ACCESS_BEFORE ?? LEGACY_DEFAULT;
   if (raw.trim().toLowerCase() === 'none') return null;
   const d = new Date(raw);
-  return Number.isNaN(d.getTime()) ? new Date(LEGACY_DEFAULT) : d;
+  return Number.isNaN(d.getTime()) ? null : d;
 }
 
 export function isGrandfathered(createdAt: Date | null | undefined): boolean {

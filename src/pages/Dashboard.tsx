@@ -9,6 +9,7 @@ import { learningApi, type TrackDetailResponse, type GamificationResponse } from
 import { IS_DEV_MODE } from '@/lib/useApi';
 import { LearningPathModal } from '@/components/LearningPathModal';
 import { SEO } from '@/components/SEO';
+import { usePurchaseUnlock } from '@/lib/usePurchaseUnlock';
 
 /* ─── Track metadata (not in DB — static config) ─── */
 const TRACK_META: Record<string, { title: string; color: string }> = {
@@ -112,6 +113,13 @@ export function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  // Tracks just bought (from the Stripe return URL), kept before the URL is cleaned.
+  const [boughtTracks] = useState<string[]>(() =>
+    (searchParams.get('session_id')?.startsWith('cs_') ? (searchParams.get('tracks') ?? '') : '')
+      .split(',')
+      .filter((t) => /^[a-z0-9-]+$/.test(t)),
+  );
+  const unlock = usePurchaseUnlock(boughtTracks);
 
   // Fire GA4 conversion when landing from Stripe checkout success
   useEffect(() => {
@@ -141,6 +149,7 @@ export function Dashboard() {
     const params = new URLSearchParams(searchParams);
     params.delete('session_id');
     params.delete('credential');
+    params.delete('tracks');
     navigate({ search: params.toString() }, { replace: true });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -243,6 +252,30 @@ export function Dashboard() {
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Pick up where you left off.
       </p>
+
+      {unlock !== 'idle' && (
+        <div
+          role="status"
+          style={{
+            padding: 'var(--space-md) var(--space-lg)',
+            background: unlock === 'unlocked' ? 'rgba(90,158,106,0.08)' : 'var(--bg-surface)',
+            border: `1px solid ${unlock === 'unlocked' ? 'var(--success)' : 'var(--bg-border)'}`,
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--text-primary)',
+            fontSize: '0.9375rem',
+            marginBottom: 'var(--space-xl)',
+          }}
+        >
+          {unlock === 'waiting' && 'Payment received. Unlocking your track now. This usually takes a few seconds.'}
+          {unlock === 'unlocked' && 'Your track is unlocked. Every lesson, the exam and the certificate are yours. No deadline.'}
+          {unlock === 'slow' && (
+            <>
+              Payment received, but unlocking is taking longer than usual. Reload this page in a minute. If it is still locked, write to{' '}
+              <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a> with your receipt and I will sort it out.
+            </>
+          )}
+        </div>
+      )}
 
       {error && (
         <div

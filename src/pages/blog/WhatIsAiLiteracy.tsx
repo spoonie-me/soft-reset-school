@@ -87,7 +87,7 @@ export function WhatIsAiLiteracy() {
       </p>
 
       <p style={p}>
-        The <Link to="/tracks/ai-orchestrated-dev" style={{ color: 'var(--signal)', textDecoration: 'none' }}>AI-Assisted Software Development track</Link> puts all of this to work in short, resumable lessons designed for people who learn from bed, not from lecture halls.
+        The <Link to="/tracks/ai-orchestrated-dev" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>AI-Assisted Software Development track</Link> puts all of this to work in short, resumable lessons designed for people who learn from bed, not from lecture halls.
       </p>
     </BlogLayout>
   );

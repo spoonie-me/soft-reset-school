@@ -7,8 +7,9 @@ import { ExerciseRenderer } from '@/components/exercises/ExerciseRenderer';
 import type { ExerciseData, ExerciseType } from '@/components/exercises/ExerciseRenderer';
 import { ExerciseTimer } from '@/components/exercises/shared/ExerciseTimer';
 import { LoadingSpinner } from '@/components/ProtectedRoute';
-import { learningApi, type AssessmentResponse } from '@/lib/api';
+import { learningApi, ApiError, type AssessmentResponse } from '@/lib/api';
 import { IS_DEV_MODE } from '@/lib/useApi';
+import { LockedCard, LoadFailedCard } from '@/components/LockedCard';
 import { SEO } from '@/components/SEO';
 
 /* ─── Demo data ─── */
@@ -71,6 +72,9 @@ export function Assessment() {
   const { moduleId } = useParams<{ moduleId: string }>();
 
   const [loading, setLoading] = useState(!IS_DEV_MODE);
+  const [blockedTrack, setBlockedTrack] = useState<string | null>(null);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [assessmentId, setAssessmentId] = useState<string | null>(null);
   const [assessmentTitle, setAssessmentTitle] = useState('Module Assessment');
   const [timeLimit, setTimeLimit] = useState(15 * 60);
@@ -91,6 +95,9 @@ export function Assessment() {
     if (IS_DEV_MODE) return;
 
     async function load() {
+      setLoading(true);
+      setBlockedTrack(null);
+      setLoadFailed(false);
       try {
         const res: AssessmentResponse = await learningApi.getAssessment(moduleId ?? '');
         setAssessmentId(res.assessment.id);
@@ -109,15 +116,17 @@ export function Assessment() {
           xpReward: 20,
         }));
         setQuestions(shuffleArray(mapped));
-      } catch {
-        setQuestions(shuffleArray(DEMO_QUESTIONS));
+      } catch (err) {
+        // Never fall back to demo questions: a locked or failed assessment must say so.
+        if (err instanceof ApiError && err.status === 403) setBlockedTrack(String(err.body.trackId ?? ''));
+        else setLoadFailed(true);
       } finally {
         setLoading(false);
       }
     }
 
     load();
-  }, [moduleId]);
+  }, [moduleId, attempt]);
 
   const totalQuestions = questions.length;
   const answeredCount = Object.keys(answers).length;
@@ -186,6 +195,9 @@ export function Assessment() {
 
   const goPrev = () => setCurrentIndex((i) => Math.max(0, i - 1));
   const goNext = () => setCurrentIndex((i) => Math.min(totalQuestions - 1, i + 1));
+
+  if (blockedTrack !== null) return <LockedCard what="assessment" trackId={blockedTrack} />;
+  if (loadFailed) return <LoadFailedCard onRetry={() => setAttempt((n) => n + 1)} />;
 
   if (loading) {
     return (

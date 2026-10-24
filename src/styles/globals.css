@@ -377,7 +377,7 @@ main:focus {
   .grid-pricing { grid-template-columns: 1fr !important; }
   .grid-3     { grid-template-columns: 1fr !important; }
   .grid-2     { grid-template-columns: 1fr !important; }
-  .grid-sidebar { grid-template-columns: 1fr !important; }
+  .grid-sidebar { grid-template-columns: minmax(0, 1fr) !important; }
 
   h1 { font-size: 1.75rem; }
   h2 { font-size: 1.375rem; }

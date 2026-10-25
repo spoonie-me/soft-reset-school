@@ -21,10 +21,13 @@ is a free trial, hardship codes are available by email, and nothing here promise
 income. See `BUSINESS_MODEL.md` for the operating model.
 
 **`main` is the production branch.** Pushing to `main` deploys softreset.school via the
-Vercel Git integration, and the production build also runs `prisma migrate deploy` +
-the idempotent seed, so lesson/exam content in the database stays in sync with
-`backend/prisma/seed-data/`. A manual fallback deploy exists at
-`.github/workflows/deploy-softreset.yml`.
+Vercel Git integration. The build no longer touches the database: a database that is
+down or cold must not block shipping the site. Migrations and the idempotent seed, which
+keeps lesson/exam content in sync with `backend/prisma/seed-data/`, run from
+`.github/workflows/db-migrate.yml` on pushes to `main` that change `backend/prisma/**`,
+or by hand with `cd backend && DATABASE_URL=... npm run db:deploy`. Merge a schema
+change, then confirm that workflow went green before relying on the new schema. A manual
+fallback deploy exists at `.github/workflows/deploy-softreset.yml`.
 
 ## Stack
 

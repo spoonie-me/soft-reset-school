@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build && cd backend && npx prisma generate && if [ \"$VERCEL_ENV\" = \"production\" ]; then npm ci && npx prisma migrate deploy && npm run db:seed; fi",
+  "buildCommand": "npm run build && cd backend && npx prisma generate && if [ \"$VERCEL_ENV\" = \"production\" ]; then npm ci && npx prisma migrate deploy && npm run db:seed:if-changed; fi",
   "outputDirectory": "dist",
   "framework": "vite",
   "functions": {

@@ -57,7 +57,9 @@ router.post('/', apiLimiter, async (req, res) => {
           from: 'Soft Reset School <hi@softreset.school>',
           to: INQUIRY_INBOX,
           replyTo: payload.email,
-          subject: `Inquiry — ${payload.org} (${payload.interest})`,
+          subject: payload.source === 'hardship'
+            ? `Hardship code request — ${payload.email}`
+            : `Inquiry — ${payload.org} (${payload.interest})`,
           html: `
             <h2>New ${esc(payload.source)} inquiry</h2>
             <p><strong>Name:</strong> ${esc(payload.name)}<br/>

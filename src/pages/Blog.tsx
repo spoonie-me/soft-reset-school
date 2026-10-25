@@ -70,7 +70,7 @@ export function Blog() {
           <span style={{ color: 'var(--signal)' }}>from wherever you are.</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', maxWidth: 560 }}>
-          AI literacy, prompt engineering, coding for chronically ill folks, and everything you need to build real things with Claude — no CS degree required.
+          AI literacy, prompt engineering, coding at a pace you can sustain, and everything you need to build real things with Claude — no CS degree required.
         </p>
       </div>
 

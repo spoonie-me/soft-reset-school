@@ -51,6 +51,7 @@ export function Footer() {
             <h4 style={{ marginBottom: 'var(--space-md)', fontSize: '0.875rem' }}>Company</h4>
             <ul>
               <li><Link to="/about" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>About</Link></li>
+              <li><Link to="/returning-to-work" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Returning to work</Link></li>
               <li><Link to="/employers" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>For Employers</Link></li>
               <li><a href="https://spooniversity.org" target="_blank" rel="noopener" style={{ color: 'var(--text-secondary)', fontSize: 14, textDecoration: 'none' }}>Spooniversity (sister site) ↗</a></li>
               <li><Link to="/imprint" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Imprint</Link></li>

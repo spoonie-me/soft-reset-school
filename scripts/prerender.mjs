@@ -47,6 +47,7 @@ const PUBLIC_ROUTES = [
   'tracks/accessibility-qa-lived-experience',
   'for-teams',
   'about',
+  'returning-to-work',
   'employers',
   'welcome',
   'share-story',

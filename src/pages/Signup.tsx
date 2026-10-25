@@ -225,7 +225,7 @@ export function Signup() {
             <span
               style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem', lineHeight: 1.5 }}
             >
-              I'd like to receive updates about new modules and features (optional).
+              I'd like occasional emails: updates about new modules and features, and one reminder if I leave a checkout unfinished (optional).
             </span>
           </label>
         </div>

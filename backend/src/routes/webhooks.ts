@@ -3,7 +3,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import { stripe, CREDENTIAL_PRODUCTS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
-import { sendPurchaseConfirmation } from '../lib/email.js';
+import { sendPurchaseConfirmation, sendCheckoutReminder } from '../lib/email.js';
 import { postWelcomeToTrack } from '../lib/discord.js';
 
 const router = Router();
@@ -161,6 +161,45 @@ router.post('/stripe', async (req: Request, res: Response) => {
           );
         } catch (discordErr) {
           console.error('Failed to post Discord welcome message:', discordErr);
+        }
+        break;
+      }
+
+      // A checkout the learner started but never paid (Stripe expires it after
+      // 24h). One gentle reminder, only to people who opted in to emails.
+      // This endpoint also receives other projects' sessions on the shared
+      // Stripe account, so anything without our metadata is ignored.
+      case 'checkout.session.expired': {
+        const session = event.data.object;
+        const productId = session.metadata?.productId;
+        const userId = session.metadata?.userId;
+        if (session.payment_status === 'paid' || !userId || !productId || !(productId in CREDENTIAL_PRODUCTS)) break;
+
+        let trackIds: string[] = [];
+        try {
+          trackIds = session.metadata?.trackIds ? JSON.parse(session.metadata.trackIds) : [];
+        } catch {
+          break;
+        }
+        if (trackIds.length === 0) break;
+
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+        if (!user || !user.marketingOptIn) break;
+
+        // Bought another way since (hardship code, a later session)? Nothing to remind about.
+        const owned = await prisma.credentialPurchase.count({
+          where: { userId: user.id, trackId: { in: trackIds } },
+        });
+        if (owned > 0) break;
+
+        try {
+          await sendCheckoutReminder(user.email, {
+            name: user.name ?? undefined,
+            tracks: trackIds.map((t) => TRACK_NAMES[t] ?? t),
+            amount: `€${((session.amount_total ?? 0) / 100).toFixed(2)}`,
+          });
+        } catch (emailErr) {
+          console.error('Failed to send checkout reminder:', emailErr);
         }
         break;
       }

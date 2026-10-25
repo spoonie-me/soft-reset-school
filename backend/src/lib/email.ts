@@ -113,7 +113,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
       <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
         <tr>
           <td style="padding:10px 0;color:#00d9ff;font-size:14px;width:28px;vertical-align:top;font-family:'DM Mono',monospace;">1.</td>
-          <td style="padding:10px 0;color:#b3b8bb;font-size:14px;">Start with <strong style="color:#fff;">Code from Bed</strong> — the free first module is waiting for you</td>
+          <td style="padding:10px 0;color:#b3b8bb;font-size:14px;">Start with <strong style="color:#fff;">Code from Bed</strong> — the free first lesson is waiting for you</td>
         </tr>
         <tr>
           <td style="padding:10px 0;color:#00d9ff;font-size:14px;width:28px;vertical-align:top;font-family:'DM Mono',monospace;">2.</td>
@@ -121,7 +121,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
         </tr>
         <tr>
           <td style="padding:10px 0;color:#00d9ff;font-size:14px;width:28px;vertical-align:top;font-family:'DM Mono',monospace;">3.</td>
-          <td style="padding:10px 0;color:#b3b8bb;font-size:14px;">Explore the free module — when you're ready, unlock the full track to go deeper</td>
+          <td style="padding:10px 0;color:#b3b8bb;font-size:14px;">Take your time with it — when you're ready, unlock the full track to go deeper</td>
         </tr>
       </table>
       ${btn('Go to your dashboard', `${APP_URL()}/dashboard`)}
@@ -153,29 +153,10 @@ export async function sendOnboardingDay2(to: string, name?: string) {
   });
 }
 
-export async function sendOnboardingDay5(to: string, name?: string) {
-  await getResend().emails.send({
-    from: `Roi from Soft Reset School <${FROM}>`,
-    to,
-    subject: `${name ? esc(name) + ', y' : 'Y'}ou've explored the free tier — here's what's next`,
-    html: emailLayout(`
-      <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">Ready for more?</h1>
-      <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
-        You've had a few days to explore the first module. If you liked what you saw, the full tracks go much deeper — graded exercises, module assessments, AI feedback on every submission, and certification exams.
-      </p>
-      <div style="background:#141428;border:1px solid #1a2023;border-radius:8px;padding:20px;margin:0 0 24px;">
-        <p style="color:#ffc107;font-size:13px;font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 8px;">Pricing</p>
-        <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:6px 0;color:#fff;font-size:14px;">Pro Monthly</td><td style="padding:6px 0;color:#b3b8bb;font-size:14px;text-align:right;">&euro;12/month</td></tr>
-          <tr><td style="padding:6px 0;color:#fff;font-size:14px;">Pro Annual <span style="color:#d4563b;font-size:12px;">(save 17%)</span></td><td style="padding:6px 0;color:#b3b8bb;font-size:14px;text-align:right;">&euro;120/year</td></tr>
-          <tr><td style="padding:6px 0;color:#fff;font-size:14px;">For Teams</td><td style="padding:6px 0;color:#b3b8bb;font-size:14px;text-align:right;">from &euro;15/seat/month</td></tr>
-        </table>
-      </div>
-      ${btn('View pricing', `${APP_URL()}/pricing`)}
-      <p style="color:#6b7076;font-size:13px;margin-top:16px;">Cancel anytime. All plans unlock all 4 learning tracks.</p>
-    `),
-  });
-}
+// REMOVED 2026-10-25: sendOnboardingDay5. It was never sent, and it advertised
+// Pro Monthly / Pro Annual / per-seat plans and "cancel anytime", none of which
+// exist any more (a track is a one-time €99 purchase). If a follow-up to the
+// free lesson is wanted, write it fresh against the current pricing.
 
 // ─── Retention / Re-engagement ──────────────────────────────────────────
 //
@@ -217,8 +198,8 @@ export async function sendPurchaseConfirmation(to: string, data: {
       </div>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 8px;">What's next:</p>
       <ul style="color:#b3b8bb;font-size:14px;line-height:1.8;padding-left:20px;margin:0 0 24px;">
-        <li>All modules are now unlocked in your purchased tracks</li>
-        <li>Complete every module to unlock the certification exam</li>
+        <li>Every lesson in your purchased tracks is now unlocked</li>
+        <li>The certification exam is open whenever you feel ready, with no deadline</li>
         <li>Pass the exam to earn your verifiable certificate</li>
       </ul>
       ${btn('Start learning', `${APP_URL()}/dashboard`)}
@@ -254,5 +235,41 @@ export async function sendCertificateEarned(to: string, data: {
       ${btn('Download certificate', `${APP_URL()}/dashboard`)}
       <p style="color:#6b7076;font-size:13px;margin-top:16px;">Share your achievement on LinkedIn or add it to your CV. The verification link never expires.</p>
     `),
+  });
+}
+
+/**
+ * One gentle note after a checkout session expires unpaid. Triggered by something
+ * the learner did (they started a checkout), never by absence, and only sent to
+ * people who opted in to emails when they signed up. Nothing was charged.
+ */
+export async function sendCheckoutReminder(to: string, data: {
+  name?: string;
+  tracks: string[];
+  amount: string;
+}) {
+  const trackList = data.tracks.map(t => `<li style="padding:4px 0;color:#b3b8bb;font-size:14px;">${esc(t)}</li>`).join('');
+  await getResend().emails.send({
+    from: `${FROM_NAME} <${FROM}>`,
+    to,
+    subject: `Your track is still here whenever you're ready`,
+    headers: { 'List-Unsubscribe': `<mailto:${FROM}?subject=stop>` },
+    html: emailLayout(`
+      <h1 style="color:#ffffff;font-size:22px;margin:0 0 8px;">No rush${data.name ? `, ${esc(data.name)}` : ''}</h1>
+      <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
+        You started checking out earlier and didn't finish. That's completely fine, and nothing was charged.
+      </p>
+      <div style="background:#141428;border:1px solid #1a2023;border-radius:8px;padding:20px;margin:0 0 24px;">
+        <ul style="list-style:none;padding:0;margin:0 0 8px;">${trackList}</ul>
+        <p style="color:#6b7076;font-size:13px;margin:0;">${esc(data.amount)} once &middot; every lesson, the exam and the certificate &middot; no subscription</p>
+      </div>
+      <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
+        If it's the right moment, it's here. If not, the first lesson of every track stays free.
+      </p>
+      ${btn('See the track', `${APP_URL()}/pricing`)}
+      <p style="color:#b3b8bb;font-size:14px;line-height:1.7;margin:16px 0 0;">
+        If the price is the problem, reply to this email for a hardship code. No reason needed.
+      </p>
+    `, `<p>This is the one reminder you get for that checkout. You're receiving it because you opted in to emails when you signed up. Reply "stop" and I'll turn them off.</p>`),
   });
 }

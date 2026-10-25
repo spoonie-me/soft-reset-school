@@ -31,7 +31,10 @@ export function Footer() {
             <h4 style={{ marginBottom: 'var(--space-md)', fontSize: '0.875rem' }}>Product</h4>
             <ul>
               <li><Link to="/pricing" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Pricing</Link></li>
+              <li><Link to="/scholarships" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Scholarships</Link></li>
+              <li><Link to="/outcomes" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Outcomes</Link></li>
               <li><Link to="/for-teams" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>For Teams</Link></li>
+              <li><Link to="/sponsors" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Sponsors</Link></li>
               <li><Link to="/share-story" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Share Your Story</Link></li>
               <li><Link to="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Dashboard</Link></li>
             </ul>

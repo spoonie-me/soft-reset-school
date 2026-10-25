@@ -18,6 +18,11 @@ let initError: any;
 try {
   const mod = await import('../backend/src/server.js');
   app = mod.default;
+  // Behind Vercel there is exactly one proxy hop, and it sets X-Forwarded-For
+  // to the real client IP. Without this, req.ip is the proxy's address for
+  // every visitor, so the rate limiters count the whole site as one user:
+  // 100 requests / 15 min and 10 login attempts / 15 min for everyone combined.
+  app.set('trust proxy', 1);
 } catch (err) {
   initError = err;
   console.error('Failed to initialize Express app:', err);

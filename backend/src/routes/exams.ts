@@ -319,8 +319,15 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
       if (mcScoredSoFar >= mcServedCount) continue;
       mcScoredSoFar += 1;
 
-      const { score, isCorrect } = scoreAnswer(exercise, answer);
-      scoredAnswers.push({ exerciseId, answer, score, isCorrect });
+      // A malformed answer (null, wrong shape) must score 0 for that
+      // question, not throw and 500 the whole attempt.
+      let result = { score: 0, isCorrect: false };
+      try {
+        result = scoreAnswer(exercise, answer);
+      } catch (err) {
+        console.warn(`[exams] Could not score answer for ${exerciseId}, scoring 0:`, err);
+      }
+      scoredAnswers.push({ exerciseId, answer, score: result.score, isCorrect: result.isCorrect });
     }
 
     // Denominator = the actual served question count (min of configured

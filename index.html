@@ -280,38 +280,62 @@
     }
     </script>
 
-    <!-- Analytics (optional). Both are off until their IDs are set at build time:
+    <!-- Analytics (optional). Off until their IDs are set at build time:
          VITE_GA_MEASUREMENT_ID (Google Analytics 4, "G-...") and
          VITE_UMAMI_WEBSITE_ID (Umami website UUID). Vercel Web Analytics is
-         separate and always on (see src/main.tsx). window.trackEvent and
-         window.gtag always exist so callers never need to check. -->
+         separate and always on (see src/main.tsx).
+         Nothing loads and nothing is sent until the visitor accepts analytics
+         in the cookie banner (localStorage "cookieConsent"). window.trackEvent
+         and window.gtag always exist so callers never need to check; before
+         consent they do nothing, and events from before consent are dropped,
+         not queued. -->
     <script>
       (function () {
         var ga = '%VITE_GA_MEASUREMENT_ID%';
         var umami = '%VITE_UMAMI_WEBSITE_ID%';
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        window.gtag = gtag;
         var gaOn = /^G-[A-Z0-9]+$/.test(ga);
+        var umamiOn = /^[0-9a-f-]{36}$/i.test(umami);
+        var loaded = false;
+        window.dataLayer = window.dataLayer || [];
+        function realGtag() { window.dataLayer.push(arguments); }
+        window.gtag = function () { if (loaded && gaOn) realGtag.apply(null, arguments); };
         window.trackEvent = function (name, params) {
-          if (gaOn) gtag('event', name, params || {});
+          if (!loaded) return;
+          if (gaOn) realGtag('event', name, params || {});
+          if (umamiOn && window.umami && typeof window.umami.track === 'function') {
+            window.umami.track(name, params || {});
+          }
         };
-        if (gaOn) {
-          var g = document.createElement('script');
-          g.async = true;
-          g.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga;
-          document.head.appendChild(g);
-          gtag('js', new Date());
-          gtag('config', ga, { anonymize_ip: true, cookie_flags: 'SameSite=None;Secure' });
+        function consented() {
+          try {
+            var c = JSON.parse(localStorage.getItem('cookieConsent') || 'null');
+            return !!c && c.analytics === true;
+          } catch (e) { return false; }
         }
-        if (/^[0-9a-f-]{36}$/i.test(umami)) {
-          var u = document.createElement('script');
-          u.async = true;
-          u.defer = true;
-          u.src = 'https://analytics.umami.is/script.js';
-          u.setAttribute('data-website-id', umami);
-          document.head.appendChild(u);
+        function load() {
+          if (loaded) return;
+          loaded = true;
+          if (gaOn) {
+            var g = document.createElement('script');
+            g.async = true;
+            g.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga;
+            document.head.appendChild(g);
+            realGtag('js', new Date());
+            realGtag('config', ga, { anonymize_ip: true, cookie_flags: 'SameSite=None;Secure' });
+          }
+          if (umamiOn) {
+            var u = document.createElement('script');
+            u.async = true;
+            u.defer = true;
+            u.src = 'https://analytics.umami.is/script.js';
+            u.setAttribute('data-website-id', umami);
+            document.head.appendChild(u);
+          }
         }
+        if (consented()) load();
+        window.addEventListener('cookieConsentUpdated', function (e) {
+          if (e && e.detail && e.detail.analytics) load();
+        });
       })();
     </script>
   </head>

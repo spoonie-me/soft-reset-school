@@ -127,6 +127,8 @@ export function Dashboard() {
     const credential = searchParams.get('credential') ?? 'track_credential';
     if (!sessionId?.startsWith('cs_')) return;
 
+    (window as any).trackEvent?.('checkout_success', { productId: credential });
+
     const g = (window as any).gtag;
     if (typeof g === 'function') {
       const value = CREDENTIAL_VALUES[credential] ?? 99;

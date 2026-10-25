@@ -211,6 +211,14 @@ const DEMO_LESSON: LessonView = {
  * request per scroll event. */
 const PROGRESS_SAVE_DEBOUNCE_MS = 2000;
 
+function trackFunnel(name: string, params?: Record<string, unknown>) {
+  (window as unknown as { trackEvent?: (n: string, p?: Record<string, unknown>) => void }).trackEvent?.(name, params);
+}
+
+function trackLessonComplete(lesson: { order: number; trackId?: string }) {
+  trackFunnel('lesson_complete', { track: lesson.trackId, lesson_order: lesson.order });
+}
+
 export function Lesson() {
   const { id } = useParams<{ id: string }>();
   const [lesson, setLesson] = useState<LessonView | null>(IS_DEV_MODE ? DEMO_LESSON : null);
@@ -291,6 +299,7 @@ export function Lesson() {
           nextLessonLocked: !!l.nextLessonLocked,
           prevLessonId: l.prevLessonId ?? undefined,
         });
+        trackFunnel('lesson_start', { track: l.trackId ?? undefined, lesson_order: l.order });
 
         // Resume where the learner stopped. Without this the saved percentage
         // is invisible: they'd come back to an empty progress bar and have no
@@ -423,8 +432,13 @@ export function Lesson() {
       cancelPendingSave();
       lastSavedProgressRef.current = 100;
       learningApi.updateLessonProgress(lesson.id, 'completed', 100).catch(() => {});
+      trackLessonComplete(lesson);
     }
   }, [completedSections, lesson, cancelPendingSave]);
+
+  useEffect(() => {
+    if (lockedTrack !== null) trackFunnel('paywall_view', { track: lockedTrack || undefined });
+  }, [lockedTrack]);
 
   if (lockedTrack !== null) {
     return (
@@ -509,6 +523,7 @@ export function Lesson() {
     cancelPendingSave();
     lastSavedProgressRef.current = 100;
     learningApi.updateLessonProgress(lesson.id, 'completed', 100).catch(() => {});
+    trackLessonComplete(lesson);
   };
 
   return (

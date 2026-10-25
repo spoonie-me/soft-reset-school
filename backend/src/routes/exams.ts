@@ -310,7 +310,7 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
         if (grade.graded && grade.score !== null) {
           scoredAnswers.push({ exerciseId, answer, score: grade.score, isCorrect: grade.isCorrect ?? grade.score >= 60 });
         } else {
-          console.warn(`[exams] AI grading failed for open-ended exam question ${exerciseId} — awarding full credit rather than failing the learner for our infra issue.`);
+          console.warn('[exams] AI grading failed for open-ended exam question %s — awarding full credit rather than failing the learner for our infra issue.', exerciseId);
           scoredAnswers.push({ exerciseId, answer, score: 100, isCorrect: true });
         }
         continue;
@@ -319,8 +319,15 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
       if (mcScoredSoFar >= mcServedCount) continue;
       mcScoredSoFar += 1;
 
-      const { score, isCorrect } = scoreAnswer(exercise, answer);
-      scoredAnswers.push({ exerciseId, answer, score, isCorrect });
+      // A malformed answer (null, wrong shape) must score 0 for that
+      // question, not throw and 500 the whole attempt.
+      let result = { score: 0, isCorrect: false };
+      try {
+        result = scoreAnswer(exercise, answer);
+      } catch (err) {
+        console.warn('[exams] Could not score answer for %s, scoring 0:', exerciseId, err);
+      }
+      scoredAnswers.push({ exerciseId, answer, score: result.score, isCorrect: result.isCorrect });
     }
 
     // Denominator = the actual served question count (min of configured
@@ -556,7 +563,7 @@ function scoreAnswer(
     }
 
     default:
-      console.warn(`[exams] Unrecognized exercise type: ${exercise.type} — scoring 0`);
+      console.warn('[exams] Unrecognized exercise type: %s — scoring 0', exercise.type);
       return { score: 0, isCorrect: false };
   }
 }

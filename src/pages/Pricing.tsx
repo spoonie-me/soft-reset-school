@@ -43,6 +43,41 @@ export function Pricing() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [bundleSelection, setBundleSelection] = useState<string[]>([]);
+  // Asking for a hardship code. Stored and emailed to the inbox by /api/inquiries.
+  const [askOpen, setAskOpen] = useState(false);
+  const [askEmail, setAskEmail] = useState('');
+  const [askBusy, setAskBusy] = useState(false);
+  const [askDone, setAskDone] = useState(false);
+  const [askError, setAskError] = useState('');
+
+  async function askForCode(e: React.FormEvent) {
+    e.preventDefault();
+    if (askBusy) return;
+    setAskBusy(true);
+    setAskError('');
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Hardship code request',
+          org: 'n/a',
+          email: askEmail.trim(),
+          interest: 'hardship code',
+          source: 'hardship',
+        }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error ?? 'Something went wrong. Please try again.');
+      }
+      setAskDone(true);
+    } catch (err) {
+      setAskError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    }
+    setAskBusy(false);
+  }
+
   // Hardship code. `codeTrack` non-null means the dialog is open.
   const [codeTrack, setCodeTrack] = useState<string | null>(null);
   const [code, setCode] = useState('');
@@ -235,10 +270,34 @@ export function Pricing() {
       <div id="hardship" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Can't afford €{TRACK_PRICE}?</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
-          <a href="mailto:hi@softreset.school?subject=Hardship%20code" style={{ color: 'var(--signal)' }}>Ask for a hardship code</a>.
-          Send one line, no reason needed, and I will send you a code. It unlocks the same exam and
-          the same certificate. Nobody reviews your situation.
+          Ask for a hardship code. Just your email, no reason needed, and I will send you a code.
+          It unlocks the same exam and the same certificate. Nobody reviews your situation.
         </p>
+        {askDone ? (
+          <p role="status" style={{ color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
+            Thank you. I will email you a code. You can also write to hi@softreset.school.
+          </p>
+        ) : askOpen ? (
+          <form onSubmit={askForCode} style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'center', flexWrap: 'wrap', margin: '0 auto var(--space-lg)' }}>
+            <label htmlFor="hardship-email" style={{ position: 'absolute', left: -9999 }}>Your email</label>
+            <input
+              id="hardship-email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={askEmail}
+              onChange={(e) => setAskEmail(e.target.value)}
+              style={{ minWidth: 240, padding: 'var(--space-sm) var(--space-md)', background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--bg-border)', borderRadius: 8 }}
+            />
+            <Button variant="primary" type="submit" disabled={askBusy}>{askBusy ? 'Sending...' : 'Send my request'}</Button>
+            {askError && <p role="alert" style={{ flexBasis: '100%', color: 'var(--rust)', fontSize: '0.875rem' }}>{askError}</p>}
+          </form>
+        ) : (
+          <div style={{ marginBottom: 'var(--space-md)' }}>
+            <Button variant="primary" onClick={() => setAskOpen(true)}>Ask for a hardship code</Button>
+          </div>
+        )}
         <Button variant="secondary" onClick={() => { setCodeTrack(CREDENTIAL_TRACKS[0].id); setCode(''); setCodeError(''); setCodeDone(false); }}>
           I have a code
         </Button>

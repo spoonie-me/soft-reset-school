@@ -5,19 +5,9 @@ import { stripe, CREDENTIAL_PRODUCTS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
 import { sendPurchaseConfirmation, sendCheckoutReminder } from '../lib/email.js';
 import { postWelcomeToTrack } from '../lib/discord.js';
+import { TRACK_NAMES } from '../lib/trackNames.js';
 
 const router = Router();
-
-const TRACK_NAMES: Record<string, string> = {
-  fundamentals: '🛏️ Code from Bed',
-  ai: '🤖 AI Literacy for Humans',
-  tools: '⚡ Build Cool Tools Fast',
-  advanced: '🚀 AI Agents that Work',
-  'ai-orchestrated-dev': '🧭 AI-Assisted Software Development',
-  'ai-workflow-consulting': '⚙️ AI Automation Consulting',
-  'ai-oversight-health-informatics': '🩺 AI-Augmented Medical Coding',
-  'accessibility-qa-lived-experience': '♿ Digital Accessibility QA',
-};
 
 // Stripe webhook — must use raw body
 router.post('/stripe', async (req: Request, res: Response) => {

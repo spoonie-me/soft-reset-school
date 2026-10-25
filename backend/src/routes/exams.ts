@@ -6,6 +6,8 @@ import { entitlementsMiddleware, type EntitledRequest } from '../middleware/enti
 import { XP_REWARDS, levelFromXp } from '../lib/gamification.js';
 import { sanitizeExerciseConfig } from '../lib/sanitizeExercise.js';
 import { getExerciseFeedback } from '../lib/claude.js';
+import { sendCertificateEarned } from '../lib/email.js';
+import { plainTrackName } from '../lib/trackNames.js';
 import crypto from 'crypto';
 
 const router = Router();
@@ -401,6 +403,27 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
         where: { id: attempt.id },
         data: { certificateId: certificate.id },
       });
+
+      // First pass only: a re-pass keeps the same certificate, no second email.
+      // Best effort, the certificate already exists and shows on the dashboard.
+      if (!existing) {
+        try {
+          const holder = await prisma.user.findUnique({
+            where: { id: authReq.userId! },
+            select: { email: true, name: true },
+          });
+          if (holder) {
+            await sendCertificateEarned(holder.email, {
+              name: holder.name ?? undefined,
+              trackName: plainTrackName(exam.trackId),
+              score: Math.round(totalScore),
+              verifyCode: certificate.verifyCode,
+            });
+          }
+        } catch (mailErr) {
+          console.error('Certificate email failed:', mailErr);
+        }
+      }
     }
 
     res.json({

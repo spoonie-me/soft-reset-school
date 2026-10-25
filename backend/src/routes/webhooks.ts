@@ -47,9 +47,18 @@ router.post('/stripe', async (req: Request, res: Response) => {
       // One-time Credential purchase — replaces the old subscription
       // activation path (2026-08-04, PRD.md §4.5). Every checkout session
       // here is mode:'payment', not mode:'subscription'.
-      case 'checkout.session.completed': {
+      case 'checkout.session.completed':
+      case 'checkout.session.async_payment_succeeded': {
         const session = event.data.object;
         const sessionId = session.id;
+
+        // Delayed payment methods (e.g. SEPA debit) complete the session
+        // before the money arrives. Don't unlock anything until it's paid;
+        // checkout.session.async_payment_succeeded fires when it is.
+        if (session.payment_status === 'unpaid') {
+          console.log(`Webhook: session ${sessionId} completed but unpaid, waiting for async payment.`);
+          break;
+        }
 
         // Idempotency: skip if we've already recorded this Stripe session
         const alreadyProcessed = await prisma.credentialPurchase.findFirst({

@@ -121,7 +121,7 @@ export function Pricing() {
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
-        <h1 style={{ marginBottom: 'var(--space-lg)' }}>All content is free. Pay once, only for the credential.</h1>
+        <h1 style={{ marginBottom: 'var(--space-lg)' }}>Try lesson 1 free. Then pay once per track.</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
           No subscription. Nothing bills you on a bad month. Try the first lesson of any track free, then pay once for the whole track, the certification exam and a permanent, publicly verifiable credential.
         </p>

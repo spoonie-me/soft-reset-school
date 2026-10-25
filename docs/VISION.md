@@ -35,9 +35,9 @@ Structure:
 5. **Not therapy.** Say so plainly, and link to crisis support where relevant.
 6. **Honest depth.** A credential is sold only when its exam bank is verified and it meets the content-depth bar.
 
-## Open decisions
+## Decisions (2026-10-25)
 
-- Pricing of the core: free, included with any specialisation, or its own price.
-- Pricing for organisations (recurring revenue). Undecided.
-- Whether the four archived foundation tracks return as a foundations entry or are removed.
-- Which Spooniversity content is linked (not copied) into the core.
+1. **Structure:** a shared core plus separate specialisation credentials. The core is not a separate purchase: it is included with any specialisation, and its first module is free for everyone, like the one-lesson trial.
+2. **Organisations:** seats at €99 per track, once, delivered as single-use codes by email (the same mechanism as hardship codes). Ongoing partnerships (a pool of seats topped up through the year plus a progress summary) are priced on request. The For Teams page now promises only what exists: no admin dashboard, CSV onboarding or custom paths until they are built.
+3. **Archived foundation tracks:** kept, hidden and not sold. Removing about 1,000 lessons is hard to reverse and nothing depends on it. They are raw material for the core. Revisit if deploy time or upkeep becomes a problem.
+4. **Spooniversity:** link, never copy, and only to courses that remain listed there: Sick Bootcamp (starting out), Advocacy in Action (asking for adjustments), Carer Resilience (carers returning). Data Literacy and Health Data are unlisted on Spooniversity, so the core owns its own evidence-judging module.

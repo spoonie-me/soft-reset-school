@@ -31,10 +31,23 @@ cost the learner nothing and cost us nothing. Learners pay once, when they are r
 
 ## Where recurring revenue can come from
 
-Organisations, not learners: employers, nonprofits and vocational-rehab agencies that fund
-seats. Today they buy voucher blocks at the same €99 per track (`/for-teams`, `/employers`).
-Pricing for organisations beyond that is **undecided**, and the For Teams page should be revised
-when it is decided.
+Organisations, not learners: employers, nonprofits, vocational-rehab agencies and return-to-work
+programmes that fund seats.
+
+- **Seats:** €99 per track, once, as single-use codes sent by email with an invoice (same
+  mechanism as hardship codes, `backend/src/lib/hardship-code.ts`). This is manual and needs no
+  new software.
+- **Ongoing partnerships:** a pool of seats topped up through the year plus a plain progress
+  summary, priced on request.
+- **Not built, so not promised:** admin dashboard, CSV onboarding, custom learning paths. Build
+  one only when a paying partner needs it.
+
+The For Teams page (`/for-teams`) says exactly this.
+
+## Structure
+
+A shared core ("Human Skills in the AI Age", included with any track, first module free) plus
+separate specialisation credentials. See `docs/VISION.md` and `docs/CORE_TRACK_OUTLINE.md`.
 
 ## The tracks
 

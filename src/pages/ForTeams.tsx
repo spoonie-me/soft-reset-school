@@ -4,19 +4,17 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { SEO, breadcrumbLd } from '@/components/SEO';
 
-const FEATURES = [
-  { icon: '📊', title: 'Admin dashboard', desc: 'Track learner progress, completion rates, and domain mastery across your entire team in one view.' },
-  { icon: '📧', title: 'Bulk onboarding', desc: 'Invite your team via CSV upload or individual email links. Seats activate instantly.' },
-  { icon: '🎯', title: 'Custom learning paths', desc: 'Configure which tracks are available to each team. Mix and match fundamentals, AI literacy, tools, and agents.' },
-  { icon: '📜', title: 'Volume certificate issuance', desc: 'All certificates are verifiable and yours to keep. Buy Credential vouchers in bulk instead of one at a time.' },
-  { icon: '🔒', title: 'GDPR-compliant DPA', desc: 'Data Processing Agreement provided for all team plans. EU and UK GDPR ready.' },
-  { icon: '🤝', title: 'Dedicated support', desc: 'Priority email support and onboarding call for teams of 20+.' },
+const WHO_FOR = [
+  { title: 'Employers', color: 'var(--signal)', desc: 'Fund retraining for people coming back after illness, burnout, caring or a career break, at a pace they can sustain.' },
+  { title: 'Nonprofits & rehab agencies', color: 'var(--gold)', desc: 'Pay for a block of seats and hand them to the people you support. Each one is a concrete, countable outcome.' },
+  { title: 'Occupational health & return-to-work programmes', color: 'var(--rust)', desc: 'Offer a structured, flexible route back that does not depend on a fixed timetable.' },
 ];
 
-const WHO_FOR = [
-  { title: 'Remote & Distributed Teams', color: 'var(--signal)', desc: 'Upskill your team in AI literacy, prompt engineering, and agent building — asynchronously, at their own pace.' },
-  { title: 'Bootcamps & Coding Schools', color: 'var(--gold)', desc: 'Supplement your curriculum with practical AI tool-building content. Students get verifiable certificates they can show employers.' },
-  { title: 'Tech Consultancies', color: 'var(--rust)', desc: 'Onboard new hires faster. Ensure every consultant can use Claude API, prompt effectively, and build AI-powered tools.' },
+const HOW_IT_WORKS = [
+  { title: 'Tell us how many seats', desc: 'Use the form below. A seat is one person, one track.' },
+  { title: 'We send single-use codes', desc: 'You get one code per seat, by email, with an invoice. Hand them out however suits you.' },
+  { title: 'People redeem when ready', desc: 'A code unlocks the whole track, the exam and the certificate. No expiry, no deadline, no monthly billing.' },
+  { title: 'Ask us for a progress summary', desc: 'On request we send a plain summary of how many seats were redeemed and certificates earned. There is no self-service dashboard yet.' },
 ];
 
 export function ForTeams() {
@@ -39,7 +37,7 @@ export function ForTeams() {
           name: form.name,
           org: form.org,
           email: form.email,
-          interest: `Team vouchers (${form.size || 'unspecified'} seats)`,
+          interest: `Organisation seats (${form.size || 'unspecified'} seats)`,
           message: form.message,
           source: 'for-teams',
         }),
@@ -74,70 +72,46 @@ export function ForTeams() {
   return (
     <div>
       <SEO
-        title="Teams & Organisations — Credential Vouchers | Soft Reset School"
-        description="Get your team building with AI. Free content, flat €99 Credential vouchers, admin dashboard, progress reporting, GDPR-compliant DPA, and bulk onboarding. Built for distributed teams, bootcamps, and tech consultancies."
+        title="Seats for organisations | Soft Reset School"
+        description="Fund seats for people returning to work. €99 per track, single-use codes by email, no subscription. For employers, nonprofits, rehab agencies and return-to-work programmes."
         canonical="/for-teams"
-        keywords="team coding training, AI training for teams, bulk credential vouchers, GDPR DPA coding course, prompt engineering team training, Claude API team license, AI literacy enterprise training"
+        keywords="return to work programme training, fund retraining seats, vocational rehabilitation courses, career break retraining for employers"
         jsonLd={[
           breadcrumbLd([
             { name: 'Home', path: '/' },
-            { name: 'For Teams', path: '/for-teams' },
+            { name: 'For Organisations', path: '/for-teams' },
           ]),
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Soft Reset School for Teams',
+            name: 'Soft Reset School seats for organisations',
             provider: { '@type': 'Organization', name: 'Soft Reset School', url: 'https://softreset.school/' },
-            description:
-              'Credential vouchers for the Soft Reset School career tracks. Admin dashboard, bulk onboarding, GDPR-compliant DPA.',
+            description: 'Single-use codes that unlock one Soft Reset School track, its exam and certificate, for people an organisation supports.',
             areaServed: 'Worldwide',
-            offers: [
-              {
-                '@type': 'Offer',
-                name: '5–20 seats',
-                price: '15.00',
-                priceCurrency: 'EUR',
-                priceSpecification: {
-                  '@type': 'UnitPriceSpecification',
-                  price: '15.00',
-                  priceCurrency: 'EUR',
-                  unitCode: 'MON',
-                  referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'C62' },
-                },
-                availability: 'https://schema.org/InStock',
-              },
-              {
-                '@type': 'Offer',
-                name: '21–100 seats',
-                price: '12.00',
-                priceCurrency: 'EUR',
-                priceSpecification: {
-                  '@type': 'UnitPriceSpecification',
-                  price: '12.00',
-                  priceCurrency: 'EUR',
-                  unitCode: 'MON',
-                  referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'C62' },
-                },
-                availability: 'https://schema.org/InStock',
-              },
-            ],
+            offers: {
+              '@type': 'Offer',
+              name: 'Track seat',
+              price: '99.00',
+              priceCurrency: 'EUR',
+              availability: 'https://schema.org/InStock',
+            },
           },
         ]}
       />
       {/* Hero */}
       <section style={{ padding: 'var(--space-4xl) var(--space-xl)', maxWidth: 900, margin: '0 auto' }}>
         <p style={{ color: 'var(--signal)', fontFamily: 'var(--font-display)', fontSize: '0.875rem', marginBottom: 'var(--space-lg)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-          For teams & organisations
+          For organisations
         </p>
         <h1 style={{ fontSize: '2.75rem', marginBottom: 'var(--space-xl)', lineHeight: 1.1 }}>
-          Get your team building with <span style={{ color: 'var(--signal)' }}>AI</span>
+          Fund a way back to work, <span style={{ color: 'var(--signal)' }}>at a pace people can keep.</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', marginBottom: 'var(--space-2xl)', maxWidth: 640 }}>
-          Volume pricing, admin dashboard, progress reporting, and GDPR-compliant onboarding — built for teams that want to actually ship AI-powered tools.
+          Buy seats for the people you support. Each seat is €99 for one track, once. We handle it by email, so there is no software to set up.
         </p>
         <div className="hero-cta" style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-          <a href="#demo"><Button variant="primary" size="lg">Book a demo</Button></a>
-          <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
+          <a href="#demo"><Button variant="primary" size="lg">Ask about seats</Button></a>
+          <Link to="/pricing"><Button variant="secondary" size="lg">See individual pricing</Button></Link>
         </div>
       </section>
 
@@ -159,51 +133,47 @@ export function ForTeams() {
 
       {/* Pricing */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 900, margin: '0 auto' }}>
-        <h2 style={{ marginBottom: 'var(--space-sm)' }}>Credential vouchers</h2>
+        <h2 style={{ marginBottom: 'var(--space-sm)' }}>Seats and partnerships</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-          No subscription, no per-seat monthly billing. The first lesson of every track is a free trial — buy a block of vouchers (every lesson in the track, the certification exam and a permanent, publicly verifiable certificate) at the same flat €99/track individual learners pay. Redeem a voucher whenever a team member is ready, no expiry.
+          No subscription and no per-seat monthly billing. The first lesson of every track is a free trial, so people can try before a seat is used.
         </p>
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-xl)' }}>
-          {[
-            { seats: '5–20 vouchers', price: '€99', note: 'per voucher, flat' },
-            { seats: '21–100 vouchers', price: '€99', note: 'per voucher, flat', highlight: true },
-            { seats: '100+ vouchers', price: 'Custom', note: 'volume conversation' },
-          ].map((tier) => (
-            <Card key={tier.seats} style={tier.highlight ? { borderColor: 'var(--signal)' } : {}}>
-              <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.75rem', marginBottom: 'var(--space-xs)' }}>{tier.price}</p>
-              <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-md)' }}>{tier.note}</p>
-              <p style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>{tier.seats}</p>
-            </Card>
-          ))}
+        <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-xl)' }}>
+          <Card>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.75rem', marginBottom: 'var(--space-xs)' }}>€99</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-md)' }}>per seat, once, any number of seats</p>
+            <p style={{ color: 'var(--text-secondary)' }}>Every lesson in the track, the exam and a permanent, publicly verifiable certificate. Same price an individual pays.</p>
+          </Card>
+          <Card>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.75rem', marginBottom: 'var(--space-xs)' }}>On request</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-md)' }}>ongoing partnership</p>
+            <p style={{ color: 'var(--text-secondary)' }}>For organisations that want to keep a pool of seats topped up through the year, with a regular summary of progress. Tell us what you need and we will propose a price.</p>
+          </Card>
         </div>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', marginTop: 'var(--space-xl)' }}>
-          All team plans include an admin dashboard, bulk onboarding, and a GDPR-compliant Data Processing Agreement.
+          A data processing agreement is available on request.
         </p>
       </section>
 
-      {/* Features */}
+      {/* How it works */}
       <section style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-2xl)' }}>What you get</h2>
-          <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-xl)' }}>
-            {FEATURES.map((f) => (
-              <div key={f.title} style={{ display: 'flex', gap: 'var(--space-md)' }}>
-                <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{f.icon}</span>
-                <div>
-                  <h4 style={{ marginBottom: 'var(--space-xs)', fontSize: '0.9375rem' }}>{f.title}</h4>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.5 }}>{f.desc}</p>
-                </div>
-              </div>
+          <h2 style={{ marginBottom: 'var(--space-2xl)' }}>How it works</h2>
+          <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 'var(--space-lg)' }}>
+            {HOW_IT_WORKS.map((f, i) => (
+              <li key={f.title}>
+                <h4 style={{ marginBottom: 'var(--space-xs)', fontSize: '0.9375rem' }}>{i + 1}. {f.title}</h4>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.5, margin: 0 }}>{f.desc}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
       {/* Demo form */}
       <section id="demo" style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 640, margin: '0 auto' }}>
-        <h2 style={{ marginBottom: 'var(--space-sm)' }}>Book a demo</h2>
+        <h2 style={{ marginBottom: 'var(--space-sm)' }}>Ask about seats</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-          Tell us about your team and we'll be in touch within one business day.
+          Tell us about your organisation and how many seats you need. We will reply by email.
         </p>
         <Card>
           <form onSubmit={submitDemo} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>

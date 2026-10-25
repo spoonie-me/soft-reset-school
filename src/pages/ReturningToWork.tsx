@@ -72,6 +72,18 @@ export function ReturningToWork() {
         </ol>
       </section>
 
+      <section style={{ padding: 'var(--space-3xl) var(--space-xl) 0', maxWidth: 720, margin: '0 auto' }}>
+        <h2 style={{ marginBottom: 'var(--space-md)' }}>If illness or caring is part of your story</h2>
+        <p style={body}>
+          Our sister site, Spooniversity, has free courses written for exactly that. They are optional and separate from the tracks here.
+        </p>
+        <ul style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', paddingLeft: 'var(--space-lg)', marginBottom: 'var(--space-3xl)' }}>
+          <li><a href="https://spooniversity.org/courses/sick-bootcamp" target="_blank" rel="noopener" style={{ color: 'var(--signal)' }}>Sick Bootcamp</a>: where to start if you were diagnosed recently</li>
+          <li><a href="https://spooniversity.org/courses/advocacy-in-action" target="_blank" rel="noopener" style={{ color: 'var(--signal)' }}>Advocacy in Action</a>: asking for what you need, including at work</li>
+          <li><a href="https://spooniversity.org/courses/carer-resilience" target="_blank" rel="noopener" style={{ color: 'var(--signal)' }}>Carer Resilience</a>: if you have been looking after someone</li>
+        </ul>
+      </section>
+
       <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <h2 style={{ marginBottom: 'var(--space-md)' }}>When you are ready to learn a skill</h2>

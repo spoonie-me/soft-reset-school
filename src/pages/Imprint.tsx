@@ -23,7 +23,7 @@ export function Imprint() {
         <p style={{ color: 'var(--text-secondary)' }}><strong>Professional regulations:</strong> Trade Regulation Act (Gewerbeordnung, GewO):{' '}
           <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--signal)' }}>www.ris.bka.gv.at</a>
         </p>
-        <p style={{ color: 'var(--text-secondary)' }}><strong>Address:</strong> Paulinengasse 18-20/4/11, 1180 Vienna, Austria</p>
+        <p style={{ color: 'var(--text-secondary)' }}><strong>Address:</strong> Paulinengasse 18-20/4/10, 1180 Vienna, Austria</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Contact:</strong> <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a></p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>Website:</strong> softreset.school</p>
         <p style={{ color: 'var(--text-secondary)' }}><strong>LinkedIn:</strong>{' '}

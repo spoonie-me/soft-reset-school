@@ -23,8 +23,9 @@ in step with the seed data.
 Each module: five lessons, one practice, one checkpoint. A lower-energy path in every one.
 Exam: mixed questions plus open-ended answers graded against a published rubric.
 
-Reuse from Spooniversity by linking, not copying: pacing and energy ideas (module 1), advocacy
-for adjustments (module 6), data literacy for judging evidence (module 2).
+Reuse from Spooniversity by linking, not copying, and only listed courses: Sick Bootcamp
+(module 1), Advocacy in Action (module 6), Carer Resilience (for carers returning). Spooniversity's
+data courses are unlisted, so module 2 teaches evidence-judging itself.
 
 ## UX Design specialisation (about 100 hours, 30 modules; outline of domains only)
 

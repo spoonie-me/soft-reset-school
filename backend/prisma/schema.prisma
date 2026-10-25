@@ -438,7 +438,7 @@ model Certificate {
 
 // One-time credential purchase, replacing the old subscription model
 // (see PRD.md §4.5 in the soft-reset-school repo — 2026-08-04 decision).
-// All lesson content is free to read; this is the only paid thing. One row
+// Lesson content is paid per track (the first lesson is a free trial); this is the purchase record. One row
 // per track a user has paid to be examined/certified in. `bundleId` groups
 // rows purchased together as a Program Credential (same value, one row per
 // included track) — null for a single Track Credential purchase.

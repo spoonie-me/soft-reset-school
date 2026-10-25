@@ -57,7 +57,7 @@ export function TracksCatalog() {
       {/* Career tracks */}
       <h2 style={{ marginBottom: 'var(--space-sm)' }}>career tracks — the reintegration path</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 640 }}>
-        Each one maps to a role a bed- or home-bound person can actually be hired — or bill clients — for.
+        Each one maps to a kind of work that can be done flexibly and from home.
         Try lesson 1 of any track free. The full track is €99 once.
       </p>
       <div className="grid-2" style={{ marginBottom: 'var(--space-3xl)' }}>

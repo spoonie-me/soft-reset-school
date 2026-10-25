@@ -36,8 +36,8 @@ export function ReturningToWork() {
   return (
     <div>
       <SEO
-        title="Returning to work after illness: a gentle first step"
-        description="Six practical steps for going back to work at the pace your body allows. Free, no account, and no promises about jobs or income."
+        title="Returning to work: a gentle first step"
+        description="Six practical steps for going back to work at a pace you can sustain, after illness, burnout, caring or a career break. Free, no account, and no promises about jobs or income."
         canonical="/returning-to-work"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },

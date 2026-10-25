@@ -58,10 +58,10 @@ export function Landing() {
               A hard reset wipes the slate and starts from zero, once. A soft reset lets you resume, gently, as many times as your body requires — no cure required first, no "get well, then work."
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-2xl)', maxWidth: 560 }}>
-              Practical AI-era skills for people who are bed- or home-bound, taught at the pace your body allows. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every track is free.
+              Practical AI-era skills for people going back to work, taught at the pace you can sustain. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every track is free.
             </p>
             <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-2xl)' }}>
-              {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'crash-day kind'].map((stat) => (
+              {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'kind to bad weeks'].map((stat) => (
                 <span key={stat} style={{ fontSize: '0.8125rem', color: 'var(--text-tertiary)', border: '1px solid var(--bg-border)', padding: '3px 10px', borderRadius: 6, fontFamily: 'var(--font-display)' }}>{stat}</span>
               ))}
             </div>

@@ -45,8 +45,8 @@ export function WelcomeSpecialist() {
             { icon: '📚', label: '50+ lessons', desc: 'Master every module at your pace' },
             { icon: '✍️', label: '200+ exercises', desc: 'AI-graded feedback on every submission' },
             { icon: '🎓', label: 'Certification exam', desc: 'Verify your mastery with a certificate' },
-            { icon: '🌀', label: 'Crash-day kind', desc: 'Cancel any month, your progress waits. No streak penalties.' },
-            { icon: '🔄', label: 'Always current', desc: 'Curriculum updates included while subscribed' },
+            { icon: '🌀', label: 'Kind to bad weeks', desc: 'Your progress waits for you. No streaks to break.' },
+            { icon: '🔄', label: 'Always current', desc: 'One payment, no subscription' },
           ].map((item) => (
             <li key={item.label} style={{ display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
               <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{item.icon}</span>

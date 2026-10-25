@@ -58,7 +58,7 @@ export function Landing() {
               A hard reset wipes the slate and starts from zero, once. A soft reset lets you resume, gently, as many times as your body requires — no cure required first, no "get well, then work."
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-2xl)', maxWidth: 560 }}>
-              Real, billable AI-era skills for people who are bed- or home-bound. Direct AI tools well enough that your energy envelope stops setting your ceiling — or bring judgment an AI structurally can't supply. Either way: income built from inside the illness, not after it.
+              Practical AI-era skills for people who are bed- or home-bound, taught at the pace your body allows. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every track is free.
             </p>
             <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-2xl)' }}>
               {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'crash-day kind'].map((stat) => (
@@ -79,6 +79,7 @@ export function Landing() {
                 </Button>
               </Link>
               <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
+              <Link to="/returning-to-work"><Button variant="secondary" size="lg">Not sure where to start?</Button></Link>
             </div>
           </div>
           <div style={{ height: 220, background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-lg)' }}>
@@ -89,7 +90,7 @@ export function Landing() {
 
       {/* Tracks — organized by the actual framework, not arbitrary cards */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-        <h2 style={{ marginBottom: 'var(--space-sm)' }}>two kinds of income, one honest question</h2>
+        <h2 style={{ marginBottom: 'var(--space-sm)' }}>two ways to work with AI, one honest question</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)', maxWidth: 640 }}>
           Every track answers the same question differently: what should only a human do here? Four tracks split across the two real answers.
         </p>

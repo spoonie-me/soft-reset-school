@@ -3,6 +3,7 @@
  * src/pages/blog/_blogStyles.ts, since Lab content is long-form prose
  * fetched at runtime rather than written as JSX. */
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 export const labMarkdownComponents = {
   h1: ({ children }: { children?: ReactNode }) => (
@@ -45,10 +46,20 @@ export const labMarkdownComponents = {
       {children}
     </blockquote>
   ),
-  a: ({ children, href }: { children?: ReactNode; href?: string }) => (
-    <a href={href} style={{ color: 'var(--signal)' }} target={href?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-      {children}
-    </a>
+  a: ({ children, href }: { children?: ReactNode; href?: string }) =>
+    href?.startsWith('/') ? (
+      <Link to={href} style={{ color: 'var(--signal)' }}>{children}</Link>
+    ) : (
+      <a href={href} style={{ color: 'var(--signal)' }} target={href?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+  img: ({ src, alt }: { src?: string; alt?: string }) => (
+    <img
+      src={src}
+      alt={alt ?? ''}
+      style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 12, margin: 'var(--space-2xl) 0' }}
+    />
   ),
   hr: () => <hr style={{ border: 'none', borderTop: '1px solid var(--bg-border)', margin: 'var(--space-3xl) 0' }} />,
 };

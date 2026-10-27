@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="t d" font-family="'DM Sans', Inter, system-ui, sans-serif">
+  <title id="t">The comfort test</title>
+  <desc id="d">If I can feel it, I take it off. If I take it off, it measures nothing.</desc>
+  <rect width="800" height="260" rx="12" fill="#211C17"/>
+  <rect x="0.5" y="0.5" width="799" height="259" rx="12" fill="none" stroke="#463D30"/>
+
+  <text x="40" y="46" fill="#EDE6DB" font-size="21" font-weight="700">The comfort test</text>
+  <text x="40" y="70" fill="#B8AD9C" font-size="14">The one I run on every wearable.</text>
+
+  <rect x="40" y="110" width="200" height="100" rx="8" fill="#332C23" stroke="#463D30"/>
+  <text x="140" y="154" fill="#EDE6DB" font-size="18" font-weight="600" text-anchor="middle">I can feel it</text>
+  <text x="140" y="178" fill="#B8AD9C" font-size="13" text-anchor="middle">on my wrist or finger</text>
+
+  <path d="M250,160 H290" stroke="#A0968A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M282,152 L292,160 L282,168" fill="none" stroke="#A0968A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="300" y="110" width="200" height="100" rx="8" fill="#332C23" stroke="#463D30"/>
+  <text x="400" y="154" fill="#EDE6DB" font-size="18" font-weight="600" text-anchor="middle">I take it off</text>
+  <text x="400" y="178" fill="#B8AD9C" font-size="13" text-anchor="middle">every time</text>
+
+  <path d="M510,160 H550" stroke="#A0968A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M542,152 L552,160 L542,168" fill="none" stroke="#A0968A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="560" y="110" width="200" height="100" rx="8" fill="#332C23" stroke="#d95926" stroke-width="2"/>
+  <text x="660" y="154" fill="#EDE6DB" font-size="18" font-weight="600" text-anchor="middle">It measures nothing</text>
+  <text x="660" y="178" fill="#B8AD9C" font-size="13" text-anchor="middle">a sensor on a nightstand</text>
+
+</svg>

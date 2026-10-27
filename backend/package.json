@@ -11,6 +11,7 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:if-changed": "tsx scripts/seed-if-changed.ts",
+    "state": "tsx scripts/state.ts",
     "db:studio": "prisma studio",
     "hardship:code": "tsx scripts/hardship-code.ts",
     "typecheck": "tsc --noEmit"

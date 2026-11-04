@@ -41,6 +41,10 @@ const About            = lazy$(() => import('@/pages/About'),           'About')
 const ReturningToWork  = lazy$(() => import('@/pages/ReturningToWork'), 'ReturningToWork');
 const Employers        = lazy$(() => import('@/pages/Employers'),       'Employers');
 const ShareStory       = lazy$(() => import('@/pages/ShareStory'),       'ShareStory');
+const Scholarships      = lazy$(() => import('@/pages/Scholarships'),      'Scholarships');
+const Outcomes          = lazy$(() => import('@/pages/Outcomes'),          'Outcomes');
+const Sponsors          = lazy$(() => import('@/pages/Sponsors'),          'Sponsors');
+const FromSpooniversity = lazy$(() => import('@/pages/FromSpooniversity'), 'FromSpooniversity');
 const Welcome          = lazy$(() => import('@/pages/Welcome'),          'Welcome');
 const SignupSuccess     = lazy$(() => import('@/pages/SignupSuccess'),    'SignupSuccess');
 const WelcomeMember    = lazy$(() => import('@/pages/WelcomeMember'),    'WelcomeMember');
@@ -145,6 +149,10 @@ function AppInner() {
           <Route path="/returning-to-work" element={<ReturningToWork />} />
           <Route path="/employers" element={<Employers />} />
           <Route path="/share-story" element={<ShareStory />} />
+          <Route path="/scholarships" element={<Scholarships />} />
+          <Route path="/outcomes" element={<Outcomes />} />
+          <Route path="/sponsors" element={<Sponsors />} />
+          <Route path="/from-spooniversity" element={<FromSpooniversity />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/welcome-member" element={<WelcomeMember />} />
           <Route path="/welcome-specialist" element={<WelcomeSpecialist />} />

@@ -9,6 +9,8 @@ vi.mock('../../lib/db.js', () => ({
   },
 }));
 
+vi.mock('../../lib/stripe.js', () => ({ CREDENTIAL_SELLABLE_TRACKS: [] }));
+
 import { entitlementsMiddleware } from '../entitlements';
 
 describe('entitlementsMiddleware credentialAccess', () => {

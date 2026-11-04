@@ -4,6 +4,7 @@ import { stripe, createCustomer, CREDENTIAL_PRODUCTS, PROGRAM_PRICES_IN_CENTS, C
 import { prisma } from '../lib/db.js';
 import { verifyHardshipCode } from '../lib/hardship-code.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
+import { EXAM_CREDENTIAL_PRODUCTS } from '../lib/credentialGrant.js';
 
 const router = Router();
 
@@ -60,7 +61,8 @@ router.post('/session', authMiddleware, async (req, res) => {
 
     // Refuse to sell a credential the user already owns.
     const alreadyOwned = await prisma.credentialPurchase.findMany({
-      where: { userId: user.id, trackId: { in: requestedTracks } },
+      // code_review purchases don't count as owning the credential.
+      where: { userId: user.id, trackId: { in: requestedTracks }, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
       select: { trackId: true },
     });
     if (alreadyOwned.length > 0) {
@@ -189,8 +191,8 @@ router.post('/hardship', authMiddleware, async (req, res) => {
       return;
     }
 
-    const existing = await prisma.credentialPurchase.findUnique({
-      where: { userId_trackId: { userId: user.id, trackId } },
+    const existing = await prisma.credentialPurchase.findFirst({
+      where: { userId: user.id, trackId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
     });
     if (existing) {
       res.status(400).json({ error: 'You already have a Credential for this track.' });

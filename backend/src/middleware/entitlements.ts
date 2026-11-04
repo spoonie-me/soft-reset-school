@@ -2,6 +2,7 @@
 import type { Response, NextFunction } from 'express';
 import { prisma } from '../lib/db.js';
 import type { AuthRequest } from './auth.js';
+import { EXAM_CREDENTIAL_PRODUCTS } from '../lib/credentialGrant.js';
 import { isGrandfathered } from '../lib/access.js';
 import { CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
 
@@ -48,7 +49,11 @@ export async function entitlementsMiddleware(
 
     const [user, purchases] = await Promise.all([
       prisma.user.findUnique({ where: { id: userId }, select: { createdAt: true } }),
-      prisma.credentialPurchase.findMany({ where: { userId }, select: { trackId: true } }),
+      prisma.credentialPurchase.findMany({
+        // Only exam credentials unlock exams — a code_review purchase must not.
+        where: { userId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
+        select: { trackId: true },
+      }),
     ]);
 
     // A purchase unlocks the track's lessons, the exam and the credential.

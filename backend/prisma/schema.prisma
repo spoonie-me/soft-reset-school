@@ -449,11 +449,16 @@ model CredentialPurchase {
   trackId         String
   productType     String // 'track_credential' | 'program_credential' | 'code_review'
   bundleId        String? // groups rows from one Program Credential checkout
-  stripeSessionId String   @unique
+  stripeSessionId String
   amountCents     Int
   purchasedAt     DateTime @default(now())
 
-  @@unique([userId, trackId])
+  // A Program Credential checkout is one Stripe session that grants several
+  // tracks, so the session id repeats across its rows; uniqueness is per track.
+  // productType is part of the key so a code_review purchase for a track never
+  // collides with (or stands in for) a credential for that same track.
+  @@unique([stripeSessionId, trackId])
+  @@unique([userId, trackId, productType])
   @@schema("bedcoders")
 }
 

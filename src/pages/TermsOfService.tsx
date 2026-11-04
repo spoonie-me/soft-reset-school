@@ -6,8 +6,8 @@ export function TermsOfService() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Terms of Service — Bedcoders"
-        description="Terms of service for Bedcoders. EU consumer rights, 14-day right of withdrawal, one-time Credential purchase terms, intellectual property, and dispute resolution."
+        title="Terms of Service — Soft Reset School"
+        description="Terms of service for Soft Reset School. EU consumer rights, 14-day right of withdrawal, one-time Credential purchase terms, intellectual property, and dispute resolution."
         canonical="/terms"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Terms of Service</h1>
@@ -16,10 +16,10 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>1. Parties & Acceptance</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and Roi Shternin-Martini, trading as Bedcoders, a sole trader registered in Vienna, Austria (GISA 38626050) ("Operator", "we", "us").
+          These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and Roi Shternin-Martini, MA, B.Ed., a sole trader registered in Vienna, Austria (GISA 38626050), operating Soft Reset School ("Operator", "we", "us").
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          By accessing or purchasing on bedcoders.com, you confirm you have read, understood, and agree to these Terms. If you do not agree, do not use this service.
+          By accessing or purchasing on softreset.school, you confirm you have read, understood, and agree to these Terms. If you do not agree, do not use this service.
         </p>
       </Card>
 
@@ -32,7 +32,7 @@ export function TermsOfService() {
           <strong>Waiver of withdrawal right:</strong> Where you explicitly request immediate access to digital content before the 14-day period expires and acknowledge that you thereby lose your right of withdrawal, the right of withdrawal is forfeited upon commencement of access. This waiver is requested and confirmed at the point of purchase.
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          If you have not waived your right of withdrawal, submit a withdrawal request to legal@bedcoders.com within 14 days of purchase. A full refund will be processed within 14 days of receipt.
+          If you have not waived your right of withdrawal, submit a withdrawal request to hi@softreset.school within 14 days of purchase. A full refund will be processed within 14 days of receipt.
         </p>
       </Card>
 
@@ -53,10 +53,10 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>4. Intellectual Property</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          All course content, exercises, assessments, software, design, and materials on bedcoders.com are owned exclusively by or licensed to the Operator and are protected by Austrian copyright law (UrhG), EU intellectual property law, and applicable international treaties.
+          All course content, exercises, assessments, software, design, and materials on softreset.school are owned exclusively by or licensed to the Operator and are protected by Austrian copyright law (UrhG), EU intellectual property law, and applicable international treaties.
         </p>
         <p style={{ color: 'var(--text-secondary)' }}>
-          You are granted a non-exclusive, non-transferable, revocable licence to access and use Bedcoders content for personal, non-commercial educational purposes only. You may not reproduce, redistribute, sell, sublicense, publish, broadcast, or create derivative works from any course content without prior written consent.
+          You are granted a non-exclusive, non-transferable, revocable licence to access and use Soft Reset School content for personal, non-commercial educational purposes only. You may not reproduce, redistribute, sell, sublicense, publish, broadcast, or create derivative works from any course content without prior written consent.
         </p>
       </Card>
 
@@ -64,7 +64,7 @@ export function TermsOfService() {
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>5. Payment & Pricing</h2>
         <ul style={{ color: 'var(--text-secondary)', paddingLeft: 'var(--space-xl)', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
           <li><strong>Pricing:</strong> All prices are inclusive of applicable VAT. Prices may change for future purchases; a change never affects a Credential you've already paid for.</li>
-          <li><strong>No subscription:</strong> All lesson content is free to read, for every account, with no recurring charge. The only paid product is a Credential — a one-time payment covering a certification exam and a permanent, publicly verifiable certificate for a specific track (or a bundle of tracks). There is nothing to cancel: a Credential purchase does not renew and is not billed again.</li>
+          <li><strong>No subscription:</strong> The first lesson of every track is a free trial. Access to the rest of a track is a one-time payment, called a Credential, which also covers a certification exam and a permanent, publicly verifiable certificate for that track (or a bundle of tracks). There is nothing to cancel: a Credential purchase does not renew and is not billed again.</li>
           <li><strong>Payment processing:</strong> Handled by Stripe, Inc. By completing a purchase you also accept Stripe's terms of service.</li>
           <li><strong>Currency:</strong> Prices are listed in Euro (€). International purchases may incur bank conversion fees outside our control.</li>
         </ul>
@@ -91,7 +91,7 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>7. Educational Content Disclaimer</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          <strong>Important:</strong> The Operator is a licensed business consultant (Unternehmensberatung, GISA 38626050) specialising in technology education. Bedcoders teaches software development, AI literacy, and related technical concepts for career development purposes only.
+          <strong>Important:</strong> The Operator is a licensed business consultant (Unternehmensberatung, GISA 38626050) specialising in education and consulting. Soft Reset School teaches AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA for career development purposes only.
         </p>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
           <strong>Content is strictly educational and does not constitute:</strong> medical advice, clinical guidance, diagnosis, treatment recommendations, legal advice, regulatory advice, or professional medical practice of any kind.
@@ -119,13 +119,13 @@ export function TermsOfService() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>8. AI-Powered Features</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-          Bedcoders uses third-party AI tools (including Anthropic's Claude) to provide automated exercise feedback. By using these features, you acknowledge:
+          Soft Reset School uses third-party AI tools (including Anthropic's Claude) to provide automated exercise feedback. By using these features, you acknowledge:
         </p>
         <ul style={{ color: 'var(--text-secondary)', paddingLeft: 'var(--space-xl)', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
           <li>AI-generated feedback is automated and may not be reviewed by a human before delivery.</li>
           <li>AI feedback is indicative only and does not constitute expert or professional advice.</li>
           <li>Exercise responses may be processed by third-party AI providers subject to their own data processing terms. No personally identifying clinical data should be submitted in exercises.</li>
-          <li>You may request human review of AI feedback by contacting legal@bedcoders.com.</li>
+          <li>There is no human review of exercise feedback; it is fully automated. If you believe feedback contains an error, contact hi@softreset.school.</li>
         </ul>
       </Card>
 

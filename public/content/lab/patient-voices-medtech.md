@@ -16,7 +16,7 @@ You'd end up with tools that work with one hand. Tools that don't require consta
 
 But that requires something the tech world hasn't quite figured out: patience with non-linear needs. It requires holding two truths at once. That the clinical problem is real. And the patient's context is real. And you have to solve for both.
 
-I built Bedcoders around this principle. Code education for people who are horizontal, exhausted, or both. Not because I'm generous. Because the alternative, standard code education, doesn't work for us. So I designed the alternative.
+I built Soft Reset School around this principle. Code education for people who are horizontal, exhausted, or both. Not because I'm generous. Because the alternative, standard code education, doesn't work for us. So I designed the alternative.
 
 That's the work that needs to happen in MedTech. Not charity. Design. Real design. With patients inside it from day one.
 

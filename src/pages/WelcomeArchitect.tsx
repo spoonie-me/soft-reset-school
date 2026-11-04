@@ -24,7 +24,7 @@ export function WelcomeArchitect() {
 
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-      <SEO title="Welcome — Bedcoders Architect" description="All four tracks unlocked." noIndex />
+      <SEO title="Welcome — Soft Reset School Architect" description="All four tracks unlocked." noIndex />
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <div style={{ fontSize: '3rem', marginBottom: 'var(--space-lg)' }}>✓</div>
         <h1 style={{ marginBottom: 'var(--space-lg)', color: 'var(--success)' }}>Welcome, Architect</h1>
@@ -60,8 +60,8 @@ export function WelcomeArchitect() {
             { icon: '📚', label: '97 lessons', desc: 'Comprehensive curriculum across all 4 tracks' },
             { icon: '✍️', label: '190+ exercises', desc: 'AI-graded feedback, progressive difficulty' },
             { icon: '🎓', label: '4 certification exams', desc: 'Earn credentials in each track' },
-            { icon: '🌀', label: 'Crash-day kind', desc: 'Cancel any month, your progress waits. No streak penalties.' },
-            { icon: '🔄', label: 'Always current', desc: 'New material and tracks included while subscribed' },
+            { icon: '🌀', label: 'Kind to bad weeks', desc: 'Your progress waits for you. No streaks to break.' },
+            { icon: '🔄', label: 'Always current', desc: 'One payment per track, no subscription' },
             { icon: '💼', label: 'Career portfolio', desc: 'Showcase your full credentials' },
           ].map((item) => (
             <div key={item.label} style={{ display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
@@ -91,7 +91,7 @@ export function WelcomeArchitect() {
           As an Architect, you own the complete suite. Learn the modules that interest you first, then circle back to others whenever you're ready. Your 4 certificates, once earned, are yours forever. This is your lifetime investment in your builder career.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-          Questions? Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
 

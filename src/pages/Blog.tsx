@@ -48,7 +48,7 @@ export function Blog() {
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
       <SEO
-        title="Bedcoders Blog — AI Literacy, Coding Guides & Builder Resources"
+        title="Soft Reset School Blog — AI Literacy, Coding Guides & Builder Resources"
         description="Deep-dives on prompt engineering, Claude API, AI agents, coding with chronic illness, and building tools that actually ship."
         canonical="/blog"
         type="website"
@@ -63,14 +63,14 @@ export function Blog() {
           textTransform: 'uppercase',
           marginBottom: 'var(--space-md)',
         }}>
-          Bedcoders Blog
+          Soft Reset School Blog
         </p>
         <h1 style={{ fontSize: '2.25rem', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}>
           Build smarter,<br />
           <span style={{ color: 'var(--signal)' }}>from wherever you are.</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', maxWidth: 560 }}>
-          AI literacy, prompt engineering, coding for chronically ill folks, and everything you need to build real things with Claude — no CS degree required.
+          AI literacy, prompt engineering, coding at a pace you can sustain, and everything you need to build real things with Claude — no CS degree required.
         </p>
       </div>
 
@@ -138,7 +138,7 @@ export function Blog() {
           Ready to go beyond the reading?
         </p>
         <h3 style={{ fontSize: '1.375rem', marginBottom: 'var(--space-xl)' }}>
-          Every lesson is free to read — no card required.
+          Try lesson 1 of any track free — no card required.
         </h3>
         <Link to="/signup" style={{
           display: 'inline-block',
@@ -151,7 +151,7 @@ export function Blog() {
           textDecoration: 'none',
           fontFamily: 'var(--font-display)',
         }}>
-          Start for free
+          Try lesson 1 free
         </Link>
       </div>
     </div>

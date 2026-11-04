@@ -51,11 +51,11 @@ export function BuildYourFirstAiApp() {
 
       <h2 style={h2}>Step 2: Install the SDK</h2>
 
-      <pre style={codeBlock}>{`npm install @anthropic-ai/sdk`}</pre>
+      <pre style={codeBlock} tabIndex={0} aria-label="Code example">{`npm install @anthropic-ai/sdk`}</pre>
 
       <h2 style={h2}>Step 3: Write your first call</h2>
 
-      <pre style={codeBlock}>{`import Anthropic from '@anthropic-ai/sdk';
+      <pre style={codeBlock} tabIndex={0} aria-label="Code example">{`import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -89,7 +89,7 @@ console.log(summary);`}</pre>
         The system prompt defines how the model behaves. Adding one makes your outputs dramatically more consistent:
       </p>
 
-      <pre style={codeBlock}>{`messages: [
+      <pre style={codeBlock} tabIndex={0} aria-label="Code example">{`messages: [
   {
     role: 'user',
     content: text,
@@ -104,7 +104,7 @@ console.log(summary);`}</pre>
       </p>
 
       <p style={p}>
-        The <strong style={{ color: 'var(--text-primary)' }}>Build Cool Tools Fast</strong> track on Bedcoders takes this further — CLI tools, full web apps with React frontends, Stripe-integrated products. All from the same pattern you just learned.
+        The <strong style={{ color: 'var(--text-primary)' }}>AI-Assisted Software Development</strong> track at Soft Reset School takes this further — directing AI to build and ship real software, and reviewing what it gives back. All from the same pattern you just learned.
       </p>
     </BlogLayout>
   );

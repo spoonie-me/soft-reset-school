@@ -20,8 +20,8 @@ export function CookiePolicy() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Cookie Policy — Bedcoders"
-        description="How Bedcoders uses cookies and your consent options. Manage analytics and marketing cookie preferences. EU GDPR / ePrivacy compliant."
+        title="Cookie Policy — Soft Reset School"
+        description="How Soft Reset School uses cookies and your consent options. Manage analytics and marketing cookie preferences. EU GDPR / ePrivacy compliant."
         canonical="/cookies"
       />
       <h1 style={{ marginBottom: 'var(--space-2xl)' }}>Cookie Policy</h1>
@@ -45,7 +45,7 @@ export function CookiePolicy() {
         </ul>
 
         <h3 style={{ color: 'var(--signal)', marginBottom: 'var(--space-sm)' }}>Analytics (Opt-In)</h3>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Help us understand how people use Bedcoders (via PostHog, privacy-first):</p>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Help us understand how people use Soft Reset School (via PostHog, privacy-first):</p>
         <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)', marginBottom: 'var(--space-xl)', cursor: 'pointer' }}>
           <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} style={{ width: 20, height: 20, accentColor: 'var(--signal)' }} />
           <span style={{ color: 'var(--text-secondary)' }}>Allow analytics cookies</span>
@@ -69,7 +69,7 @@ export function CookiePolicy() {
 
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Questions?</h2>
-        <p style={{ color: 'var(--text-secondary)' }}>Email: <strong>privacy@bedcoders.com</strong></p>
+        <p style={{ color: 'var(--text-secondary)' }}>Email: <strong>hi@softreset.school</strong></p>
       </Card>
     </div>
   );

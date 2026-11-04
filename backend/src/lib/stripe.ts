@@ -14,39 +14,37 @@ export const stripe = new Stripe((process.env.STRIPE_SECRET_KEY ?? '').trim(), {
 // old subscription was already quietly failing — it unlocked zero extra
 // content in 4 of 8 tracks because every lesson sat in the free tier.)
 //
-// All lesson content is free to read for every logged-in user, forever —
-// see backend/src/middleware/entitlements.ts. The ONLY paid thing is a
-// Credential: a real certification-exam attempt + a permanent, publicly
-// verifiable certificate for a specific track. See CREDENTIAL_SELLABLE_TRACKS
+// Lesson 1 of every track is a free trial; the rest of a track unlocks with
+// a one-time Credential purchase — see backend/src/middleware/entitlements.ts
+// and lib/access.ts. A Credential is every lesson in the track, a real
+// certification-exam attempt and a permanent, publicly verifiable
+// certificate. See CREDENTIAL_SELLABLE_TRACKS
 // below for which tracks currently have real exam content behind them.
 // ──────────────────────────────────────────
 
 export const CREDENTIAL_PRODUCTS = {
   track_credential: {
-    priceInCents: 6900, // €69, one-time
+    priceInCents: 9900, // €99, one-time
     label: 'Track Credential',
-    description: 'Certification exam + permanent, publicly verifiable certificate for one track.',
+    description: 'Every lesson in one track, its certification exam and a permanent, publicly verifiable certificate.',
   },
   program_credential: {
-    priceInCents: 14900, // €149, one-time
     label: 'Program Credential',
-    description: 'Certification exams + certificates for 3 tracks, bundled.',
-  },
-  code_review: {
-    priceInCents: 2500, // €25, one-time
-    label: 'Human Code Review',
-    description: 'A human reviews your submitted project and gives written feedback.',
+    description: 'Every lesson, certification exam and certificate for 2 or 3 tracks, bundled.',
   },
 } as const;
+
+/** Bundle pricing by number of tracks: 2 for €149, 3 for €199. */
+export const PROGRAM_PRICES_IN_CENTS: Record<number, number> = {
+  2: 14900,
+  3: 19900,
+};
 
 export type CredentialProductId = keyof typeof CREDENTIAL_PRODUCTS;
 
-// Price IDs from env — set in Vercel (.trim() guards against Vercel's trailing \n on env pull)
-export const CREDENTIAL_PRICES = {
-  track_credential: process.env.STRIPE_PRICE_ID_TRACK_CREDENTIAL?.trim(),
-  program_credential: process.env.STRIPE_PRICE_ID_PROGRAM_CREDENTIAL?.trim(),
-  code_review: process.env.STRIPE_PRICE_ID_CODE_REVIEW?.trim(),
-} as const;
+// Prices live in code (price_data at checkout) rather than in Stripe Price
+// objects, so a price change is a code change and can't drift from the
+// dashboard. No human code-review product: all feedback is automated.
 
 /** Tracks with a real, defensible TrackExam — i.e. tracks whose question
  * bank has been verified, question by question, as a real exam rather than
@@ -65,10 +63,9 @@ export const CREDENTIAL_PRICES = {
  * bank. If a future audit finds a bank below the bar, REMOVE its track from
  * this list first, fix second. */
 const VERIFIED_EXAM_BANK_TRACKS = [
-  'fundamentals',
-  'ai',
-  'tools',
-  'advanced',
+  // The four foundation tracks (fundamentals, ai, tools, advanced) are
+  // archived: hidden from the site and no longer sold. Content and any
+  // existing purchases/certificates stay intact.
   'ai-orchestrated-dev',
   'ai-workflow-consulting',
   'ai-oversight-health-informatics',
@@ -81,7 +78,7 @@ const VERIFIED_EXAM_BANK_TRACKS = [
  * src/data/credentialBar.ts for the frontend).
  *
  * ADDED 2026-08-08 (business review): the exam-bank gate alone let a
- * 4-lesson track sell the same €69 "Career Credential," under the same
+ * 4-lesson track sell the same €99 "Career Credential," under the same
  * wording, as a 30-lesson one. A track that's held back stays free to read
  * and re-opens on its own once its lesson count clears the bar — no code
  * change needed here. */

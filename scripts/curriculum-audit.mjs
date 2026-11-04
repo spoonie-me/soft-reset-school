@@ -49,6 +49,7 @@ export const INTERACTIVE_SECTIONS = new Set([
   'retrieval-check',
   'case-sim',
   'lab-brief',
+  'screen-reader-sim',
 ]);
 
 /** Structural sections that are neither prose nor interaction — they don't

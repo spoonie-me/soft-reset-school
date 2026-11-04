@@ -123,7 +123,7 @@
     "id": "aod-ag1-l02",
     "moduleId": "aod-ag1",
     "order": 2,
-    "duration": 25,
+    "duration": 30,
     "difficulty": "medium",
     "title": "A step is done when something checkable is true",
     "description": "Turning a vague step description into a verification condition — a concrete, observable fact you can check without trusting the agent's own account of what it did.",
@@ -254,6 +254,100 @@
       {
         "type": "takeaway",
         "body": "Aim a verification condition at the specific part of the instruction most likely to get quietly dropped or guessed wrong — not at whether the feature exists at all."
+      },
+      {
+        "type": "pod-header",
+        "title": "Do it once yourself first",
+        "podNumber": 3,
+        "duration": 5
+      },
+      {
+        "type": "text",
+        "body": "A checkable condition tells the agent when a step is done. It does not tell the agent what good looks like. \"Write a good summary\" cannot be checked, by you or by the agent, because neither of you has written down what good means.\n\nThe fix is old and plain. Do a small version of the task yourself, once, or find one that already exists. Keep it. That one example is worth more than a page of instructions, because the agent can compare its work against it and so can you.\n\nAn example alone is not enough. Add the short list of things it must contain, written as yes or no checks. Then add one bad example and say what is wrong with it. The bad one marks the edge of the task.\n\nThe low-energy version is small. One real example, three yes or no checks, one bad example in two lines. A spreadsheet row per check is fine."
+      },
+      {
+        "type": "build-it",
+        "intro": "Task: \"Turn a customer complaint email into a ticket for the support team.\" Build the standard of good, one decision at a time, before any agent sees the task.",
+        "objectName": "standardOfGood",
+        "fields": [
+          {
+            "key": "example",
+            "prompt": "What do you give the agent as the picture of good?",
+            "options": [
+              {
+                "label": "The words \"write a good ticket\"",
+                "value": "words"
+              },
+              {
+                "label": "One real ticket you wrote yourself, with the parts it must contain marked",
+                "value": "real-example"
+              },
+              {
+                "label": "A long description of your team's values",
+                "value": "values"
+              }
+            ],
+            "correctValue": "real-example",
+            "feedback": {
+              "real-example": "Right. The agent and you can both compare a result against it. Doing it once yourself is also how you find out what the hard part of the task really is.",
+              "words": "\"Good\" names no observable fact. The agent will supply its own idea of good, and you will only learn what it chose by reading the result.",
+              "values": "Values are real, but they cannot be checked against a result. A real example carries the same preferences in a form you can compare."
+            }
+          },
+          {
+            "key": "checks",
+            "prompt": "How do you say what done means?",
+            "options": [
+              {
+                "label": "\"The customer should be happy with it\"",
+                "value": "happy"
+              },
+              {
+                "label": "Three yes or no checks: names the product, states what the customer wants, quotes any error text",
+                "value": "three-checks"
+              },
+              {
+                "label": "\"It should look professional\"",
+                "value": "professional"
+              }
+            ],
+            "correctValue": "three-checks",
+            "feedback": {
+              "three-checks": "Right. Each one can be answered yes or no in seconds, by you or by a second pass of the agent.",
+              "happy": "You cannot check this against a ticket, because the customer has not read the ticket yet. It is a hope, not a condition.",
+              "professional": "Looks professional is a feeling. Two people will disagree about it, and so will two runs of the same agent."
+            }
+          },
+          {
+            "key": "counter",
+            "prompt": "What else do you show it?",
+            "options": [
+              {
+                "label": "One bad ticket and a line on what is wrong with it",
+                "value": "bad-example"
+              },
+              {
+                "label": "Nothing more, one good example is enough",
+                "value": "nothing"
+              },
+              {
+                "label": "Ten more good tickets",
+                "value": "more-good"
+              }
+            ],
+            "correctValue": "bad-example",
+            "feedback": {
+              "bad-example": "Right. The bad example marks where good stops, which the good example cannot do on its own. For instance, a ticket that is polite but never says what the customer wants.",
+              "nothing": "A good example shows the middle of the task. It does not show the edge, which is where agents tend to wander.",
+              "more-good": "More of the same adds little. One counter-example adds more information than ten more good ones."
+            }
+          }
+        ],
+        "synthesis": "One real example, three yes or no checks and one bad example. That is the whole standard. It takes about fifteen minutes to write, and it is the only part of the job the agent cannot do for you."
+      },
+      {
+        "type": "takeaway",
+        "body": "\"Do a great job\" cannot be checked. A real example, three yes or no checks and one bad example can."
       }
     ]
   },
@@ -2273,7 +2367,7 @@
     "id": "aod-ag3-l05",
     "moduleId": "aod-ag3",
     "order": 5,
-    "duration": 20,
+    "duration": 30,
     "difficulty": "medium",
     "title": "Cheap checks you can run after every step",
     "description": "Building a small set of fast, low-effort checks — a diff line count, a grep for a specific pattern, an exit code combined with an output check — that catch most silent failures without a full audit on every single step.",
@@ -2380,6 +2474,53 @@
       {
         "type": "takeaway",
         "body": "Cheap checks are a floor run on everything by default — they don't replace a full artefact check on the steps that genuinely warrant one."
+      },
+      {
+        "type": "pod-header",
+        "title": "One good run proves nothing",
+        "podNumber": 3,
+        "duration": 10
+      },
+      {
+        "type": "text",
+        "body": "Everything so far in this lesson is a check on one result. There is a second check, and it costs a little more: run the same brief several times and compare.\n\nIf you ask an agent for the same small piece of work three to five times, the answers will not be identical. That is not a defect to complain about. It is information. Where the runs differ, one of two things is true. Either the brief left something unsaid, so the agent filled the gap differently each time. Or the task has a genuinely hard part that the agent handles inconsistently.\n\nWhere all the runs agree, be careful. Agreement tells you the result is consistent. It does not tell you it is correct. Five runs can share the same wrong assumption.\n\nDo this on a small slice of the work, not the whole project. Five runs cost five times as much, so spend them on the part you are least sure of. On a low-energy day, three runs and a one-line note on what differed is enough."
+      },
+      {
+        "type": "evidence-stack",
+        "scenario": "You give an agent the same brief five times: \"Write a function that turns a list of order lines into a total including VAT.\" Run 1 rounds each line and then adds them up. Run 2 adds them up and then rounds once. Runs 3 and 5 match run 1. Run 4 matches run 1 but never handles a line with quantity zero. Run 2 finished faster than the others.",
+        "question": "Select every observation that tells you something about the brief, not only about the agent.",
+        "items": [
+          {
+            "value": "rounding",
+            "label": "Runs 1 and 2 round at different points",
+            "applicable": true
+          },
+          {
+            "value": "zero",
+            "label": "Run 4 skips the zero-quantity case that the others handled",
+            "applicable": true
+          },
+          {
+            "value": "agree",
+            "label": "Runs 1, 3 and 5 produced the same code, so that approach must be right",
+            "applicable": false
+          },
+          {
+            "value": "speed",
+            "label": "Run 2 was faster than the others",
+            "applicable": false
+          }
+        ],
+        "explanation": {
+          "rounding": "The brief never said when to round, so the agent chose differently. Money totals change by a cent depending on the answer. This is a gap in your brief that you can close in one sentence.",
+          "zero": "A case that only some runs handle is a case the brief did not mention. Decide what should happen with a zero quantity, write it down, and the difference disappears.",
+          "agree": "Three runs agreeing shows consistency, not correctness. They may all round each line first because that is the common habit, which may or may not match what your accounts need. Check the answer against a worked example, not against the other runs.",
+          "speed": "Speed tells you nothing about whether the brief was clear. It is the easiest thing to see and the least useful."
+        }
+      },
+      {
+        "type": "takeaway",
+        "body": "Where five runs of the same brief disagree, the brief left something unsaid. Where they all agree, you have consistency, which is not the same as correct."
       }
     ]
   },
@@ -3966,7 +4107,7 @@
     "id": "aod-ag5-l04",
     "moduleId": "aod-ag5",
     "order": 4,
-    "duration": 25,
+    "duration": 30,
     "difficulty": "medium",
     "title": "Fabricated verification: claiming a check that never ran",
     "description": "The failure mode where a completion report states a check was performed — tests run, a request sent, an output inspected — with no corresponding evidence that it actually happened, distinct from a check that ran and was merely insufficient.",
@@ -4055,6 +4196,31 @@
       {
         "type": "takeaway",
         "body": "A claim that sounds most confidently complete is exactly the one most worth checking against the transcript's actual tool calls — polish is not evidence."
+      },
+      {
+        "type": "pod-header",
+        "title": "From faults to a checklist",
+        "podNumber": 3,
+        "duration": 5
+      },
+      {
+        "type": "text",
+        "body": "Once you can spot a fabricated check, the next move is not to catch it again by hand every week. It is to write it down once so the next run is told.\n\nThe method is short. Collect a handful of finished runs of the same kind of task. Read each against your standard. List every fault, one line each, and note which run it came from. Group the faults that share a cause. Keep the groups that repeated, because a one-off may just be noise.\n\nThen turn each group into one rule that can be checked. \"Be careful with tests\" is not a rule. \"Paste the output of the test run into the report\" is. Add the rules to the brief or to your review list.\n\nFinally, run the task again and see whether the faults come back. If they do, the rule was not specific enough. This loop is how a person's habits become a written procedure that anyone, or any agent, can follow."
+      },
+      {
+        "type": "sequence-it",
+        "question": "You have five finished runs of the same kind of task, and each one had some faults. Put these steps in the order that turns your reading into a rule you can trust.",
+        "steps": [
+          "Read each of the five runs against your standard of good and list every fault, one line each, with which run it came from",
+          "Group the faults that share a cause, and keep only the groups that appeared in more than one run",
+          "Write one checkable rule for each kept group, such as \"paste the output of the test run into the report\"",
+          "Run the task again with the rules added and see whether the same faults come back"
+        ],
+        "explanation": "Listing every fault first stops you fixing the one you happened to notice. Grouping next shows which faults are habits and which were one-off noise. Rules come after grouping, because a rule written for a single fault is usually too narrow. The rerun comes last and is the real test: if the faults return, the rule was not specific enough, and you have learned that cheaply before relying on it."
+      },
+      {
+        "type": "takeaway",
+        "body": "Do not fix the same fault by hand every week. Group the faults that repeat and turn each group into one rule that can be checked."
       }
     ]
   },
@@ -4062,7 +4228,7 @@
     "id": "aod-ag5-l05",
     "moduleId": "aod-ag5",
     "order": 5,
-    "duration": 20,
+    "duration": 30,
     "difficulty": "medium",
     "title": "Stop conditions you set before you start",
     "description": "Defining concrete, checkable conditions — tied to this module's four failure modes — that halt a run and ask for human input, decided before a task starts rather than diagnosed after it's already gone wrong.",
@@ -4169,6 +4335,46 @@
       {
         "type": "takeaway",
         "body": "This module's four failure modes don't require elevated blast radius or a destructive step to happen — their stop conditions belong on any task with real complexity, not just the ones already flagged as high-stakes."
+      },
+      {
+        "type": "pod-header",
+        "title": "Check-ins that fit your energy",
+        "podNumber": 3,
+        "duration": 10
+      },
+      {
+        "type": "text",
+        "body": "A stop condition says when the agent stops. A check-in says when you look. Both belong in the plan before the run starts, and the second is the one that gets forgotten.\n\nA plan that needs you at two o'clock every day is a plan that fails on the day you cannot. The test for any supervision plan is simple: what happens on the day you are flat in bed and read nothing?\n\nA plan that holds up on a bad day has four parts. The agent stops by itself at a limit you set, such as a spending cap, or three failed attempts at the same fix. It writes a short report in a fixed shape when it stops. You read one report at a fixed time, ten minutes, and choose continue, correct or stop. And anything that could cause damage waits for your yes.\n\nThe point is that the stops live in the plan, not in your attention. A missed day then delays decisions. It does not remove them."
+      },
+      {
+        "type": "diagnose-mechanism",
+        "scenario": "Two supervision plans for the same week-long unattended refactor of a small internal tool. Plan A: \"I will watch the live log and answer the agent's questions as they come up.\" Plan B: \"The agent stops at a spending cap, and at any failing test it cannot fix in three tries. It writes a half-page report. I read one report a day, for ten minutes, and choose continue, correct or stop. Anything touching the live system waits until I say so.\" On day three you are unable to look at anything for thirty-six hours.",
+        "question": "What is the difference between the two plans that matters on day three?",
+        "options": [
+          {
+            "label": "Plan B is stricter, so the agent behaves better",
+            "value": "stricter"
+          },
+          {
+            "label": "Plan B puts the stops in the plan, so the agent waits safely when you cannot look. Plan A needs your attention to be the stop",
+            "value": "stops-in-plan"
+          },
+          {
+            "label": "There is no difference, both depend on you being available",
+            "value": "no-difference"
+          }
+        ],
+        "correctValue": "stops-in-plan",
+        "feedback": {
+          "stops-in-plan": "Right. In Plan B the agent halts at a limit and a failure count, so thirty-six silent hours means a delayed decision, not a wandering run. In Plan A there is nothing to stop it, so the missed hours are hours of unwatched work building on whatever it assumed.",
+          "stricter": "Plan B is not stricter about the work. It is different about where the stops are. The same agent under Plan A would behave the same way, with nobody there to catch it.",
+          "no-difference": "They differ exactly where it counts. Plan B still works when you are absent for a day and a half. Plan A only works while your attention is available."
+        },
+        "mechanism": "The mechanism is where the stop lives. Attention can be taken away by a bad day. A limit written into the plan cannot."
+      },
+      {
+        "type": "takeaway",
+        "body": "A good supervision plan still works on the day you read nothing. Put the stops in the plan, not in your attention."
       }
     ]
   },

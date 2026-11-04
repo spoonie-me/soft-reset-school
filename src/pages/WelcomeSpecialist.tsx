@@ -28,7 +28,7 @@ export function WelcomeSpecialist() {
 
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 800, margin: '0 auto' }}>
-      <SEO title="Welcome — Bedcoders Specialist" description="You're in." noIndex />
+      <SEO title="Welcome — Soft Reset School Specialist" description="You're in." noIndex />
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
         <div style={{ fontSize: '3rem', marginBottom: 'var(--space-lg)' }}>✓</div>
         <h1 style={{ marginBottom: 'var(--space-lg)', color: 'var(--success)' }}>Welcome, Specialist</h1>
@@ -45,8 +45,8 @@ export function WelcomeSpecialist() {
             { icon: '📚', label: '50+ lessons', desc: 'Master every module at your pace' },
             { icon: '✍️', label: '200+ exercises', desc: 'AI-graded feedback on every submission' },
             { icon: '🎓', label: 'Certification exam', desc: 'Verify your mastery with a certificate' },
-            { icon: '🌀', label: 'Crash-day kind', desc: 'Cancel any month, your progress waits. No streak penalties.' },
-            { icon: '🔄', label: 'Always current', desc: 'Curriculum updates included while subscribed' },
+            { icon: '🌀', label: 'Kind to bad weeks', desc: 'Your progress waits for you. No streaks to break.' },
+            { icon: '🔄', label: 'Always current', desc: 'One payment, no subscription' },
           ].map((item) => (
             <li key={item.label} style={{ display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
               <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{item.icon}</span>
@@ -75,7 +75,7 @@ export function WelcomeSpecialist() {
           Your lifetime enrollment means you can learn at your own pace, come back anytime, and revisit material whenever you need it. Your certificate, once earned, is yours forever.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-          Questions? Contact <a href="mailto:hello@bedcoders.com" style={{ color: 'var(--signal)' }}>hello@bedcoders.com</a>
+          Questions? Contact <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a>
         </p>
       </div>
 

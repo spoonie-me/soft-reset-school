@@ -6,8 +6,8 @@ export function PrivacyPolicy() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Privacy Policy — Bedcoders"
-        description="How Bedcoders collects, uses, and protects your personal data. GDPR-compliant. Operator: Roi Shternin-Martini, Vienna, Austria."
+        title="Privacy Policy — Soft Reset School"
+        description="How Soft Reset School collects, uses, and protects your personal data. GDPR-compliant. Operator: Roi Shternin-Martini, Vienna, Austria."
         canonical="/privacy"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Privacy Policy</h1>
@@ -20,7 +20,7 @@ export function PrivacyPolicy() {
         <p style={{ color: 'var(--text-secondary)' }}>
           <strong>Roi Shternin-Martini</strong><br />
           1180 Vienna, Austria<br />
-          Email: privacy@bedcoders.com
+          Email: hi@softreset.school
         </p>
       </Card>
 
@@ -69,7 +69,7 @@ export function PrivacyPolicy() {
           <li><strong>Withdraw consent:</strong> Anytime, for any reason, no penalty</li>
         </ul>
         <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-lg)' }}>
-          To exercise any right: <strong>privacy@bedcoders.com</strong> with proof of identity.
+          To exercise any right: <strong>hi@softreset.school</strong> with proof of identity.
         </p>
       </Card>
 
@@ -102,7 +102,7 @@ export function PrivacyPolicy() {
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>Questions?</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          Email: <strong>privacy@bedcoders.com</strong><br />
+          Email: <strong>hi@softreset.school</strong><br />
           For complaints: Contact your national Data Protection Authority
         </p>
       </Card>

@@ -9,6 +9,7 @@ import { learningApi, type TrackDetailResponse, type GamificationResponse } from
 import { IS_DEV_MODE } from '@/lib/useApi';
 import { LearningPathModal } from '@/components/LearningPathModal';
 import { SEO } from '@/components/SEO';
+import { usePurchaseUnlock } from '@/lib/usePurchaseUnlock';
 
 /* ─── Track metadata (not in DB — static config) ─── */
 const TRACK_META: Record<string, { title: string; color: string }> = {
@@ -21,6 +22,10 @@ const TRACK_META: Record<string, { title: string; color: string }> = {
   'ai-oversight-health-informatics': { title: '🩺 AI-Augmented Medical Coding', color: 'var(--crystal)' },
   'accessibility-qa-lived-experience': { title: '♿ Digital Accessibility QA', color: 'var(--signal)' },
 };
+
+/* Foundation tracks are archived: hidden from the public site and no longer sold.
+ * Learners who already started one still see it so their progress isn't lost. */
+const ARCHIVED_TRACKS = new Set(['fundamentals', 'ai', 'tools', 'advanced']);
 
 /* ─── Types ─── */
 interface DomainSummary {
@@ -94,9 +99,8 @@ function MasteryStars({ count, max = 5 }: { count: number; max?: number }) {
 // Credential product value map for GA4 conversion events (one-time payments —
 // see PRD.md §4.5, 2026-08-04. Subscription plan values retired.)
 const CREDENTIAL_VALUES: Record<string, number> = {
-  track_credential: 69,
-  program_credential: 149,
-  code_review: 25,
+  track_credential: 99,
+  program_credential: 199, // 2-track bundles are €149; GA4 value is approximate
 };
 
 export function Dashboard() {
@@ -109,6 +113,13 @@ export function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  // Tracks just bought (from the Stripe return URL), kept before the URL is cleaned.
+  const [boughtTracks] = useState<string[]>(() =>
+    (searchParams.get('session_id')?.startsWith('cs_') ? (searchParams.get('tracks') ?? '') : '')
+      .split(',')
+      .filter((t) => /^[a-z0-9-]+$/.test(t)),
+  );
+  const unlock = usePurchaseUnlock(boughtTracks);
 
   // Fire GA4 conversion when landing from Stripe checkout success
   useEffect(() => {
@@ -116,9 +127,11 @@ export function Dashboard() {
     const credential = searchParams.get('credential') ?? 'track_credential';
     if (!sessionId?.startsWith('cs_')) return;
 
+    (window as any).trackEvent?.('checkout_success', { productId: credential });
+
     const g = (window as any).gtag;
     if (typeof g === 'function') {
-      const value = CREDENTIAL_VALUES[credential] ?? 69;
+      const value = CREDENTIAL_VALUES[credential] ?? 99;
       const transaction_id = `${credential}_${sessionId.slice(-8)}`;
       g('event', 'conversion', {
         send_to: 'AW-18029452931/UiPjCJWPqowcEIO9jpVD',
@@ -138,6 +151,7 @@ export function Dashboard() {
     const params = new URLSearchParams(searchParams);
     params.delete('session_id');
     params.delete('credential');
+    params.delete('tracks');
     navigate({ search: params.toString() }, { replace: true });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -195,7 +209,11 @@ export function Dashboard() {
           }),
         );
 
-        setTracks(trackSummaries);
+        // Career tracks first; an archived track only appears if the learner has progress in it.
+        const visible = trackSummaries
+          .filter((t) => !ARCHIVED_TRACKS.has(t.id) || t.progress > 0 || t.domains.some((d) => d.progress > 0))
+          .sort((a, b) => Number(ARCHIVED_TRACKS.has(a.id)) - Number(ARCHIVED_TRACKS.has(b.id)));
+        setTracks(visible);
         if (gamRes) setGamData(gamRes);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load dashboard');
@@ -230,12 +248,36 @@ export function Dashboard() {
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
-      <SEO title="Your Dashboard" description="Continue your Bedcoders training. Track progress, resume lessons, and earn certifications." noIndex />
+      <SEO title="Your Dashboard" description="Continue your Soft Reset School training. Track progress, resume lessons, and earn certifications." noIndex />
       <LearningPathModal isOpen={showPathModal} onClose={() => setShowPathModal(false)} />
       <h1 style={{ fontSize: '1.75rem', marginBottom: 'var(--space-sm)' }}>Your Dashboard</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Pick up where you left off.
       </p>
+
+      {unlock !== 'idle' && (
+        <div
+          role="status"
+          style={{
+            padding: 'var(--space-md) var(--space-lg)',
+            background: unlock === 'unlocked' ? 'rgba(90,158,106,0.08)' : 'var(--bg-surface)',
+            border: `1px solid ${unlock === 'unlocked' ? 'var(--success)' : 'var(--bg-border)'}`,
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--text-primary)',
+            fontSize: '0.9375rem',
+            marginBottom: 'var(--space-xl)',
+          }}
+        >
+          {unlock === 'waiting' && 'Payment received. Unlocking your track now. This usually takes a few seconds.'}
+          {unlock === 'unlocked' && 'Your track is unlocked. Every lesson, the exam and the certificate are yours. No deadline.'}
+          {unlock === 'slow' && (
+            <>
+              Payment received, but unlocking is taking longer than usual. Reload this page in a minute. If it is still locked, write to{' '}
+              <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)' }}>hi@softreset.school</a> with your receipt and I will sort it out.
+            </>
+          )}
+        </div>
+      )}
 
       {error && (
         <div
@@ -322,7 +364,7 @@ export function Dashboard() {
               )}
 
               {track.domains.length > 0 && (
-                <div style={{ marginTop: 'var(--space-xl)', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-sm)' }}>
+                <div style={{ marginTop: 'var(--space-xl)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))', gap: 'var(--space-sm)' }}>
                   {track.domains.map((domain) => (
                     <Link
                       key={domain.id}

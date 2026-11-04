@@ -33,6 +33,50 @@
         "body": "**Try it before you read on.** Mac: press `Cmd+F5` to turn on VoiceOver, `Tab` to the checkbox above, then `Ctrl+Option+Right Arrow` to move through it. Windows: download NVDA free at nvaccess.org, launch it, then `Tab` through the same way. Listen for exactly what gets announced when you land on the checkbox — that's your evidence for the question below, not a guess."
       },
       {
+        "type": "screen-reader-sim",
+        "title": "No screen reader running? Tab through a simulated one",
+        "intro": "Five checkboxes on a signup form. To a sighted person they all look fine. Press **Tab** to move to each one and read what a screen reader would announce. Try **Space** on any of them too.",
+        "note": "This is a simulation, written for this lesson. Real screen readers phrase things differently by browser and software. It is a stand-in, not a replacement. When you can, run the real thing, as described above.",
+        "controls": [
+          {
+            "id": "wrapping",
+            "visual": "Remember me on this device",
+            "code": "<label>\n  <input type=\"checkbox\"> Remember me on this device\n</label>",
+            "announces": "Remember me on this device, checkbox, not checked",
+            "named": true
+          },
+          {
+            "id": "hidden-label",
+            "visual": "Subscribe to our newsletter",
+            "code": "<label for=\"subscribe\" aria-hidden=\"true\">Subscribe to our newsletter</label>\n<input type=\"checkbox\" id=\"subscribe\">",
+            "announces": "checkbox, not checked",
+            "named": false
+          },
+          {
+            "id": "aria-label",
+            "visual": "Email me about new features",
+            "code": "<input type=\"checkbox\" aria-label=\"Email me about new features\">",
+            "announces": "Email me about new features, checkbox, not checked",
+            "named": true
+          },
+          {
+            "id": "adjacent-text",
+            "visual": "I agree to the terms",
+            "code": "<input type=\"checkbox\"> I agree to the terms",
+            "announces": "checkbox, not checked",
+            "named": false
+          },
+          {
+            "id": "for-id",
+            "visual": "Send me a weekly summary",
+            "code": "<label for=\"weekly\">Send me a weekly summary</label>\n<input type=\"checkbox\" id=\"weekly\">",
+            "announces": "Send me a weekly summary, checkbox, not checked",
+            "named": true
+          }
+        ],
+        "debrief": "Five checkboxes that look identical on screen. Two of them announce nothing but \"checkbox, not checked\". Nobody using a screen reader could tell what they were agreeing to.\n\nThe second one is this lesson's example. It passes the automated scan described above, and you only find the problem by listening."
+      },
+      {
         "type": "text",
         "body": "You just heard it yourself: automated tools often miss how assistive technologies *actually behave*.\n\n- `aria-hidden=\"true\"` on a `<label>` hides the label entirely from screen readers, but not from sighted users — creating an inconsistent experience.\n- Screen readers announce form controls based on DOM order and semantics: labels must be programmatically associated (via `<label for>`, `aria-labelledby`, or wrapping) to be announced *before* the control's state.\n\nThe flaw here isn't a missing `alt` text or an empty link — it's breaking core programmatic association. WCAG 2.1 SC 4.1.2 (Name, Role, Value) can technically pass if an accessible name exists *somewhere* in the DOM, but what you just experienced shows that *how* and *when* the name is announced is what determines whether a user can actually act on it."
       },

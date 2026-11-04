@@ -50,7 +50,7 @@ export function VerifyCertificate() {
     >
       <div style={{ maxWidth: '520px', width: '100%' }}>
         <p style={{ fontSize: '12px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--signal)', marginBottom: '24px', fontFamily: 'var(--font-display)' }}>
-          Bedcoders · Certificate Verification
+          Soft Reset School · Certificate Verification
         </p>
 
         {status === 'loading' && (
@@ -111,7 +111,7 @@ export function VerifyCertificate() {
         )}
 
         <p style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: 'var(--text-tertiary)' }}>
-          <Link to="/" style={{ color: 'var(--signal)', textDecoration: 'none' }}>← Bedcoders</Link>
+          <Link to="/" style={{ color: 'var(--signal)', textDecoration: 'none' }}>← Soft Reset School</Link>
         </p>
       </div>
     </div>

@@ -5,8 +5,8 @@ export function DataProcessing() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-3xl) var(--space-xl)' }}>
       <SEO
-        title="Data Processing Agreement — Bedcoders"
-        description="GDPR-compliant Data Processing Agreement (DPA) for Bedcoders team customers. Sub-processor list, security measures, and EU/EEA data residency."
+        title="Data Processing Agreement — Soft Reset School"
+        description="GDPR-compliant Data Processing Agreement (DPA) for Soft Reset School team customers. Sub-processor list, security measures, and EU/EEA data residency."
         canonical="/dpa"
       />
       <h1 style={{ marginBottom: 'var(--space-sm)' }}>Data Processing Agreement</h1>
@@ -15,7 +15,7 @@ export function DataProcessing() {
       <Card style={{ marginBottom: 'var(--space-xl)' }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>1. Scope</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          This Data Processing Agreement (DPA) applies to the processing of personal data by Bedcoders, operated by Roi Shternin-Martini ("Processor") on behalf of institutional customers ("Controller") under the General Data Protection Regulation (GDPR).
+          This Data Processing Agreement (DPA) applies to the processing of personal data by Soft Reset School, operated by Roi Shternin-Martini ("Processor") on behalf of institutional customers ("Controller") under the General Data Protection Regulation (GDPR).
         </p>
       </Card>
 
@@ -57,7 +57,7 @@ export function DataProcessing() {
       <Card>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>5. Contact</h2>
         <p style={{ color: 'var(--text-secondary)' }}>
-          For DPA inquiries or to request a signed copy: <strong>legal@bedcoders.com</strong>
+          For DPA inquiries or to request a signed copy: <strong>hi@softreset.school</strong>
         </p>
       </Card>
     </div>

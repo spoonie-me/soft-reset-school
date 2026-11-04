@@ -31,6 +31,9 @@ export function LearningPathModal({ isOpen, onClose }: Props) {
         padding: 'var(--space-2xl)',
         maxWidth: 560,
         width: '100%',
+        boxSizing: 'border-box',
+        maxHeight: '100%',
+        overflowY: 'auto',
       }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-sm)' }}>Choose your learning path</h2>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: 'var(--space-xl)' }}>

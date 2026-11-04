@@ -26,7 +26,7 @@ export function Login() {
 
   return (
     <div style={{ maxWidth: 420, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
-      <SEO title="Log In" description="Log in to your Bedcoders account." canonical="/login" noIndex />
+      <SEO title="Log In" description="Log in to your Soft Reset School account." canonical="/login" noIndex />
       <h1 style={{ fontSize: '1.75rem', marginBottom: 'var(--space-sm)' }}>Welcome back</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Log in to continue learning.

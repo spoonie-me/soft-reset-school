@@ -24,7 +24,7 @@ export function CodingWithChronicIllness() {
       </h1>
 
       <p style={p}>
-        Bedcoders exists because traditional coding education wasn't designed for people whose bodies don't cooperate. Three-hour video lectures. Daily homework streaks that punish rest. Synchronous cohorts that assume you're available at 9am on Tuesdays.
+        Soft Reset School exists because traditional coding education wasn't designed for people whose bodies don't cooperate. Three-hour video lectures. Daily homework streaks that punish rest. Synchronous cohorts that assume you're available at 9am on Tuesdays.
       </p>
 
       <p style={p}>
@@ -84,7 +84,7 @@ export function CodingWithChronicIllness() {
       </p>
 
       <p style={p}>
-        Bedcoders tracks XP, not streaks. Your progress doesn't evaporate when you have a flare. You come back to where you left off. That's the design — not an afterthought.
+        Soft Reset School tracks XP, not streaks. Your progress doesn't evaporate when you have a flare. You come back to where you left off. That's the design — not an afterthought.
       </p>
 
       <h2 style={h2}>You're not behind</h2>

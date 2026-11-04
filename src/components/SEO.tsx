@@ -1,4 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 interface SEOProps {
@@ -27,7 +28,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://softreset.school';
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-card.png`;
 
 export function SEO({
   title,
@@ -43,6 +44,12 @@ export function SEO({
   const fullTitle = title.includes('Soft Reset School') ? title : `${title} | Soft Reset School`;
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
   const jsonLdArray = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+  // scripts/prerender.mjs bakes this route's head tags into the static HTML so
+  // crawlers without JS see them; once Helmet owns the head, drop that copy.
+  useEffect(() => {
+    document.head.querySelectorAll('[data-prerender]').forEach((el) => el.remove());
+  }, []);
 
   return (
     <Helmet>
@@ -86,7 +93,7 @@ export function SEO({
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@bedcoders" />
+      <meta name="twitter:site" content="@roishternin" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

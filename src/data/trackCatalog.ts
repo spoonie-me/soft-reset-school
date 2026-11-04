@@ -40,6 +40,10 @@ export interface CatalogTrack {
    * backend/prisma/seed-data/domains/<slug>/*\/lessons.json, summed. */
   lessonCount: number;
   totalMinutes: number;
+  /** The one lesson anyone can open without buying the track. Must be lesson 1
+   * of module 1 of the track's first domain — src/data/__tests__/trialLessons.test.ts
+   * checks it against the seed data, and backend/src/lib/access.ts enforces it. */
+  trialLessonId?: string;
   exam: {
     questionCount: number;
     timeLimitMinutes: number;
@@ -56,9 +60,11 @@ export interface CatalogTrack {
 }
 
 const CAREER_CURRICULUM_NOTE =
-  'This is a young track: a focused, growing curriculum — every lesson free to read before you pay anything.';
+  'The first lesson is a free trial. The full track is €99 once.';
 
-export const CATALOG_TRACKS: CatalogTrack[] = [
+/** Every track definition, including archived ones. Use CATALOG_TRACKS for
+ * anything public-facing. */
+const ALL_TRACKS: CatalogTrack[] = [
   // ── Career tracks — the reintegration path ──────────────────────────────
   {
     slug: 'ai-orchestrated-dev',
@@ -69,7 +75,7 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
     pitch:
       'Direct AI coding tools well enough that your energy envelope stops setting your ceiling — and review what they produce with real judgment.',
     whoFor:
-      'For people who want to ship real software without typing every line — including on days when typing every line isn\'t physically on the table. You don\'t need to be a fast coder; you need to become a careful director and reviewer of AI output. Some prior exposure to code helps — the foundation tracks are a free on-ramp if you\'re starting from zero.',
+      'For people who want to ship real software without typing every line — including on days when typing every line isn\'t physically on the table. You don\'t need to be a fast coder; you need to become a careful director and reviewer of AI output. Some prior exposure to code helps — ',
     jobItLeadsTo:
       'Development work — freelance or employed — where the value is directing and reviewing AI-generated code: writing executable specs, catching the bugs AI confidently gets wrong, and owning correctness, security, and maintainability. A hireable dev skill that doesn\'t bill by the hour of typing.',
     curriculumNote: CAREER_CURRICULUM_NOTE,
@@ -88,17 +94,16 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
         name: 'Agentic Workflows',
         description:
           'Multi-step AI-driven development: planning, delegating subtasks, and verifying a chain of AI actions rather than a single completion.',
-        inDevelopment: true,
       },
       {
         name: 'Shipping with AI Assistance',
         description:
           'Testing, deployment, and monitoring workflows where AI handles routine work and the developer owns judgment calls and final accountability.',
-        inDevelopment: true,
       },
     ],
+    trialLessonId: 'aod-l01',
     lessonCount: 244,
-    totalMinutes: 6100,
+    totalMinutes: 6135,
     exam: { questionCount: 22, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
   },
   {
@@ -136,6 +141,7 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
           'Building in checkpoints to catch AI errors at scale, and proving the actual business value of an automation, not just its existence.',
       },
     ],
+    trialLessonId: 'awc-sp1-l01',
     lessonCount: 246,
     totalMinutes: 6150,
     exam: { questionCount: 21, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
@@ -175,6 +181,7 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
           'Auditing AI-assisted clinical systems for safety-critical failures, and documenting findings in a way clinical and engineering teams can both act on.',
       },
     ],
+    trialLessonId: 'ai-oh-f-l01',
     lessonCount: 246,
     totalMinutes: 6135,
     exam: { questionCount: 22, timeLimitMinutes: 45, passScore: 75, openEndedCount: 2 },
@@ -202,33 +209,29 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
         name: 'Assistive Technology Fluency',
         description:
           'Beyond the WCAG checklist: how screen readers, magnifiers, switch access, and voice control actually behave in practice — the specific failures a lived-experience reviewer catches that an automated scanner misses.',
-        inDevelopment: true,
       },
       {
         name: 'Cognitive, Content and Energy Accessibility',
         description:
           'The barriers WCAG covers thinly: cognitive load, unclear content, sensory load, and interfaces that cost more energy than a person has.',
-        inDevelopment: true,
       },
       {
         name: 'Running a Real Audit',
         description:
           'Scoping, evidence, severity and reporting — the practical craft of an audit a development team can actually work from, not a list of WCAG violation codes.',
-        inDevelopment: true,
       },
       {
         name: 'Advocacy & Organizational Change',
         description:
           'Turning audit findings into real product change: making the case internally, working with design and engineering teams, and the difference between compliance theater and a genuine accessibility culture.',
-        inDevelopment: true,
       },
       {
         name: 'Working in Accessibility',
         description:
           'Getting and holding accessibility work — employed, contract or freelance — and structuring it so it doesn\'t cost more than it pays.',
-        inDevelopment: true,
       },
     ],
+    trialLessonId: 'aqa-l01',
     lessonCount: 243,
     totalMinutes: 6065,
     exam: { questionCount: 14, timeLimitMinutes: 30, passScore: 75, openEndedCount: 2 },
@@ -386,14 +389,18 @@ export const CATALOG_TRACKS: CatalogTrack[] = [
   },
 ];
 
-export const CAREER_CATALOG_TRACKS = CATALOG_TRACKS.filter((t) => t.kind === 'career');
-export const FOUNDATION_CATALOG_TRACKS = CATALOG_TRACKS.filter((t) => t.kind === 'foundation');
+/** Public catalog: the four career tracks. The four foundation tracks
+ * (kind: 'foundation') are archived — still defined above so their content
+ * and existing certificates keep working, but hidden from every public page
+ * and no longer sold. To bring them back, include them here. */
+export const CATALOG_TRACKS: CatalogTrack[] = ALL_TRACKS.filter((t) => t.kind === 'career');
+export const CAREER_CATALOG_TRACKS = CATALOG_TRACKS;
 
 export function getCatalogTrack(slug: string | undefined): CatalogTrack | undefined {
   return CATALOG_TRACKS.find((t) => t.slug === slug);
 }
 
-/** Whether this track has enough published content to sell a €69 credential
+/** Whether this track has enough published content to sell a credential
  * for — see credentialBar.ts. Backend/src/lib/stripe.ts computes the same
  * thing independently for CREDENTIAL_SELLABLE_TRACKS; the two are checked
  * against each other by src/data/__tests__/credentialBar.test.ts. */

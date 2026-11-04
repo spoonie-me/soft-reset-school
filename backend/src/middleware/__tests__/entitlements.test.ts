@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 const findMany = vi.fn();
 vi.mock('../../lib/db.js', () => ({
   prisma: {
+    user: { findUnique: async () => ({ createdAt: new Date() }) },
     track: { findMany: async () => [{ slug: 'ai' }] },
     credentialPurchase: { findMany: (...a: unknown[]) => findMany(...a) },
   },

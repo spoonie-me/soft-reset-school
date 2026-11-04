@@ -5,7 +5,7 @@ import { apiLimiter } from '../middleware/rateLimit.js';
 
 const router = Router();
 
-const INQUIRY_INBOX = 'hello@bedcoders.com';
+const INQUIRY_INBOX = 'hi@softreset.school';
 
 // POST /api/inquiries — employer / team / organisation inquiry.
 //
@@ -54,10 +54,12 @@ router.post('/', apiLimiter, async (req, res) => {
         const esc = (s: string) =>
           s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         await resend.emails.send({
-          from: 'Soft Reset School <hello@bedcoders.com>',
+          from: 'Soft Reset School <hi@softreset.school>',
           to: INQUIRY_INBOX,
           replyTo: payload.email,
-          subject: `Inquiry — ${payload.org} (${payload.interest})`,
+          subject: payload.source === 'hardship'
+            ? `Hardship code request — ${payload.email}`
+            : `Inquiry — ${payload.org} (${payload.interest})`,
           html: `
             <h2>New ${esc(payload.source)} inquiry</h2>
             <p><strong>Name:</strong> ${esc(payload.name)}<br/>

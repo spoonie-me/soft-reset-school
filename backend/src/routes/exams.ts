@@ -6,6 +6,8 @@ import { entitlementsMiddleware, type EntitledRequest } from '../middleware/enti
 import { XP_REWARDS, levelFromXp } from '../lib/gamification.js';
 import { sanitizeExerciseConfig } from '../lib/sanitizeExercise.js';
 import { getExerciseFeedback } from '../lib/claude.js';
+import { sendCertificateEarned } from '../lib/email.js';
+import { plainTrackName } from '../lib/trackNames.js';
 import crypto from 'crypto';
 
 const router = Router();
@@ -310,7 +312,7 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
         if (grade.graded && grade.score !== null) {
           scoredAnswers.push({ exerciseId, answer, score: grade.score, isCorrect: grade.isCorrect ?? grade.score >= 60 });
         } else {
-          console.warn(`[exams] AI grading failed for open-ended exam question ${exerciseId} — awarding full credit rather than failing the learner for our infra issue.`);
+          console.warn('[exams] AI grading failed for open-ended exam question %s — awarding full credit rather than failing the learner for our infra issue.', exerciseId);
           scoredAnswers.push({ exerciseId, answer, score: 100, isCorrect: true });
         }
         continue;
@@ -319,8 +321,15 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
       if (mcScoredSoFar >= mcServedCount) continue;
       mcScoredSoFar += 1;
 
-      const { score, isCorrect } = scoreAnswer(exercise, answer);
-      scoredAnswers.push({ exerciseId, answer, score, isCorrect });
+      // A malformed answer (null, wrong shape) must score 0 for that
+      // question, not throw and 500 the whole attempt.
+      let result = { score: 0, isCorrect: false };
+      try {
+        result = scoreAnswer(exercise, answer);
+      } catch (err) {
+        console.warn('[exams] Could not score answer for %s, scoring 0:', exerciseId, err);
+      }
+      scoredAnswers.push({ exerciseId, answer, score: result.score, isCorrect: result.isCorrect });
     }
 
     // Denominator = the actual served question count (min of configured
@@ -394,6 +403,27 @@ router.post('/:examId/attempt', authMiddleware, entitlementsMiddleware, async (r
         where: { id: attempt.id },
         data: { certificateId: certificate.id },
       });
+
+      // First pass only: a re-pass keeps the same certificate, no second email.
+      // Best effort, the certificate already exists and shows on the dashboard.
+      if (!existing) {
+        try {
+          const holder = await prisma.user.findUnique({
+            where: { id: authReq.userId! },
+            select: { email: true, name: true },
+          });
+          if (holder) {
+            await sendCertificateEarned(holder.email, {
+              name: holder.name ?? undefined,
+              trackName: plainTrackName(exam.trackId),
+              score: Math.round(totalScore),
+              verifyCode: certificate.verifyCode,
+            });
+          }
+        } catch (mailErr) {
+          console.error('Certificate email failed:', mailErr);
+        }
+      }
     }
 
     res.json({
@@ -556,7 +586,7 @@ function scoreAnswer(
     }
 
     default:
-      console.warn(`[exams] Unrecognized exercise type: ${exercise.type} — scoring 0`);
+      console.warn('[exams] Unrecognized exercise type: %s — scoring 0', exercise.type);
       return { score: 0, isCorrect: false };
   }
 }

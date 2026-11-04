@@ -16,7 +16,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: 'Freelance developer & designer',
     track: 'fundamentals',
     outcome: 'Shipped her first AI-powered client tool in 3 weeks.',
-    quote: 'I kept putting off learning to code because every course felt like it was written for CS grads. Bedcoders actually starts where I am. The micro-lesson format is perfect for my energy levels — I can do one pod on a bad day and still feel like I made progress.',
+    quote: 'I kept putting off learning to code because every course felt like it was written for CS grads. [Soft Reset School] actually starts where I am. The micro-lesson format is perfect for my energy levels — I can do one pod on a bad day and still feel like I made progress.',
     avatar: 'SE',
     approved: true,
   },

@@ -18,7 +18,7 @@ export function TrackInfo() {
     <div>
       <SEO
         title={`${track.title} — what's inside the track`}
-        description={`${track.pitch} Full curriculum outline, who it's for, and the €69 credential exam — every lesson free to read, no account needed.`}
+        description={`${track.pitch} Full curriculum outline, who it's for, and the credential exam. Lesson 1 is a free trial.`}
         canonical={`/tracks/${track.slug}`}
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -38,7 +38,7 @@ export function TrackInfo() {
           {track.pitch}
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-          <Link to="/signup"><Button variant="primary" size="lg">Start learning free</Button></Link>
+          <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
         </div>
       </section>
@@ -101,7 +101,7 @@ export function TrackInfo() {
           <Card style={{ borderColor: track.color }}>
             <div style={{ width: 32, height: 3, background: track.color, borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
             <p style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>
-              €69 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever</span>
+              €99 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever · 2 tracks €149, 3 tracks €199</span>
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} · ~{track.totalMinutes} min total
@@ -119,15 +119,15 @@ export function TrackInfo() {
               </p>
             )}
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-              Every lesson in this track is free to read first — you sit the exam only when you feel ready, with
-              no deadline and no re-purchase. Passing earns a certificate: proof of practiced skill, not a
+              Lesson 1 is a free trial. The full track unlocks every lesson and the exam, and you sit the exam only
+              when you feel ready, with no deadline and no re-purchase. Passing earns a certificate: proof of practiced skill, not a
               promise of a job, that you can share on LinkedIn and employers can verify. See{' '}
               <Link to="/imprint" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>what the certificate does and doesn't claim</Link>, including what happens to it if this school ever
               stops operating.
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-              Can't afford €69? Pay what you can, down to €0 — no proof, no application. Details on the{' '}
-              <Link to="/pricing" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
+              Can't afford €99? Ask for a hardship code, no reason needed. Details on the{' '}
+              <Link to="/pricing#hardship" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
             </p>
           </Card>
         ) : (
@@ -139,10 +139,10 @@ export function TrackInfo() {
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} published so far · ~{track.totalMinutes} min total ·
               {' '}needs at least {lessonsUntilCredential(track)} more lesson{lessonsUntilCredential(track) === 1 ? '' : 's'} before a
-              {' '}€69 credential would be honest
+              {' '}credential would be honest
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-              Every lesson here is free to read right now, same as every other track. We just won't sell a
+              Every lesson here is open to read right now. We just won't sell a
               certificate for a curriculum this thin — the credential opens on its own, automatically, once
               there's enough here to back it up. No code change needed, and no early-access price either: one
               price for everyone, when it's ready.
@@ -153,9 +153,9 @@ export function TrackInfo() {
 
       {/* CTA */}
       <section style={{ padding: 'var(--space-2xl) var(--space-xl) var(--space-4xl)', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: 'var(--space-lg)' }}>read it all free. pay only when you're ready to prove it.</h2>
+        <h2 style={{ marginBottom: 'var(--space-lg)' }}>try lesson 1 free. then pay once for the rest.</h2>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 'var(--space-xl)' }}>
-          <Link to="/signup"><Button variant="primary" size="lg">Start learning free</Button></Link>
+          <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
         </div>
         <Link to="/tracks" style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', textDecoration: 'underline', textUnderlineOffset: '2px' }}>

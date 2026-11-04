@@ -128,7 +128,7 @@ Sentiment:"`}</pre>
       </p>
 
       <p style={p}>
-        The AI Literacy for Humans track on Bedcoders has a full module on prompt debugging — including a systematic framework for figuring out exactly why a prompt isn't working.
+        The AI-Assisted Software Development track at Soft Reset School covers prompt debugging — including a systematic framework for figuring out exactly why a prompt isn't working.
       </p>
     </BlogLayout>
   );

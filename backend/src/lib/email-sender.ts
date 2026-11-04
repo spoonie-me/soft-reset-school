@@ -2,7 +2,9 @@ import { Resend } from 'resend';
 import { prisma } from './db.js';
 import { getSequence } from './email-sequences.js';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// A missing key must not crash the whole API at import time (the Resend client throws
+// on construction); sends will simply fail and be logged. Same approach as lib/email.ts.
+const resend = new Resend(process.env.RESEND_API_KEY || 'dummy');
 
 export async function sendSequenceEmail(subscriberId: string) {
   const subscriber = await prisma.emailSubscriber.findUnique({

@@ -2,6 +2,8 @@
 import { Router } from 'express';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
+import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
+import { isTrialLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -26,25 +28,59 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Update lesson progress
-router.post('/:lessonId', authMiddleware, async (req, res) => {
+router.post('/:lessonId', authMiddleware, entitlementsMiddleware, async (req, res) => {
   try {
-    const authReq = req as AuthRequest;
-    const { status, progress: pct } = req.body;
+    const authReq = req as EntitledRequest;
+    const { status, progress: pct } = req.body ?? {};
+
+    if (status !== undefined && status !== 'in-progress' && status !== 'completed') {
+      res.status(400).json({ error: 'Invalid status' });
+      return;
+    }
+    if (pct !== undefined && (!Number.isInteger(pct) || pct < 0 || pct > 100)) {
+      res.status(400).json({ error: 'Progress must be a whole number from 0 to 100' });
+      return;
+    }
+
+    // Same rule as reading the lesson: the trial lesson is open, everything
+    // else needs the track. Without this, anyone logged in could mark paid
+    // lessons complete (and collect the XP) without having bought them.
+    const lesson = await prisma.lesson.findUnique({
+      where: { id: req.params.lessonId },
+      include: { module: { include: { domain: true } } },
+    });
+    if (!lesson || !lesson.isPublished) {
+      res.status(404).json({ error: 'Lesson not found' });
+      return;
+    }
+    const trackId = lesson.module?.domain?.trackId;
+    if (trackId && !isTrialLesson(lesson) && !authReq.trackAccess?.includes(trackId)) {
+      res.status(403).json({ error: 'Track access required', trackId });
+      return;
+    }
+
+    // A later "in-progress" ping (e.g. reopening a finished lesson) must not
+    // undo a completion.
+    const existing = await prisma.lessonProgress.findUnique({
+      where: { userId_lessonId: { userId: authReq.userId!, lessonId: lesson.id } },
+    });
+    const keepCompleted = existing?.status === 'completed' && status !== 'completed';
 
     const updated = await prisma.lessonProgress.upsert({
       where: {
-        userId_lessonId: { userId: authReq.userId!, lessonId: req.params.lessonId },
+        userId_lessonId: { userId: authReq.userId!, lessonId: lesson.id },
       },
       create: {
         userId: authReq.userId!,
-        lessonId: req.params.lessonId,
+        lessonId: lesson.id,
         status: status ?? 'in-progress',
         progress: pct ?? 0,
+        completedAt: status === 'completed' ? new Date() : undefined,
       },
       update: {
-        status: status ?? undefined,
-        progress: pct ?? undefined,
-        completedAt: status === 'completed' ? new Date() : undefined,
+        status: keepCompleted ? undefined : status ?? undefined,
+        progress: keepCompleted ? undefined : pct ?? undefined,
+        completedAt: status === 'completed' && !existing?.completedAt ? new Date() : undefined,
       },
     });
 

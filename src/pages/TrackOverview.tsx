@@ -298,8 +298,7 @@ export function TrackOverview() {
                         background: mod.locked ? 'var(--bg-void)' : 'var(--bg-elevated)',
                         border: '1px solid var(--bg-border)',
                         borderRadius: 'var(--radius-md)',
-                        opacity: mod.locked ? 0.6 : 1,
-                      }}
+                                      }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-sm)', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>

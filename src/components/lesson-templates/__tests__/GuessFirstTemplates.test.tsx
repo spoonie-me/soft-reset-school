@@ -844,3 +844,47 @@ describe('accessibility: PredictNumber inputs do not collide', () => {
     expect(a.id).not.toBe(b.id);
   });
 });
+
+describe('authored lessons written in the older shapes', () => {
+  it('BuildIt shows plain-string options as buttons and explains the answer', async () => {
+    const user = userEvent.setup();
+    render(
+      <BuildIt
+        intro="Build it."
+        objectName="plan"
+        synthesis="Done."
+        fields={[
+          {
+            key: 'storage',
+            prompt: 'What do you check?',
+            options: ['Nothing at all', 'Whether the format is open and portable'],
+            correctValue: 'Whether the format is open and portable',
+            feedback: 'An open format is what stops lock-in.',
+          },
+        ]}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Nothing at all' })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Nothing at all' }));
+    expect(screen.getByText(/open format is what stops lock-in/i)).toBeInTheDocument();
+  });
+
+  it('DiagnoseMechanism does not crash when a lesson gives no per-option feedback', async () => {
+    const user = userEvent.setup();
+    render(
+      <DiagnoseMechanism
+        scenario="Something failed."
+        question="Why?"
+        options={[
+          { label: 'The first reason', value: 'a' },
+          { label: 'The second reason', value: 'b' },
+        ]}
+        correctValue="a"
+        mechanism="The first reason is the real one."
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: 'The second reason' }));
+    await user.click(screen.getByRole('button', { name: /continue/i }));
+    expect(screen.getByText(/the first reason is the real one/i)).toBeInTheDocument();
+  });
+});

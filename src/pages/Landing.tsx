@@ -38,8 +38,8 @@ export function Landing() {
   return (
     <div>
       <SEO
-        title="Soft Reset School — income built from inside the illness, not after it"
-        description="AI-era employable skills for bed- and home-ridden chronically ill people. Not a cure narrative — a restart you get to take as many times as you need, directing AI tools well enough that your hours stop setting your ceiling."
+        title="Soft Reset School | A restart, not a comeback story"
+        description="AI-era work skills for people returning to work after illness or time away. Try lesson 1 free. Short units, a lower-energy path in every module, nothing timed."
         canonical="/"
       />
 
@@ -58,10 +58,10 @@ export function Landing() {
               A hard reset wipes the slate and starts from zero, once. A soft reset lets you resume, gently, as many times as your body requires — no cure required first, no "get well, then work."
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-2xl)', maxWidth: 560 }}>
-              Real, billable AI-era skills for people who are bed- or home-bound. Direct AI tools well enough that your energy envelope stops setting your ceiling — or bring judgment an AI structurally can't supply. Either way: income built from inside the illness, not after it.
+              Practical AI-era skills for people going back to work, taught at the pace you can sustain. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every track is free.
             </p>
             <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-2xl)' }}>
-              {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'crash-day kind'].map((stat) => (
+              {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'kind to bad weeks'].map((stat) => (
                 <span key={stat} style={{ fontSize: '0.8125rem', color: 'var(--text-tertiary)', border: '1px solid var(--bg-border)', padding: '3px 10px', borderRadius: 6, fontFamily: 'var(--font-display)' }}>{stat}</span>
               ))}
             </div>
@@ -75,10 +75,11 @@ export function Landing() {
                     if (typeof (window as any).umami !== 'undefined') (window as any).umami.track('get-started-hero');
                   }}
                 >
-                  Start for Free
+                  Try lesson 1 free
                 </Button>
               </Link>
               <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
+              <Link to="/returning-to-work"><Button variant="secondary" size="lg">Not sure where to start?</Button></Link>
             </div>
           </div>
           <div style={{ height: 220, background: 'var(--bg-elevated)', border: '1px solid var(--bg-border)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-lg)' }}>
@@ -87,22 +88,9 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Origin */}
-      <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-xl)' }}>a paramedic who became the patient</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-lg)' }}>
-            Nine years responding to other people's emergencies, then years being the emergency nobody reached in time — dismissed by doctor after doctor before a diagnosis that should have come sooner. That's the actual founding story here, not a metaphor borrowed for a pitch deck.
-          </p>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem' }}>
-            <strong style={{ color: 'var(--text-primary)' }}>Machines handle information. Humans handle transformation.</strong> That's the whole organizing idea behind every track here — let AI hold what it's actually good at, and build the part of your income around what it structurally can't do.
-          </p>
-        </div>
-      </section>
-
       {/* Tracks — organized by the actual framework, not arbitrary cards */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-        <h2 style={{ marginBottom: 'var(--space-sm)' }}>two kinds of income, one honest question</h2>
+        <h2 style={{ marginBottom: 'var(--space-sm)' }}>two ways to work with AI, one honest question</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)', maxWidth: 640 }}>
           Every track answers the same question differently: what should only a human do here? Four tracks split across the two real answers.
         </p>
@@ -140,7 +128,7 @@ export function Landing() {
         </div>
 
         <p style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '0.875rem', marginTop: 'var(--space-2xl)' }}>
-          Prefer to start with foundations first? The original coding curriculum — programming basics through AI agents — is still here, free to read like everything else. <Link to="/tracks" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Browse all 8 tracks</Link>. Every track ends in an optional <Link to="/pricing" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>€69 career credential</Link> employers can verify.
+          <Link to="/tracks" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Browse all 4 tracks</Link>. Every track ends in an optional <Link to="/pricing" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>career credential</Link> employers can verify.
         </p>
       </section>
 
@@ -172,18 +160,18 @@ export function Landing() {
       {/* Pricing */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-sm)' }}>every lesson is free. no card, no subscription.</h2>
+          <h2 style={{ marginBottom: 'var(--space-sm)' }}>try lesson 1 free. then €99 once per track.</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-            Read every lesson in every track for free, forever. Nothing bills you on a bad month — there is no monthly anything. You pay once, only when you're ready to prove it.
+            The first lesson of every track is a free trial. The full track, the exam and the certificate are €99 once. Nothing bills you on a bad month — there is no monthly anything.
           </p>
           <Card style={{ textAlign: 'center', maxWidth: 440, margin: '0 auto var(--space-2xl)', borderColor: 'var(--signal)' }}>
             <div style={{ width: 32, height: 3, background: 'var(--signal)', borderRadius: 2, margin: '0 auto var(--space-md)' }} />
-            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>€69 <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once, per credential</span></p>
+            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>€99 <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once, per track — 2 for €149, 3 for €199</span></p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>certification exam · permanent verifiable certificate · no renewal, ever</p>
             <Link to="/pricing" style={{ textDecoration: 'none' }}><Button variant="primary" size="sm" style={{ width: '100%' }}>See pricing</Button></Link>
           </Card>
           <p style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-            Can't afford €69? Pay what you can, down to €0 — no proof, no application. · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
+            Can't afford €99? Ask for a hardship code, no reason needed. · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
           </p>
         </div>
       </section>
@@ -192,7 +180,7 @@ export function Landing() {
       <section style={{ padding: 'var(--space-4xl) var(--space-xl)', textAlign: 'center' }}>
         <h2 style={{ marginBottom: 'var(--space-lg)' }}>restart as many times as you need to.</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)', fontSize: '1.125rem' }}>
-          Every lesson free. No card. No deadlines. No good day required.
+          Lesson 1 free. No card. No deadlines. No good day required.
         </p>
         <Link to="/signup">
           <Button
@@ -203,7 +191,7 @@ export function Landing() {
               if (typeof (window as any).umami !== 'undefined') (window as any).umami.track('get-started-footer');
             }}
           >
-            Start for Free
+            Try lesson 1 free
           </Button>
         </Link>
       </section>

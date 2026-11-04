@@ -3,22 +3,12 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import { stripe, CREDENTIAL_PRODUCTS } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
-import { sendPurchaseConfirmation } from '../lib/email.js';
+import { sendPurchaseConfirmation, sendCheckoutReminder } from '../lib/email.js';
 import { postWelcomeToTrack } from '../lib/discord.js';
 import { recordPurchase, sessionFullyRecorded } from '../lib/credentialGrant.js';
+import { TRACK_NAMES } from '../lib/trackNames.js';
 
 const router = Router();
-
-const TRACK_NAMES: Record<string, string> = {
-  fundamentals: '🛏️ Code from Bed',
-  ai: '🤖 AI Literacy for Humans',
-  tools: '⚡ Build Cool Tools Fast',
-  advanced: '🚀 AI Agents that Work',
-  'ai-orchestrated-dev': '🧭 AI-Assisted Software Development',
-  'ai-workflow-consulting': '⚙️ AI Automation Consulting',
-  'ai-oversight-health-informatics': '🩺 AI-Augmented Medical Coding',
-  'accessibility-qa-lived-experience': '♿ Digital Accessibility QA',
-};
 
 // Stripe webhook — must use raw body
 router.post('/stripe', async (req: Request, res: Response) => {
@@ -48,9 +38,18 @@ router.post('/stripe', async (req: Request, res: Response) => {
       // One-time Credential purchase — replaces the old subscription
       // activation path (2026-08-04, PRD.md §4.5). Every checkout session
       // here is mode:'payment', not mode:'subscription'.
-      case 'checkout.session.completed': {
+      case 'checkout.session.completed':
+      case 'checkout.session.async_payment_succeeded': {
         const session = event.data.object;
         const sessionId = session.id;
+
+        // Delayed payment methods (e.g. SEPA debit) complete the session
+        // before the money arrives. Don't unlock anything until it's paid;
+        // checkout.session.async_payment_succeeded fires when it is.
+        if (session.payment_status === 'unpaid') {
+          console.log(`Webhook: session ${sessionId} completed but unpaid, waiting for async payment.`);
+          break;
+        }
 
         const customerId = session.customer as string;
         const productId = session.metadata?.productId as keyof typeof CREDENTIAL_PRODUCTS | undefined;
@@ -115,6 +114,45 @@ router.post('/stripe', async (req: Request, res: Response) => {
           );
         } catch (discordErr) {
           console.error('Failed to post Discord welcome message:', discordErr);
+        }
+        break;
+      }
+
+      // A checkout the learner started but never paid (Stripe expires it after
+      // 24h). One gentle reminder, only to people who opted in to emails.
+      // This endpoint also receives other projects' sessions on the shared
+      // Stripe account, so anything without our metadata is ignored.
+      case 'checkout.session.expired': {
+        const session = event.data.object;
+        const productId = session.metadata?.productId;
+        const userId = session.metadata?.userId;
+        if (session.payment_status === 'paid' || !userId || !productId || !(productId in CREDENTIAL_PRODUCTS)) break;
+
+        let trackIds: string[] = [];
+        try {
+          trackIds = session.metadata?.trackIds ? JSON.parse(session.metadata.trackIds) : [];
+        } catch {
+          break;
+        }
+        if (trackIds.length === 0) break;
+
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+        if (!user || !user.marketingOptIn) break;
+
+        // Bought another way since (hardship code, a later session)? Nothing to remind about.
+        const owned = await prisma.credentialPurchase.count({
+          where: { userId: user.id, trackId: { in: trackIds } },
+        });
+        if (owned > 0) break;
+
+        try {
+          await sendCheckoutReminder(user.email, {
+            name: user.name ?? undefined,
+            tracks: trackIds.map((t) => TRACK_NAMES[t] ?? t),
+            amount: `€${((session.amount_total ?? 0) / 100).toFixed(2)}`,
+          });
+        } catch (emailErr) {
+          console.error('Failed to send checkout reminder:', emailErr);
         }
         break;
       }

@@ -3500,7 +3500,7 @@
     "id": "aod-pr4-l04",
     "moduleId": "aod-pr4",
     "order": 4,
-    "duration": 25,
+    "duration": 30,
     "difficulty": "medium",
     "title": "Choosing Tools You Can Leave",
     "description": "Evaluating an AI tool for how easily you could switch away from it if you needed to — before committing workflow, data, or habits to it.",
@@ -3621,6 +3621,76 @@
       {
         "type": "takeaway",
         "body": "Three checks before adopting a new tool: portable context storage, genuinely flexible pricing, and a workflow that survives the tool being removed."
+      },
+      {
+        "type": "pod-header",
+        "title": "Keep a task set, rerun it on every new model",
+        "podNumber": 3,
+        "duration": 5
+      },
+      {
+        "type": "text",
+        "body": "Choosing tools you can leave is easier if you can answer one question quickly: is the new option actually better for my work? Most people answer it by feel, or by reading someone else's benchmark that has nothing to do with their tasks.\n\nThe cheap alternative is a small kept task set. Save five tasks you really do, each with the standard of good you wrote for it: the example, the yes or no checks and the bad example. When a new model or tool arrives, run all five with the same briefs. Score each against the checks. Write down time and cost beside the quality.\n\nThen look at one table, not five impressions. Switch only the tasks where the new option is better for the price. Keep the set. In six months you will run it again, and you will have a real answer rather than a mood.\n\nKeep it small. Five tasks run twice is ten runs, and that is plenty."
+      },
+      {
+        "type": "worked-example",
+        "problem": "A new model is released and everyone says it is better. Decide, for your own weekly work, whether to switch.",
+        "steps": [
+          {
+            "label": "Keep five real tasks with their standard of good",
+            "work": "Five jobs you actually do: for example, a ticket summary, a short status report, a test for a small function, a data clean-up, a code review comment. Each has its example and its yes or no checks saved with it.",
+            "why": "Without a saved standard, you can only compare how the two results feel. With it, you compare results against the same checks."
+          },
+          {
+            "label": "Run all five on both, with identical briefs",
+            "work": "Same wording, same context, same example. Change only the model. Run each task twice if the task is one where results varied.",
+            "why": "If the briefs differ, you are comparing the briefs. Running twice tells you whether a difference is real or just variation."
+          },
+          {
+            "label": "Score against the checks and record time and cost",
+            "work": "A table with a row per task and columns for each check passed, minutes taken and cost per run.",
+            "why": "Quality alone hides the price, and price alone hides the quality. You need both beside each other."
+          },
+          {
+            "label": "Decide per task, not per model",
+            "work": "Switch the two tasks where the new model passes more checks for a similar cost. Keep the old one for the rest. Note the date and run it again at the next release.",
+            "why": "A new model is rarely better at everything. Deciding per task keeps the gains and the savings, and leaves you free to leave a tool without a scramble."
+          }
+        ],
+        "faded": {
+          "problem": "A cheaper, smaller model is released. Decide whether to use it for your weekly work.",
+          "blanks": [
+            {
+              "prompt": "What do you run both models on?",
+              "answer": "The same kept set of real tasks, with the same briefs and the same standard of good.",
+              "accept": [
+                "the kept task set with identical briefs"
+              ],
+              "why": "The same tasks and briefs are what make the comparison fair."
+            },
+            {
+              "prompt": "What do you record beside quality?",
+              "answer": "Time and cost per run.",
+              "accept": [
+                "time and cost"
+              ],
+              "why": "A smaller model is attractive because of price, so the price has to be in the table."
+            },
+            {
+              "prompt": "At what level do you make the switch decision?",
+              "answer": "Per task, not for the model as a whole.",
+              "accept": [
+                "per task"
+              ],
+              "why": "A smaller model may be good enough for the simple tasks and not for the hard ones."
+            }
+          ]
+        },
+        "procedure": "Keep a small set of real tasks with a standard of good for each. When something new arrives, run the same briefs on both, score against the checks, record time and cost, and decide task by task."
+      },
+      {
+        "type": "takeaway",
+        "body": "Judge a new model on your own five tasks, with the same briefs and the same checks. Decide task by task."
       }
     ]
   },

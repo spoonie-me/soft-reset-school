@@ -14,10 +14,11 @@
 # Soft Reset School
 
 The app serving [softreset.school](https://softreset.school) — the Soft Reset umbrella,
-split into **Lab** (ongoing content) and **School** (AI-era employable skills for bed-
-and home-bound chronically ill people). Every School lesson free forever; one-time €69
-Credentials (certification exam + permanent, publicly verifiable certificate) are the
-only paid product. See `BUSINESS_MODEL.md` for the full operating model.
+split into **Lab** (ongoing content) and **School** (AI-era work skills for people returning
+to work after illness, taught at the pace their body allows). Each of the four career tracks
+costs €99 once (2 for €149, 3 for €199), with no subscription. The first lesson of every track
+is a free trial, hardship codes are available by email, and nothing here promises a job or an
+income. See `BUSINESS_MODEL.md` for the operating model.
 
 **`main` is the production branch.** Pushing to `main` deploys softreset.school via the
 Vercel Git integration, and the production build also runs `prisma migrate deploy` +
@@ -30,7 +31,7 @@ the idempotent seed, so lesson/exam content in the database stays in sync with
 - Vite 8 + React 19.2 + TypeScript
 - Express 5 (`api/index.ts`) + Prisma 6 (Postgres, schema `bedcoders`)
 - Vercel deployment, custom domain `softreset.school`
-- Stripe (one-time Credential checkout), Resend, Anthropic SDK
+- Stripe (one-time track checkout), Resend, Anthropic SDK
 
 ## Local dev
 

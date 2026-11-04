@@ -56,7 +56,7 @@ app.use(helmet({
     },
   },
 }));
-const allowedOrigins = (process.env.CORS_ORIGIN ?? 'https://bedcoders.com')
+const allowedOrigins = (process.env.CORS_ORIGIN ?? 'https://softreset.school')
   .split(',')
   .map((o) => o.trim());
 app.use(cors({
@@ -125,7 +125,7 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 // Only listen when running standalone (not in Vercel serverless)
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`Bedcoders API running on port ${PORT}`);
+    console.log(`Soft Reset School API running on port ${PORT}`);
   });
 }
 

@@ -111,6 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { token, user } = await authApi.signup(data);
         localStorage.setItem(TOKEN_KEY, token);
         setState({ user, loading: false, error: null });
+        (window as any).trackEvent?.('signup_complete');
       } catch (err) {
         const message =
           err instanceof ApiError

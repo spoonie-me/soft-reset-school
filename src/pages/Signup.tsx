@@ -45,7 +45,7 @@ export function Signup() {
 
   return (
     <div style={{ maxWidth: 420, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
-      <SEO title="Sign Up — Start Building with AI" description="Create your free Bedcoders account. Learn Claude API, prompt engineering, and AI agents. First lesson free, no credit card required." canonical="/signup" />
+      <SEO title="Sign Up — try lesson 1 free" description="Create your free Soft Reset School account with just your email and start with lesson 1 of any career track. The full track, exam and credential are €99 once." canonical="/signup" />
       <h1 style={{ fontSize: '1.75rem', marginBottom: 'var(--space-sm)' }}>Create your account</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Start building with AI. Free to begin.
@@ -225,7 +225,7 @@ export function Signup() {
             <span
               style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem', lineHeight: 1.5 }}
             >
-              I'd like to receive updates about new modules and features (optional).
+              I'd like occasional emails: updates about new modules and features, and one reminder if I leave a checkout unfinished (optional).
             </span>
           </label>
         </div>

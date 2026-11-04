@@ -30,7 +30,7 @@ export interface TrackDepth {
 /** Published content per track — must match src/data/trackCatalog.ts. */
 export const TRACK_DEPTH: Record<string, TrackDepth> = {
   // Career tracks
-  'ai-orchestrated-dev': { lessonCount: 244, totalMinutes: 6100 },
+  'ai-orchestrated-dev': { lessonCount: 244, totalMinutes: 6135 },
   'ai-workflow-consulting': { lessonCount: 246, totalMinutes: 6150 },
   'ai-oversight-health-informatics': { lessonCount: 246, totalMinutes: 6135 },
   'accessibility-qa-lived-experience': { lessonCount: 243, totalMinutes: 6065 },

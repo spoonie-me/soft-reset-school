@@ -6,7 +6,10 @@ import { Button } from '@/components/Button';
 import { ProgressBar } from '@/components/ProgressBar';
 import { ExerciseRenderer, type ExerciseData, type ExerciseType } from '@/components/exercises/ExerciseRenderer';
 import { LoadingSpinner } from '@/components/ProtectedRoute';
-import { learningApi, type LessonDetailResponse } from '@/lib/api';
+import { learningApi, ApiError, type LessonDetailResponse } from '@/lib/api';
+import { getCatalogTrack } from '@/data/trackCatalog';
+import { TRACK_PRICE } from '@/data/pricing';
+import { LockedCard, LoadFailedCard } from '@/components/LockedCard';
 import { IS_DEV_MODE } from '@/lib/useApi';
 import { SEO } from '@/components/SEO';
 import { markdownComponents } from '@/components/lesson-templates/markdownComponents';
@@ -26,6 +29,9 @@ import {
   CaseSim, type CaseSimProps,
   LabBrief, type LabBriefProps,
 } from '@/components/lesson-templates/DepthTemplates';
+import { ScreenReaderSim, type ScreenReaderSimProps } from '@/components/lesson-templates/ScreenReaderSim';
+import { ListenBar } from '@/components/ListenBar';
+import { lessonSpeechChunks } from '@/lib/speech';
 
 /* ─── Types for lesson content ─── */
 interface TextSection { type: 'text'; body: string }
@@ -53,11 +59,12 @@ interface WorkedExampleSection extends WorkedExampleProps { type: 'worked-exampl
 interface RetrievalCheckSection extends RetrievalCheckProps { type: 'retrieval-check' }
 interface CaseSimSection extends CaseSimProps { type: 'case-sim' }
 interface LabBriefSection extends LabBriefProps { type: 'lab-brief' }
+interface ScreenReaderSimSection extends ScreenReaderSimProps { type: 'screen-reader-sim' }
 type ContentSection =
   | TextSection | CalloutSection | ExerciseSection | HookSection | TakeawaySection | PodHeaderSection | InteractiveGuessSection
   | ConceptFlowSection | DiagnoseMechanismSection | SpotFlawSection | SequenceItSection
   | BuildItSection | EvidenceStackSection | PredictNumberSection | PromptBuildSection
-  | WorkedExampleSection | RetrievalCheckSection | CaseSimSection | LabBriefSection;
+  | WorkedExampleSection | RetrievalCheckSection | CaseSimSection | LabBriefSection | ScreenReaderSimSection;
 
 interface LessonView {
   id: string;
@@ -67,11 +74,28 @@ interface LessonView {
   order: number;
   learningObjectives: string[];
   contentSections: ContentSection[];
+  trackId?: string;
   trackTitle: string;
   domainTitle: string;
   exercises: ExerciseData[];
   nextLessonId?: string;
+  /** The next lesson needs the full track, so this lesson is the end of the free trial. */
+  nextLessonLocked?: boolean;
   prevLessonId?: string;
+}
+
+/* Listen bar for one lesson: reads the text sections aloud and scrolls to each as it goes. */
+function LessonListen({ lesson, sectionRefs }: { lesson: LessonView; sectionRefs: React.MutableRefObject<(HTMLElement | null)[]> }) {
+  const chunks = useMemo(() => lessonSpeechChunks(lesson), [lesson]);
+  const follow = useCallback(
+    (idx: number) => {
+      if (idx < 0) return;
+      const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      sectionRefs.current[idx]?.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+    },
+    [sectionRefs],
+  );
+  return <ListenBar chunks={chunks} lessonId={lesson.id} onSection={follow} />;
 }
 
 /* ─── Callout styling by variant ─── */
@@ -187,10 +211,22 @@ const DEMO_LESSON: LessonView = {
  * request per scroll event. */
 const PROGRESS_SAVE_DEBOUNCE_MS = 2000;
 
+function trackFunnel(name: string, params?: Record<string, unknown>) {
+  (window as unknown as { trackEvent?: (n: string, p?: Record<string, unknown>) => void }).trackEvent?.(name, params);
+}
+
+function trackLessonComplete(lesson: { order: number; trackId?: string }) {
+  trackFunnel('lesson_complete', { track: lesson.trackId, lesson_order: lesson.order });
+}
+
 export function Lesson() {
   const { id } = useParams<{ id: string }>();
   const [lesson, setLesson] = useState<LessonView | null>(IS_DEV_MODE ? DEMO_LESSON : null);
   const [loading, setLoading] = useState(!IS_DEV_MODE);
+  // Set to the track id when the API says this lesson needs the track.
+  const [lockedTrack, setLockedTrack] = useState<string | null>(null);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [exerciseResults, setExerciseResults] = useState<Record<string, { feedback: string; score: number }>>({});
   // Submission failures, shown honestly instead of being papered over with a
   // fabricated score.
@@ -220,6 +256,9 @@ export function Lesson() {
     if (IS_DEV_MODE) return;
 
     async function load() {
+      setLoading(true);
+      setLoadFailed(false);
+      setLockedTrack(null);
       try {
         const res: LessonDetailResponse = await learningApi.getLesson(id ?? '1');
         const l = res.lesson;
@@ -252,12 +291,15 @@ export function Lesson() {
           order: l.order,
           learningObjectives: objectives,
           contentSections: sections,
-          trackTitle: l.trackTitle ?? 'Code from Bed',
+          trackId: l.trackId ?? undefined,
+          trackTitle: getCatalogTrack(l.trackId ?? undefined)?.title ?? l.trackTitle ?? 'Code from Bed',
           domainTitle: l.domainTitle ?? '',
           exercises,
           nextLessonId: l.nextLessonId ?? undefined,
+          nextLessonLocked: !!l.nextLessonLocked,
           prevLessonId: l.prevLessonId ?? undefined,
         });
+        trackFunnel('lesson_start', { track: l.trackId ?? undefined, lesson_order: l.order });
 
         // Resume where the learner stopped. Without this the saved percentage
         // is invisible: they'd come back to an empty progress bar and have no
@@ -280,15 +322,20 @@ export function Lesson() {
             }
           }
         }
-      } catch {
-        setLesson(DEMO_LESSON);
+      } catch (err) {
+        // A locked or failed lesson must never fall back to the demo lesson.
+        if (err instanceof ApiError && err.status === 403) {
+          setLockedTrack(String(err.body.trackId ?? ''));
+        } else {
+          setLoadFailed(true);
+        }
       } finally {
         setLoading(false);
       }
     }
 
     load();
-  }, [id]);
+  }, [id, attempt]);
 
   // Build exercise lookup
   const exerciseMap = useMemo(() => {
@@ -385,8 +432,24 @@ export function Lesson() {
       cancelPendingSave();
       lastSavedProgressRef.current = 100;
       learningApi.updateLessonProgress(lesson.id, 'completed', 100).catch(() => {});
+      trackLessonComplete(lesson);
     }
   }, [completedSections, lesson, cancelPendingSave]);
+
+  useEffect(() => {
+    if (lockedTrack !== null) trackFunnel('paywall_view', { track: lockedTrack || undefined });
+  }, [lockedTrack]);
+
+  if (lockedTrack !== null) {
+    return (
+      <>
+        <SEO title="Lesson locked" description="This lesson is part of a paid track." canonical="/pricing" noIndex />
+        <LockedCard what="lesson" trackId={lockedTrack} />
+      </>
+    );
+  }
+
+  if (loadFailed) return <LoadFailedCard onRetry={() => setAttempt((n) => n + 1)} />;
 
   if (loading || !lesson) {
     return (
@@ -460,6 +523,7 @@ export function Lesson() {
     cancelPendingSave();
     lastSavedProgressRef.current = 100;
     learningApi.updateLessonProgress(lesson.id, 'completed', 100).catch(() => {});
+    trackLessonComplete(lesson);
   };
 
   return (
@@ -498,6 +562,8 @@ export function Lesson() {
           ))}
         </ul>
       </Card>
+
+      <LessonListen lesson={lesson} sectionRefs={sectionRefs} />
 
       {/* Content sections */}
       {lesson.contentSections.map((section, i) => {
@@ -696,6 +762,15 @@ export function Lesson() {
           );
         }
 
+        if (section.type === 'screen-reader-sim') {
+          const s = section as ScreenReaderSimSection;
+          return (
+            <div key={i} ref={(el) => { sectionRefs.current[i] = el as HTMLElement | null; }} data-section-idx={i} onClick={() => markSectionRead(i)}>
+              <ScreenReaderSim title={s.title} intro={s.intro} note={s.note} controls={s.controls} debrief={s.debrief} />
+            </div>
+          );
+        }
+
         if (section.type === 'evidence-stack') {
           const s = section as EvidenceStackSection;
           return (
@@ -764,6 +839,21 @@ export function Lesson() {
         return null;
       })}
 
+      {/* End of the free trial */}
+      {lesson.nextLessonLocked && lesson.nextLessonId && (
+        <Card style={{ marginTop: 'var(--space-3xl)', padding: 'var(--space-xl)' }}>
+          <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-sm)' }}>That was the free trial</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
+            The rest of the track is €{TRACK_PRICE} once: every lesson, the exam and the certificate. No subscription, no
+            renewal. If that is out of reach, ask for a hardship code. No reason needed.
+          </p>
+          <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+            <Link to={`/tracks/${lesson.trackId ?? ''}`} onClick={markLessonComplete}><Button variant="primary">See the full track</Button></Link>
+            <Link to="/pricing#hardship" onClick={markLessonComplete}><Button variant="secondary">Ask for a hardship code</Button></Link>
+          </div>
+        </Card>
+      )}
+
       {/* Navigation */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--space-3xl)', paddingTop: 'var(--space-xl)', borderTop: '1px solid var(--bg-border)' }}>
         {lesson.prevLessonId ? (
@@ -771,7 +861,11 @@ export function Lesson() {
         ) : (
           <Link to="/dashboard"><Button variant="ghost">Back to dashboard</Button></Link>
         )}
-        {lesson.nextLessonId ? (
+        {lesson.nextLessonLocked ? (
+          <Link to="/dashboard" onClick={markLessonComplete}>
+            <Button variant="secondary">Finish lesson &check;</Button>
+          </Link>
+        ) : lesson.nextLessonId ? (
           <Link to={`/lesson/${lesson.nextLessonId}`} onClick={markLessonComplete}>
             <Button variant="primary">Next lesson &rarr;</Button>
           </Link>

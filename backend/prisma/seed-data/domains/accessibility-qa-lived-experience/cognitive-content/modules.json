@@ -2,7 +2,7 @@
   {
     "id": "aqa-cc1",
     "title": "Cognitive Accessibility",
-    "description": "Identify barriers created by memory demand, complexity and unpredictability — redundant entry, layout that shifts under a pointer, instructions that arrive after the mistake, forms that punish one wrong field with total loss, and brain fog treated as a real design constraint rather than an edge case.",
+    "description": "Identify barriers created by memory demand, complexity and unpredictability — redundant entry, layout that shifts under a pointer, instructions that arrive after the mistake, forms that punish one wrong field with total loss, and limited attention and memory treated as a real design constraint rather than an edge case.",
     "tier": "application",
     "bloomLevel": "analyze",
     "order": 1,

@@ -229,7 +229,7 @@
     "order": 3,
     "duration": 20,
     "difficulty": "medium",
-    "title": "Writing that gets you hired without a call",
+    "title": "Writing that explains your offer",
     "description": "The outreach message, the one-pager, the case-study post — the writing that has to do the convincing before anyone agrees to spend thirty minutes talking to you.",
     "learningObjectives": [
       {
@@ -2427,7 +2427,7 @@
     "order": 5,
     "duration": 20,
     "difficulty": "easy",
-    "title": "Declining cleanly and staying employable",
+    "title": "Declining cleanly",
     "description": "Every skill in this module is only useful if you can actually say no in a way that doesn't end your business relationships or your reputation in a small industry.",
     "learningObjectives": [
       {
@@ -3465,7 +3465,7 @@
     "order": 6,
     "duration": 30,
     "difficulty": "medium",
-    "title": "Practice — Redesign seven engagements to be capacity-resilient",
+    "title": "Practice — Redesign seven engagements to survive a missed week",
     "description": "Seven drills applying this module's skills at speed. No new concepts.",
     "learningObjectives": [
       {
@@ -3550,7 +3550,7 @@
       {
         "type": "lab-brief",
         "labId": "awc-pc4-capacity-resilient-engagement",
-        "title": "Your capacity-resilient engagement plan",
+        "title": "Your missed-week engagement plan",
         "brief": "Pick one real or realistic engagement — a past project, a current one, or a plausible near-future one. Rebuild its structure so a bad week costs it as little as possible.",
         "deliverable": "A restructured engagement plan: async-native deliverable structure, a staged timeline with visible, sized buffers, a pricing structure that doesn't punish a slow week, and a ready-to-send contingency message.",
         "stages": [
@@ -3612,7 +3612,7 @@
     "order": 8,
     "duration": 10,
     "difficulty": "easy",
-    "title": "Checkpoint — A Practice That Survives Your Body",
+    "title": "Checkpoint — Engagements That Survive a Missed Week",
     "description": "Ten questions: four from this module, four from The Work You Won't Take, two from further back. Ungraded, untimed.",
     "learningObjectives": [
       {
@@ -3629,10 +3629,10 @@
       },
       {
         "type": "retrieval-check",
-        "title": "Checkpoint — A Practice That Survives Your Body",
+        "title": "Checkpoint — Engagements That Survive a Missed Week",
         "questions": [
           {
-            "from": "This module — A Practice That Survives Your Body",
+            "from": "This module — Engagements That Survive a Missed Week",
             "prompt": "Which engagement stage most genuinely benefits from being live rather than async?",
             "options": [
               {
@@ -3652,7 +3652,7 @@
             "explanation": "Kickoff genuinely benefits from live back-and-forth; most everything after is better served by a written artefact."
           },
           {
-            "from": "This module — A Practice That Survives Your Body",
+            "from": "This module — Engagements That Survive a Missed Week",
             "prompt": "Why should an async-first structure be stated in the original proposal rather than introduced later?",
             "options": [
               {
@@ -3672,7 +3672,7 @@
             "explanation": "Timing changes the signal even when the wording is identical — say it before anything's been missed."
           },
           {
-            "from": "This module — A Practice That Survives Your Body",
+            "from": "This module — Engagements That Survive a Missed Week",
             "prompt": "What makes a timeline buffer actually survive to protect a bad week, rather than getting silently spent?",
             "options": [
               {
@@ -3692,7 +3692,7 @@
             "explanation": "A buffer with no separate existence gets silently absorbed by optimism on a good week; a visible line requires a deliberate decision to spend."
           },
           {
-            "from": "This module — A Practice That Survives Your Body",
+            "from": "This module — Engagements That Survive a Missed Week",
             "prompt": "What three things does a client-facing incapacity message actually need to include?",
             "options": [
               {
@@ -4472,7 +4472,7 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Staying Current Without Drowning",
-    "description": "Ten questions: four from this module, four from A Practice That Survives Your Body, two from further back. Ungraded, untimed.",
+    "description": "Ten questions: four from this module, four from Engagements That Survive a Missed Week, two from further back. Ungraded, untimed.",
     "learningObjectives": [
       {
         "text": "Retrieve this module's core distinctions and reinforce earlier modules across the phase",
@@ -4571,7 +4571,7 @@
             "explanation": "The weekly habits are reactive, needing an announcement or changelog as a trigger — a scheduled review is the only habit that catches an untriggered stale assumption."
           },
           {
-            "from": "Previous module — A Practice That Survives Your Body",
+            "from": "Previous module — Engagements That Survive a Missed Week",
             "prompt": "What makes a timeline buffer actually survive to protect a bad week?",
             "options": [
               {
@@ -4591,7 +4591,7 @@
             "explanation": "A buffer with no separate existence gets silently absorbed by optimism; a visible line requires a deliberate decision to spend."
           },
           {
-            "from": "Previous module — A Practice That Survives Your Body",
+            "from": "Previous module — Engagements That Survive a Missed Week",
             "prompt": "What three things does a client-facing incapacity message need to include?",
             "options": [
               {
@@ -4611,7 +4611,7 @@
             "explanation": "These three give the client what they need to plan; the rest is optional personal disclosure."
           },
           {
-            "from": "Previous module — A Practice That Survives Your Body",
+            "from": "Previous module — Engagements That Survive a Missed Week",
             "prompt": "Why should an async-first structure be stated in the original proposal rather than introduced later?",
             "options": [
               {
@@ -4631,7 +4631,7 @@
             "explanation": "Timing changes the signal even when the wording is identical — say it before anything's been missed."
           },
           {
-            "from": "Previous module — A Practice That Survives Your Body",
+            "from": "Previous module — Engagements That Survive a Missed Week",
             "prompt": "What's the honest, sufficient case for fixed-fee pricing to a client, without disclosing personal reasons?",
             "options": [
               {

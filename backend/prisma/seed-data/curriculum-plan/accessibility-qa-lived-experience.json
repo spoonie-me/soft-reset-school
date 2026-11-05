@@ -833,7 +833,7 @@
             },
             {
               "order": 5,
-              "title": "Brain fog as a design constraint, not an edge case",
+              "title": "Limited attention and memory as a design constraint",
               "minutes": 20,
               "energy": "low",
               "bloom": "evaluate",
@@ -1018,7 +1018,7 @@
         {
           "order": 14,
           "slug": "energy-cost",
-          "name": "The Energy Cost of an Interface",
+          "name": "Interaction Cost: What a Task Really Demands",
           "tier": "mastery",
           "bloom": "evaluate",
           "objective": "Measure how much a task costs a user who has a limited budget of effort, and argue it as a real finding.",
@@ -1034,7 +1034,7 @@
             },
             {
               "order": 2,
-              "title": "Sessions that time out on someone who had to lie down",
+              "title": "Session timeouts and the user who steps away",
               "minutes": 20,
               "energy": "medium",
               "bloom": "analyze",
@@ -1050,7 +1050,7 @@
             },
             {
               "order": 4,
-              "title": "One-handed, lying down, on a phone: the real posture",
+              "title": "One-handed and small-screen use",
               "minutes": 20,
               "energy": "medium",
               "bloom": "analyze",
@@ -1079,7 +1079,7 @@
             "energy": "high"
           },
           "checkpoint": {
-            "title": "Checkpoint — The Energy Cost of an Interface",
+            "title": "Checkpoint — Interaction Cost: What a Task Really Demands",
             "minutes": 10,
             "energy": "low",
             "badDayPath": true,

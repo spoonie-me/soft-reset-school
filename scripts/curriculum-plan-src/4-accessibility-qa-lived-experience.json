@@ -193,7 +193,7 @@
             ["Consistency, predictability and the interface that moves", 20, "medium", "analyze", false],
             ["Instructions that arrive after the mistake", 25, "medium", "analyze", true],
             ["Error recovery without starting over", 20, "medium", "analyze", false],
-            ["Brain fog as a design constraint, not an edge case", 20, "low", "evaluate", true]
+            ["Limited attention and memory as a design constraint", 20, "low", "evaluate", true]
           ],
           "practice": ["Find the cognitive barrier in eight flows", 8],
           "lab": ["Audit a multi-step form for cognitive load", 4, "An audit with memory demand, recovery paths and specific reductions proposed"]
@@ -232,15 +232,15 @@
         },
         {
           "slug": "energy-cost",
-          "name": "The Energy Cost of an Interface",
+          "name": "Interaction Cost: What a Task Really Demands",
           "tier": "mastery",
           "bloom": "evaluate",
           "objective": "Measure how much a task costs a user who has a limited budget of effort, and argue it as a real finding.",
           "lessons": [
             ["Counting the interactions a task actually requires", 25, "low", "apply", true],
-            ["Sessions that time out on someone who had to lie down", 20, "medium", "analyze", false],
+            ["Session timeouts and the user who steps away", 20, "medium", "analyze", false],
             ["Work the interface makes you redo", 25, "medium", "analyze", true],
-            ["One-handed, lying down, on a phone: the real posture", 20, "medium", "analyze", false],
+            ["One-handed and small-screen use", 20, "medium", "analyze", false],
             ["Writing an energy-cost finding that survives \"that's not WCAG\"", 20, "medium", "create", true]
           ],
           "practice": ["Count and reduce the interaction cost of seven tasks", 7],

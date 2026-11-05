@@ -4099,7 +4099,7 @@
     "contentSections": [
       {
         "type": "pod-header",
-        "title": "Naming the Risk Before You're Paid",
+        "title": "Naming the Risk Before You Commit",
         "podNumber": 1,
         "duration": 20
       },
@@ -4719,7 +4719,7 @@
     "order": 8,
     "duration": 10,
     "difficulty": "easy",
-    "title": "Checkpoint — Naming the Risk Before You're Paid",
+    "title": "Checkpoint — Naming the Risk Before You Commit",
     "description": "Ten questions: four from this module, four from the previous one, and two pulling further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
@@ -4736,10 +4736,10 @@
       },
       {
         "type": "retrieval-check",
-        "title": "Checkpoint — Naming the Risk Before You're Paid",
+        "title": "Checkpoint — Naming the Risk Before You Commit",
         "questions": [
           {
-            "from": "This module — Naming the Risk Before You're Paid",
+            "from": "This module — Naming the Risk Before You Commit",
             "prompt": "What separates a real risk-section entry from a generic disclaimer?",
             "options": [
               {
@@ -4759,7 +4759,7 @@
             "explanation": "Anchorline's original \"model accuracy may vary\" was true and specific to nothing — the exclusion-coverage risk that actually mattered had to be named at the level of an actual mechanism to be useful."
           },
           {
-            "from": "This module — Naming the Risk Before You're Paid",
+            "from": "This module — Naming the Risk Before You Commit",
             "prompt": "Two designs have the same average error rate. One flags low-confidence cases visibly; the other returns every decision with no confidence signal at all. Why aren't they equally risky?",
             "options": [
               {
@@ -4779,7 +4779,7 @@
             "explanation": "Loud failure announces itself somewhere a person or process will see it; silent failure requires the risk section to recommend a fundamentally different kind of mitigation — a built-in detection mechanism, since none exists naturally."
           },
           {
-            "from": "This module — Naming the Risk Before You're Paid",
+            "from": "This module — Naming the Risk Before You Commit",
             "prompt": "In a regulated process, why should the first-questions checklist (jurisdiction, obligations specific to automation, expected audit trail) be answered before scoping, not folded into the risk section afterward?",
             "options": [
               {
@@ -4799,7 +4799,7 @@
             "explanation": "Anchorline's audit-trail and obligation questions weren't a formality — the answers determine what a compliant design even looks like, which is far more expensive to discover after scoping than before it."
           },
           {
-            "from": "This module — Naming the Risk Before You're Paid",
+            "from": "This module — Naming the Risk Before You Commit",
             "prompt": "A junior consultant writes: \"Risk: the model may occasionally be wrong. Mitigation: we use industry-leading technology and best practices.\" What's the flaw?",
             "options": [
               {
@@ -4819,7 +4819,7 @@
             "explanation": "A real pairing needs a specific mechanism (which situation, which cases) and a specific, checkable action the client could verify was actually done — not reassurance about quality."
           },
           {
-            "from": "This module — Naming the Risk Before You're Paid",
+            "from": "This module — Naming the Risk Before You Commit",
             "prompt": "A client wants to skip a named mitigation, framed as reasonable phased delivery. What's the actual test for whether this crosses into a request you shouldn't proceed under?",
             "options": [
               {

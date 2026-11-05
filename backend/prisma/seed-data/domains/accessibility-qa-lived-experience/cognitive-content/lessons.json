@@ -435,7 +435,7 @@
     "order": 5,
     "duration": 20,
     "difficulty": "medium",
-    "title": "Brain fog as a design constraint, not an edge case",
+    "title": "Limited attention and memory as a design constraint",
     "description": "Losing a word mid-sentence, rereading the same line three times, needing ten seconds to reorient after any interruption — brain fog is a design constraint like a screen reader or a colour-blind-safe palette, and standards coverage for it is genuinely thinner than for either.",
     "learningObjectives": [
       {
@@ -3074,7 +3074,7 @@
     "order": 2,
     "duration": 20,
     "difficulty": "medium",
-    "title": "Sessions that time out on someone who had to lie down",
+    "title": "Session timeouts and the user who steps away",
     "description": "A warn-and-extend session timeout satisfies WCAG 2.2.1 cleanly — and still isn't enough for an interruption whose length nobody, including the person having it, can predict in advance.",
     "learningObjectives": [
       {
@@ -3317,7 +3317,7 @@
     "order": 4,
     "duration": 20,
     "difficulty": "medium",
-    "title": "One-handed, lying down, on a phone: the real posture",
+    "title": "One-handed and small-screen use",
     "description": "A settings toggle that needs a long-press-then-drag gesture assumes two functioning hands and a flat surface — for someone holding a phone above their face with their other arm hooked up to an IV line, that assumption is the whole barrier.",
     "learningObjectives": [
       {
@@ -3583,7 +3583,7 @@
     "order": 7,
     "duration": 50,
     "difficulty": "hard",
-    "title": "Lab — Produce an Energy-Cost Audit of a Core User Journey",
+    "title": "Lab — Produce an Interaction-Cost Audit of a Core User Journey",
     "description": "Pick a real, multi-step journey and produce the artefact this whole module has been building toward: an honest interaction count, the session and redo risks that actually apply, and reductions specific enough for a team to build.",
     "learningObjectives": [
       {
@@ -3677,7 +3677,7 @@
     "order": 8,
     "duration": 10,
     "difficulty": "easy",
-    "title": "Checkpoint — The Energy Cost of an Interface",
+    "title": "Checkpoint — Interaction Cost: What a Task Really Demands",
     "description": "Ten questions pulling across this module, the module before it, and further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
@@ -3694,10 +3694,10 @@
       },
       {
         "type": "retrieval-check",
-        "title": "Checkpoint — The Energy Cost of an Interface",
+        "title": "Checkpoint — Interaction Cost: What a Task Really Demands",
         "questions": [
           {
-            "from": "This module — The Energy Cost of an Interface",
+            "from": "This module — Interaction Cost: What a Task Really Demands",
             "prompt": "An interaction inventory finds a task takes 14 taps as built, with a 6-tap honest minimum. What's the actual finding?",
             "options": [
               {
@@ -3717,7 +3717,7 @@
             "explanation": "The finding is the gap between the built count and the honest minimum, with each avoidable step named specifically — not a vague impression that the total feels high."
           },
           {
-            "from": "This module — The Energy Cost of an Interface",
+            "from": "This module — Interaction Cost: What a Task Really Demands",
             "prompt": "A form has a warn-and-extend session timeout that comfortably satisfies WCAG 2.2.1. Why might this still fail to protect someone mid-way through a dysautonomia episode?",
             "options": [
               {
@@ -3737,7 +3737,7 @@
             "explanation": "A warn-and-extend mechanism protects a predictable interruption where the person can act on the warning — it does nothing for an interruption that removes their ability to respond at exactly the moment the mechanism needs them to."
           },
           {
-            "from": "This module — The Energy Cost of an Interface",
+            "from": "This module — Interaction Cost: What a Task Really Demands",
             "prompt": "Why is 'reduces how often data gets lost' (a longer timeout) a weaker claim than 'protects the data regardless of interruption length' (autosave)?",
             "options": [
               {
@@ -3757,7 +3757,7 @@
             "explanation": "Reducing frequency and removing risk entirely are different properties — a longer timeout still eventually fails someone slower or more interrupted than the new limit assumes."
           },
           {
-            "from": "This module — The Energy Cost of an Interface",
+            "from": "This module — Interaction Cost: What a Task Really Demands",
             "prompt": "A drag-to-reorder gesture and a pair of 'move up'/'move down' buttons produce the same result. Why does the button version matter for one-handed use specifically?",
             "options": [
               {
@@ -4795,7 +4795,7 @@
             "explanation": "A confidently stated, false, blaming cause is a materially worse failure than a vague one — it's unhelpful, false, and blaming all at once."
           },
           {
-            "from": "Previous module — The Energy Cost of an Interface",
+            "from": "Previous module — Interaction Cost: What a Task Really Demands",
             "prompt": "A form has a warn-and-extend session timeout that fully satisfies WCAG 2.2.1. Why might this still fail to protect someone mid-episode of an involuntary health event?",
             "options": [
               {
@@ -4815,7 +4815,7 @@
             "explanation": "A warn-and-extend mechanism protects a predictable interruption where the person can act on the warning — it does nothing for one that removes their ability to respond."
           },
           {
-            "from": "Previous module — The Energy Cost of an Interface",
+            "from": "Previous module — Interaction Cost: What a Task Really Demands",
             "prompt": "A five-page form saves nothing until final submission. A failure on page 4 costs how much work?",
             "options": [
               {
@@ -4835,7 +4835,7 @@
             "explanation": "With no intermediate saving, a failure at any point costs everything completed up to that point equally — per-page or per-field saving bounds this loss to a much smaller unit of work."
           },
           {
-            "from": "Previous module — The Energy Cost of an Interface",
+            "from": "Previous module — Interaction Cost: What a Task Really Demands",
             "prompt": "A drag-to-reorder gesture and a pair of 'move up'/'move down' buttons produce the same result. Why does the button version matter for one-handed use?",
             "options": [
               {

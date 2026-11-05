@@ -15,7 +15,7 @@
         {
           "order": 1,
           "slug": "what-consulting-is",
-          "name": "What This Job Actually Is",
+          "name": "What the Work Involves",
           "tier": "foundation",
           "bloom": "understand",
           "objective": "Describe what an automation consultant is hired to decide, and what they are accountable for afterwards.",
@@ -76,7 +76,7 @@
             "energy": "high"
           },
           "checkpoint": {
-            "title": "Checkpoint — What This Job Actually Is",
+            "title": "Checkpoint — What the Work Involves",
             "minutes": 10,
             "energy": "low",
             "badDayPath": true,
@@ -704,7 +704,7 @@
         {
           "order": 10,
           "slug": "risk-framing",
-          "name": "Naming the Risk Before You're Paid",
+          "name": "Naming the Risk Before You Commit",
           "tier": "mastery",
           "bloom": "evaluate",
           "objective": "State what can go wrong, how badly, and who bears it — while the client can still say no.",
@@ -765,7 +765,7 @@
             "energy": "high"
           },
           "checkpoint": {
-            "title": "Checkpoint — Naming the Risk Before You're Paid",
+            "title": "Checkpoint — Naming the Risk Before You Commit",
             "minutes": 10,
             "energy": "low",
             "badDayPath": true,
@@ -1984,7 +1984,7 @@
             },
             {
               "order": 3,
-              "title": "Writing that gets you hired without a call",
+              "title": "Writing that explains your offer",
               "minutes": 20,
               "energy": "medium",
               "bloom": "create",
@@ -2150,7 +2150,7 @@
             },
             {
               "order": 5,
-              "title": "Declining cleanly and staying employable",
+              "title": "Declining cleanly",
               "minutes": 20,
               "energy": "low",
               "bloom": "create",
@@ -2185,7 +2185,7 @@
         {
           "order": 29,
           "slug": "sustainable-practice",
-          "name": "A Practice That Survives Your Body",
+          "name": "Engagements That Survive a Missed Week",
           "tier": "mastery",
           "bloom": "create",
           "objective": "Structure the work so a bad fortnight doesn't cost you a client.",
@@ -2233,7 +2233,7 @@
             }
           ],
           "practiceSet": {
-            "title": "Redesign seven engagements to be capacity-resilient",
+            "title": "Redesign seven engagements to survive a missed week",
             "minutes": 30,
             "drills": 7,
             "energy": "medium"
@@ -2246,7 +2246,7 @@
             "energy": "high"
           },
           "checkpoint": {
-            "title": "Checkpoint — A Practice That Survives Your Body",
+            "title": "Checkpoint — Engagements That Survive a Missed Week",
             "minutes": 10,
             "energy": "low",
             "badDayPath": true,

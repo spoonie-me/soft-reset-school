@@ -1183,7 +1183,7 @@
             "explanation": "The reassuring data-export clause hides the actual dependency in a second clause — months of field-mapping and exception-rule tuning don't come with you, which is real, underestimated exit cost."
           },
           {
-            "from": "Previous module — Naming the Risk Before You're Paid",
+            "from": "Previous module — Naming the Risk Before You Commit",
             "prompt": "Per the previous module, when should the failure modes of a proposed automation be named to a client?",
             "options": [
               {
@@ -1203,7 +1203,7 @@
             "explanation": "Naming what can go wrong, how badly, and who bears it belongs in the proposal itself, while the client still has a real choice — not discovered together after signing."
           },
           {
-            "from": "Previous module — Naming the Risk Before You're Paid",
+            "from": "Previous module — Naming the Risk Before You Commit",
             "prompt": "Why does the previous module treat silent failure as worse than loud failure, even at the same underlying error rate?",
             "options": [
               {
@@ -1223,7 +1223,7 @@
             "explanation": "Two designs with the same error rate carry different risk depending on whether the errors announce themselves — the whole reason silent failure gets its own category in the risk-framing module."
           },
           {
-            "from": "Previous module — Naming the Risk Before You're Paid",
+            "from": "Previous module — Naming the Risk Before You Commit",
             "prompt": "What does the previous module say about regulated processes specifically?",
             "options": [
               {
@@ -1243,7 +1243,7 @@
             "explanation": "Regulated processes carry questions worth asking before scoping begins, not after — the same 'ask before you're paid' logic the module's title states directly."
           },
           {
-            "from": "Previous module — Naming the Risk Before You're Paid",
+            "from": "Previous module — Naming the Risk Before You Commit",
             "prompt": "When is walking away from an engagement the right call, per the previous module?",
             "options": [
               {
@@ -3217,7 +3217,7 @@
             "explanation": "Matching the fallback to actual urgency meant the short outage didn't need an expensive manual fallback — but only because retry-and-queue was a deliberately designed behavior, not an assumption."
           },
           {
-            "from": "Three modules back — Naming the Risk Before You're Paid",
+            "from": "Three modules back — Naming the Risk Before You Commit",
             "prompt": "Per the risk-framing module, why does a proposal's risk section listing only generic categories (\"model accuracy may vary,\" \"data privacy must be maintained\") fail to do its job?",
             "options": [
               {
@@ -3237,7 +3237,7 @@
             "explanation": "Generic risk categories are true of almost any AI project and specific to none of them — they wouldn't have prompted anyone to check whether the model had actually been shown every policy exclusion, which is what let Anchorline's loan-modification tool wrongly approve an excluded loan type."
           },
           {
-            "from": "Three modules back — Naming the Risk Before You're Paid",
+            "from": "Three modules back — Naming the Risk Before You Commit",
             "prompt": "Two designs for Anchorline's triage tool reach the same 3% measured error rate. Per that module, why aren't they equally risky?",
             "options": [
               {

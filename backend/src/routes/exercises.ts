@@ -5,7 +5,8 @@ import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
 import { XP_REWARDS, levelFromXp } from '../lib/gamification.js';
 import { getExerciseFeedback } from '../lib/claude.js';
-import { canAccessLesson, lockedMessage } from '../lib/access.js';
+import { lockedMessage } from '../lib/access.js';
+import { canAccessExercise } from '../lib/exerciseAccess.js';
 
 const router = Router();
 
@@ -36,6 +37,7 @@ router.post('/:exerciseId/submit', authMiddleware, entitlementsMiddleware, async
             },
           },
         },
+        assessment: { include: { module: { include: { domain: true } } } },
       },
     });
 
@@ -44,13 +46,10 @@ router.post('/:exerciseId/submit', authMiddleware, entitlementsMiddleware, async
       return;
     }
 
-    // Check track access — the trial lesson is open, everything else needs the track
+    // Check track access. Lesson exercises: the trial lesson is open, the rest
+    // needs the track. Assessment-bank exercises (no lesson) always need full access.
     const trackId = exercise.lesson?.module?.domain?.trackId;
-    const exLesson = exercise.lesson;
-    if (trackId && !canAccessLesson({
-      domain: exLesson?.module?.domain, module: exLesson?.module, lesson: exLesson,
-      trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess,
-    })) {
+    if (!(await canAccessExercise(exercise, { trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess }))) {
       res.status(403).json({
         error: 'Track access required',
         message: lockedMessage(),

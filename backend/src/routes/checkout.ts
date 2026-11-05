@@ -377,30 +377,49 @@ router.post('/hardship', authMiddleware, async (req, res) => {
       return;
     }
 
-    const existing = await prisma.credentialPurchase.findFirst({
-      where: { userId: user.id, trackId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
-    });
-    if (existing) {
-      res.status(400).json({ error: 'You already have a Credential for this track.' });
-      return;
-    }
+    // One code = one track, once, in total. The unique key is (stripeSessionId,
+    // trackId, domainId), so on its own it only stops the same track twice and
+    // one code could still unlock every track. So look the code up first, and
+    // hold a per-code advisory lock so two simultaneous redemptions of one code
+    // run one after the other (the second then sees the first's row).
+    const sessionId = `hardship_code_${nonce}`;
+    const outcome = await prisma.$transaction(async (tx) => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${sessionId}))`;
 
-    try {
-      await prisma.credentialPurchase.create({
+      const used = await tx.credentialPurchase.findFirst({ where: { stripeSessionId: sessionId } });
+      if (used) {
+        // A retry by the same user for the same track stays a success.
+        return used.userId === user.id && used.trackId === trackId ? 'granted' : 'code_used';
+      }
+
+      const existing = await tx.credentialPurchase.findFirst({
+        where: { userId: user.id, trackId, productType: { in: [...EXAM_CREDENTIAL_PRODUCTS] } },
+      });
+      if (existing) return 'has_credential';
+
+      await tx.credentialPurchase.create({
         data: {
           userId: user.id,
           trackId,
           productType: 'track_credential',
-          stripeSessionId: `hardship_code_${nonce}`,
+          stripeSessionId: sessionId,
           amountCents: 0,
         },
       });
-    } catch (err) {
-      if ((err as { code?: string }).code === 'P2002') {
-        res.status(400).json({ error: 'That code has already been used.' });
-        return;
-      }
+      return 'granted';
+    }).catch((err: unknown) => {
+      // Backstop: the unique key fired anyway (same code, same track).
+      if ((err as { code?: string }).code === 'P2002') return 'code_used';
       throw err;
+    });
+
+    if (outcome === 'has_credential') {
+      res.status(400).json({ error: 'You already have a Credential for this track.' });
+      return;
+    }
+    if (outcome === 'code_used') {
+      res.status(409).json({ error: 'That code has already been used.' });
+      return;
     }
     res.json({ granted: true });
   } catch (err) {

@@ -95,7 +95,7 @@ router.get('/:moduleId', authMiddleware, entitlementsMiddleware, async (req, res
 // Submit assessment attempt
 router.post('/:assessmentId/attempt', authMiddleware, entitlementsMiddleware, async (req, res) => {
   try {
-    const authReq = req as AuthRequest;
+    const authReq = req as EntitledRequest;
     const { assessmentId } = req.params;
     const { answers } = req.body as {
       answers: Array<{ exerciseId: string; answer: unknown }>;
@@ -109,13 +109,23 @@ router.post('/:assessmentId/attempt', authMiddleware, entitlementsMiddleware, as
     const assessment = await prisma.moduleAssessment.findUnique({
       where: { id: assessmentId },
       include: {
-        module: { select: { domainId: true } },
+        module: { include: { domain: true } },
         exercises: { where: { isActive: true } },
       },
     });
 
     if (!assessment) {
       res.status(404).json({ error: 'Assessment not found' });
+      return;
+    }
+
+    // Same gate as the GET route: an assessment needs the track (or the course with courses on)
+    if (!hasFullAccess({ domain: assessment.module?.domain, trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess })) {
+      res.status(403).json({
+        error: 'Track access required',
+        trackId: assessment.module?.domain?.trackId,
+        message: lockedMessage(),
+      });
       return;
     }
 

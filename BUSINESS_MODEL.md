@@ -1,6 +1,6 @@
 # Soft Reset School — Business Model
 
-*Last updated: 2026-10-25. If a pricing decision contradicts this document, update it first,
+*Last updated: 2026-11-05 (price cut to €29 per track, 5 Nov 2026). If a pricing decision contradicts this document, update it first,
 deliberately, or don't make the change.*
 
 ## Mission
@@ -15,9 +15,9 @@ an income, and says so on every page that sells something.
 
 | Product | Price |
 |---|---|
-| One track (every lesson, the exam, a permanent verifiable certificate) | €99 |
-| Two tracks | €149 |
-| Three tracks | €199 |
+| One track (every lesson, the exam, a permanent verifiable certificate) | €29 |
+| Two tracks | €49 |
+| Three tracks | €69 |
 | Free trial | The first lesson of every track |
 | Hardship code | Free, by email to hi@softreset.school, single use, no proof asked |
 
@@ -34,7 +34,7 @@ cost the learner nothing and cost us nothing. Learners pay once, when they are r
 Organisations, not learners: employers, nonprofits, vocational-rehab agencies and return-to-work
 programmes that fund seats.
 
-- **Seats:** €99 per track, once, as single-use codes sent by email with an invoice (same
+- **Seats:** €29 per track, once, as single-use codes sent by email with an invoice (same
   mechanism as hardship codes, `backend/src/lib/hardship-code.ts`). This is manual and needs no
   new software.
 - **Ongoing partnerships:** a pool of seats topped up through the year plus a plain progress
@@ -53,14 +53,15 @@ separate specialisation credentials. See `docs/VISION.md` and `docs/CORE_TRACK_O
 
 | Track | Size |
 |---|---|
-| AI-Assisted Software Development | 244 lessons, about 102 hours |
-| AI Automation Consulting | 246 lessons, about 102 hours |
-| AI-Augmented Medical Coding | 246 lessons, about 102 hours |
-| Digital Accessibility QA | 243 lessons, about 101 hours |
+| AI-Assisted Software Development | 244 lessons |
+| AI Automation Consulting | 246 lessons |
+| AI-Augmented Medical Coding | 246 lessons |
+| Digital Accessibility QA | 243 lessons |
 
 A track is sellable only if its exam bank is verified and it meets the content-depth bar
-(`backend/src/lib/credentialBar.ts`, mirrored in `src/data/credentialBar.ts`). The 100-hour
-shape of each track is enforced by `scripts/curriculum-audit.mjs`.
+(`backend/src/lib/credentialBar.ts`, mirrored in `src/data/credentialBar.ts`). The planned
+shape of each track is checked by `scripts/curriculum-audit.mjs`. Hour totals are planned
+figures, not measured, so they are not used in sales copy.
 
 Four earlier foundation tracks (Code from Bed, AI Literacy, Build Cool Tools Fast, AI Agents
 that Work) are archived: hidden and not sold, with content and existing purchases intact.

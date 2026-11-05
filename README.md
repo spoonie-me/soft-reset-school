@@ -16,7 +16,7 @@
 The app serving [softreset.school](https://softreset.school) — the Soft Reset umbrella,
 split into **Lab** (ongoing content) and **School** (AI-era work skills for people returning
 to work after illness, taught at the pace their body allows). Each of the four career tracks
-costs €99 once (2 for €149, 3 for €199), with no subscription. The first lesson of every track
+costs €29 once (2 for €49, 3 for €69), with no subscription. The first lesson of every track
 is a free trial, hardship codes are available by email, and nothing here promises a job or an
 income. See `BUSINESS_MODEL.md` for the operating model.
 

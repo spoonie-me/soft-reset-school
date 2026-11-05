@@ -73,7 +73,7 @@ export function ForTeams() {
     <div>
       <SEO
         title="Seats for organisations | Soft Reset School"
-        description="Fund seats for people returning to work. €99 per track, single-use codes by email, no subscription. For employers, nonprofits, rehab agencies and return-to-work programmes."
+        description="Fund seats for people returning to work. €29 per track, single-use codes by email, no subscription. For employers, nonprofits, rehab agencies and return-to-work programmes."
         canonical="/for-teams"
         keywords="return to work programme training, fund retraining seats, vocational rehabilitation courses, career break retraining for employers"
         jsonLd={[
@@ -91,7 +91,7 @@ export function ForTeams() {
             offers: {
               '@type': 'Offer',
               name: 'Track seat',
-              price: '99.00',
+              price: '29.00',
               priceCurrency: 'EUR',
               availability: 'https://schema.org/InStock',
             },
@@ -107,7 +107,7 @@ export function ForTeams() {
           Fund a way back to work, <span style={{ color: 'var(--signal)' }}>at a pace people can keep.</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', marginBottom: 'var(--space-2xl)', maxWidth: 640 }}>
-          Buy seats for the people you support. Each seat is €99 for one track, once. We handle it by email, so there is no software to set up.
+          Buy seats for the people you support. Each seat is €29 for one track, once. We handle it by email, so there is no software to set up.
         </p>
         <div className="hero-cta" style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
           <a href="#demo"><Button variant="primary" size="lg">Ask about seats</Button></a>
@@ -139,7 +139,7 @@ export function ForTeams() {
         </p>
         <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-xl)' }}>
           <Card>
-            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.75rem', marginBottom: 'var(--space-xs)' }}>€99</p>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.75rem', marginBottom: 'var(--space-xs)' }}>€29</p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-md)' }}>per seat, once, any number of seats</p>
             <p style={{ color: 'var(--text-secondary)' }}>Every lesson in the track, the exam and a permanent, publicly verifiable certificate. Same price an individual pays.</p>
           </Card>

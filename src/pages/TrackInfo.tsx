@@ -101,7 +101,7 @@ export function TrackInfo() {
           <Card style={{ borderColor: track.color }}>
             <div style={{ width: 32, height: 3, background: track.color, borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
             <p style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>
-              €99 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever · 2 tracks €149, 3 tracks €199</span>
+              €29 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever · 2 tracks €49, 3 tracks €69</span>
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} · ~{track.totalMinutes} min total
@@ -126,7 +126,7 @@ export function TrackInfo() {
               stops operating.
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-              Can't afford €99? Ask for a hardship code, no reason needed. Details on the{' '}
+              Can't afford €29? Ask for a hardship code, no reason needed. Details on the{' '}
               <Link to="/pricing#hardship" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>pricing page</Link>.
             </p>
           </Card>

@@ -52,7 +52,7 @@ export function Employers() {
     <div>
       <SEO
         title="For Employers — hire-train-place talent and certification seats"
-        description="Hire graduates trained in AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA, or sponsor certification seats for your own people. €99 per seat, no expiry."
+        description="Hire graduates trained in AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA, or sponsor certification seats for your own people. €29 per seat, no expiry."
         canonical="/employers"
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -101,9 +101,9 @@ export function Employers() {
       {/* Seats — the one thing with a published price */}
       <section style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-2xl) var(--space-xl)' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Seats — €99 per track, flat</h2>
+          <h2 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-md)' }}>Seats — €29 per track, flat</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-            One seat is one person's credential for one track. A seat unlocks every lesson in the track, plus the exam and certificate. It costs exactly what an individual learner pays — €99 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
+            One seat is one person's credential for one track. A seat unlocks every lesson in the track, plus the exam and certificate. It costs exactly what an individual learner pays — €29 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
           </p>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
             Buying for an organisation? See <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>seats for organisations</Link>, or tell us how many below.

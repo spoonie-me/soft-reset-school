@@ -105,7 +105,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
         You just joined a community of coders who learn on their own terms — from bed, from the sofa, at their own pace.
       </p>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 16px;">
-        Lesson 1 of every track is yours to try for free. A full track is <strong style="color:#ffffff;">€99 once</strong>: every lesson, the exam and the certificate, with no subscription.
+        Lesson 1 of every track is yours to try for free. A full track is <strong style="color:#ffffff;">€29 once</strong>: every lesson, the exam and the certificate, with no subscription.
       </p>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 24px;">
         Here's what to do first:
@@ -155,7 +155,7 @@ export async function sendOnboardingDay2(to: string, name?: string) {
 
 // REMOVED 2026-10-25: sendOnboardingDay5. It was never sent, and it advertised
 // Pro Monthly / Pro Annual / per-seat plans and "cancel anytime", none of which
-// exist any more (a track is a one-time €99 purchase). If a follow-up to the
+// exist any more (a track is a one-time €29 purchase). If a follow-up to the
 // free lesson is wanted, write it fresh against the current pricing.
 
 // ─── Retention / Re-engagement ──────────────────────────────────────────

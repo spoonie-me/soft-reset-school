@@ -39,7 +39,7 @@ person. They redeem it on the Pricing page.
 2. Where did you get stuck, bored or tired?
 3. Was there a lesson you'd have skipped? Was any one really good?
 4. Did the lower-energy path help, or get in the way?
-5. Would you pay €99 for it? What would make that an easy yes, and what would make it a no?
+5. Would you pay €29 for it? What would make that an easy yes, and what would make it a no?
 6. Who would you show the certificate to? What would they say?
 
 ## 2. Employers and agencies (accessibility track)

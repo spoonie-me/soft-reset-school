@@ -150,7 +150,7 @@ export function Pricing() {
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
       <SEO
         title="Pricing — Soft Reset School"
-        description="Try lesson 1 free. Then pay once, €99 per track (2 for €149, 3 for €199), for every lesson, the certification exam and a permanent, publicly verifiable credential."
+        description="Try lesson 1 free. Then pay once, €29 per track (2 for €49, 3 for €69), for every lesson, the certification exam and a permanent, publicly verifiable credential."
         canonical="/pricing"
       />
 
@@ -161,7 +161,7 @@ export function Pricing() {
           No subscription. Nothing bills you on a bad month. Try the first lesson of any track free, then pay once for the whole track, the certification exam and a permanent, publicly verifiable credential.
         </p>
         <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
-          €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
+          €29 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
         </p>
       </div>
 
@@ -171,7 +171,7 @@ export function Pricing() {
         <h3 style={{ marginBottom: 'var(--space-xs)' }}>Start here: try lesson 1</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
           Create a free account with just your email and start with the first lesson of any track. No card.
-          The rest of the track, the exam and the certificate are €99 once.
+          The rest of the track, the exam and the certificate are €29 once.
         </p>
         <Link to="/signup">
           <Button variant="secondary">Try lesson 1 free</Button>
@@ -265,7 +265,7 @@ export function Pricing() {
         <CohortInterest />
       </div>
 
-      {/* Hardship codes. The price stays €99 so the credential means the same
+      {/* Hardship codes. The price stays €29 so the credential means the same
        * thing to everyone; a code is how money isn't a barrier. No reason asked. */}
       <div id="hardship" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Can't afford €{TRACK_PRICE}?</h3>

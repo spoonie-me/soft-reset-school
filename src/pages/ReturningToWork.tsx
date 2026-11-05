@@ -88,7 +88,7 @@ export function ReturningToWork() {
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <h2 style={{ marginBottom: 'var(--space-md)' }}>When you are ready to learn a skill</h2>
           <p style={body}>
-            The first lesson of every track is free, with no card. Each track is €99 once, with no subscription. If €99 is out of reach, ask for a hardship code at hi@softreset.school.
+            The first lesson of every track is free, with no card. Each track is €29 once, with no subscription. If €29 is out of reach, ask for a hardship code at hi@softreset.school.
           </p>
           <Link to="/tracks"><Button variant="primary" size="lg">See the four tracks</Button></Link>
         </div>

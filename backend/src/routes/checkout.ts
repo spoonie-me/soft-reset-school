@@ -166,7 +166,7 @@ router.get('/credentials', authMiddleware, async (req, res) => {
 
 // ─── Hardship codes ──────────────────────────────────────────────────────
 //
-// The credential stays €99 so it means the same thing to every employer.
+// The credential stays €29 so it means the same thing to every employer.
 // Anyone who can't pay asks hi@softreset.school for a code, no reason
 // needed. A code unlocks one track once. See lib/hardship-code.ts.
 

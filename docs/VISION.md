@@ -18,8 +18,8 @@ Spooniversity remains the home of the chronic-illness community and keeps the sp
 explaining, teaching, presenting, designing for real people, and directing AI tools well.
 
 Structure:
-1. **Core: Human Skills in the AI Age** (about 25 hours). Shared by everyone. See `docs/CORE_TRACK_OUTLINE.md`.
-2. **Specialisations**, each its own credential at about 100 hours:
+1. **Core: Human Skills in the AI Age** (planned, not measured). Shared by everyone. See `docs/CORE_TRACK_OUTLINE.md`.
+2. **Specialisations**, each its own credential:
    - AI-Assisted Software Development
    - AI Automation Consulting
    - AI-Augmented Medical Coding
@@ -38,6 +38,6 @@ Structure:
 ## Decisions (2026-10-25)
 
 1. **Structure:** a shared core plus separate specialisation credentials. The core is not a separate purchase: it is included with any specialisation, and its first module is free for everyone, like the one-lesson trial.
-2. **Organisations:** seats at €99 per track, once, delivered as single-use codes by email (the same mechanism as hardship codes). Ongoing partnerships (a pool of seats topped up through the year plus a progress summary) are priced on request. The For Teams page now promises only what exists: no admin dashboard, CSV onboarding or custom paths until they are built.
+2. **Organisations:** seats at €29 per track, once, delivered as single-use codes by email (the same mechanism as hardship codes). Ongoing partnerships (a pool of seats topped up through the year plus a progress summary) are priced on request. The For Teams page now promises only what exists: no admin dashboard, CSV onboarding or custom paths until they are built.
 3. **Archived foundation tracks:** kept, hidden and not sold. Removing about 1,000 lessons is hard to reverse and nothing depends on it. They are raw material for the core. Revisit if deploy time or upkeep becomes a problem.
 4. **Spooniversity:** link, never copy, and only to courses that remain listed there: Sick Bootcamp (starting out), Advocacy in Action (asking for adjustments), Carer Resilience (carers returning). Data Literacy and Health Data are unlisted on Spooniversity, so the core owns its own evidence-judging module.

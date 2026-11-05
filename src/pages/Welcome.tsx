@@ -46,7 +46,7 @@ export function Welcome() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'var(--space-2xl) var(--space-lg)' }}>
       <SEO
         title="Welcome — start coding from bed"
-        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — try lesson 1 free, then €99 once per track for every lesson, the exam and the credential."
+        description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — try lesson 1 free, then €29 once per track for every lesson, the exam and the credential."
         canonical="/welcome"
       />
       {/* Hero */}
@@ -150,8 +150,8 @@ export function Welcome() {
       }}>
         <h3 style={{ marginBottom: 'var(--space-sm)' }}>Money is not the gate</h3>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-          The first lesson of every track is a free trial, and the full track is €99 once.
-          If €99 isn't possible right now, ask for a hardship code. No reason needed and nobody
+          The first lesson of every track is a free trial, and the full track is €29 once.
+          If €29 isn't possible right now, ask for a hardship code. No reason needed and nobody
           reviews your situation. Many people here left education or work because they
           got ill; that is exactly who this is for.
         </p>

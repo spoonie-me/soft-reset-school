@@ -24,7 +24,7 @@ export const stripe = new Stripe((process.env.STRIPE_SECRET_KEY ?? '').trim(), {
 
 export const CREDENTIAL_PRODUCTS = {
   track_credential: {
-    priceInCents: 9900, // €99, one-time
+    priceInCents: 2900, // €29, one-time
     label: 'Track Credential',
     description: 'Every lesson in one track, its certification exam and a permanent, publicly verifiable certificate.',
   },
@@ -34,10 +34,10 @@ export const CREDENTIAL_PRODUCTS = {
   },
 } as const;
 
-/** Bundle pricing by number of tracks: 2 for €149, 3 for €199. */
+/** Bundle pricing by number of tracks: 2 for €49, 3 for €69. */
 export const PROGRAM_PRICES_IN_CENTS: Record<number, number> = {
-  2: 14900,
-  3: 19900,
+  2: 4900,
+  3: 6900,
 };
 
 export type CredentialProductId = keyof typeof CREDENTIAL_PRODUCTS;
@@ -78,7 +78,7 @@ const VERIFIED_EXAM_BANK_TRACKS = [
  * src/data/credentialBar.ts for the frontend).
  *
  * ADDED 2026-08-08 (business review): the exam-bank gate alone let a
- * 4-lesson track sell the same €99 "Career Credential," under the same
+ * 4-lesson track sell the same (then €99) "Career Credential," under the same
  * wording, as a 30-lesson one. A track that's held back stays free to read
  * and re-opens on its own once its lesson count clears the bar — no code
  * change needed here. */

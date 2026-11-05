@@ -160,18 +160,18 @@ export function Landing() {
       {/* Pricing */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-sm)' }}>try lesson 1 free. then €99 once per track.</h2>
+          <h2 style={{ marginBottom: 'var(--space-sm)' }}>try lesson 1 free. then €29 once per track.</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-            The first lesson of every track is a free trial. The full track, the exam and the certificate are €99 once. Nothing bills you on a bad month — there is no monthly anything.
+            The first lesson of every track is a free trial. The full track, the exam and the certificate are €29 once. Nothing bills you on a bad month — there is no monthly anything.
           </p>
           <Card style={{ textAlign: 'center', maxWidth: 440, margin: '0 auto var(--space-2xl)', borderColor: 'var(--signal)' }}>
             <div style={{ width: 32, height: 3, background: 'var(--signal)', borderRadius: 2, margin: '0 auto var(--space-md)' }} />
-            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>€99 <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once, per track — 2 for €149, 3 for €199</span></p>
+            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>€29 <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once, per track — 2 for €49, 3 for €69</span></p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>certification exam · permanent verifiable certificate · no renewal, ever</p>
             <Link to="/pricing" style={{ textDecoration: 'none' }}><Button variant="primary" size="sm" style={{ width: '100%' }}>See pricing</Button></Link>
           </Card>
           <p style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-            Can't afford €99? Ask for a hardship code, no reason needed. · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
+            Can't afford €29? Ask for a hardship code, no reason needed. · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
           </p>
         </div>
       </section>

@@ -2,12 +2,12 @@
 // backend/src/lib/stripe.ts (CREDENTIAL_PRODUCTS, PROGRAM_PRICES_IN_CENTS).
 // Keep the two in sync.
 
-export const TRACK_PRICE = 99;
+export const TRACK_PRICE = 29;
 
 /** Bundle price by number of tracks. */
 export const BUNDLE_PRICES: Record<number, number> = {
-  2: 149,
-  3: 199,
+  2: 49,
+  3: 69,
 };
 
 export const MAX_BUNDLE_SIZE = 3;

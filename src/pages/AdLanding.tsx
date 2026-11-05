@@ -33,7 +33,7 @@ const OUTCOMES = [
 const TRUST = [
   { stat: '190+', label: 'practice exercises' },
   { stat: '4', label: 'career tracks' },
-  { stat: '€99', label: 'one-time, no subscription' },
+  { stat: '€29', label: 'one-time, no subscription' },
 ];
 
 const INCLUDES = [
@@ -48,8 +48,8 @@ async function startCheckout(trackId: string, slug: string) {
   if (typeof g === 'function') {
     g('event', 'begin_checkout', {
       currency: 'EUR',
-      value: 99.0,
-      items: [{ item_id: 'track_credential', item_name: 'Soft Reset School Track Credential', item_category: 'credential', price: 99.0, quantity: 1 }],
+      value: 29.0,
+      items: [{ item_id: 'track_credential', item_name: 'Soft Reset School Track Credential', item_category: 'credential', price: 29.0, quantity: 1 }],
     });
   }
   if (typeof window !== 'undefined' && (window as any).trackEvent) {
@@ -137,7 +137,7 @@ export function AdLanding() {
               letterSpacing: '0.02em',
             }}
           >
-            {loading ? 'Redirecting…' : 'Get certified — €99, once'}
+            {loading ? 'Redirecting…' : 'Get certified — €29, once'}
           </button>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-tertiary)', textAlign: 'center' }}>
             One-time payment, no subscription, nothing renews. <Link to="/signup" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Try lesson 1 free</Link>, no card.
@@ -211,7 +211,7 @@ export function AdLanding() {
           Ready to make the move?
         </h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-          €99, one-time. Every lesson in the track, the certification exam and a permanent, publicly verifiable certificate. Try lesson 1 free first.
+          €29, one-time. Every lesson in the track, the certification exam and a permanent, publicly verifiable certificate. Try lesson 1 free first.
         </p>
         <button
           onClick={handleCTA}
@@ -230,7 +230,7 @@ export function AdLanding() {
             letterSpacing: '0.02em',
           }}
         >
-          {loading ? 'Redirecting…' : 'Get certified — €99, once'}
+          {loading ? 'Redirecting…' : 'Get certified — €29, once'}
         </button>
         <p style={{ marginTop: 'var(--space-md)', fontSize: '0.8125rem', color: 'var(--text-tertiary)' }}>
           Questions? <a href="mailto:hi@softreset.school" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>hi@softreset.school</a>

@@ -128,7 +128,7 @@ const spooniversityLaunch: EmailSequence = {
 // (bedcoders_welcome) since it's referenced elsewhere as a sequence key, not
 // a brand name. Previously promised "new posts every Tuesday and Friday" —
 // a newsletter cadence that had been broken for months and, worse, never
-// mentioned the actual product (free lessons, the €99 credential). Rewritten
+// mentioned the actual product (free lessons, the €29 credential). Rewritten
 // to do the conversion work a welcome email is supposed to do.
 const bedcodersWelcome: EmailSequence = {
   id: 'bedcoders_welcome',
@@ -146,7 +146,7 @@ const bedcodersWelcome: EmailSequence = {
 
   <p>Soft Reset School teaches AI-era employable skills to people who work from bed, the couch, or wherever the body lands today — four career tracks (AI-assisted development, AI automation consulting, AI-augmented medical coding, digital accessibility QA) plus a coding foundation curriculum.</p>
 
-  <p>Lesson 1 of every track is a free trial, no card required. The full track is a one-time €99: every lesson, the certification exam and a permanent, verifiable credential. If €99 is out of reach, write to hi@softreset.school for a hardship code. No reason needed.</p>
+  <p>Lesson 1 of every track is a free trial, no card required. The full track is a one-time €29: every lesson, the certification exam and a permanent, verifiable credential. If €29 is out of reach, write to hi@softreset.school for a hardship code. No reason needed.</p>
 
   <p>No hustle culture. No streak penalties. No "10x developer" nonsense — just real skill, built at the pace your body actually allows.</p>
 

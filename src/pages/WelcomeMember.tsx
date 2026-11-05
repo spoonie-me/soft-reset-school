@@ -40,20 +40,20 @@ export function WelcomeMember() {
 
     g('event', 'conversion', {
       send_to: 'AW-18029452931/UiPjCJWPqowcEIO9jpVD',
-      value: 99.0,
+      value: 29.0,
       currency: 'EUR',
       transaction_id,
     });
 
     g('event', 'purchase', {
       currency: 'EUR',
-      value: 99.0,
+      value: 29.0,
       transaction_id,
       items: [{
         item_id: 'track_credential',
         item_name: 'Soft Reset School Track Credential',
         item_category: 'credential',
-        price: 99.0,
+        price: 29.0,
         quantity: 1,
       }],
     });

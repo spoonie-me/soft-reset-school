@@ -39,7 +39,7 @@ const bundle = {
   trackIds: ['fundamentals', 'ai', 'tools'],
   bundleId: 'b1',
   sessionId: 'cs_1',
-  amountTotal: 14900,
+  amountTotal: 6900,
 };
 
 beforeEach(() => {
@@ -51,7 +51,7 @@ describe('Program Credential bundle', () => {
     const db = fakeDb();
     await recordPurchase(db, bundle);
     expect(db.rows.map((r) => r.trackId).sort()).toEqual(['ai', 'fundamentals', 'tools']);
-    expect(db.rows.reduce((n, r) => n + r.amountCents, 0)).toBe(14900);
+    expect(db.rows.reduce((n, r) => n + r.amountCents, 0)).toBe(6900);
   });
 
   it('is idempotent when the webhook is redelivered', async () => {
@@ -64,7 +64,7 @@ describe('Program Credential bundle', () => {
 
   it('completes a partially processed session instead of skipping it', async () => {
     const db = fakeDb([
-      { userId: 'u1', trackId: 'fundamentals', productType: 'program_credential', stripeSessionId: 'cs_1', amountCents: 4967 },
+      { userId: 'u1', trackId: 'fundamentals', productType: 'program_credential', stripeSessionId: 'cs_1', amountCents: 2300 },
     ]);
     expect(await sessionFullyRecorded(db, 'cs_1', bundle.trackIds)).toBe(false);
     await recordPurchase(db, bundle);
@@ -73,8 +73,8 @@ describe('Program Credential bundle', () => {
 
   it('flags a second session for an already-granted track as a duplicate charge, keeping the original', async () => {
     const db = fakeDb();
-    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], amountTotal: 6900 });
-    const res = await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_2', amountTotal: 6900 });
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], amountTotal: 2900 });
+    const res = await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_2', amountTotal: 2900 });
     expect(res.duplicateCharges).toEqual(['ai']);
     expect(db.rows).toHaveLength(1);
     expect(db.rows[0].stripeSessionId).toBe('cs_1');
@@ -84,14 +84,14 @@ describe('Program Credential bundle', () => {
 describe('duplicate charge across products', () => {
   it('flags a bundle that re-sells a track already bought as a single credential', async () => {
     const db = fakeDb();
-    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_single', amountTotal: 6900 });
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_single', amountTotal: 2900 });
     const res = await recordPurchase(db, bundle);
     expect(res.duplicateCharges).toEqual(['ai']);
   });
 
   it('does not flag a code_review next to a credential', async () => {
     const db = fakeDb();
-    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_c', amountTotal: 6900 });
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_c', amountTotal: 2900 });
     const res = await recordPurchase(db, { ...bundle, productId: 'code_review', trackIds: ['ai'], sessionId: 'cs_r', amountTotal: 2500 });
     expect(res.duplicateCharges).toEqual([]);
   });
@@ -107,7 +107,7 @@ describe('code_review', () => {
   it('can coexist with a later credential for the same track', async () => {
     const db = fakeDb();
     await recordPurchase(db, { ...bundle, productId: 'code_review', trackIds: ['ai'], sessionId: 'cs_r', amountTotal: 2500 });
-    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_c', amountTotal: 6900 });
+    await recordPurchase(db, { ...bundle, productId: 'track_credential', trackIds: ['ai'], sessionId: 'cs_c', amountTotal: 2900 });
     expect(db.rows.map((r) => r.productType).sort()).toEqual(['code_review', 'track_credential']);
   });
 });

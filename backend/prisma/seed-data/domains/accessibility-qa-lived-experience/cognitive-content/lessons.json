@@ -436,7 +436,7 @@
     "duration": 20,
     "difficulty": "medium",
     "title": "Limited attention and memory as a design constraint",
-    "description": "Losing a word mid-sentence, rereading the same line three times, needing ten seconds to reorient after any interruption — brain fog is a design constraint like a screen reader or a colour-blind-safe palette, and standards coverage for it is genuinely thinner than for either.",
+    "description": "Losing a word mid-sentence, rereading the same line three times, needing ten seconds to reorient after any interruption — limited attention and memory are a design constraint like a screen reader or a colour-blind-safe palette, and standards coverage for it is genuinely thinner than for either.",
     "learningObjectives": [
       {
         "text": "Evaluate an interface change for whether it genuinely reduces cognitive load or only appears to",
@@ -2940,7 +2940,7 @@
     "duration": 25,
     "difficulty": "easy",
     "title": "Counting the interactions a task actually requires",
-    "description": "Booking a follow-up appointment while lying down mid-flare turns out to take fourteen taps when six would genuinely do — the difference between those two numbers is the entire finding, and nobody sees it until they actually count.",
+    "description": "Booking a follow-up appointment on a phone while tired and interrupted turns out to take fourteen taps when six would genuinely do — the difference between those two numbers is the entire finding, and nobody sees it until they actually count.",
     "learningObjectives": [
       {
         "text": "Build an interaction inventory for a real task, counting every tap, click and decision",

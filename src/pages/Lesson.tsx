@@ -9,6 +9,8 @@ import { LoadingSpinner } from '@/components/ProtectedRoute';
 import { learningApi, ApiError, type LessonDetailResponse } from '@/lib/api';
 import { getCatalogTrack } from '@/data/trackCatalog';
 import { TRACK_PRICE } from '@/data/pricing';
+import { courseCopy } from '@/data/pricingCopy';
+import { getCourse } from '@/data/courseCatalog';
 import { LockedCard, LoadFailedCard } from '@/components/LockedCard';
 import { IS_DEV_MODE } from '@/lib/useApi';
 import { SEO } from '@/components/SEO';
@@ -82,6 +84,8 @@ interface LessonView {
   /** The next lesson needs the full track, so this lesson is the end of the free trial. */
   nextLessonLocked?: boolean;
   prevLessonId?: string;
+  /** The course this lesson belongs to. Sent only while courses are on. */
+  courseSlug?: string;
 }
 
 /* Listen bar for one lesson: reads the text sections aloud and scrolls to each as it goes. */
@@ -221,10 +225,14 @@ function trackLessonComplete(lesson: { order: number; trackId?: string }) {
 
 export function Lesson() {
   const { id } = useParams<{ id: string }>();
+  const cc = courseCopy();
   const [lesson, setLesson] = useState<LessonView | null>(IS_DEV_MODE ? DEMO_LESSON : null);
+  const ownCourse = cc && lesson ? getCourse(lesson.courseSlug) : undefined;
   const [loading, setLoading] = useState(!IS_DEV_MODE);
   // Set to the track id when the API says this lesson needs the track.
   const [lockedTrack, setLockedTrack] = useState<string | null>(null);
+  // The course a locked lesson belongs to. Sent by the API while courses are on.
+  const [lockedCourse, setLockedCourse] = useState<string | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [exerciseResults, setExerciseResults] = useState<Record<string, { feedback: string; score: number }>>({});
@@ -297,6 +305,7 @@ export function Lesson() {
           exercises,
           nextLessonId: l.nextLessonId ?? undefined,
           nextLessonLocked: !!l.nextLessonLocked,
+          courseSlug: l.courseSlug ?? undefined,
           prevLessonId: l.prevLessonId ?? undefined,
         });
         trackFunnel('lesson_start', { track: l.trackId ?? undefined, lesson_order: l.order });
@@ -326,6 +335,7 @@ export function Lesson() {
         // A locked or failed lesson must never fall back to the demo lesson.
         if (err instanceof ApiError && err.status === 403) {
           setLockedTrack(String(err.body.trackId ?? ''));
+          setLockedCourse(typeof err.body.courseSlug === 'string' ? err.body.courseSlug : null);
         } else {
           setLoadFailed(true);
         }
@@ -444,7 +454,7 @@ export function Lesson() {
     return (
       <>
         <SEO title="Lesson locked" description="This lesson is part of a paid track." canonical="/pricing" noIndex />
-        <LockedCard what="lesson" trackId={lockedTrack} />
+        <LockedCard what="lesson" trackId={lockedTrack} courseSlug={lockedCourse} />
       </>
     );
   }
@@ -842,13 +852,19 @@ export function Lesson() {
       {/* End of the free trial */}
       {lesson.nextLessonLocked && lesson.nextLessonId && (
         <Card style={{ marginTop: 'var(--space-3xl)', padding: 'var(--space-xl)' }}>
-          <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-sm)' }}>That was the free trial</h2>
+          <h2 style={{ fontSize: '1.25rem', marginBottom: 'var(--space-sm)' }}>{cc ? cc.endOfTrial : 'That was the free trial'}</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-            The rest of the track is €{TRACK_PRICE} once: every lesson, the exam and the certificate. No subscription, no
-            renewal. If that is out of reach, ask for a hardship code. No reason needed.
+            {cc
+              ? cc.endOfTrialBody
+              : `The rest of the track is €${TRACK_PRICE} once: every lesson, the exam and the certificate. No subscription, no renewal. If that is out of reach, ask for a hardship code. No reason needed.`}
           </p>
           <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-            <Link to={`/tracks/${lesson.trackId ?? ''}`} onClick={markLessonComplete}><Button variant="primary">See the full track</Button></Link>
+            {cc && (
+              <Link to={ownCourse ? `/courses/${ownCourse.slug}` : '/courses'} onClick={markLessonComplete}>
+                <Button variant="primary">{ownCourse ? `${cc.buyThisCourse}: ${ownCourse.title}` : cc.buyThisCourse}</Button>
+              </Link>
+            )}
+            <Link to={`/tracks/${lesson.trackId ?? ''}`} onClick={markLessonComplete}><Button variant={cc ? 'secondary' : 'primary'}>See the full track</Button></Link>
             <Link to="/pricing#hardship" onClick={markLessonComplete}><Button variant="secondary">Ask for a hardship code</Button></Link>
           </div>
         </Card>

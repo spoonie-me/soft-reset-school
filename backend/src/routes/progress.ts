@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
-import { isTrialLesson } from '../lib/access.js';
+import { canAccessLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -54,7 +54,10 @@ router.post('/:lessonId', authMiddleware, entitlementsMiddleware, async (req, re
       return;
     }
     const trackId = lesson.module?.domain?.trackId;
-    if (trackId && !isTrialLesson(lesson) && !authReq.trackAccess?.includes(trackId)) {
+    if (trackId && !canAccessLesson({
+      domain: lesson.module?.domain, module: lesson.module, lesson,
+      trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess,
+    })) {
       res.status(403).json({ error: 'Track access required', trackId });
       return;
     }

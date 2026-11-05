@@ -78,6 +78,17 @@ async function main() {
   }
   console.log(`  ${badges.length} badges seeded\n`);
 
+  // Course fields per domain, keyed by the domain's seed id (domains.json "id").
+  // Domains not listed here (the health-informatics track and the archived
+  // tracks) are reset to the defaults below: not for sale.
+  const courses = loadJson<Record<string, {
+    courseSlug: string; courseTitle: string; courseBlurb: string; courseOrder: number; courseForSale: boolean;
+  }>>('seed-data/courses.json');
+
+  const COURSE_DEFAULTS = {
+    courseSlug: null, courseTitle: null, courseBlurb: null, courseOrder: null, courseForSale: false,
+  };
+
   // ─── 2. Seed all tracks ──────────────────────────────────────────────
   const trackIds = ['fundamentals', 'ai', 'tools', 'advanced', 'accessibility-qa-lived-experience', 'ai-orchestrated-dev', 'ai-workflow-consulting', 'ai-oversight-health-informatics'];
 
@@ -93,6 +104,21 @@ async function main() {
     console.log(`\nSeeding track "${trackId}" (${domains.length} domains)...`);
 
     for (const domainData of domains) {
+      // Course fields follow the seed id, not the row position. If the row at
+      // (trackId, order) belongs to another seed id, domains.json was reordered:
+      // stop instead of moving a course (and its buyers) onto the wrong domain.
+      const atPosition = await prisma.competencyDomain.findUnique({
+        where: { trackId_order: { trackId, order: domainData.order } },
+        select: { seedKey: true },
+      });
+      if (atPosition?.seedKey && atPosition.seedKey !== domainData.id) {
+        throw new Error(
+          `Seed refused: ${trackId} order ${domainData.order} is domain "${atPosition.seedKey}" in the database ` +
+            `but domains.json now has "${domainData.id}" there. Reordering would move course fields onto the wrong domain.`,
+        );
+      }
+      const course = courses[domainData.id] ?? COURSE_DEFAULTS;
+
       const domain = await prisma.competencyDomain.upsert({
         where: {
           trackId_order: {
@@ -103,12 +129,16 @@ async function main() {
         update: {
           name: domainData.name,
           description: domainData.description,
+          seedKey: domainData.id,
+          ...course,
         },
         create: {
           trackId,
           name: domainData.name,
           description: domainData.description,
           order: domainData.order,
+          seedKey: domainData.id,
+          ...course,
         },
       });
 

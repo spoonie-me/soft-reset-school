@@ -1,11 +1,12 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from '@/lib/AuthContext';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { coursesEnabled } from '@/lib/flags';
 // NotFound stays eager — needed for the catch-all without a loading flash
 import { NotFound } from '@/pages/NotFound';
 
@@ -17,6 +18,8 @@ const lazy$ = <T extends Record<string, React.ComponentType<any>>>(
 
 const AdLanding        = lazy$(() => import('@/pages/AdLanding'),        'AdLanding');
 const Landing          = lazy$(() => import('@/pages/Landing'),          'Landing');
+const Courses          = lazy$(() => import('@/pages/Courses'),          'Courses');
+const CoursePage       = lazy$(() => import('@/pages/CoursePage'),       'CoursePage');
 const Pricing          = lazy$(() => import('@/pages/Pricing'),          'Pricing');
 const Login            = lazy$(() => import('@/pages/Login'),            'Login');
 const Signup           = lazy$(() => import('@/pages/Signup'),           'Signup');
@@ -105,6 +108,14 @@ function AppInner() {
           <Route path="/" element={<Landing />} />
           <Route path="/tracks" element={<TracksCatalog />} />
           <Route path="/tracks/:slug" element={<TrackInfo />} />
+          {coursesEnabled() ? (
+            <>
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:slug" element={<CoursePage />} />
+            </>
+          ) : (
+            <Route path="/courses/*" element={<Navigate to="/tracks" replace />} />
+          )}
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

@@ -6,25 +6,41 @@ export type UnlockStatus = 'idle' | 'waiting' | 'unlocked' | 'slow';
 const POLL_MS = 2000;
 const GIVE_UP_AFTER_MS = 60000;
 
-/** After Stripe sends someone back, the webhook that grants the track can land a
+interface CredentialRow {
+  trackId: string;
+  productType?: string;
+  /** '' for a track row, the course's domain id for a course row. Absent on an older backend. */
+  domainId?: string;
+}
+
+/** A course row is not the track. Only rows that are not a course count as owning the whole track. */
+function isTrackRow(c: CredentialRow): boolean {
+  return c.productType !== 'course' && !c.domainId;
+}
+
+/** After Stripe sends someone back, the webhook that grants the purchase can land a
  * few seconds later. This waits for it, so the buyer sees "unlocking" rather
- * than a locked lesson and no explanation. Pass the track ids from the return URL. */
-export function usePurchaseUnlock(trackIds: string[]): UnlockStatus {
-  const key = trackIds.join(',');
-  const [status, setStatus] = useState<UnlockStatus>(trackIds.length > 0 ? 'waiting' : 'idle');
+ * than a locked lesson and no explanation. Pass the track ids from the return URL,
+ * and for a course purchase the course (domain) ids from `courses=`. */
+export function usePurchaseUnlock(trackIds: string[], courseIds: string[] = []): UnlockStatus {
+  const key = JSON.stringify([trackIds, courseIds]);
+  const [status, setStatus] = useState<UnlockStatus>(trackIds.length + courseIds.length > 0 ? 'waiting' : 'idle');
 
   useEffect(() => {
-    if (!key) return;
-    const wanted = key.split(',');
+    const [wantedTracks, wantedCourses] = JSON.parse(key) as [string[], string[]];
+    if (wantedTracks.length + wantedCourses.length === 0) return;
     let cancelled = false;
     const started = Date.now();
 
     const check = async () => {
       try {
-        const res = await api.get<{ credentials: Array<{ trackId: string }> }>('/checkout/credentials');
-        const owned = new Set(res.credentials.map((c) => c.trackId));
+        const res = await api.get<{ credentials: CredentialRow[] }>('/checkout/credentials');
+        const ownedTracks = new Set(res.credentials.filter(isTrackRow).map((c) => c.trackId));
+        const ownedCourses = new Set(
+          res.credentials.filter((c) => c.productType === 'course' && c.domainId).map((c) => c.domainId),
+        );
         if (cancelled) return true;
-        if (wanted.every((t) => owned.has(t))) {
+        if (wantedTracks.every((t) => ownedTracks.has(t)) && wantedCourses.every((d) => ownedCourses.has(d))) {
           setStatus('unlocked');
           return true;
         }

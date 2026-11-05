@@ -168,9 +168,47 @@ const labSeo = new Map(labMeta.map((p) => [`/lab/${p.slug}`, {
   description: p.description || `${p.title} — from the Soft Reset Lab: writing on AI in healthcare, health IT and working life with a chronic illness or disability.`,
 }]));
 
+// ── Courses (only while VITE_COURSES_ENABLED is "true" in the build env) ───
+// With the flag off none of this runs: no course routes, no overrides, and the
+// sitemap and every file are what they were. Course pages and the course-first
+// head tags come from src/data/courseCatalog.ts and src/data/courseSeo.ts, the
+// same modules the pages use.
+const COURSES_ON = process.env.VITE_COURSES_ENABLED === 'true';
+const courseSeoMap = new Map();
+const courseLdByRoute = new Map();
+let headSeo = {};
+if (COURSES_ON) {
+  const bundle = async (entry, name) => {
+    const outfile = join(__dir, '..', 'node_modules', '.cache', name);
+    await build({ entryPoints: [entry], bundle: true, format: 'esm', platform: 'node', outfile, logLevel: 'silent' });
+    return import(outfile);
+  };
+  const { COURSE_CATALOG, coursesOfTrack } = await bundle(join(__dir, '..', 'src', 'data', 'courseCatalog.ts'), 'prerender-courseCatalog.mjs');
+  const seo = await bundle(join(__dir, '..', 'src', 'data', 'courseSeo.ts'), 'prerender-courseSeo.mjs');
+  headSeo = seo.HEAD_SEO;
+  courseSeoMap.set('/courses', seo.COURSES_SEO);
+  PUBLIC_ROUTES.push('courses');
+  for (const c of COURSE_CATALOG) {
+    courseSeoMap.set(`/courses/${c.slug}`, seo.courseSeo(c));
+    courseLdByRoute.set(`/courses/${c.slug}`, seo.courseJsonLd(c));
+    PUBLIC_ROUTES.push(`courses/${c.slug}`);
+  }
+  // Existing pages whose head text changes with the flag.
+  for (const [route, o] of Object.entries(headSeo)) {
+    if (route !== '/' && staticSeo.get(route)) courseSeoMap.set(route, { ...staticSeo.get(route), ...o });
+  }
+  courseSeoMap.set('/pricing', seo.PRICING_SEO);
+  courseSeoMap.set('/tracks', seo.TRACKS_SEO);
+  for (const [key, t] of trackSeo) {
+    if (coursesOfTrack(key.replace('/tracks/', '')).length > 0) {
+      courseSeoMap.set(key, { title: t.title, description: seo.trackSeoDescription(t.description.split(' Full curriculum outline')[0]) });
+    }
+  }
+}
+
 function seoFor(route) {
   const key = `/${route}`;
-  return trackSeo.get(key) ?? labSeo.get(key) ?? staticSeo.get(key);
+  return courseSeoMap.get(key) ?? trackSeo.get(key) ?? labSeo.get(key) ?? staticSeo.get(key);
 }
 
 let count = 0;
@@ -181,7 +219,13 @@ for (const route of PUBLIC_ROUTES) {
   const dir = join(DIST, route);
   mkdirSync(dir, { recursive: true });
   if (seo) {
-    writeFileSync(join(dir, 'index.html'), withHead(shellHtml, { ...seo, canonical: `/${route}` }), 'utf8');
+    let html = withHead(shellHtml, { ...seo, canonical: `/${route}` });
+    const ld = courseLdByRoute.get(`/${route}`);
+    if (ld) {
+      // <SEO> removes [data-prerender] on mount and Helmet adds its own copy.
+      html = html.replace('</head>', () => `<script data-prerender="1" type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script></head>`);
+    }
+    writeFileSync(join(dir, 'index.html'), html, 'utf8');
     if (!seo.noIndex) sitemapPaths.push(`/${route}`);
   } else {
     missing.push(route);
@@ -196,7 +240,7 @@ if (missing.length) {
 
 // The shell itself (home page, and the SPA fallback for app routes): mark the
 // tags <SEO> replaces on mount.
-writeFileSync(SHELL, withHead(shellHtml, homeSeo), 'utf8');
+writeFileSync(SHELL, withHead(shellHtml, { ...homeSeo, ...(headSeo['/'] ?? {}) }), 'utf8');
 
 // sitemap.xml is generated from the same route list, so it can't drift from
 // what is actually served.
@@ -219,4 +263,4 @@ const shell404 = shell.replace(
 );
 writeFileSync(join(DIST, '404.html'), shell404, 'utf8');
 
-console.log(`✓ prerender: ${count} routes + sitemap (${sitemapPaths.length} urls) + 404.html (noindex)`);
+console.log(`${COURSES_ON ? '(courses on) ' : ''}✓ prerender: ${count} routes + sitemap (${sitemapPaths.length} urls) + 404.html (noindex)`);

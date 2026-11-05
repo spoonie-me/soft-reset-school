@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
+import { hasFullAccess, lockedMessage } from '../lib/access.js';
 import {
   XP_REWARDS,
   levelFromXp,
@@ -25,11 +26,11 @@ router.get('/:moduleId', authMiddleware, entitlementsMiddleware, async (req, res
       include: { domain: true },
     });
 
-    if (mod && !entReq.trackAccess?.includes(mod.domain?.trackId ?? '')) {
+    if (mod && !hasFullAccess({ domain: mod.domain, trackAccess: entReq.trackAccess, courseAccess: entReq.courseAccess })) {
       res.status(403).json({
         error: 'Track access required',
         trackId: mod.domain?.trackId,
-        message: "You need the full track to read this. The first lesson of every track is a free trial.",
+        message: lockedMessage(),
       });
       return;
     }

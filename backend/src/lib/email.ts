@@ -181,6 +181,8 @@ export async function sendPurchaseConfirmation(to: string, data: {
   plan: string;
   tracks: string[];
   amount: string;
+  /** Course purchase: the list holds course titles and the exam lines are left out. */
+  courses?: boolean;
 }) {
   const trackList = data.tracks.map(t => `<li style="padding:4px 0;color:#b3b8bb;font-size:14px;"><span style="color:#1fca7a;">&#10003;</span> ${t}</li>`).join('');
   await getResend().emails.send({
@@ -198,9 +200,11 @@ export async function sendPurchaseConfirmation(to: string, data: {
       </div>
       <p style="color:#b3b8bb;font-size:15px;line-height:1.7;margin:0 0 8px;">What's next:</p>
       <ul style="color:#b3b8bb;font-size:14px;line-height:1.8;padding-left:20px;margin:0 0 24px;">
-        <li>Every lesson in your purchased tracks is now unlocked</li>
+        ${data.courses
+          ? '<li>Every lesson in your purchased courses is now unlocked</li>'
+          : `<li>Every lesson in your purchased tracks is now unlocked</li>
         <li>The certification exam is open whenever you feel ready, with no deadline</li>
-        <li>Pass the exam to earn your verifiable certificate</li>
+        <li>Pass the exam to earn your verifiable certificate</li>`}
       </ul>
       ${btn('Start learning', `${APP_URL()}/dashboard`)}
       <p style="color:#6b7076;font-size:13px;margin-top:16px;">Need a receipt? Check your Stripe email or visit your <a href="${APP_URL()}/dashboard" style="color:#00d9ff;">dashboard</a>.</p>

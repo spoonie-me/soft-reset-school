@@ -10,6 +10,7 @@ import { IS_DEV_MODE } from '@/lib/useApi';
 import { LearningPathModal } from '@/components/LearningPathModal';
 import { SEO } from '@/components/SEO';
 import { usePurchaseUnlock } from '@/lib/usePurchaseUnlock';
+import { courseCopy, purchaseValue, COURSE_COPY } from '@/data/pricingCopy';
 
 /* ─── Track metadata (not in DB — static config) ─── */
 const TRACK_META: Record<string, { title: string; color: string }> = {
@@ -119,7 +120,19 @@ export function Dashboard() {
       .split(',')
       .filter((t) => /^[a-z0-9-]+$/.test(t)),
   );
-  const unlock = usePurchaseUnlock(boughtTracks);
+  // Courses just bought (credential=course&courses=<domain ids>). Same wait, keyed on the course rows.
+  const [boughtCourses] = useState<string[]>(() =>
+    (searchParams.get('session_id')?.startsWith('cs_') && searchParams.get('credential') === 'course'
+      ? (searchParams.get('courses') ?? '')
+      : ''
+    )
+      .split(',')
+      .filter((c) => /^[A-Za-z0-9_-]+$/.test(c)),
+  );
+  const unlock = usePurchaseUnlock(boughtTracks, boughtCourses);
+  const cc = courseCopy();
+  // A course return URL has no tracks= part, so a course unlock must not use the track wording.
+  const courseReturn = boughtCourses.length > 0;
 
   // Fire GA4 conversion when landing from Stripe checkout success
   useEffect(() => {
@@ -131,7 +144,7 @@ export function Dashboard() {
 
     const g = (window as any).gtag;
     if (typeof g === 'function') {
-      const value = CREDENTIAL_VALUES[credential] ?? 99;
+      const value = purchaseValue(credential, boughtCourses.length) ?? CREDENTIAL_VALUES[credential] ?? 99;
       const transaction_id = `${credential}_${sessionId.slice(-8)}`;
       g('event', 'conversion', {
         send_to: 'AW-18029452931/UiPjCJWPqowcEIO9jpVD',
@@ -152,6 +165,7 @@ export function Dashboard() {
     params.delete('session_id');
     params.delete('credential');
     params.delete('tracks');
+    params.delete('courses');
     navigate({ search: params.toString() }, { replace: true });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -254,6 +268,11 @@ export function Dashboard() {
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Pick up where you left off.
       </p>
+      {cc && (
+        <p style={{ color: 'var(--text-secondary)', marginTop: 'calc(-1 * var(--space-xl))', marginBottom: 'var(--space-2xl)' }}>
+          <Link to="/courses" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>{cc.dashBrowse}</Link>
+        </p>
+      )}
 
       {unlock !== 'idle' && (
         <div
@@ -268,8 +287,12 @@ export function Dashboard() {
             marginBottom: 'var(--space-xl)',
           }}
         >
-          {unlock === 'waiting' && 'Payment received. Unlocking your track now. This usually takes a few seconds.'}
-          {unlock === 'unlocked' && 'Your track is unlocked. Every lesson, the exam and the certificate are yours. No deadline.'}
+          {unlock === 'waiting' && (courseReturn
+            ? (boughtCourses.length === 1 ? COURSE_COPY.dashWaitingCourse : COURSE_COPY.dashWaitingCourses)
+            : 'Payment received. Unlocking your track now. This usually takes a few seconds.')}
+          {unlock === 'unlocked' && (courseReturn
+            ? (boughtCourses.length === 1 ? COURSE_COPY.dashUnlockedCourse : COURSE_COPY.dashUnlockedCourses)
+            : 'Your track is unlocked. Every lesson, the exam and the certificate are yours. No deadline.')}
           {unlock === 'slow' && (
             <>
               Payment received, but unlocking is taking longer than usual. Reload this page in a minute. If it is still locked, write to{' '}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
 
 const SLUG_CONFIG: Record<string, { trackId: string; label: string; headline: string; sub: string }> = {
   '/go/coding': {
@@ -75,6 +76,7 @@ async function startCheckout(trackId: string, slug: string) {
 }
 
 export function AdLanding() {
+  const cc = courseCopy();
   const [loading, setLoading] = useState(false);
   const { pathname } = useLocation();
   const cfg = SLUG_CONFIG[pathname] ?? SLUG_CONFIG['/go/coding'];
@@ -146,7 +148,7 @@ export function AdLanding() {
 
         {/* Trust stats */}
         <div style={{ display: 'flex', gap: 'var(--space-2xl)', marginTop: 'var(--space-3xl)', flexWrap: 'wrap' }}>
-          {TRUST.map((t) => (
+          {TRUST.map((t) => cc && t.stat === '€99' ? { stat: cc.adStat, label: cc.adStatLabel } : t).map((t) => (
             <div key={t.stat}>
               <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>{t.stat}</div>
               <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>{t.label}</div>
@@ -211,7 +213,7 @@ export function AdLanding() {
           Ready to make the move?
         </h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-          €99, one-time. Every lesson in the track, the certification exam and a permanent, publicly verifiable certificate. Try lesson 1 free first.
+          {cc ? cc.adFinal : '€99, one-time. Every lesson in the track, the certification exam and a permanent, publicly verifiable certificate. Try lesson 1 free first.'}
         </p>
         <button
           onClick={handleCTA}

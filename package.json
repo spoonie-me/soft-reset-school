@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "curriculum:plan": "node scripts/build-curriculum-plan.mjs",
     "curriculum:audit": "node scripts/curriculum-audit.mjs",
+    "courses:sync": "node scripts/sync-courses.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { SEO, breadcrumbLd } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
 
 const body = { color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-lg)' } as const;
 const strong = { color: 'var(--text-primary)' } as const;
 
 export function About() {
+  const cc = courseCopy();
   return (
     <div>
       <SEO
@@ -100,7 +102,7 @@ export function About() {
             So this school works the other way. Short lessons. Resume anywhere. No streaks to lose. A lower-energy path in every module. Nothing in a lesson is timed.
           </p>
           <p style={body}>
-            The first lesson of every track is free to try. After that it is €99 once per track, for the lessons, the exam and the certificate.
+            {cc ? cc.aboutLine : 'The first lesson of every track is free to try. After that it is €99 once per track, for the lessons, the exam and the certificate.'}
           </p>
           <p style={{ ...body, marginBottom: 0 }}>
             <strong style={strong}>This is not a cure story.</strong> A cure has an ending. Chronic illness doesn't give you one. You restart as many times as your body needs, and it still counts.

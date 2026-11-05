@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { SEO, breadcrumbLd } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
 
 const body = { color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-lg)' } as const;
 
@@ -33,6 +34,7 @@ const steps = [
 ];
 
 export function ReturningToWork() {
+  const cc = courseCopy();
   return (
     <div>
       <SEO
@@ -88,9 +90,9 @@ export function ReturningToWork() {
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <h2 style={{ marginBottom: 'var(--space-md)' }}>When you are ready to learn a skill</h2>
           <p style={body}>
-            The first lesson of every track is free, with no card. Each track is €99 once, with no subscription. If €99 is out of reach, ask for a hardship code at hi@softreset.school.
+            {cc ? cc.returningLine : 'The first lesson of every track is free, with no card. Each track is €99 once, with no subscription. If €99 is out of reach, ask for a hardship code at hi@softreset.school.'}
           </p>
-          <Link to="/tracks"><Button variant="primary" size="lg">See the four tracks</Button></Link>
+          <Link to={cc ? '/courses' : '/tracks'}><Button variant="primary" size="lg">{cc ? cc.returningCta : 'See the four tracks'}</Button></Link>
         </div>
       </section>
     </div>

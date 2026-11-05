@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { SEO, breadcrumbLd } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
+import { HEAD_SEO } from '@/data/courseSeo';
 
 export function Employers() {
+  const cc = courseCopy();
   const [form, setForm] = useState({ name: '', org: '', email: '', interest: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -54,6 +57,7 @@ export function Employers() {
         title="For Employers — hire-train-place talent and certification seats"
         description="Hire graduates trained in AI-assisted software development, AI automation consulting, AI-augmented medical coding and digital accessibility QA, or sponsor certification seats for your own people. €99 per seat, no expiry."
         canonical="/employers"
+        {...(cc ? HEAD_SEO['/employers'] : {})}
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
           { name: 'For Employers', path: '/employers' },
@@ -106,7 +110,7 @@ export function Employers() {
             One seat is one person's credential for one track. A seat unlocks every lesson in the track, plus the exam and certificate. It costs exactly what an individual learner pays — €99 — and is redeemable whenever the person is ready, with no expiry. For a company, that's the cheapest return-to-work or upskilling instrument you'll price this year; for the learner, it's an employer saying "we'll back you" without a deadline attached.
           </p>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-            Buying for an organisation? See <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>seats for organisations</Link>, or tell us how many below.
+            {cc && `${cc.seatsNote} `}Buying for an organisation? See <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>seats for organisations</Link>, or tell us how many below.
           </p>
         </div>
       </section>

@@ -43,4 +43,55 @@ describe('usePurchaseUnlock', () => {
     await act(async () => { await vi.advanceTimersByTimeAsync(61000); });
     expect(result.current).toBe('slow');
   });
+
+  describe('course purchases (courses=<ids>)', () => {
+    const course = (domainId: string) => ({ trackId: 't1', productType: 'course', domainId });
+
+    it('waits until a row with that domainId exists', async () => {
+      get
+        .mockResolvedValueOnce({ credentials: [course('other')] })
+        .mockResolvedValueOnce({ credentials: [course('other'), course('d1')] });
+      const { result } = renderHook(() => usePurchaseUnlock([], ['d1']));
+      expect(result.current).toBe('waiting');
+      await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+      expect(result.current).toBe('waiting');
+      await act(async () => { await vi.advanceTimersByTimeAsync(2100); });
+      expect(result.current).toBe('unlocked');
+    });
+
+    it('needs every course in a 3-course purchase', async () => {
+      get.mockResolvedValue({ credentials: [course('d1'), course('d2')] });
+      const { result } = renderHook(() => usePurchaseUnlock([], ['d1', 'd2', 'd3']));
+      await act(async () => { await vi.advanceTimersByTimeAsync(6000); });
+      expect(result.current).toBe('waiting');
+    });
+
+    it('a track row does not stand in for a course', async () => {
+      get.mockResolvedValue({ credentials: [{ trackId: 't1', productType: 'track_credential', domainId: '' }] });
+      const { result } = renderHook(() => usePurchaseUnlock([], ['d1']));
+      await act(async () => { await vi.advanceTimersByTimeAsync(6000); });
+      expect(result.current).toBe('waiting');
+    });
+
+    it('a course row is not read as owning the whole track', async () => {
+      get.mockResolvedValue({ credentials: [course('d1')] });
+      const { result } = renderHook(() => usePurchaseUnlock(['t1']));
+      await act(async () => { await vi.advanceTimersByTimeAsync(6000); });
+      expect(result.current).toBe('waiting');
+    });
+
+    it('the track path still unlocks on a track row with an empty domainId', async () => {
+      get.mockResolvedValue({ credentials: [{ trackId: 't1', productType: 'track_credential', domainId: '' }] });
+      const { result } = renderHook(() => usePurchaseUnlock(['t1']));
+      await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+      expect(result.current).toBe('unlocked');
+    });
+
+    it('says it is slow when the course never appears', async () => {
+      get.mockResolvedValue({ credentials: [] });
+      const { result } = renderHook(() => usePurchaseUnlock([], ['d1']));
+      await act(async () => { await vi.advanceTimersByTimeAsync(61000); });
+      expect(result.current).toBe('slow');
+    });
+  });
 });

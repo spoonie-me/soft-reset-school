@@ -6,9 +6,11 @@ import { SEO } from '@/components/SEO';
 import { api } from '@/lib/api';
 import { lessonsUntilCredential } from '@/data/credentialBar';
 import { getCatalogTrack, credentialAvailable } from '@/data/trackCatalog';
-import { TRACK_PRICE, BUNDLE_PRICES, MAX_BUNDLE_SIZE, bundleSavings } from '@/data/pricing';
+import { TRACK_PRICE, BUNDLE_PRICES, MAX_BUNDLE_SIZE, bundleSavings, COURSE_TRACK_PRICE } from '@/data/pricing';
 import { CohortInterest } from '@/components/CohortInterest';
 import { ModalDialog } from '@/components/ModalDialog';
+import { courseCopy } from '@/data/pricingCopy';
+import { PRICING_SEO } from '@/data/courseSeo';
 
 // Career tracks are the reintegration path: each one maps to a role a
 // bed- or home-bound person can actually be hired (or bill clients) for.
@@ -38,6 +40,7 @@ type PendingCheckout =
   | { productId: 'program_credential'; trackIds: string[] };
 
 export function Pricing() {
+  const cc = courseCopy();
   const [pending, setPending] = useState<PendingCheckout | null>(null);
   const [withdrawalAck, setWithdrawalAck] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
@@ -148,37 +151,83 @@ export function Pricing() {
 
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-      <SEO
-        title="Pricing — Soft Reset School"
-        description="Try lesson 1 free. Then pay once, €99 per track (2 for €149, 3 for €199), for every lesson, the certification exam and a permanent, publicly verifiable credential."
-        canonical="/pricing"
-      />
+      {cc ? (
+        <SEO title={PRICING_SEO.title} description={PRICING_SEO.description} canonical="/pricing" />
+      ) : (
+        <SEO
+          title="Pricing — Soft Reset School"
+          description="Try lesson 1 free. Then pay once, €99 per track (2 for €149, 3 for €199), for every lesson, the certification exam and a permanent, publicly verifiable credential."
+          canonical="/pricing"
+        />
+      )}
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
-        <h1 style={{ marginBottom: 'var(--space-lg)' }}>Try lesson 1 free. Then pay once per track.</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
-          No subscription. Nothing bills you on a bad month. Try the first lesson of any track free, then pay once for the whole track, the certification exam and a permanent, publicly verifiable credential.
-        </p>
-        <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
-          €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
-        </p>
+        {cc ? (
+          <>
+            <h1 style={{ marginBottom: 'var(--space-lg)' }}>{cc.pricingTitle}</h1>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
+              {cc.pricingIntro}
+            </p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
+              {cc.pricingSub}
+            </p>
+          </>
+        ) : (
+          <>
+            <h1 style={{ marginBottom: 'var(--space-lg)' }}>Try lesson 1 free. Then pay once per track.</h1>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: 640, margin: '0 auto var(--space-md)' }}>
+              No subscription. Nothing bills you on a bad month. Try the first lesson of any track free, then pay once for the whole track, the certification exam and a permanent, publicly verifiable credential.
+            </p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9375rem', maxWidth: 600, margin: '0 auto' }}>
+              €99 per track, flat. If that is out of reach, ask for a hardship code below. No reason needed.
+            </p>
+          </>
+        )}
       </div>
 
       {/* Free preview — the email-capture entry point */}
       <Card style={{ marginBottom: 'var(--space-2xl)', textAlign: 'center' }}>
         <div style={{ width: 40, height: 4, background: 'var(--crystal)', borderRadius: 2, margin: '0 auto var(--space-lg)' }} />
-        <h3 style={{ marginBottom: 'var(--space-xs)' }}>Start here: try lesson 1</h3>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
-          Create a free account with just your email and start with the first lesson of any track. No card.
-          The rest of the track, the exam and the certificate are €99 once.
-        </p>
-        <Link to="/signup">
-          <Button variant="secondary">Try lesson 1 free</Button>
-        </Link>
+        {cc ? (
+          <>
+            <h3 style={{ marginBottom: 'var(--space-xs)' }}>{cc.pricingStart}</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
+              {cc.pricingStartBody}
+            </p>
+            <Link to="/signup">
+              <Button variant="secondary">Try a first lesson free</Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <h3 style={{ marginBottom: 'var(--space-xs)' }}>Start here: try lesson 1</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: 520, margin: '0 auto var(--space-lg)' }}>
+              Create a free account with just your email and start with the first lesson of any track. No card.
+              The rest of the track, the exam and the certificate are €99 once.
+            </p>
+            <Link to="/signup">
+              <Button variant="secondary">Try lesson 1 free</Button>
+            </Link>
+          </>
+        )}
       </Card>
 
-      {/* Career credentials — the reintegration path */}
+      {cc && (
+        <section aria-labelledby="courses-heading" style={{ marginBottom: 'var(--space-3xl)' }}>
+          <h2 id="courses-heading" style={{ marginBottom: 'var(--space-sm)' }}>{cc.pricingCoursesHead}</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', maxWidth: 680 }}>{cc.pricingCoursesBody}</p>
+          <Link to="/courses"><Button variant="primary">{cc.pricingCoursesCta}</Button></Link>
+        </section>
+      )}
+
+      {cc ? (
+        <>
+          <h2 style={{ marginBottom: 'var(--space-sm)' }}>{cc.pricingTrackHead}</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 680 }}>{cc.pricingTrackBody}</p>
+        </>
+      ) : (
+        <>
       <h2 style={{ marginBottom: 'var(--space-sm)' }}>Career Credential — €{TRACK_PRICE} per track, one-time</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 680 }}>
         The four reintegration tracks. Each one ends in a certification exam and a certificate: proof of
@@ -187,6 +236,8 @@ export function Pricing() {
         on each track's page before you pay anything. A track still too new to back up a credential says
         so below, with no price and no buy button, rather than selling one anyway.
       </p>
+        </>
+      )}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-3xl)' }}>
         {CAREER_TRACKS.map((track) => (
           <Card key={track.id}>
@@ -198,10 +249,10 @@ export function Pricing() {
             {track.sellable ? (
               <>
                 <div style={{ marginBottom: 'var(--space-lg)' }}>
-                  <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€{TRACK_PRICE}</span>
+                  <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500 }}>€{cc ? COURSE_TRACK_PRICE : TRACK_PRICE}</span>
                 </div>
                 <Button variant="primary" style={{ width: '100%' }} onClick={() => startCheckout({ productId: 'track_credential', trackId: track.id })}>
-                  Get certified
+                  {cc ? cc.pricingTrackCta : 'Get certified'}
                 </Button>
               </>
             ) : (
@@ -218,7 +269,9 @@ export function Pricing() {
         ))}
       </div>
 
-      {/* Program bundle */}
+      {/* Program bundle: track bundles are not sold while courses are on */}
+      {!cc && (
+        <>
       <h2 style={{ marginBottom: 'var(--space-sm)' }}>Bundle — 2 tracks for €{BUNDLE_PRICES[2]}, 3 for €{BUNDLE_PRICES[3]}</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
         Pick 2 tracks and save €{bundleSavings(2)}, or 3 and save €{bundleSavings(3)}, versus buying them one at a time.
@@ -259,6 +312,8 @@ export function Pricing() {
             : 'Select 2 or 3 tracks'}
         </Button>
       </Card>
+        </>
+      )}
 
       {/* Hybrid cohorts interest list */}
       <div style={{ marginBottom: 'var(--space-3xl)' }}>
@@ -268,7 +323,7 @@ export function Pricing() {
       {/* Hardship codes. The price stays €99 so the credential means the same
        * thing to everyone; a code is how money isn't a barrier. No reason asked. */}
       <div id="hardship" style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
-        <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>Can't afford €{TRACK_PRICE}?</h3>
+        <h3 style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>{cc ? cc.pricingHardshipHead : `Can't afford €${TRACK_PRICE}?`}</h3>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto var(--space-lg)' }}>
           Ask for a hardship code. Just your email, no reason needed, and I will send you a code.
           It unlocks the same exam and the same certificate. Nobody reviews your situation.

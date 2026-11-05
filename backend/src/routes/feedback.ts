@@ -4,7 +4,7 @@ import { prisma } from '../lib/db.js';
 import { getExerciseFeedback } from '../lib/claude.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
-import { isTrialLesson } from '../lib/access.js';
+import { canAccessLesson, lockedMessage } from '../lib/access.js';
 
 const router = Router();
 
@@ -47,10 +47,14 @@ router.post('/:exerciseId', authMiddleware, entitlementsMiddleware, async (req, 
 
     // Check track access — the trial lesson is open, everything else needs the track
     const trackId = exercise.lesson?.module?.domain?.trackId;
-    if (trackId && !isTrialLesson(exercise.lesson) && !authReq.trackAccess?.includes(trackId)) {
+    const exLesson = exercise.lesson;
+    if (trackId && !canAccessLesson({
+      domain: exLesson?.module?.domain, module: exLesson?.module, lesson: exLesson,
+      trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess,
+    })) {
       res.status(403).json({
         error: 'Track access required',
-        message: "You need the full track to read this. The first lesson of every track is a free trial.",
+        message: lockedMessage(),
       });
       return;
     }

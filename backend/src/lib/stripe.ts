@@ -1,4 +1,5 @@
 // @ts-nocheck
+import crypto from 'crypto';
 import Stripe from 'stripe';
 import { meetsCredentialBar } from './credentialBar.js';
 
@@ -41,6 +42,26 @@ export const PROGRAM_PRICES_IN_CENTS: Record<number, number> = {
 };
 
 export type CredentialProductId = keyof typeof CREDENTIAL_PRODUCTS;
+
+// Courses (a domain sold on its own). Only used while COURSES_ENABLED is "true".
+// Allowed carts: exactly 1 course, exactly 3 distinct courses, or one whole track.
+// Not in CREDENTIAL_PRODUCTS on purpose: that object also validates the
+// flag-off checkout body, which must stay as it was.
+export const COURSE_PRICE_CENTS = 2900; // 1 course, €29
+export const COURSE_BUNDLE_3_PRICE_CENTS = 6900; // any 3 courses, €69
+export const COURSE_TRACK_PRICE_CENTS = 9900; // a whole track while courses are on, €99
+
+export const COURSE_PRODUCT = {
+  label: 'Course',
+  description: 'Every lesson in the course, for good.',
+} as const;
+
+/** Price of a course cart by number of distinct courses, or null if not sold. */
+export function courseCartPriceCents(count: number): number | null {
+  if (count === 1) return COURSE_PRICE_CENTS;
+  if (count === 3) return COURSE_BUNDLE_3_PRICE_CENTS;
+  return null;
+}
 
 // Prices live in code (price_data at checkout) rather than in Stripe Price
 // objects, so a price change is a code change and can't drift from the
@@ -91,4 +112,27 @@ export type TrackId = (typeof VERIFIED_EXAM_BANK_TRACKS)[number];
 
 export async function createCustomer(email: string, name?: string) {
   return stripe.customers.create({ email, name: name ?? undefined });
+}
+
+/**
+ * Idempotency key for creating a Checkout Session (courses flag on only).
+ * Same user + same cart (kind and ids, order ignored) inside the same minute
+ * gives the same key, so two simultaneous identical requests collapse into one
+ * session. A later retry lands in a new minute and gets a fresh session.
+ * Stripe rejects a reused key with different parameters, so every field that
+ * goes into the session must be a pure function of the same inputs.
+ */
+export function checkoutIdempotencyKey(
+  userId: string,
+  cart: Array<{ kind: string; id: string }>,
+  now: number = Date.now(),
+): string {
+  const items = cart.map((c) => `${c.kind}:${c.id}`).sort().join('|');
+  const hash = crypto.createHash('sha256').update(items).digest('hex').slice(0, 24);
+  return `checkout_${userId}_${hash}_${Math.floor(now / 60000)}`;
+}
+
+/** A stable bundle id for a multi-course cart, derived from the idempotency key. */
+export function bundleIdFromKey(key: string): string {
+  return `bundle_${crypto.createHash('sha256').update(key).digest('hex').slice(0, 32)}`;
 }

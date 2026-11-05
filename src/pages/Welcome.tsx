@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
 import { SEO } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
+import { HEAD_SEO } from '@/data/courseSeo';
 
 /**
  * /welcome — LinkedIn Ads conversion landing page.
@@ -21,6 +23,7 @@ import { SEO } from '@/components/SEO';
  */
 
 export function Welcome() {
+  const cc = courseCopy();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -48,6 +51,7 @@ export function Welcome() {
         title="Welcome — start coding from bed"
         description="A coding school built for chronic illness. Short, resumable lessons, no streak penalties, ship real AI tools — try lesson 1 free, then €99 once per track for every lesson, the exam and the credential."
         canonical="/welcome"
+        {...(cc ? HEAD_SEO['/welcome'] : {})}
       />
       {/* Hero */}
       <section style={{ textAlign: 'center', marginBottom: 'var(--space-2xl)' }}>
@@ -150,9 +154,8 @@ export function Welcome() {
       }}>
         <h3 style={{ marginBottom: 'var(--space-sm)' }}>Money is not the gate</h3>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-          The first lesson of every track is a free trial, and the full track is €99 once.
-          If €99 isn't possible right now, ask for a hardship code. No reason needed and nobody
-          reviews your situation. Many people here left education or work because they
+          {cc ? cc.moneyLine : 'The first lesson of every track is a free trial, and the full track is €99 once.'}
+          {cc ? " If that isn't possible right now, ask for a hardship code. No reason needed and nobody reviews your situation." : " If €99 isn't possible right now, ask for a hardship code. No reason needed and nobody reviews your situation."} Many people here left education or work because they
           got ill; that is exactly who this is for.
         </p>
       </section>
@@ -161,7 +164,7 @@ export function Welcome() {
       <section style={{ textAlign: 'center', marginBottom: 'var(--space-2xl)' }}>
         <h2 style={{ marginBottom: 'var(--space-md)' }}>Ready to Start?</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Try lesson 1 of any track free. No credit card needed.
+          {cc ? cc.readyLine : 'Try lesson 1 of any track free. No credit card needed.'}
         </p>
         <Link
           to="/signup"

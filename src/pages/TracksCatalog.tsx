@@ -6,6 +6,8 @@ import {
   CAREER_CATALOG_TRACKS,
   type CatalogTrack,
 } from '@/data/trackCatalog';
+import { courseCopy } from '@/data/pricingCopy';
+import { TRACKS_SEO } from '@/data/courseSeo';
 
 function TrackCard({ track }: { track: CatalogTrack }) {
   return (
@@ -30,17 +32,30 @@ function TrackCard({ track }: { track: CatalogTrack }) {
 }
 
 export function TracksCatalog() {
+  const cc = courseCopy();
   return (
     <div style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 1000, margin: '0 auto' }}>
-      <SEO
-        title="Tracks — see what's inside before you sign up"
-        description="All 4 Soft Reset School career tracks, with the full curriculum outline before you create an account. Try lesson 1 free, then €99 per track once (2 for €149, 3 for €199). No subscription."
-        canonical="/tracks"
-        jsonLd={breadcrumbLd([
-          { name: 'Home', path: '/' },
-          { name: 'Tracks', path: '/tracks' },
-        ])}
-      />
+      {cc ? (
+        <SEO
+          title={TRACKS_SEO.title}
+          description={TRACKS_SEO.description}
+          canonical="/tracks"
+          jsonLd={breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Tracks', path: '/tracks' },
+          ])}
+        />
+      ) : (
+        <SEO
+          title="Tracks — see what's inside before you sign up"
+          description="All 4 Soft Reset School career tracks, with the full curriculum outline before you create an account. Try lesson 1 free, then €99 per track once (2 for €149, 3 for €199). No subscription."
+          canonical="/tracks"
+          jsonLd={breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Tracks', path: '/tracks' },
+          ])}
+        />
+      )}
 
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-3xl)', maxWidth: 680 }}>
@@ -58,7 +73,8 @@ export function TracksCatalog() {
       <h2 style={{ marginBottom: 'var(--space-sm)' }}>career tracks — the reintegration path</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)', maxWidth: 640 }}>
         Each one maps to a kind of work that can be done flexibly and from home.
-        Try lesson 1 of any track free. The full track is €99 once.
+        {' '}
+        {cc ? cc.tracksPriceNote : 'Try lesson 1 of any track free. The full track is €99 once.'}
       </p>
       <div className="grid-2" style={{ marginBottom: 'var(--space-3xl)' }}>
         {CAREER_CATALOG_TRACKS.map((track) => (
@@ -69,11 +85,12 @@ export function TracksCatalog() {
       {/* CTA */}
       <div style={{ textAlign: 'center', borderTop: '1px solid var(--bg-border)', paddingTop: 'var(--space-2xl)' }}>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-          Lesson 1 free. No card. Then pay once, €99 per track, when you're ready.
+          {cc ? cc.tracksCta : "Lesson 1 free. No card. Then pay once, €99 per track, when you're ready."}
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
+          {cc && <Link to="/courses"><Button variant="secondary" size="lg">See the courses</Button></Link>}
         </div>
       </div>
     </div>

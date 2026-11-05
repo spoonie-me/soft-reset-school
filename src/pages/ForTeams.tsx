@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { SEO, breadcrumbLd } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
+import { HEAD_SEO } from '@/data/courseSeo';
 
 const WHO_FOR = [
   { title: 'Employers', color: 'var(--signal)', desc: 'Fund retraining for people coming back after illness, burnout, caring or a career break, at a pace they can sustain.' },
@@ -18,6 +20,7 @@ const HOW_IT_WORKS = [
 ];
 
 export function ForTeams() {
+  const cc = courseCopy();
   const [form, setForm] = useState({ name: '', org: '', email: '', size: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -75,6 +78,7 @@ export function ForTeams() {
         title="Seats for organisations | Soft Reset School"
         description="Fund seats for people returning to work. €99 per track, single-use codes by email, no subscription. For employers, nonprofits, rehab agencies and return-to-work programmes."
         canonical="/for-teams"
+        {...(cc ? HEAD_SEO['/for-teams'] : {})}
         keywords="return to work programme training, fund retraining seats, vocational rehabilitation courses, career break retraining for employers"
         jsonLd={[
           breadcrumbLd([
@@ -108,6 +112,7 @@ export function ForTeams() {
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', marginBottom: 'var(--space-2xl)', maxWidth: 640 }}>
           Buy seats for the people you support. Each seat is €99 for one track, once. We handle it by email, so there is no software to set up.
+          {cc && ` ${cc.seatsNote}`}
         </p>
         <div className="hero-cta" style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
           <a href="#demo"><Button variant="primary" size="lg">Ask about seats</Button></a>
@@ -135,7 +140,7 @@ export function ForTeams() {
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 900, margin: '0 auto' }}>
         <h2 style={{ marginBottom: 'var(--space-sm)' }}>Seats and partnerships</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-          No subscription and no per-seat monthly billing. The first lesson of every track is a free trial, so people can try before a seat is used.
+          No subscription and no per-seat monthly billing. The first lesson of every {cc ? 'course' : 'track'} is a free trial, so people can try before a seat is used.
         </p>
         <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-xl)' }}>
           <Card>

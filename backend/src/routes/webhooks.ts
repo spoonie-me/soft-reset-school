@@ -1,11 +1,11 @@
 // @ts-nocheck
 import { Router } from 'express';
 import type { Request, Response } from 'express';
-import { stripe, CREDENTIAL_PRODUCTS } from '../lib/stripe.js';
+import { stripe, CREDENTIAL_PRODUCTS, COURSE_PRODUCT, courseCartPriceCents } from '../lib/stripe.js';
 import { prisma } from '../lib/db.js';
 import { sendPurchaseConfirmation, sendCheckoutReminder } from '../lib/email.js';
 import { postWelcomeToTrack } from '../lib/discord.js';
-import { recordPurchase, sessionFullyRecorded } from '../lib/credentialGrant.js';
+import { recordPurchase, sessionFullyRecorded, parseCourseItems, COURSE_PRODUCT_TYPE } from '../lib/credentialGrant.js';
 import { TRACK_NAMES } from '../lib/trackNames.js';
 
 const router = Router();
@@ -56,14 +56,22 @@ router.post('/stripe', async (req: Request, res: Response) => {
         const trackIds: string[] = session.metadata?.trackIds ? JSON.parse(session.metadata.trackIds) : [];
         const bundleId: string | undefined = session.metadata?.bundleId || undefined;
 
-        if (!productId || trackIds.length === 0) {
+        // Course cart (checkout.ts, flag on). Always honoured once paid, even
+        // if the flag was switched off after the session was created.
+        const courses = parseCourseItems(session.metadata);
+        if (courses && courses.length === 0) {
+          console.warn(`Webhook: course session ${sessionId} has unreadable courseIds/courseTrackIds, needs manual review`);
+          break;
+        }
+
+        if (!courses && (!productId || trackIds.length === 0)) {
           console.warn(`Webhook: checkout.session.completed missing productId/trackIds in metadata, sessionId ${sessionId}`);
           break;
         }
 
-        // Idempotency: skip only if EVERY track of this session is recorded.
+        // Idempotency: skip only if EVERY track (or course) of this session is recorded.
         // (A bundle writes several rows; one row existing means a partial run.)
-        if (await sessionFullyRecorded(prisma, sessionId, trackIds)) {
+        if (await sessionFullyRecorded(prisma, sessionId, courses ?? trackIds)) {
           console.log(`Webhook: session ${sessionId} already processed, skipping.`);
           break;
         }
@@ -79,25 +87,44 @@ router.post('/stripe', async (req: Request, res: Response) => {
           return;
         }
 
-        const amountTotal = session.amount_total ?? CREDENTIAL_PRODUCTS[productId]?.priceInCents ?? 0;
+        const amountTotal = courses
+          ? (session.amount_total ?? courseCartPriceCents(courses.length) ?? 0)
+          : (session.amount_total ?? CREDENTIAL_PRODUCTS[productId]?.priceInCents ?? 0);
         await recordPurchase(prisma, {
           userId: user.id,
-          productId,
+          productId: courses ? COURSE_PRODUCT_TYPE : productId,
           trackIds,
+          courses: courses ?? undefined,
           bundleId,
           sessionId,
           amountTotal,
         });
-        console.log(`Credential purchase recorded for user ${user.id}: ${productId}, tracks: ${trackIds.join(', ')}`);
+        console.log(
+          courses
+            ? `Course purchase recorded for user ${user.id}: ${courses.map((c) => c.domainId).join(', ')}`
+            : `Credential purchase recorded for user ${user.id}: ${productId}, tracks: ${trackIds.join(', ')}`,
+        );
 
         // Send purchase confirmation email (non-blocking)
         try {
-          const productLabel = CREDENTIAL_PRODUCTS[productId]?.label ?? productId;
+          let names = trackIds.map((t) => TRACK_NAMES[t] ?? t);
+          if (courses) {
+            const rows = await prisma.competencyDomain.findMany({
+              where: { id: { in: courses.map((c) => c.domainId) } },
+              select: { id: true, name: true, courseTitle: true },
+            });
+            names = courses.map((c) => {
+              const r = rows.find((x) => x.id === c.domainId);
+              return r?.courseTitle ?? r?.name ?? c.domainId;
+            });
+          }
+          const productLabel = courses ? COURSE_PRODUCT.label : (CREDENTIAL_PRODUCTS[productId]?.label ?? productId);
           await sendPurchaseConfirmation(user.email, {
             name: user.name ?? undefined,
             plan: productLabel,
-            tracks: trackIds.map((t) => TRACK_NAMES[t] ?? t),
+            tracks: names,
             amount: `€${(amountTotal / 100).toFixed(2)}`,
+            ...(courses ? { courses: true } : {}),
           });
         } catch (emailErr) {
           console.error('Failed to send purchase confirmation email:', emailErr);
@@ -110,7 +137,7 @@ router.post('/stripe', async (req: Request, res: Response) => {
         // cohort, not lesson access.
         try {
           await Promise.all(
-            trackIds.map((trackId) => postWelcomeToTrack(user.email, trackId)),
+            (courses ? [...new Set(courses.map((c) => c.trackId))] : trackIds).map((trackId) => postWelcomeToTrack(user.email, trackId)),
           );
         } catch (discordErr) {
           console.error('Failed to post Discord welcome message:', discordErr);
@@ -141,7 +168,8 @@ router.post('/stripe', async (req: Request, res: Response) => {
 
         // Bought another way since (hardship code, a later session)? Nothing to remind about.
         const owned = await prisma.credentialPurchase.count({
-          where: { userId: user.id, trackId: { in: trackIds } },
+          // domainId '' = a track row. A course row must not cancel a track reminder.
+          where: { userId: user.id, trackId: { in: trackIds }, domainId: '' },
         });
         if (owned > 0) break;
 

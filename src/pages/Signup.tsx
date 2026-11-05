@@ -4,6 +4,8 @@ import { Button } from '@/components/Button';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { useAuth } from '@/lib/AuthContext';
 import { SEO } from '@/components/SEO';
+import { courseCopy } from '@/data/pricingCopy';
+import { HEAD_SEO } from '@/data/courseSeo';
 
 function passwordStrength(pw: string): { label: string; color: string } {
   if (pw.length === 0) return { label: '', color: 'transparent' };
@@ -45,7 +47,7 @@ export function Signup() {
 
   return (
     <div style={{ maxWidth: 420, margin: '0 auto', padding: 'var(--space-4xl) var(--space-xl)' }}>
-      <SEO title="Sign Up — try lesson 1 free" description="Create your free Soft Reset School account with just your email and start with lesson 1 of any career track. The full track, exam and credential are €99 once." canonical="/signup" />
+      <SEO title="Sign Up — try lesson 1 free" description="Create your free Soft Reset School account with just your email and start with lesson 1 of any career track. The full track, exam and credential are €99 once." canonical="/signup" {...(courseCopy() ? HEAD_SEO['/signup'] : {})} />
       <h1 style={{ fontSize: '1.75rem', marginBottom: 'var(--space-sm)' }}>Create your account</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
         Start building with AI. Free to begin.

@@ -4,7 +4,8 @@ import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
 import { sanitizeExerciseConfig } from '../lib/sanitizeExercise.js';
-import { isTrialLesson } from '../lib/access.js';
+import { canAccessLesson, hasFullAccess, lockedMessage } from '../lib/access.js';
+import { coursesEnabled } from '../lib/flags.js';
 
 const router = Router();
 
@@ -47,11 +48,16 @@ router.get('/:id', authMiddleware, entitlementsMiddleware, async (req, res) => {
 
     // Check track access — the trial lesson is open, everything else needs the track
     const trackId = lesson.module?.domain?.trackId;
-    if (trackId && !isTrialLesson(lesson) && !entReq.trackAccess?.includes(trackId)) {
+    if (trackId && !canAccessLesson({
+      domain: lesson.module?.domain, module: lesson.module, lesson,
+      trackAccess: entReq.trackAccess, courseAccess: entReq.courseAccess,
+    })) {
       res.status(403).json({
         error: 'Track access required',
-        message: "You need the full track to read this. The first lesson of every track is a free trial.",
+        message: lockedMessage(),
         trackId,
+        // Lets the locked page offer this lesson's own course. Flag on only.
+        ...(coursesEnabled() ? { courseSlug: lesson.module?.domain?.courseSlug ?? null } : {}),
       });
       return;
     }
@@ -84,10 +90,13 @@ router.get('/:id', authMiddleware, entitlementsMiddleware, async (req, res) => {
       prevLessonId: prevLesson?.id ?? null,
       nextLessonId: nextLesson?.id ?? null,
       // Only the trial lesson is open without the track, and it is always lesson 1, so any next lesson is locked for non-owners.
-      nextLessonLocked: !!nextLesson && !!trackId && !entReq.trackAccess?.includes(trackId),
+      nextLessonLocked:
+        !!nextLesson && !!trackId &&
+        !hasFullAccess({ domain: lesson.module?.domain, trackAccess: entReq.trackAccess, courseAccess: entReq.courseAccess }),
       trackId: trackId ?? null,
       trackTitle: lesson.module?.domain?.trackId ?? null,
       domainTitle: lesson.module?.domain?.name ?? null,
+      ...(coursesEnabled() ? { courseSlug: lesson.module?.domain?.courseSlug ?? null } : {}),
     };
 
     // Get user progress

@@ -3,6 +3,8 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { SEO } from '@/components/SEO';
 import { SoftResetWave } from '@/components/SoftResetWave';
+import { courseCopy } from '@/data/pricingCopy';
+import { HEAD_SEO } from '@/data/courseSeo';
 
 const AI_ENABLED_TRACKS = [
   {
@@ -35,12 +37,14 @@ const AI_RESISTANT_TRACKS = [
 ];
 
 export function Landing() {
+  const cc = courseCopy();
   return (
     <div>
       <SEO
         title="Soft Reset School | A restart, not a comeback story"
         description="AI-era work skills for people returning to work after illness or time away. Try lesson 1 free. Short units, a lower-energy path in every module, nothing timed."
         canonical="/"
+        {...(cc ? HEAD_SEO['/'] : {})}
       />
 
       {/* Hero */}
@@ -58,7 +62,7 @@ export function Landing() {
               A hard reset wipes the slate and starts from zero, once. A soft reset lets you resume, gently, as many times as your body requires — no cure required first, no "get well, then work."
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginBottom: 'var(--space-2xl)', maxWidth: 560 }}>
-              Practical AI-era skills for people going back to work, taught at the pace you can sustain. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every track is free.
+              Practical AI-era skills for people going back to work, taught at the pace you can sustain. Learn to direct AI tools well, or to bring the judgment an AI cannot supply. We make no promises about jobs or income, and the first lesson of every {cc ? 'course' : 'track'} is free.
             </p>
             <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', marginBottom: 'var(--space-2xl)' }}>
               {['4 new tracks', 'AI-enabled or AI-resistant', 'no streak penalties', 'kind to bad weeks'].map((stat) => (
@@ -160,18 +164,19 @@ export function Landing() {
       {/* Pricing */}
       <section style={{ padding: 'var(--space-3xl) var(--space-xl)', background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <h2 style={{ marginBottom: 'var(--space-sm)' }}>try lesson 1 free. then €99 once per track.</h2>
+          <h2 style={{ marginBottom: 'var(--space-sm)' }}>{cc ? cc.landingTitle : 'try lesson 1 free. then €99 once per track.'}</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-2xl)' }}>
-            The first lesson of every track is a free trial. The full track, the exam and the certificate are €99 once. Nothing bills you on a bad month — there is no monthly anything.
+            {cc ? cc.landingBody : 'The first lesson of every track is a free trial. The full track, the exam and the certificate are €99 once. Nothing bills you on a bad month — there is no monthly anything.'}
           </p>
           <Card style={{ textAlign: 'center', maxWidth: 440, margin: '0 auto var(--space-2xl)', borderColor: 'var(--signal)' }}>
             <div style={{ width: 32, height: 3, background: 'var(--signal)', borderRadius: 2, margin: '0 auto var(--space-md)' }} />
-            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>€99 <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once, per track — 2 for €149, 3 for €199</span></p>
-            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>certification exam · permanent verifiable certificate · no renewal, ever</p>
+            <p style={{ fontSize: '1.75rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>{cc ? cc.landingPriceHead : '€99'} <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>{cc ? cc.landingPriceTail : 'once, per track — 2 for €149, 3 for €199'}</span></p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-lg)' }}>{cc ? cc.landingPriceNote : 'certification exam · permanent verifiable certificate · no renewal, ever'}</p>
             <Link to="/pricing" style={{ textDecoration: 'none' }}><Button variant="primary" size="sm" style={{ width: '100%' }}>See pricing</Button></Link>
+            {cc && <Link to="/courses" style={{ textDecoration: 'none', display: 'block', marginTop: 'var(--space-sm)' }}><Button variant="secondary" size="sm" style={{ width: '100%' }}>{cc.landingCta}</Button></Link>}
           </Card>
           <p style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '0.8125rem' }}>
-            Can't afford €99? Ask for a hardship code, no reason needed. · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
+            {cc ? cc.landingHardship : "Can't afford €99? Ask for a hardship code, no reason needed."} · <Link to="/for-teams" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>Credential vouchers for organisations &rarr;</Link>
           </p>
         </div>
       </section>

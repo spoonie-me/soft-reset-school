@@ -5,6 +5,7 @@ import type { AuthRequest } from './auth.js';
 import { EXAM_CREDENTIAL_PRODUCTS } from '../lib/credentialGrant.js';
 import { isGrandfathered } from '../lib/access.js';
 import { CREDENTIAL_SELLABLE_TRACKS } from '../lib/stripe.js';
+import { coursesEnabled } from '../lib/flags.js';
 
 // ──────────────────────────────────────────
 // TYPES
@@ -19,6 +20,9 @@ export interface EntitledRequest extends AuthRequest {
   /** Track IDs the current user has paid a one-time fee for. Gates the
    * certification exam and certificate issuance as well as the content. */
   credentialAccess: string[];
+  /** Domain IDs the user bought as single courses. Always empty while the
+   * courses flag is off. Never feeds credentialAccess (exams stay per track). */
+  courseAccess: string[];
 }
 
 // ──────────────────────────────────────────
@@ -43,6 +47,7 @@ export async function entitlementsMiddleware(
     if (!userId) {
       req.trackAccess = [];
       req.credentialAccess = [];
+      req.courseAccess = [];
       next();
       return;
     }
@@ -69,12 +74,21 @@ export async function entitlementsMiddleware(
       req.trackAccess = [...new Set([...open, ...purchases.map((p) => p.trackId)])];
     }
     req.credentialAccess = purchases.map((p) => p.trackId);
+    req.courseAccess = [];
+    if (coursesEnabled()) {
+      const courses = await prisma.credentialPurchase.findMany({
+        where: { userId, productType: 'course', domainId: { not: '' } },
+        select: { domainId: true },
+      });
+      req.courseAccess = [...new Set(courses.map((c) => c.domainId))];
+    }
     next();
   } catch (error) {
     console.error('Entitlements middleware error:', error);
     // Fail closed rather than crashing the request
     req.trackAccess = [];
     req.credentialAccess = [];
+    req.courseAccess = [];
     next();
   }
 }

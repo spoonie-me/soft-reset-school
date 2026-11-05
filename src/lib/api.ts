@@ -186,6 +186,8 @@ export interface LessonDetailResponse {
     trackId?: string | null;
     trackTitle?: string | null;
     domainTitle?: string | null;
+    /** The course this lesson belongs to. Sent only while courses are on. */
+    courseSlug?: string | null;
   };
   progress: { status: string; progress: number } | null;
 }

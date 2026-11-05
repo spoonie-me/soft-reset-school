@@ -1,0 +1,128 @@
+{
+  "ai-orch-dev-foundations": {
+    "courseSlug": "direct-ai-to-write-code",
+    "courseTitle": "Direct AI to Write Code",
+    "courseBlurb": "Specify requirements, give an AI coding tool the context it needs, and decide when to take over.",
+    "courseOrder": 1,
+    "courseForSale": true
+  },
+  "ai-orch-dev-reading-code": {
+    "courseSlug": "read-code-you-didnt-write",
+    "courseTitle": "Read Code You Didn't Write",
+    "courseBlurb": "Read unfamiliar code for intent, control flow, data shapes and dependency cost, and use tests as a reading tool.",
+    "courseOrder": 2,
+    "courseForSale": true
+  },
+  "ai-orch-dev-review": {
+    "courseSlug": "review-ai-code",
+    "courseTitle": "Review AI Code",
+    "courseBlurb": "Review AI-generated code for common bugs, injection, auth and secrets, concurrency, and error handling.",
+    "courseOrder": 3,
+    "courseForSale": true
+  },
+  "ai-orch-dev-agentic": {
+    "courseSlug": "agents-you-can-trust",
+    "courseTitle": "Agents You Can Trust",
+    "courseBlurb": "Break work into steps an agent can finish, scope what it may touch, and check each step of a run.",
+    "courseOrder": 4,
+    "courseForSale": true
+  },
+  "ai-orch-dev-shipping": {
+    "courseSlug": "ship-it",
+    "courseTitle": "Ship It",
+    "courseBlurb": "Write tests that can fail, prepare changes for review, work with CI, and deploy changes you can undo.",
+    "courseOrder": 5,
+    "courseForSale": true
+  },
+  "ai-orch-dev-practice": {
+    "courseSlug": "scoping-and-accountability-for-ai-assisted-work",
+    "courseTitle": "Scoping and Accountability for AI-Assisted Work",
+    "courseBlurb": "Estimate and scope AI-assisted work, understand disclosure and accountability, and apply it all in one capstone change.",
+    "courseOrder": 6,
+    "courseForSale": true
+  },
+  "ai-workflow-seeing-process": {
+    "courseSlug": "see-the-process",
+    "courseTitle": "See the Process",
+    "courseBlurb": "Map a process as it actually runs, ask people the right questions, and measure a baseline before changing anything.",
+    "courseOrder": 1,
+    "courseForSale": true
+  },
+  "ai-workflow-foundations": {
+    "courseSlug": "where-ai-belongs",
+    "courseTitle": "Where AI Belongs",
+    "courseBlurb": "Diagnose where AI belongs in a process, choose between rules, models and people, and name the risk early.",
+    "courseOrder": 2,
+    "courseForSale": true
+  },
+  "ai-workflow-tool-selection": {
+    "courseSlug": "design-and-build-the-automation",
+    "courseTitle": "Design and Build the Automation",
+    "courseBlurb": "Choose tools on evidence, specify the pipeline, treat prompts as tested components, and fit the work into existing systems.",
+    "courseOrder": 3,
+    "courseForSale": true
+  },
+  "ai-workflow-client-consulting": {
+    "courseSlug": "client-work",
+    "courseTitle": "Client Work",
+    "courseBlurb": "Scope and price an engagement, set expectations early, explain AI plainly, work with the people affected, and close cleanly.",
+    "courseOrder": 4,
+    "courseForSale": true
+  },
+  "ai-workflow-validation-roi": {
+    "courseSlug": "prove-it-works",
+    "courseTitle": "Prove It Works",
+    "courseBlurb": "Check accuracy independently, monitor for drift after launch, calculate ROI honestly, and know when to recommend less automation.",
+    "courseOrder": 5,
+    "courseForSale": true
+  },
+  "ai-workflow-practice": {
+    "courseSlug": "positioning-contracts-and-boundaries",
+    "courseTitle": "Positioning, Contracts and Boundaries",
+    "courseBlurb": "Position your work, read contract terms that matter, decide which engagements to refuse, and keep up with change.",
+    "courseOrder": 6,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-foundations": {
+    "courseSlug": "read-wcag-and-the-law",
+    "courseTitle": "Read WCAG and the Law",
+    "courseBlurb": "Learn what accessibility QA produces, how WCAG and the law apply, and what automated testing can and cannot find.",
+    "courseOrder": 1,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-assistive-tech-fluency": {
+    "courseSlug": "assistive-tech-in-practice",
+    "courseTitle": "Assistive Tech in Practice",
+    "courseBlurb": "Test with a keyboard, a screen reader, magnification, switch access and voice control, and read the accessibility tree.",
+    "courseOrder": 2,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-cognitive-content": {
+    "courseSlug": "cognitive-accessibility",
+    "courseTitle": "Cognitive Accessibility",
+    "courseBlurb": "Find cognitive, language, sensory and interaction-cost barriers, including design that is accessible yet coercive or undignified.",
+    "courseOrder": 3,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-audit-practice": {
+    "courseSlug": "audit-practice",
+    "courseTitle": "Audit Practice",
+    "courseBlurb": "Scope an audit, capture evidence, rate severity, write a report developers can act on, and retest fixes.",
+    "courseOrder": 4,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-advocacy-and-change": {
+    "courseSlug": "making-it-stick",
+    "courseTitle": "Making It Stick",
+    "courseBlurb": "Understand why correct findings go unfixed, work with design and engineering, make the case internally, and build accessibility into process.",
+    "courseOrder": 5,
+    "courseForSale": true
+  },
+  "accessibility-qa-lived-experience-career": {
+    "courseSlug": "credentials-sustainable-practice-and-staying-current",
+    "courseTitle": "Credentials, Sustainable Practice and Staying Current",
+    "courseBlurb": "Compare accessibility credentials, structure sustainable practice, and keep up with WCAG and assistive technology changes.",
+    "courseOrder": 6,
+    "courseForSale": true
+  }
+}

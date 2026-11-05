@@ -4,7 +4,7 @@ import { prisma } from '../lib/db.js';
 import { authMiddleware, type AuthRequest } from '../middleware/auth.js';
 import type { Request, Response, NextFunction } from 'express';
 import { entitlementsMiddleware, type EntitledRequest } from '../middleware/entitlements.js';
-import { isTrialLesson } from '../lib/access.js';
+import { canAccessLesson } from '../lib/access.js';
 
 const router = Router();
 
@@ -88,8 +88,10 @@ router.get('/:moduleId', optionalAuth, entitlementsMiddleware, async (req, res) 
           // Same rule as GET /lessons/:id, so the list never promises a lesson the page will refuse.
           locked:
             !!mod.domain &&
-            !isTrialLesson({ order: l.order, module: { order: mod.order, domain: { order: mod.domain.order } } }) &&
-            !authReq.trackAccess?.includes(mod.domain.trackId),
+            !canAccessLesson({
+              domain: mod.domain, module: mod, lesson: l,
+              trackAccess: authReq.trackAccess, courseAccess: authReq.courseAccess,
+            }),
         })),
         assessment: mod.assessment,
       },

@@ -4,21 +4,29 @@ import { Card } from '@/components/Card';
 import { SEO, breadcrumbLd } from '@/components/SEO';
 import { getCatalogTrack, credentialAvailable } from '@/data/trackCatalog';
 import { lessonsUntilCredential } from '@/data/credentialBar';
+import { courseCopy } from '@/data/pricingCopy';
+import { trackSeoDescription } from '@/data/courseSeo';
+import { coursesOfTrack } from '@/data/courseCatalog';
+import { COURSE_PRICE, COURSE_TRACK_PRICE } from '@/data/pricing';
 
 export function TrackInfo() {
   const { slug } = useParams<{ slug: string }>();
   const track = getCatalogTrack(slug);
+  const flagCopy = courseCopy();
 
   if (!track) return <Navigate to="/tracks" replace />;
 
   const isCareer = track.kind === 'career';
   const sellable = credentialAvailable(track);
+  const trackCourses = flagCopy ? coursesOfTrack(track.slug) : [];
+  // Course-first copy only for a track that has courses. A track without them (medical coding) reads as on main.
+  const cc = flagCopy && trackCourses.length > 0 ? flagCopy : null;
 
   return (
     <div>
       <SEO
         title={`${track.title} — what's inside the track`}
-        description={`${track.pitch} Full curriculum outline, who it's for, and the credential exam. Lesson 1 is a free trial.`}
+        description={cc ? trackSeoDescription(track.pitch) : `${track.pitch} Full curriculum outline, who it's for, and the credential exam. Lesson 1 is a free trial.`}
         canonical={`/tracks/${track.slug}`}
         jsonLd={breadcrumbLd([
           { name: 'Home', path: '/' },
@@ -42,6 +50,23 @@ export function TrackInfo() {
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>
         </div>
       </section>
+
+      {/* Courses in this track (courses flag on only) */}
+      {cc && (
+        <section aria-labelledby="track-courses-heading" style={{ padding: 'var(--space-3xl) var(--space-xl)', maxWidth: 720, margin: '0 auto' }}>
+          <h2 id="track-courses-heading" style={{ marginBottom: 'var(--space-md)' }}>courses in this track</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>{cc.trackPriceNote} {cc.freeLesson}</p>
+          <ul style={{ paddingLeft: 'var(--space-xl)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+            {trackCourses.map((c) => (
+              <li key={c.slug}>
+                <Link to={`/courses/${c.slug}`} style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>{c.title}</Link>
+                {' '}<span style={{ color: 'var(--text-tertiary)' }}>(€{COURSE_PRICE})</span>
+              </li>
+            ))}
+          </ul>
+          <Link to="/courses" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>{cc.trackCoursesLink}</Link>
+        </section>
+      )}
 
       {/* Who this is for */}
       <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', padding: 'var(--space-3xl) var(--space-xl)' }}>
@@ -101,7 +126,7 @@ export function TrackInfo() {
           <Card style={{ borderColor: track.color }}>
             <div style={{ width: 32, height: 3, background: track.color, borderRadius: 2, marginBottom: 'var(--space-lg)' }} />
             <p style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)', fontWeight: 500, marginBottom: 4 }}>
-              €99 <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>once — no subscription, no renewal, ever · 2 tracks €149, 3 tracks €199</span>
+              €{cc ? COURSE_TRACK_PRICE : 99} <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)', fontWeight: 400 }}>{cc ? `once. no subscription, no renewal, ever. ${cc.trackPriceNote}` : 'once — no subscription, no renewal, ever · 2 tracks €149, 3 tracks €199'}</span>
             </p>
             <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 'var(--space-xs)', fontFamily: 'var(--font-display)' }}>
               {track.lessonCount} lesson{track.lessonCount === 1 ? '' : 's'} · ~{track.totalMinutes} min total
@@ -119,8 +144,10 @@ export function TrackInfo() {
               </p>
             )}
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', marginBottom: 'var(--space-md)' }}>
-              Lesson 1 is a free trial. The full track unlocks every lesson and the exam, and you sit the exam only
-              when you feel ready, with no deadline and no re-purchase. Passing earns a certificate: proof of practiced skill, not a
+              {cc
+                ? `${cc.trackBlock} You sit the exam only when you feel ready, with no deadline and no re-purchase.`
+                : 'Lesson 1 is a free trial. The full track unlocks every lesson and the exam, and you sit the exam only when you feel ready, with no deadline and no re-purchase.'}
+              {' '}Passing earns a certificate: proof of practiced skill, not a
               promise of a job, that you can share on LinkedIn and employers can verify. See{' '}
               <Link to="/imprint" style={{ color: 'var(--signal)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>what the certificate does and doesn't claim</Link>, including what happens to it if this school ever
               stops operating.
@@ -153,7 +180,7 @@ export function TrackInfo() {
 
       {/* CTA */}
       <section style={{ padding: 'var(--space-2xl) var(--space-xl) var(--space-4xl)', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: 'var(--space-lg)' }}>try lesson 1 free. then pay once for the rest.</h2>
+        <h2 style={{ marginBottom: 'var(--space-lg)' }}>{cc ? cc.trackCtaTitle : 'try lesson 1 free. then pay once for the rest.'}</h2>
         <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 'var(--space-xl)' }}>
           <Link to="/signup"><Button variant="primary" size="lg">Try lesson 1 free</Button></Link>
           <Link to="/pricing"><Button variant="secondary" size="lg">See pricing</Button></Link>

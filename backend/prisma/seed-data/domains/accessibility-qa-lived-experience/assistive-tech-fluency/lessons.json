@@ -845,10 +845,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Keyboard-Only Operation",
-    "description": "Ten questions pulling across this module, the module before it, and two modules further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve the module's core distinctions without looking them up",
+        "text": "Retrieve this module's keyboard distinctions: tab order, focus indicators, keyboard traps, skip links and custom controls, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -944,124 +944,124 @@
             "explanation": "All three are bundled into the native element for free. A div with an onclick solves none of them — a mouse click fires regardless of what element it's attached to, which is exactly why these controls test fine with a mouse and fail with a keyboard."
           },
           {
-            "from": "Previous module — What Automated Testing Can and Can't Find",
-            "prompt": "Roughly what share of accessibility barriers does an automated scanner detect on a typical site?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "A developer reorders page sections with layout CSS and never touches the HTML. What happens to the Tab order?",
             "options": [
               {
                 "value": "a",
-                "label": "About 30%, though the figure depends heavily on how you count"
+                "label": "It stays in DOM order, so keyboard users get a jumbled sequence"
               },
               {
                 "value": "b",
-                "label": "About 70%"
+                "label": "It follows the new visual order, since the browser reads the CSS"
               },
               {
                 "value": "c",
-                "label": "Nearly all of them, if configured well"
+                "label": "It resets, so Tab skips past the sections that were moved"
               }
             ],
             "correctValue": "a",
-            "explanation": "Somewhere in the 20–40% range. Scanners are near-complete on markup properties and structurally blind to meaning, layout and runtime behaviour — which is exactly the category most of this module's keyboard defects fall into."
+            "explanation": "Tab order is DOM order and CSS never touches it. The page looks right to anyone testing by eye or mouse and breaks only for people who tab through it."
           },
           {
-            "from": "Previous module — What Automated Testing Can and Can't Find",
-            "prompt": "Six identical 'Add to cart' buttons on a product listing page each have a valid, non-empty accessible name and pass every automated check. What do they still fail?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "A developer sets outline: none globally and adds a custom focus style only to .btn:focus. What do links and inputs get?",
             "options": [
               {
                 "value": "a",
-                "label": "Nothing — six passing buttons is six passing buttons"
+                "label": "The custom style, which the other elements inherit from the button"
               },
               {
                 "value": "b",
-                "label": "A screen reader user hears 'Add to cart' six times with no way to tell which product each one belongs to"
+                "label": "Nothing visible, because the replacement covers too few elements"
               },
               {
                 "value": "c",
-                "label": "They fail 1.4.3 contrast, which scanners can't detect on buttons"
+                "label": "The browser default outline, which stays in place for them all"
               }
             ],
             "correctValue": "b",
-            "explanation": "A scanner checks that an accessible name exists and is non-empty — it cannot judge whether that name is distinguishable from five identical siblings. This is a meaning problem, and meaning is exactly what automation can't evaluate."
+            "explanation": "A global reset and a narrow replacement do not cover the same set of elements. Focus still works for those elements but nothing shows it."
           },
           {
-            "from": "Previous module — What Automated Testing Can and Can't Find",
-            "prompt": "A scan flags 'insufficient contrast' on text overlaid on a photographic background image. What's the likely issue with the finding?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "Once a focus indicator exists, what else does an audit check about it?",
             "options": [
               {
                 "value": "a",
-                "label": "It's a reliable finding — contrast math doesn't care what's behind the text"
+                "label": "That it is animated, so keyboard users can spot it quickly"
               },
               {
                 "value": "b",
-                "label": "The tool likely sampled one point in a photo with widely varying colour underneath the text, so the result may be a false positive, a false negative, or just noisy depending on where it sampled"
+                "label": "That it matches the default browser outline in colour and width"
               },
               {
                 "value": "c",
-                "label": "Photographic backgrounds are exempt from contrast requirements entirely"
+                "label": "That it clears 3:1 contrast and stays visible when scrolled"
               }
             ],
-            "correctValue": "b",
-            "explanation": "Contrast tools built for flat colours struggle with photos, where the colour behind the text varies pixel to pixel — the single ratio reported may not represent the worst (or best) case anywhere the text actually sits, which is why this is a case worth checking manually rather than trusting the number."
+            "correctValue": "c",
+            "explanation": "An indicator existing and an indicator meeting the bar are not the same claim. The lesson names the 3:1 contrast ratio and visibility while scrolling."
           },
           {
-            "from": "Previous module — What Automated Testing Can and Can't Find",
-            "prompt": "A developer sets alt=\"image\" on every unlabelled image site-wide to make an automated scan pass. What's the problem?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "Under WCAG 2.1.2 No Keyboard Trap, what actually counts as a trap?",
             "options": [
               {
                 "value": "a",
-                "label": "Nothing — the scan is now clean, which was the goal"
+                "label": "A component focus can enter but no standard key can leave"
               },
               {
                 "value": "b",
-                "label": "The scan checks that alt exists and is non-empty; it can't check that the text is meaningful, so this clears the tool while leaving every image just as undescribed to a screen reader user as before"
+                "label": "A component that keeps Tab cycling inside, like an open modal"
               },
               {
                 "value": "c",
-                "label": "alt=\"image\" is technically invalid HTML"
+                "label": "A page that offers more than one skip link near the top"
               }
             ],
-            "correctValue": "b",
-            "explanation": "This is the same mechanism as the six identical buttons: presence-and-non-empty is machine-checkable, accuracy is not. A screen reader user now hears 'image' instead of silence — arguably no better, and the scan reports full success either way."
+            "correctValue": "a",
+            "explanation": "Constrained focus is normal, for example Tab cycling inside an open modal. The failure is focus with no exit, and it can lock a user out of a whole product."
           },
           {
-            "from": "Older module — What Accessibility QA Actually Is",
-            "prompt": "In the finding procedure from accessibility QA fundamentals, what comes first?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "A rich text editor uses Tab to indent text instead of moving focus. When does this still meet the keyboard trap criterion?",
             "options": [
               {
                 "value": "a",
-                "label": "The success criterion"
+                "label": "When the editor is built on a standard text area element"
               },
               {
                 "value": "b",
-                "label": "The task the user was trying to complete"
+                "label": "When the user is told how to escape, such as Escape then Tab"
               },
               {
                 "value": "c",
-                "label": "The reproduction steps"
+                "label": "When the editor is exempt from the criterion as a text tool"
               }
             ],
             "correctValue": "b",
-            "explanation": "Task, access method, where it stops, what they're left with, citation — in that order. It's the same procedure this module's lab and practice drills apply directly to keyboard findings."
+            "explanation": "WCAG allows an editor to give Tab another job on one condition: the user is told how to get out. The same behavior with no hint anywhere is a trap for anyone who does not already know the convention."
           },
           {
-            "from": "Older module — Reading WCAG Properly",
-            "prompt": "Which layer of WCAG's structure is the one you actually cite in a finding — success criteria, or techniques?",
+            "from": "This module — Keyboard-Only Operation",
+            "prompt": "Where should an audit look first when hunting for real keyboard traps?",
             "options": [
               {
                 "value": "a",
-                "label": "Techniques — they're the most specific and detailed"
+                "label": "The footer links, which come last on the page in tab order"
               },
               {
                 "value": "b",
-                "label": "Success criteria — techniques are advisory, sufficient-but-not-required ways of meeting one"
+                "label": "Plain paragraphs of body text that contain no controls"
               },
               {
                 "value": "c",
-                "label": "Either one works equally well in a citation"
+                "label": "Embeds and iframes from third parties, where focus has no exit"
               }
             ],
-            "correctValue": "b",
-            "explanation": "A success criterion (like 2.1.2 No Keyboard Trap) is the testable requirement. A technique is one documented, non-exhaustive way of meeting it — citing a technique as if it were mandatory overstates what WCAG actually requires."
+            "correctValue": "c",
+            "explanation": "Embeds and iframes are where focus most often enters and has no documented way out. Plain text has nothing focusable to trap."
           }
         ]
       },
@@ -1897,10 +1897,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Screen Readers: Actually Using One",
-    "description": "Ten questions pulling across this module, the keyboard module before it, and two modules further back in the foundations phase. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve the module's core distinctions without looking them up",
+        "text": "Retrieve this module's screen reader distinctions alongside the previous module's keyboard distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2076,44 +2076,44 @@
             "explanation": "Focusability and the trigger's Enter handling both work — only the listbox-open state's arrow-key handling was never built, the most common shape a partially-built custom control takes."
           },
           {
-            "from": "Older module — How Barriers Get Built",
-            "prompt": "A wheelchair user can't get up a single step into a building. Which framing does this reflect: \"the person can't walk\" or \"the building has no ramp\"?",
+            "from": "This module — Screen Readers: Actually Using One",
+            "prompt": "A reviewer needs to test an iPhone app with a screen reader. Which tool is the only realistic option?",
             "options": [
               {
                 "value": "a",
-                "label": "The building has no ramp — the barrier is a property of the design, not of the person meeting it"
+                "label": "VoiceOver, because it comes built into every iPhone and Mac"
               },
               {
                 "value": "b",
-                "label": "The person can't walk — the barrier is inherent to the impairment"
+                "label": "JAWS, because it is the most widely used and works on phones"
               },
               {
                 "value": "c",
-                "label": "Neither — steps aren't a real accessibility concern"
+                "label": "NVDA, because it is free and open source, so it runs on phones"
               }
             ],
             "correctValue": "a",
-            "explanation": "The barrier is the missing ramp, not the wheelchair — the same design could have included a ramp and removed the barrier entirely, which is the whole point of describing barriers as properties of the design."
+            "explanation": "VoiceOver is free and built into every Mac and iPhone. JAWS is paid and Windows-only, and NVDA is free but Windows-only, so neither tests iOS."
           },
           {
-            "from": "Older module — Reading WCAG Properly",
-            "prompt": "Which WCAG conformance level do most real-world legal requirements (EN 301 549, ADA-adjacent standards) actually target?",
+            "from": "This module — Screen Readers: Actually Using One",
+            "prompt": "A page update cannot wait for the user to be idle. Which live region role fits?",
             "options": [
               {
                 "value": "a",
-                "label": "AAA, the strictest level"
+                "label": "role=\"status\", which is polite and waits until the user is idle"
               },
               {
                 "value": "b",
-                "label": "AA"
+                "label": "role=\"alert\", which is assertive and speaks without waiting"
               },
               {
                 "value": "c",
-                "label": "A, the minimum level"
+                "label": "No live region, because updates reach the user on their own"
               }
             ],
             "correctValue": "b",
-            "explanation": "AA is the level almost every legal and procurement requirement targets in practice — AAA is real but explicitly not recommended as a blanket site-wide target even by WCAG itself, and A alone is considered too low a bar for most real compliance obligations."
+            "explanation": "Alert implies assertive and status implies polite, so the choice is whether waiting is acceptable. An update with focus elsewhere is invisible to a screen reader user by default, so it is never automatic."
           }
         ]
       },

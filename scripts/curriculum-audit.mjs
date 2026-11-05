@@ -197,7 +197,13 @@ export function auditBlueprint(plan) {
       const p = m.checkpoint.pulls;
       const pullTotal = p.thisModule + p.previousModule + p.olderModules;
       if (pullTotal !== 10) errors.push(`${at(m.slug)}: checkpoint pulls sum to ${pullTotal}, expected 10 (§3)`);
-      if (m.order > 2 && (p.thisModule !== 4 || p.previousModule !== 4 || p.olderModules !== 2)) {
+      // A course split can leave a module with too little of its own course behind it.
+      // Only the explicit ownCourseOnly flag skips 4/4/2, and it still has to total 10.
+      const ownCourseOnly = p.ownCourseOnly === true;
+      if (ownCourseOnly && p.thisModule < 4) {
+        errors.push(`${at(m.slug)}: ownCourseOnly checkpoint pulls only ${p.thisModule} from this module, expected at least 4 (§3)`);
+      }
+      if (!ownCourseOnly && m.order > 2 && (p.thisModule !== 4 || p.previousModule !== 4 || p.olderModules !== 2)) {
         errors.push(`${at(m.slug)}: checkpoint pulls are ${p.thisModule}/${p.previousModule}/${p.olderModules}, expected 4/4/2 (§3)`);
       }
     }

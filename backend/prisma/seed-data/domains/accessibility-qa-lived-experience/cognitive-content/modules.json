@@ -28,7 +28,7 @@
   },
   {
     "id": "aqa-cc4",
-    "title": "The Energy Cost of an Interface",
+    "title": "Interaction Cost: What a Task Really Demands",
     "description": "Measure how much a task actually costs a user with a limited, non-renewable budget of effort, and argue it as a real finding — counting the interactions a task genuinely requires versus the ones a redesign added for free, session limits that assume nobody ever has to physically stop mid-task, the specific cost of work an interface makes someone redo, the real posture of one-handed and lying-down use, and how to write an energy-cost finding precise enough to survive 'that's not WCAG.'",
     "tier": "mastery",
     "bloomLevel": "evaluate",

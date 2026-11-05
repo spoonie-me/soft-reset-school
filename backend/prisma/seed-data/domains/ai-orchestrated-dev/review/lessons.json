@@ -1064,10 +1064,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — The Bugs AI Writes Most",
-    "description": "Ten questions: four from this module, four from Tests as a Reading Tool (the module immediately before this one in the track), two from further back in the reading-code phase. Ungraded, untimed.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's four defect patterns alongside earlier modules' reading habits, without looking them up",
+        "text": "Retrieve this module's four defect patterns and why they recur, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1163,124 +1163,124 @@
             "explanation": "Zero conditionals in an edge-case-heavy domain is the structural tell for happy-path-only code — and 'zero of something' (an empty cart, a brand-new user with no orders) is usually the single most common non-happy-path input a function actually meets in production, not a rare corner case."
           },
           {
-            "from": "Previous module — Tests as a Reading Tool",
-            "prompt": "A generated test mocks a payment gateway response using the field name the buggy code under test expects, rather than the real gateway's actual documented field name. Why does the test pass despite a real, production-breaking bug?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "A generated helper has the comment \"# try up to four times\" above `for attempt in range(max_retries):`, with max_retries set to 3. How many attempts does it make in total?",
             "options": [
               {
                 "value": "e1",
-                "label": "The mock and the code share the same wrong assumption, so the test verifies internal agreement between two things that agree with each other, not agreement with the real dependency"
+                "label": "Four, the first try plus three retries after that one"
               },
               {
                 "value": "e2",
-                "label": "The real payment gateway must have changed its API recently"
+                "label": "Three, so the comment promises more than the loop does"
               },
               {
                 "value": "e3",
-                "label": "The assertion itself is checking the wrong field"
+                "label": "Two, because counting from zero skips the first attempt"
               }
             ],
-            "correctValue": "e1",
-            "explanation": "When a mock's shape is derived from the buggy code rather than from the real dependency's actual contract, the test can't detect a bug the mock and the code both share — it's only checking that two things which agree with each other still agree, not that either one is right."
+            "correctValue": "e2",
+            "explanation": "range(max_retries) makes exactly max_retries attempts in total, so the comment promising four attempts describes a different function than the one written."
           },
           {
-            "from": "Previous module — Tests as a Reading Tool",
-            "prompt": "What does a test's assertion, read against a computed baseline rather than in isolation, usually reveal?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "A generated pagination helper computes total pages as total items divided by page size using whole-number division. With 101 items at 20 per page, what goes wrong?",
             "options": [
               {
                 "value": "f1",
-                "label": "The specific, often more precise requirement the test actually encodes, beyond what its name generically suggests"
+                "label": "It reports 6 pages, which is the correct count for the data"
               },
               {
                 "value": "f2",
-                "label": "Whether the test file is well-organized"
+                "label": "It reports 20 pages because the division is the wrong way round"
               },
               {
                 "value": "f3",
-                "label": "Nothing useful beyond what the test's name already states"
+                "label": "It reports 5 pages, so the 101st item cannot be reached"
               }
             ],
-            "correctValue": "f1",
-            "explanation": "The bulk-discount example showed this directly: computing the undiscounted baseline first turned an opaque `assert total == 127.50` into a specific, checkable claim — 'a 15-unit order gets a 15% discount' — that the test's generic name alone didn't state."
+            "correctValue": "f3",
+            "explanation": "Whole-number division drops the final partial page. It is the same miscount as the date range bug, a count that is off by one at the boundary."
           },
           {
-            "from": "Previous module — Tests as a Reading Tool",
-            "prompt": "What does high test coverage, on its own, actually tell you about a codebase?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "Why can a generated default like a 30 second timeout be reasonable in general and still wrong for your system?",
             "options": [
               {
                 "value": "g1",
-                "label": "That a line of code executed during the test run — not that anything about its behavior was actually checked by an assertion"
+                "label": "It is a typical value from other codebases, not a fact about yours"
               },
               {
                 "value": "g2",
-                "label": "That the code is very likely to be correct"
+                "label": "Thirty seconds is too long for the gateways most systems use"
               },
               {
                 "value": "g3",
-                "label": "That the code has been reviewed by a human"
+                "label": "Defaults are checked against your gateway before the code runs"
               }
             ],
             "correctValue": "g1",
-            "explanation": "Coverage measures execution, not verification — a line can run inside a test with a tautological or missing assertion and still count as covered, which is exactly the gap this module's earlier lesson on tautological assertions covered."
+            "explanation": "A generated default is the statistical center of other codebases. Whether it is safe is a checkable fact about your system that the model has no access to."
           },
           {
-            "from": "Previous module — Tests as a Reading Tool",
-            "prompt": "What makes an assertion tautological rather than a genuine check?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "What does the first, mechanical pass for finding a function's missing cases look for?",
             "options": [
               {
                 "value": "h1",
-                "label": "It can't fail given how it's constructed — for instance, asserting a mock's return value equals itself, or comparing a function's output to a value derived from the exact same logic under test"
+                "label": "The business rules a domain expert would know about in depth"
               },
               {
                 "value": "h2",
-                "label": "It uses `assertTrue` instead of a more specific assertion method"
+                "label": "Each list, optional field and call that could be empty or fail"
               },
               {
                 "value": "h3",
-                "label": "It doesn't include a custom failure message"
+                "label": "Whether the function has a comment for each branch of its logic"
               }
             ],
-            "correctValue": "h1",
-            "explanation": "A tautological assertion is structurally incapable of failing — it's comparing a value against itself or against something derived the same way, so it passes regardless of whether the code under test is actually correct, which is worse than no test because it looks like verification without providing any."
+            "correctValue": "h2",
+            "explanation": "The first pass reads the signature and body and asks what if the list is empty, the call fails or the field is null. A slower domain-knowledge pass comes second."
           },
           {
-            "from": "Three modules back — Data Shapes and Boundaries",
-            "prompt": "Why are null, empty, missing, and zero treated as four genuinely different things a function needs to consider separately, rather than one 'falsy' case?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "Why do off-by-one errors persist in generated code?",
             "options": [
               {
                 "value": "i1",
-                "label": "Each represents a distinct real-world fact — 'never set,' 'explicitly set to nothing,' 'the key doesn't exist,' and 'a real, meaningful zero value' — and conflating them silently discards information a caller may actually need"
+                "label": "Models are weak at arithmetic, so simple counting goes wrong"
               },
               {
                 "value": "i2",
-                "label": "They aren't actually different — this distinction only matters in strictly-typed languages"
+                "label": "Loops are written one step too long by default in many languages"
               },
               {
                 "value": "i3",
-                "label": "Because most databases store them using different byte representations"
+                "label": "Boundary conventions differ across the training material it saw"
               }
             ],
-            "correctValue": "i1",
-            "explanation": "The order-field examples showed this directly — a `0` discount is a real, meaningful value distinct from 'never calculated,' and a bare truthiness check silently conflates the two, exactly the shape of risk the evidence-stack exercise in that module asked you to sort."
+            "correctValue": "i3",
+            "explanation": "Languages and libraries differ on 0-indexed or 1-indexed and inclusive or exclusive ranges. The model has absorbed all of them without a signal for which one applies here."
           },
           {
-            "from": "Four modules back — Reading for Intent",
-            "prompt": "Why is a name that overstates what code does (like `sanitizeInput` that only trims whitespace) a specific, nameable risk rather than just 'bad naming'?",
+            "from": "This module — The Bugs AI Writes Most",
+            "prompt": "A generated function returns the end index minus the start index as the count of items in an inclusive range. What is wrong?",
             "options": [
               {
                 "value": "j1",
-                "label": "The name and the implementation come from the same generation pass, with nothing independently checking that the name's claim matches the logic beneath it — the name is a claim to verify, not a fact"
+                "label": "A difference is a gap, so the count is the gap plus one"
               },
               {
                 "value": "j2",
-                "label": "It's only a risk if the function is also missing a docstring"
+                "label": "Nothing is wrong, since a difference is the count of items"
               },
               {
                 "value": "j3",
-                "label": "It's not actually a risk — a plausible name is reliable evidence on its own"
+                "label": "The subtraction is the wrong way round and should be reversed"
               }
             ],
             "correctValue": "j1",
-            "explanation": "The `sanitizeInput`/`is_authorized` examples showed this precisely: a confident, plausible name is produced by the same pass as the logic it describes, with no independent check that the two agree, which is exactly why a name implying a security or correctness property has to be verified against the body before anything is built on top of the assumption that it's accurate."
+            "explanation": "The gap between two ends is not the number of items spanning them. An inclusive count is always the gap plus one, and generated code often returns the gap."
           }
         ]
       }
@@ -2052,10 +2052,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Injection and Untrusted Input",
-    "description": "Ten questions: four from this module, four from The Bugs AI Writes Most, two from further back in the reading-code phase. Ungraded, untimed.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's four interpreter-specific injection patterns alongside earlier modules' defect and reading habits, without looking them up",
+        "text": "Retrieve this module's four interpreter-specific injection patterns alongside the previous module's defect patterns, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2231,44 +2231,44 @@
             "explanation": "Zero conditionals in an edge-case-heavy domain is the structural tell for happy-path-only code, and 'zero of something' is usually the single most common non-happy-path input a function meets in production."
           },
           {
-            "from": "Three modules back — Data Shapes and Boundaries",
-            "prompt": "Why are null, empty, missing, and zero treated as four genuinely different things a function needs to consider separately?",
+            "from": "This module — Injection and Untrusted Input",
+            "prompt": "A project uses an ORM, so a reviewer assumes it cannot have SQL injection. Where does that assumption break?",
             "options": [
               {
                 "value": "i1",
-                "label": "Each represents a distinct real-world fact, and conflating them silently discards information a caller may actually need"
+                "label": "In the raw-query escape hatch, where strings get built"
               },
               {
                 "value": "i2",
-                "label": "They aren't actually different outside of strictly-typed languages"
+                "label": "Nowhere, since an ORM makes each query safe by design"
               },
               {
                 "value": "i3",
-                "label": "Because databases store them using different byte representations"
+                "label": "In queries that join more than three tables in one call"
               }
             ],
             "correctValue": "i1",
-            "explanation": "The order-field examples showed a `0` discount is a real, meaningful value distinct from 'never calculated' — a bare truthiness check silently conflates the two."
+            "explanation": "An ORM's normal query-builder methods are parameterized, but its raw-query method is as vulnerable as hand-written SQL once a string gets concatenated. Safety belongs to specific methods, not to having chosen an ORM."
           },
           {
-            "from": "Five modules back — Reading for Intent",
-            "prompt": "Why is a name that overstates what code does (like `sanitizeInput` that only trims whitespace) a specific, nameable risk?",
+            "from": "This module — Injection and Untrusted Input",
+            "prompt": "Escaping and parameter binding can both stop the same demonstrated attack. Why is binding the stronger fix?",
             "options": [
               {
                 "value": "j1",
-                "label": "The name and the implementation come from the same generation pass, with nothing independently checking that the name's claim matches the logic beneath it"
+                "label": "It covers a larger set of special characters than escaping does"
               },
               {
                 "value": "j2",
-                "label": "It's only a risk if the function is also missing a docstring"
+                "label": "It is applied in application code before the string is built"
               },
               {
                 "value": "j3",
-                "label": "A plausible name is reliable evidence on its own"
+                "label": "The value stays outside the part that gets parsed as SQL"
               }
             ],
-            "correctValue": "j1",
-            "explanation": "The `sanitizeInput` example showed this precisely — a confident name is produced by the same pass as the logic it describes, with nothing independently checking they agree."
+            "correctValue": "j3",
+            "explanation": "Escaping is a per-character patch that only works if every special character for that context was handled. Binding keeps the value out of the parsed command, so it holds for every character and context."
           }
         ]
       }

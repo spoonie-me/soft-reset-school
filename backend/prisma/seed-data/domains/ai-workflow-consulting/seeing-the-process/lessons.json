@@ -749,7 +749,7 @@
     "order": 8,
     "duration": 10,
     "difficulty": "easy",
-    "title": "Checkpoint — What This Job Actually Is",
+    "title": "Checkpoint — What the Work Involves",
     "description": "Ten questions pulling across the module. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
@@ -766,10 +766,10 @@
       },
       {
         "type": "retrieval-check",
-        "title": "Checkpoint — What This Job Actually Is",
+        "title": "Checkpoint — What the Work Involves",
         "questions": [
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "What's the difference between a judgement call and a tool recommendation?",
             "options": [
               {
@@ -789,7 +789,7 @@
             "explanation": "A tool recommendation made before a diagnosis is a guess wearing an invoice — the Northbeam invoice-matching case showed a tool hitting its own benchmark while changing nothing the client experienced, because nobody diagnosed the actual bottleneck first."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "A diagnose engagement's deliverable is:",
             "options": [
               {
@@ -809,7 +809,7 @@
             "explanation": "Diagnose produces a document and a conversation — an assessment of what's happening and what's worth automating, without building or specifying anything."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "A client says \"our dev team is ready to build, they just need to know exactly what.\" Which engagement do they need?",
             "options": [
               {
@@ -829,7 +829,7 @@
             "explanation": "Design produces the spec their own team executes — hiring you to also build it would be work they didn't ask for and didn't need."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "Why did the invoice-matching model at Northbeam hit 96% accuracy while the overall review rate stayed at 40%?",
             "options": [
               {
@@ -849,7 +849,7 @@
             "explanation": "Automation doesn't fix process inconsistency, it hardens it — the model's benchmark measured reading accuracy, not the downstream matching failure against inconsistent reference data."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "The pre-mortem procedure for spotting process risk before recommending automation starts with:",
             "options": [
               {
@@ -869,7 +869,7 @@
             "explanation": "Canonical form, then who resolves inconsistency now and how, then whether fixing the input is in scope, then the recommendation — in that order, because each later question depends on the answer to the one before it."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "In the clinic misrouting case, what actually determined the split between what the consultant owned and what the client owned?",
             "options": [
               {
@@ -889,7 +889,7 @@
             "explanation": "The line between consultant and client accountability gets drawn by what's written down before launch, not by how the after-the-fact conversation goes."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "Why was a written limitation clause not enough to actually prevent the clinic's misrouting failure?",
             "options": [
               {
@@ -909,7 +909,7 @@
             "explanation": "A written limitation establishes accountability after a failure; it doesn't prevent the failure. Making the safeguard fail loudly — an alert when it's disabled — closes the actual gap."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "Which engagement stages in this module's example genuinely have no async substitute?",
             "options": [
               {
@@ -929,7 +929,7 @@
             "explanation": "Both rely on real-time interaction — follow-up questions in an interview, and the team correcting a map live in the room — that an emailed version can't equivalently replicate."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "What's the professional way to build bad-day flexibility into a client-facing project timeline?",
             "options": [
               {
@@ -949,7 +949,7 @@
             "explanation": "Naming which dates are fixed and which are a range reads as competent project management to a client, discloses nothing personal, and happens to be exactly the structure that makes the job sustainable."
           },
           {
-            "from": "This module — What This Job Actually Is",
+            "from": "This module — What the Work Involves",
             "prompt": "A client's ambiguous request bundles \"figure out why it's broken\" and \"just fix it\" into one sentence. What's the right response?",
             "options": [
               {
@@ -1964,7 +1964,7 @@
             "explanation": "Mapping the pattern captures the fact that actually matters for later decisions (this branch is common and inherently unpredictable) without drowning the map in one-off historical instances."
           },
           {
-            "from": "Previous module — What This Job Actually Is",
+            "from": "Previous module — What the Work Involves",
             "prompt": "What's the difference between a judgement call and a tool recommendation?",
             "options": [
               {
@@ -1984,7 +1984,7 @@
             "explanation": "A tool recommendation made before a diagnosis is a guess wearing an invoice — this is the module-1 lesson that process mapping exists to serve: you can't diagnose the actual bottleneck without first mapping the real process."
           },
           {
-            "from": "Previous module — What This Job Actually Is",
+            "from": "Previous module — What the Work Involves",
             "prompt": "A diagnose engagement's deliverable is:",
             "options": [
               {
@@ -2979,7 +2979,7 @@
             "explanation": "Renata's spreadsheet is the shadow process — the documented handbook describes what Larkspur believes should happen, and the spreadsheet describes what actually keeps referrals moving."
           },
           {
-            "from": "Two modules back — What This Job Actually Is",
+            "from": "Two modules back — What the Work Involves",
             "prompt": "What's the difference between a judgement call and a tool recommendation?",
             "options": [
               {

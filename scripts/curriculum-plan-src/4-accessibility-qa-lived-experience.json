@@ -101,6 +101,7 @@
           "tier": "foundation",
           "bloom": "apply",
           "objective": "Complete real tasks with no pointing device, and diagnose what breaks when you can't.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["Tab, focus and the order nobody designed", 25, "low", "apply", true],
             ["Focus visibility, and the outline someone removed", 20, "medium", "analyze", false],
@@ -117,6 +118,7 @@
           "tier": "application",
           "bloom": "apply",
           "objective": "Navigate a page with a screen reader using the commands real users navigate with.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Setting up NVDA or VoiceOver and surviving the first hour", 25, "medium", "apply", true],
             ["Browse mode, focus mode, and why things stop responding", 20, "medium", "understand", false],
@@ -188,12 +190,13 @@
           "tier": "application",
           "bloom": "analyze",
           "objective": "Identify barriers created by memory demand, complexity and unpredictability.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["What a form asks you to hold in your head", 25, "low", "analyze", true],
             ["Consistency, predictability and the interface that moves", 20, "medium", "analyze", false],
             ["Instructions that arrive after the mistake", 25, "medium", "analyze", true],
             ["Error recovery without starting over", 20, "medium", "analyze", false],
-            ["Brain fog as a design constraint, not an edge case", 20, "low", "evaluate", true]
+            ["Limited attention and memory as a design constraint", 20, "low", "evaluate", true]
           ],
           "practice": ["Find the cognitive barrier in eight flows", 8],
           "lab": ["Audit a multi-step form for cognitive load", 4, "An audit with memory demand, recovery paths and specific reductions proposed"]
@@ -204,6 +207,7 @@
           "tier": "application",
           "bloom": "evaluate",
           "objective": "Judge whether the words in an interface can be understood by the people who have to use it.",
+          "courseSplitPulls": [5, 5, 0],
           "lessons": [
             ["Plain language that isn't patronising", 25, "low", "evaluate", true],
             ["Link text, button text and \"click here\"", 20, "medium", "apply", false],
@@ -232,15 +236,15 @@
         },
         {
           "slug": "energy-cost",
-          "name": "The Energy Cost of an Interface",
+          "name": "Interaction Cost: What a Task Really Demands",
           "tier": "mastery",
           "bloom": "evaluate",
           "objective": "Measure how much a task costs a user who has a limited budget of effort, and argue it as a real finding.",
           "lessons": [
             ["Counting the interactions a task actually requires", 25, "low", "apply", true],
-            ["Sessions that time out on someone who had to lie down", 20, "medium", "analyze", false],
+            ["Session timeouts and the user who steps away", 20, "medium", "analyze", false],
             ["Work the interface makes you redo", 25, "medium", "analyze", true],
-            ["One-handed, lying down, on a phone: the real posture", 20, "medium", "analyze", false],
+            ["One-handed and small-screen use", 20, "medium", "analyze", false],
             ["Writing an energy-cost finding that survives \"that's not WCAG\"", 20, "medium", "create", true]
           ],
           "practice": ["Count and reduce the interaction cost of seven tasks", 7],
@@ -362,6 +366,7 @@
           "tier": "mastery",
           "bloom": "analyze",
           "objective": "Diagnose the organisational reasons an accurate audit produces no change.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["The audit that sat in a drive for a year", 25, "low", "analyze", true],
             ["Nobody owns it: the accountability gap", 20, "medium", "analyze", false],
@@ -378,6 +383,7 @@
           "tier": "mastery",
           "bloom": "create",
           "objective": "Give feedback developers and designers can use, at the point where it's cheap to act on.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Meeting a team where their process already is", 25, "medium", "apply", true],
             ["Design review before anything is built", 20, "medium", "apply", false],

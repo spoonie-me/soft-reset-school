@@ -10,7 +10,7 @@
       "modules": [
         {
           "slug": "what-consulting-is",
-          "name": "What This Job Actually Is",
+          "name": "What the Work Involves",
           "tier": "foundation",
           "bloom": "understand",
           "objective": "Describe what an automation consultant is hired to decide, and what they are accountable for afterwards.",
@@ -161,7 +161,7 @@
         },
         {
           "slug": "risk-framing",
-          "name": "Naming the Risk Before You're Paid",
+          "name": "Naming the Risk Before You Commit",
           "tier": "mastery",
           "bloom": "evaluate",
           "objective": "State what can go wrong, how badly, and who bears it — while the client can still say no.",
@@ -188,6 +188,7 @@
           "tier": "application",
           "bloom": "evaluate",
           "objective": "Select tools on evidence — cost, exit, support, fit — rather than on category popularity.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["The categories: models, orchestration, RPA, and the existing software", 25, "low", "understand", true],
             ["Buy, wire together, or build: choosing honestly", 20, "medium", "evaluate", false],
@@ -204,6 +205,7 @@
           "tier": "application",
           "bloom": "create",
           "objective": "Specify an automation as a sequence of steps with defined inputs, outputs and failure behaviour.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Drawing the pipeline before choosing anything", 20, "low", "create", true],
             ["What each step receives and guarantees", 25, "medium", "apply", false],
@@ -452,7 +454,7 @@
           "lessons": [
             ["Specialising enough to be findable", 20, "low", "evaluate", true],
             ["Where these clients actually look", 25, "medium", "analyze", false],
-            ["Writing that gets you hired without a call", 20, "medium", "create", true],
+            ["Writing that explains your offer", 20, "medium", "create", true],
             ["Proof when you can't name the client", 25, "medium", "create", false],
             ["Saying no to work that will hurt you", 20, "medium", "evaluate", true]
           ],
@@ -486,14 +488,14 @@
             ["Surveillance dressed as efficiency", 20, "medium", "analyze", false],
             ["Decisions about people that shouldn't be automated", 25, "medium", "evaluate", true],
             ["The client who wants cover, not advice", 20, "medium", "analyze", false],
-            ["Declining cleanly and staying employable", 20, "low", "create", true]
+            ["Declining cleanly", 20, "low", "create", true]
           ],
           "practice": ["Decide take or decline on eight engagements", 8],
           "lab": ["Write your own engagement red lines", 3, "A written set of red lines with the reasoning, and a decline template"]
         },
         {
           "slug": "sustainable-practice",
-          "name": "A Practice That Survives Your Body",
+          "name": "Engagements That Survive a Missed Week",
           "tier": "mastery",
           "bloom": "create",
           "objective": "Structure the work so a bad fortnight doesn't cost you a client.",
@@ -504,7 +506,7 @@
             ["What to tell a client when you can't work this week", 25, "medium", "create", false],
             ["Pricing that doesn't punish a slow week", 20, "medium", "evaluate", true]
           ],
-          "practice": ["Redesign seven engagements to be capacity-resilient", 7],
+          "practice": ["Redesign seven engagements to survive a missed week", 7],
           "lab": ["Restructure an engagement for variable capacity", 3, "A restructured plan with buffers, async deliverables and a written contingency"]
         },
         {

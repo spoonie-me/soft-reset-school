@@ -748,10 +748,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Why Correct Findings Don't Get Fixed",
-    "description": "Ten questions pulling across this module and the two that came before it. Ungraded, untimed — getting one wrong just means it comes back later.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's diagnostic frame and the retesting and severity concepts that precede it, without looking them up",
+        "text": "Retrieve this module's diagnostic frame: ownership, the sprint-ticket route, compliance theatre, and who can decide, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -847,124 +847,124 @@
             "explanation": "Zero exceptions across dozens of criteria, with no way to check who tested what or when, is a tell for theatre, not a sign of thoroughness."
           },
           {
-            "from": "Previous module — Retesting and Regression",
-            "prompt": "A ticket is marked 'Done' with a developer's comment describing the fix. What's still missing before the finding is actually verified?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "A client reports 100% completion of a one-time checkbox accessibility training, with nothing after it. What does that figure show?",
             "options": [
               {
                 "value": "a",
-                "label": "Rerunning the original reproduction steps with the original assistive technology, checked against the original expected-versus-actual pair"
+                "label": "Strong evidence that staff now apply accessibility in their work"
               },
               {
                 "value": "b",
-                "label": "Nothing — a clear closing comment is sufficient"
+                "label": "A completion statistic, which is not the same as a programme"
               },
               {
                 "value": "c",
-                "label": "A second developer's sign-off"
+                "label": "Proof that the barriers in the product have now been fixed"
               }
             ],
-            "correctValue": "a",
-            "explanation": "A closing comment is a claim about what was done, not independent confirmation the original barrier is actually gone."
+            "correctValue": "b",
+            "explanation": "Training raises awareness at one moment in time. Without follow-up, and with nobody's workload or review reflecting whether it changed anything, it is a completion statistic and not a programme."
           },
           {
-            "from": "Previous module — Retesting and Regression",
-            "prompt": "A retester hears NVDA announce something after a search that was previously silent, and marks the finding fixed without checking further. What's the actual gap?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "Why does raising awareness rarely close an accountability gap on its own?",
             "options": [
               {
                 "value": "a",
-                "label": "The retest checked for 'any announcement happened' instead of the finding's specific expected outcome"
+                "label": "People forget campaign messages within a week of seeing them"
               },
               {
                 "value": "b",
-                "label": "NVDA is unreliable and shouldn't be trusted for retesting"
+                "label": "Campaigns are priced beyond what most teams can afford to run"
               },
               {
                 "value": "c",
-                "label": "There is no gap — the original silence is fixed"
+                "label": "It leaves job descriptions, reviews and protected time unchanged"
               }
             ],
-            "correctValue": "a",
-            "explanation": "The original finding specified an exact expected outcome. 'Something happens now' is a weaker, different claim than 'the specific expected behaviour happens now.'"
+            "correctValue": "c",
+            "explanation": "Job description, review criteria and protected time are the load-bearing parts of a role. A campaign can change the mood in the room and leave the gap where it was."
           },
           {
-            "from": "Previous module — Retesting and Regression",
-            "prompt": "What are the three required parts of a real regression-check entry?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "Two tickets describe the same fix. Ticket A reads 'Accessibility issue #14: fix component per audit finding' with no estimate. Ticket B names the component, has 3 points and has acceptance criteria. Why does B get picked up?",
             "options": [
               {
                 "value": "a",
-                "label": "A concrete trigger, a check against the exact original expected behaviour, and a named, documented owner"
+                "label": "It is a smaller and easier fix than ticket A would be to do"
               },
               {
                 "value": "b",
-                "label": "A severity rating, a WCAG citation, and a due date"
+                "label": "It matches the shape sprint planning already knows how to compare"
               },
               {
                 "value": "c",
-                "label": "A screenshot, a video, and a signature"
+                "label": "It touches checkout, which is a higher-traffic page than A's"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Missing any of trigger, precise check or owner quietly turns a regression suite back into the hopeful assumption the original retest was meant to replace."
+            "correctValue": "b",
+            "explanation": "Sprint planning compares tickets that look like the ones it already handles. A ticket with no estimate, no acceptance criteria and no named component is not rejected, it is skipped past."
           },
           {
-            "from": "Previous module — Retesting and Regression",
-            "prompt": "Which kind of accessibility check is generally safe to fully automate for regression purposes?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "A company's public accessibility statement is nearly identical to a competitor's, with the company name swapped in. What does that suggest?",
             "options": [
               {
                 "value": "a",
-                "label": "Static, structural properties like contrast ratio — not dynamic behaviour like focus trapping or live-region announcements"
+                "label": "Nobody assessed this company's own product before writing it"
               },
               {
                 "value": "b",
-                "label": "Everything, with modern tooling"
+                "label": "The company applies the same tested standard as its rival"
               },
               {
                 "value": "c",
-                "label": "Nothing should ever be automated"
+                "label": "The statement is safer since a competitor already vetted it"
               }
             ],
             "correctValue": "a",
-            "explanation": "Automated tools are reliably strong on static, structural properties and reliably weak on dynamic behaviour that requires actually operating the interface."
+            "explanation": "Copied wording is close to a confession that nobody assessed this company's own product. A genuine statement tends to name something specific to the product it describes."
           },
           {
-            "from": "3+ modules back — Severity and Prioritisation",
-            "prompt": "What does 'Blocker' or 'Critical' severity precisely mean?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "Whom should you ask for a fix that needs sprint capacity, roadmap priority or budget?",
             "options": [
               {
                 "value": "a",
-                "label": "Complete task failure for an entire category of assistive-technology user — not just an especially annoying finding"
+                "label": "The person closest to the daily work on the page itself"
               },
               {
                 "value": "b",
-                "label": "Any finding that cites a Level A criterion"
+                "label": "The person who holds the specific resource the fix needs"
               },
               {
                 "value": "c",
-                "label": "Any finding an executive personally noticed"
+                "label": "The person you can get a meeting with most easily this week"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Severity's top rating is a precise claim about total task failure for a category of user, worth defending precisely rather than using loosely."
+            "correctValue": "b",
+            "explanation": "The person whose yes changes the least is usually easiest to meet, which is why so many proposals stop at the wrong desk."
           },
           {
-            "from": "3+ modules back — Severity and Prioritisation",
-            "prompt": "Is WCAG conformance level (A, AA, AAA) the same axis as severity?",
+            "from": "This module — Why Correct Findings Don't Get Fixed",
+            "prompt": "Which request is sized so that a decision-maker can actually say yes?",
             "options": [
               {
                 "value": "a",
-                "label": "No — level describes how universally applicable and testable a criterion is, not how much real-world harm violating it causes"
+                "label": "A broad request to prioritise accessibility across the product"
               },
               {
                 "value": "b",
-                "label": "Yes — Level A failures are always more severe than AA or AAA failures"
+                "label": "A list of each finding in the audit, set out one after another"
               },
               {
                 "value": "c",
-                "label": "Yes — severity is just another name for conformance level"
+                "label": "A named recipient, a specific resource, evidence and a deadline"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Treating level and severity as the same axis produces ratings that don't track actual impact — a Level A failure on a decorative element can be far less severe than an AA failure blocking a payment."
+            "correctValue": "c",
+            "explanation": "A decision-maker can only say yes to something sized small enough to be a decision. \"Please prioritise this\" has none of the four parts."
           }
         ]
       },
@@ -1786,10 +1786,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Working With Design and Engineering",
-    "description": "Ten questions pulling across this module, the previous one, and the report-writing module further back. Ungraded, untimed — a missed question just comes back later.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's process-fit and design-review frame alongside the previous module's diagnostic frame and earlier reporting concepts",
+        "text": "Retrieve this module's process-fit, design-review, pairing, and component-fix ideas alongside the previous module's diagnostic frame, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1886,23 +1886,23 @@
           },
           {
             "from": "Previous module — Why Correct Findings Don't Get Fixed",
-            "prompt": "An audit is praised publicly by a CEO. A year later, nothing has changed. What's the most likely explanation?",
+            "prompt": "Why does raising awareness rarely close an accountability gap on its own?",
             "options": [
               {
                 "value": "a",
-                "label": "The findings were never entered into a system anyone's actual job depended on — no ticket, owner, sprint or deadline"
+                "label": "People forget campaign messages within a week of seeing them"
               },
               {
                 "value": "b",
-                "label": "The CEO's praise was insincere"
+                "label": "Campaigns are priced beyond what most teams can afford to run"
               },
               {
                 "value": "c",
-                "label": "The findings were too technical to act on"
+                "label": "It leaves job descriptions, reviews and protected time unchanged"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Praise is a reaction to a document, not a ticket, owner, sprint or deadline — until a finding has all four, it isn't part of anyone's actual work."
+            "correctValue": "c",
+            "explanation": "Job description, review criteria and protected time are the load-bearing parts of a role. A campaign can change the mood in the room and leave the gap where it was."
           },
           {
             "from": "Previous module — Why Correct Findings Don't Get Fixed",
@@ -1965,44 +1965,44 @@
             "explanation": "Zero exceptions across dozens of criteria with no way to check who tested what is a tell for theatre, not thoroughness."
           },
           {
-            "from": "3+ modules back — Writing the Report",
-            "prompt": "What four elements does every finding need stated explicitly?",
+            "from": "This module — Working With Design and Engineering",
+            "prompt": "What makes a design-stage comment get resolved the same day?",
             "options": [
               {
                 "value": "a",
-                "label": "What's wrong, where it is, who it affects and how, and what to do about it"
+                "label": "It stays general so nobody feels blamed for the problem"
               },
               {
                 "value": "b",
-                "label": "A title, a citation, a severity label, and a signature"
+                "label": "It names the exact element, the value and the target"
               },
               {
                 "value": "c",
-                "label": "A screenshot, a video, a transcript, and a citation"
+                "label": "It arrives after the design is finished and handed off"
               }
             ],
-            "correctValue": "a",
-            "explanation": "A finding needs what/where/who/what-to-do each stated as its own explicit sentence, whether it's a written audit finding or a design-review comment."
+            "correctValue": "b",
+            "explanation": "A vague comment gets read, half understood and quietly deprioritised. A specific one can be fixed in the file."
           },
           {
-            "from": "3+ modules back — Writing the Report",
-            "prompt": "Why shouldn't an executive summary understate what was actually found?",
+            "from": "This module — Working With Design and Engineering",
+            "prompt": "What turns an accessibility programme from fragile into durable, per the lesson?",
             "options": [
               {
                 "value": "a",
-                "label": "It's the section decision-makers are most likely to read on its own, so understating there is functionally the same as hiding the finding from the person who could fund the fix"
+                "label": "A decision log, a team-owned checklist and a second trained person"
               },
               {
                 "value": "b",
-                "label": "It's a minor stylistic issue with no real consequence"
+                "label": "One expert who personally answers the team's questions about it"
               },
               {
                 "value": "c",
-                "label": "Executives never read summaries anyway, so it doesn't matter"
+                "label": "A much longer audit report with far more detail on each finding"
               }
             ],
             "correctValue": "a",
-            "explanation": "The executive summary is often the only section a budget-holder reads — understating it there quietly removes the evidence the case for fixing anything depends on."
+            "explanation": "A team that can only catch issues while you are in the room has gained a dependency, not a capability. Writing things down and training a second person is the difference."
           }
         ]
       },
@@ -2805,10 +2805,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Making the Case Internally",
-    "description": "Ten questions pulling across this module, the previous one, and the retesting module further back. Ungraded, untimed — a missed question just comes back later.",
+    "description": "Ten questions: four from this module, four from the module before it in this course, and two from the module two back in this course. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's framing, evidence and audience concepts alongside the previous module's process-fit ideas and earlier retesting concepts",
+        "text": "Retrieve this module's framing, evidence and audience concepts alongside the previous module's process-fit ideas and the diagnostic frame from two modules back, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2984,44 +2984,44 @@
             "explanation": "The gap comes from what has to change between the two moments — one value in a file, versus production code already shipped in several places."
           },
           {
-            "from": "3+ modules back — Retesting and Regression",
-            "prompt": "A ticket is marked 'Done' with a developer's comment describing the fix. What's still missing before the finding is actually verified?",
+            "from": "Two modules back — Why Correct Findings Don't Get Fixed",
+            "prompt": "A remediation effort needs two sprints of engineering capacity and a place on the roadmap. Whom should the request go to first?",
             "options": [
               {
                 "value": "a",
-                "label": "Rerunning the original reproduction steps with the original assistive technology, checked against the original expected-versus-actual pair"
+                "label": "The engineering manager, who is closest to the day-to-day work"
               },
               {
                 "value": "b",
-                "label": "Nothing — a clear closing comment is sufficient"
+                "label": "The VP of Product, who holds roadmap capacity and budget"
               },
               {
                 "value": "c",
-                "label": "A second developer's sign-off"
+                "label": "Legal counsel, because they can require the company to act"
               }
             ],
-            "correctValue": "a",
-            "explanation": "A closing comment is a claim about what was done, not independent confirmation the original barrier is actually gone."
+            "correctValue": "b",
+            "explanation": "A multi-sprint effort is a roadmap and budget decision. The person to ask is the one who holds the specific resource the fix requires, not the one closest to the work or the one easiest to meet."
           },
           {
-            "from": "3+ modules back — Retesting and Regression",
-            "prompt": "What are the three required parts of a real regression-check entry?",
+            "from": "Two modules back — Why Correct Findings Don't Get Fixed",
+            "prompt": "Which request is sized so that a decision-maker can actually say yes?",
             "options": [
               {
                 "value": "a",
-                "label": "A concrete trigger, a check against the exact original expected behaviour, and a named, documented owner"
+                "label": "A named recipient, a specific resource, evidence and a deadline"
               },
               {
                 "value": "b",
-                "label": "A severity rating, a WCAG citation, and a due date"
+                "label": "A broad request to prioritise accessibility across the product"
               },
               {
                 "value": "c",
-                "label": "A screenshot, a video, and a signature"
+                "label": "A list of each finding in the audit, set out one after another"
               }
             ],
             "correctValue": "a",
-            "explanation": "Missing any of trigger, precise check or owner quietly turns a regression suite back into the hopeful assumption the original retest was meant to replace."
+            "explanation": "A decision-maker can only say yes to something sized small enough to be a decision. 'Please prioritise this' has none of the four parts."
           }
         ]
       },

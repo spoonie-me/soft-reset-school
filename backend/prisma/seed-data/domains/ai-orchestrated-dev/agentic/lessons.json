@@ -825,10 +825,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Decomposition and Task Design",
-    "description": "Ten questions: four from this module, four from Error Handling and Failure Paths (the module immediately before this one), two from The Bugs AI Writes Most, further back in the track.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's decomposition, verification-condition, and ordering patterns alongside earlier modules' failure-handling and defect patterns, without looking them up",
+        "text": "Retrieve this module's decomposition, verification-condition, ordering, and checkpoint patterns, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -924,124 +924,124 @@
             "explanation": "Reversible steps first, destructive last: every step that could surface \"this whole approach was wrong\" gets the chance to do so while undoing it still just means not running the next step, rather than recovering from data that's already gone."
           },
           {
-            "from": "Previous module — Error Handling and Failure Paths",
-            "prompt": "A generated catch block does `catch (err) { return null; }` and the caller checks `if (result) { ... }`. What does this pattern actually hide?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "Why is \"smaller\" not the real target when you split a task into steps?",
             "options": [
               {
                 "value": "e1",
-                "label": "Every distinct failure — a timeout, a 404, a malformed response — collapses into the same signal as a legitimate empty result, so the caller can't tell 'nothing found' from 'something broke'"
+                "label": "Because the agent works on one file per step, whatever the task"
               },
               {
                 "value": "e2",
-                "label": "Nothing — returning null on error is a safe, conventional pattern in most languages"
+                "label": "Because a step only helps if its result can be checked alone"
               },
               {
                 "value": "e3",
-                "label": "Only network errors are actually swallowed by this pattern; other error types still propagate"
+                "label": "Because each smaller step runs faster than a larger one would"
               }
             ],
-            "correctValue": "e1",
-            "explanation": "Swallowing every error into the same falsy return erases the distinction between an empty-but-successful result and a failure — the caller has no way to recover appropriately, retry, or surface the real problem, because the specific error was thrown away at the exact point it was known."
+            "correctValue": "e2",
+            "explanation": "What matters is whether a step's result can be checked on its own against something concrete. Chopping a task into arbitrary fragments can be worse than six well-chosen steps. The other options are not claims the lesson makes."
           },
           {
-            "from": "Previous module — Error Handling and Failure Paths",
-            "prompt": "A multi-step signup writes a user row, then a workspace row, then calls a billing API — and the billing call fails. What does 'partial failure' mean here?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "You want an agent to turn customer complaint emails into support tickets. What is the best way to set the standard of good before it starts?",
             "options": [
               {
                 "value": "f1",
-                "label": "The user and workspace rows already committed and now exist with no corresponding billing record, unless something explicitly detects and repairs that state"
+                "label": "Show one real ticket you wrote, with its required parts marked"
               },
               {
                 "value": "f2",
-                "label": "The entire operation automatically rolls back across all three steps, including the external billing call"
+                "label": "Tell it to write a good ticket and trust its sense of quality"
               },
               {
                 "value": "f3",
-                "label": "Partial failure only matters if the billing API returns a 500 rather than timing out"
+                "label": "Describe your team's values and working style in a long paragraph"
               }
             ],
             "correctValue": "f1",
-            "explanation": "A database transaction, if one is even in play, only covers database operations — it has no power to undo an external API call. Without an explicit compensation or detection step, a failure partway through a multi-step write leaves the earlier, already-committed steps in place with nothing to reconcile them."
+            "explanation": "A real example you made yourself gives you and the agent something to compare against. \"Write a good ticket\" cannot be checked, and a description of values does not show what good looks like."
           },
           {
-            "from": "Previous module — Error Handling and Failure Paths",
-            "prompt": "Why does a good error message for an on-call engineer look different from a good error message for an end user?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "An agent runs for forty minutes on one big task and the diff has four defects. According to the module, what made this expensive?",
             "options": [
               {
                 "value": "g1",
-                "label": "The engineer needs enough specific, technical detail to locate the failure at 3am with no other context; the user needs to know what to do next, not the internals"
+                "label": "Each of the four defects was hard to fix even when taken alone"
               },
               {
                 "value": "g2",
-                "label": "There's no real difference — one well-written error message serves both audiences equally well"
+                "label": "The agent should have been given less access to the codebase"
               },
               {
                 "value": "g3",
-                "label": "User-facing messages should always include the full stack trace so support can escalate faster"
+                "label": "All four arrived in one run, so later work was built on the first"
               }
             ],
-            "correctValue": "g1",
-            "explanation": "These are different audiences with different needs at different moments — an engineer paged at 3am needs the specific failing call, the input that triggered it, and enough context to reproduce it; a user needs a plain statement of what happened and what to do, not internals that mean nothing to them and may leak information besides."
+            "correctValue": "g3",
+            "explanation": "Each defect alone was a five-minute fix. The cost came from how much got built on top of the first mistake before anyone looked. Access scope is a different topic from decomposition."
           },
           {
-            "from": "Previous module — Error Handling and Failure Paths",
-            "prompt": "A generated retry loop retries a failed request immediately, three times, with no delay between attempts. What's the risk specific to this pattern under a real outage?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "A written plan has been reviewed and approved. What does that change about checking each step's actual result once it runs?",
             "options": [
               {
                 "value": "h1",
-                "label": "A struggling service gets hit with a burst of immediate retries from every failing caller at once, which can turn a partial outage into a complete one"
+                "label": "Checking becomes optional for steps the plan marked as mechanical"
               },
               {
                 "value": "h2",
-                "label": "There's no real risk — retrying more times only ever increases the odds of eventual success"
+                "label": "Nothing changes, since each result still has to be checked"
               },
               {
                 "value": "h3",
-                "label": "The risk only applies to database calls, not HTTP requests"
+                "label": "Just the final step needs checking, as the plan covered the rest"
               }
             ],
-            "correctValue": "h1",
-            "explanation": "Immediate, undelayed retries synchronize load exactly when a service is least able to handle it — this is what backoff (increasing delay between attempts) and jitter (randomizing it slightly) exist to prevent, by spreading retries out instead of amplifying the exact moment of failure."
+            "correctValue": "h2",
+            "explanation": "A plan makes mistakes visible while they are still just text, but it does not replace verifying each step. The other options treat the plan as a guarantee, which the lesson rejects."
           },
           {
-            "from": "Three modules back — The Bugs AI Writes Most",
-            "prompt": "A generated retry helper is `for attempt in range(max_retries):` with `max_retries = 3`. How many total attempts does this actually make?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "A task is to rename one internal helper function that is used in exactly one file, with no callers elsewhere. Does it need a staged written plan with marked judgment points?",
             "options": [
               {
                 "value": "i1",
-                "label": "3 — range(3) yields exactly three values, so the loop body runs three times total, regardless of what the variable name implies"
+                "label": "No, because it has no irreversible step and no judgment call"
               },
               {
                 "value": "i2",
-                "label": "4 — the name 'max_retries' implies retries in addition to the first attempt"
+                "label": "Yes, because renames are destructive and hard to undo later"
               },
               {
                 "value": "i3",
-                "label": "It depends on whether the first attempt is counted separately elsewhere in the code"
+                "label": "Yes, because a staged plan is the standard for a code change"
               }
             ],
             "correctValue": "i1",
-            "explanation": "`range(3)` yields 0, 1, 2 — three iterations. The variable name suggests a convention the code doesn't actually implement; counting what the loop does, not what the name implies, is the only reliable check."
+            "explanation": "The planning ceremony is worth its cost when a task has multiple files, an irreversible step or a judgment call. A one-file rename has none of those."
           },
           {
-            "from": "Three modules back — The Bugs AI Writes Most",
-            "prompt": "A generated checkout function has zero conditionals and operates on a list of cart items. What should that absence of branching make you check first?",
+            "from": "This module — Decomposition and Task Design",
+            "prompt": "A plan's checkpoint only says \"Step 4 needs human input before proceeding.\" What is missing?",
             "options": [
               {
                 "value": "j1",
-                "label": "What happens when the list is empty — the single most common non-happy-path state a function meets"
+                "label": "A longer account of why the agent cannot decide this itself"
               },
               {
                 "value": "j2",
-                "label": "Whether the function's variable names are descriptive enough"
+                "label": "A second checkpoint added at the very end of the run"
               },
               {
                 "value": "j3",
-                "label": "Whether the function is fast enough for a large cart"
+                "label": "The actual question, plus the facts needed to answer it"
               }
             ],
-            "correctValue": "j1",
-            "explanation": "Zero conditionals in an edge-case-heavy domain is the structural tell for happy-path-only code, and an empty collection is usually the single most common non-happy-path input a function actually meets in production."
+            "correctValue": "j3",
+            "explanation": "Without the question and the facts needed to answer it, the checkpoint just moves the research burden onto the human. Checkpoints go immediately before a judgment step, not at the end."
           }
         ]
       }
@@ -1764,10 +1764,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Tools, Files and Blast Radius",
-    "description": "Ten questions: four from this module, four from Decomposition and Task Design (the module immediately before this one), two from Concurrency, Time and Ordering, further back in the track.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's scoping, isolation, and recovery patterns alongside earlier modules' decomposition and concurrency patterns, without looking them up",
+        "text": "Retrieve this module's scoping, isolation, confirmation, and recovery patterns alongside the previous module's decomposition patterns, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1943,44 +1943,44 @@
             "explanation": "The test for a judgment step is whether the inputs alone determine one correct answer, not its wording or subject matter — a pricing/policy tradeoff depends on information the code has no access to."
           },
           {
-            "from": "Three modules back — Concurrency, Time and Ordering",
-            "prompt": "Two requests hit the same record at nearly the same time: both read the current value, both compute an update based on what they read, both write. What's the resulting risk called, and why does it happen?",
+            "from": "This module — Tools, Files and Blast Radius",
+            "prompt": "A code review task needs the agent to read files only. Why is it a mistake to grant read, write, execute and network because \"access to the repo\" defaults to all four?",
             "options": [
               {
                 "value": "i1",
-                "label": "A lost update — the second write overwrites the first because both reads happened before either write, so neither request saw the other's change"
+                "label": "One wrong tool call could change things the task needed no access to"
               },
               {
                 "value": "i2",
-                "label": "A deadlock — neither request can proceed because each is waiting on the other"
+                "label": "Write access takes longer to grant, which would delay reviews"
               },
               {
                 "value": "i3",
-                "label": "This isn't actually a risk as long as both requests eventually complete successfully"
+                "label": "Network access is needed to read local files, so it is harmless"
               }
             ],
             "correctValue": "i1",
-            "explanation": "A read-then-write pattern with no locking or atomic update lets two concurrent requests both read the same starting value, compute independently, and have the second write silently clobber the first — the update one of them intended is simply lost, with no error raised anywhere."
+            "explanation": "Each of the four is a separate decision. A deliberate \"no\" is a decision, while a default \"yes\" nobody looked at is scope creep. Network access is not needed to read local files."
           },
           {
-            "from": "Three modules back — Concurrency, Time and Ordering",
-            "prompt": "A payment retry fires because the first response timed out, but the first charge actually succeeded on the provider's side before the timeout. Without an idempotency key, what happens?",
+            "from": "This module — Tools, Files and Blast Radius",
+            "prompt": "An agent asks \"About to drop table legacy_exports, confirm?\" and the person clicks yes without checking. Why is this a weak gate?",
             "options": [
               {
                 "value": "j1",
-                "label": "The customer is charged twice, because the retry has no way to tell the provider \"this is a repeat of a request that may have already succeeded\""
+                "label": "Destructive operations should run without a confirmation step"
               },
               {
                 "value": "j2",
-                "label": "The provider automatically detects and rejects the duplicate charge with no extra work required"
+                "label": "The prompt gives the person nothing to judge but the agent's claim"
               },
               {
                 "value": "j3",
-                "label": "The retry is safe by default as long as it uses the same request body as the original"
+                "label": "The person ought to have answered much faster than they did"
               }
             ],
-            "correctValue": "j1",
-            "explanation": "A timeout tells you the response was lost, not that the operation failed — retrying blindly risks re-executing an action that already succeeded. An idempotency key lets the provider recognize a retried request as the same logical operation rather than a new one, which a merely-identical request body does not guarantee on its own."
+            "correctValue": "j2",
+            "explanation": "A confirmation only works as a gate when the person has enough evidence to decide. Without it the prompt creates the appearance of oversight without the substance."
           }
         ]
       }
@@ -2678,10 +2678,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Verifying a Chain, Not a Completion",
-    "description": "Ten questions: four from this module, four from Tools, Files and Blast Radius (the module immediately before this one), two from Error Handling and Failure Paths, further back in the track.",
+    "description": "Ten questions: four from this module, four from the module before it in this course, and two from the module two back in this course. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's claim-checking and artefact-verification patterns alongside earlier modules' scoping and failure-handling patterns, without looking them up",
+        "text": "Retrieve this module's claim-checking and artefact-verification patterns alongside earlier modules' scoping and decomposition patterns, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2857,44 +2857,44 @@
             "explanation": "A real gate surfaces the evidence behind a decision — what was checked, and what it doesn't cover — not just the fact that a decision is pending."
           },
           {
-            "from": "Three modules back — Error Handling and Failure Paths",
-            "prompt": "A multi-step signup writes a user row, then a workspace row, then calls a billing API — and the billing call fails partway through. What does 'partial failure' mean here?",
+            "from": "Two modules back — Decomposition and Task Design",
+            "prompt": "Two plans touch the same twelve files. Plan A tests its riskiest assumption on file one before touching the other eleven. Plan B touches all twelve and tests everything at the end. Why is Plan A less risky when both change the same code overall?",
             "options": [
               {
                 "value": "i1",
-                "label": "The user and workspace rows already committed and now exist with no corresponding billing record, unless something explicitly detects and repairs that state"
+                "label": "Plan A finishes sooner, so there is less time for things to go wrong"
               },
               {
                 "value": "i2",
-                "label": "The entire operation automatically rolls back across all three steps, including the external billing call"
+                "label": "Total scope of change decides the risk, so the order makes no difference"
               },
               {
                 "value": "i3",
-                "label": "Partial failure only matters if the billing API returns a 500 rather than timing out"
+                "label": "A wrong assumption is found on file one, before it spreads to eleven more"
               }
             ],
-            "correctValue": "i1",
-            "explanation": "A database transaction, if one is even in play, only covers database operations — it has no power to undo an external API call, so a failure partway through leaves earlier committed steps in place with nothing to reconcile them automatically."
+            "correctValue": "i3",
+            "explanation": "Order changes where in the sequence a wrong assumption becomes visible, and how much has been built on top of it by then, not the total amount of work. The same defect costs one fix in Plan A and twelve in Plan B."
           },
           {
-            "from": "Three modules back — Error Handling and Failure Paths",
-            "prompt": "What can the caller of a function actually do differently if a swallowed error returns `null` for every distinct failure type, versus if the specific error were preserved?",
+            "from": "Two modules back — Decomposition and Task Design",
+            "prompt": "A plan step reads: \"decide whether to grandfather existing customers at the old price or migrate them automatically.\" Why does this step need a human checkpoint, even though it is written in the same flat style as the mechanical steps around it?",
             "options": [
               {
                 "value": "j1",
-                "label": "With the specific error preserved, the caller can distinguish a retryable failure (a timeout) from a permanent one (a 404) and respond appropriately; with everything collapsed to null, it can only treat every failure identically"
+                "label": "A step phrased as a plain instruction is safe to run unattended"
               },
               {
                 "value": "j2",
-                "label": "Nothing — a caller can't meaningfully act on error information regardless of how it's represented"
+                "label": "The answer rests on a business tradeoff the codebase cannot settle"
               },
               {
                 "value": "j3",
-                "label": "The caller can always infer the specific failure type from context, regardless of what the function returns"
+                "label": "Steps that involve customers need approval whatever they decide"
               }
             ],
-            "correctValue": "j1",
-            "explanation": "Preserving the specific failure (a timeout versus a not-found versus a validation error) is what lets a caller retry, surface a real message, or fail permanently — the appropriate response — instead of treating every distinct cause identically because the information was discarded before it reached them."
+            "correctValue": "j2",
+            "explanation": "The test for a judgment step is not its wording or its subject matter. It is whether the inputs alone determine one correct answer. A pricing and migration tradeoff depends on information such as support capacity and business priorities, which an agent has no access to and no standing to decide."
           }
         ]
       }

@@ -762,10 +762,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Reading for Intent",
-    "description": "Ten questions: four from this module, four from Knowing When to Take Over, two from further back. Ungraded, untimed.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's core distinctions alongside earlier modules', without looking them up",
+        "text": "Retrieve this module's reading-order, naming, comment, and constant-reconstruction distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -861,124 +861,124 @@
             "explanation": "Specific, non-round constants and fixed caps are expensive to arrive at by accident — they're evidence of a decision made somewhere else, worth naming as an open question."
           },
           {
-            "from": "Previous module — Knowing When to Take Over",
-            "prompt": "What's the shape of a situation where directing an AI tool costs more than just writing the code yourself?",
+            "from": "This module — Reading for Intent",
+            "prompt": "Why does reading a function's signature and returns before its body make the body easier to read?",
             "options": [
               {
                 "value": "e1",
-                "label": "A stalled prompt loop with no closer, a problem whose hard part is the thinking rather than the typing, or a domain you can't review well enough to judge the output"
+                "label": "The body then becomes a check against an expectation"
               },
               {
                 "value": "e2",
-                "label": "Any task that takes more than ten minutes"
+                "label": "The body can be skipped when the signature looks fine"
               },
               {
                 "value": "e3",
-                "label": "Any task involving a database"
+                "label": "The signature holds comments that explain the body plainly"
               }
             ],
             "correctValue": "e1",
-            "explanation": "Take-over situations share a shape: the tool isn't converging, the actual difficulty is deciding rather than translating, or you can't tell correct from incorrect in the domain — not a fixed time or technology boundary."
+            "explanation": "The signature and returns carry most of a function's intent. With that expectation set, the body only has to show whether it gets from inputs to outputs. The body is not skipped and signatures do not always carry comments."
           },
           {
-            "from": "Previous module — Knowing When to Take Over",
-            "prompt": "Why is a small, precise edit sometimes faster to make by hand than to prompt for?",
+            "from": "This module — Reading for Intent",
+            "prompt": "A function called formatDate also silently converts time zones. What does this show about names?",
             "options": [
               {
                 "value": "f1",
-                "label": "Because describing the exact edit precisely enough to prompt for it can take longer than just making it directly"
+                "label": "Names can overstate what code does but cannot understate it"
               },
               {
                 "value": "f2",
-                "label": "Because AI tools can't make small edits at all"
+                "label": "Names stop mattering once you have read the whole body"
               },
               {
                 "value": "f3",
-                "label": "Because manual edits are always more reliable than generated ones"
+                "label": "A name can understate a behavior change and surprise callers"
               }
             ],
-            "correctValue": "f1",
-            "explanation": "For a genuinely small, precise change, the overhead of writing a prompt precise enough to get it right can exceed the time to just make the edit — a real, situational trade-off, not a general claim about reliability."
+            "correctValue": "f3",
+            "explanation": "Misdirection runs both ways. A name can overstate, like a sanitizer that only trims, or understate, like a date formatter that also changes time zones. Names are still useful evidence, as claims to check."
           },
           {
-            "from": "Previous module — Knowing When to Take Over",
-            "prompt": "What does a personal 'take-over rule,' built from evidence rather than instinct, actually look for?",
+            "from": "This module — Reading for Intent",
+            "prompt": "A comment says one thing and the code beneath it does another. What is that mismatch worth to a reviewer?",
             "options": [
               {
                 "value": "g1",
-                "label": "Recurring, nameable situations from your own logged experience where directing cost more than doing it yourself"
+                "label": "Nothing, since comments are noise and the code is what counts"
               },
               {
                 "value": "g2",
-                "label": "A fixed time limit that applies to every task equally"
+                "label": "A lead that points at the gap between intent and what shipped"
               },
               {
                 "value": "g3",
-                "label": "Whether a task feels hard at first glance"
+                "label": "Proof that the code is correct and the comment is outdated"
               }
             ],
-            "correctValue": "g1",
-            "explanation": "A rule built from a logged decision history names specific, recurring situations — not a generic feeling or a one-size time limit — which is what makes it something you can actually apply consistently next time."
+            "correctValue": "g2",
+            "explanation": "A comment that contradicts its code is often the closest thing to a written requirement for undocumented code. It shows where intent and what shipped may have split apart."
           },
           {
-            "from": "Previous module — Knowing When to Take Over",
-            "prompt": "A developer is asked to implement something in a domain they don't understand well enough to review the AI's output. What's the accurate framing?",
+            "from": "This module — Reading for Intent",
+            "prompt": "Your one-sentence summary of a function keeps growing a third and fourth clause. What is that most likely telling you?",
             "options": [
               {
                 "value": "h1",
-                "label": "This is exactly the situation where directing is risky, because you can't tell correct output from confidently wrong output"
+                "label": "That your sentence writing needs practice at compressing ideas"
               },
               {
                 "value": "h2",
-                "label": "AI tools are more reliable in unfamiliar domains, since they've seen more examples than any one person has"
+                "label": "That the function is correct but written in an unusual style"
               },
               {
                 "value": "h3",
-                "label": "It doesn't matter, since the code will be reviewed by someone else eventually"
+                "label": "That the function is stitching together more than one job"
               }
             ],
-            "correctValue": "h1",
-            "explanation": "Review requires knowing what correct looks like. In a domain you can't evaluate, fluent-and-wrong output is indistinguishable from fluent-and-right — the risk that motivated most of this module's earlier lessons on reading code carefully."
+            "correctValue": "h3",
+            "explanation": "The difficulty is information about the function, not a failure of compression. It usually means several responsibilities were stitched together for convenience."
           },
           {
-            "from": "Three modules back — What Actually Changes",
-            "prompt": "What actually predicts whether a task is a good fit to delegate to an AI tool?",
+            "from": "This module — Reading for Intent",
+            "prompt": "Why can a model-written comment claim three retries with exponential backoff while the code falls short of that?",
             "options": [
               {
                 "value": "i1",
-                "label": "Pattern density and whether the result is checkable — not how difficult the task looks to a human"
+                "label": "Summary and logic are separate tasks with no check between them"
               },
               {
                 "value": "i2",
-                "label": "Whether the task involves a well-known algorithm"
+                "label": "Models stop writing accurate comments once a file gets long"
               },
               {
                 "value": "i3",
-                "label": "How many lines of code the task is likely to require"
+                "label": "Comments are compiled into the program and then drift from it"
               }
             ],
             "correctValue": "i1",
-            "explanation": "A hard-looking regex can be a great fit; a trivial-sounding, unwritten business rule can be a terrible one — human difficulty doesn't track the real predictor."
+            "explanation": "A generated comment can describe the intended behavior from the prompt while the logic implements less. Nothing forces the two to agree, so check the comment against the code."
           },
           {
-            "from": "Four modules back — The Executable Spec",
-            "prompt": "Why does \"make it better\" fail as a specification?",
+            "from": "This module — Reading for Intent",
+            "prompt": "A function has an oddly specific constant and no comment. Why is the constant worth a closer look rather than a shrug?",
             "options": [
               {
                 "value": "j1",
-                "label": "It names no state the code could fail to be in, so nothing can actually be checked against it"
+                "label": "Odd constants point to wrong code that should be changed now"
               },
               {
                 "value": "j2",
-                "label": "It's grammatically incomplete"
+                "label": "A specific number is rarely accidental, so someone decided it"
               },
               {
                 "value": "j3",
-                "label": "It doesn't specify a programming language"
+                "label": "Constants matter in handwritten code but not in generated code"
               }
             ],
-            "correctValue": "j1",
-            "explanation": "A spec only does work if some output could fail it — this is the same falsifiability idea that makes a one-sentence function description useful only when it's specific enough to be wrong."
+            "correctValue": "j2",
+            "explanation": "Nobody types a number like 0.015 unless it came from a contract, a rule or a decision. Name it as an open question to confirm, not a conclusion to build on."
           }
         ]
       }
@@ -1690,10 +1690,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Control Flow and State",
-    "description": "Ten questions: four from this module, four from Reading for Intent, two from further back. Ungraded, untimed.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve this module's core distinctions alongside earlier modules', without looking them up",
+        "text": "Retrieve this module's tracing, branch, guard-clause, shared-state, and loop distinctions alongside the previous module's reading habits, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1869,44 +1869,44 @@
             "explanation": "The `handleSignup` example — validate, create, email, log, provision — resisted one-sentence compression because it genuinely was five separable responsibilities, not one function that was merely hard to describe."
           },
           {
-            "from": "Two modules back — Knowing When to Take Over",
-            "prompt": "What's the shape of a situation where directing an AI tool costs more than writing the code yourself?",
+            "from": "This module — Control Flow and State",
+            "prompt": "A loop has an exit condition. Why is that not enough to call it safe?",
             "options": [
               {
                 "value": "i1",
-                "label": "A stalled prompt loop with no closer, a problem whose hard part is deciding rather than translating, or a domain you can't review well enough to judge the output"
+                "label": "An exit condition means the loop stops after the first pass"
               },
               {
                 "value": "i2",
-                "label": "Any task that takes more than ten minutes to prompt for"
+                "label": "Loops should be replaced by recursion in the code you review"
               },
               {
                 "value": "i3",
-                "label": "Any task touching a database"
+                "label": "The condition may not become true for inputs nobody tested"
               }
             ],
-            "correctValue": "i1",
-            "explanation": "Take-over situations share a recognizable shape — non-convergence, decision-heavy work, or an unreviewable domain — not a fixed time or technology boundary."
+            "correctValue": "i3",
+            "explanation": "Reading a loop for correctness means naming what would have to be true in the real world for it to stop, then checking that this is guaranteed rather than just usual."
           },
           {
-            "from": "Three modules back — Reading the First Draft",
-            "prompt": "What's the fastest reliable signal that a generated diff needs a full rewrite rather than a quick fix?",
+            "from": "This module — Control Flow and State",
+            "prompt": "A branch looks like it handles a case, but an earlier, wider condition already matches every value it would catch. What does that usually signal?",
             "options": [
               {
                 "value": "j1",
-                "label": "The core approach itself is wrong for the problem, not just a detail within an otherwise sound approach"
+                "label": "A requirement may have been put where it cannot ever fire"
               },
               {
                 "value": "j2",
-                "label": "The diff is longer than about 50 lines"
+                "label": "The branch is a harmless duplicate that a reviewer can ignore"
               },
               {
                 "value": "j3",
-                "label": "The diff doesn't include any comments"
+                "label": "The branch is faster since it does not run, which is a plus"
               }
             ],
             "correctValue": "j1",
-            "explanation": "Line count and comment presence are surface features; whether the underlying approach actually fits the problem is the distinction that determines whether refining is salvageable or wasted effort."
+            "explanation": "Dead branches often mean the author had a requirement in mind but placed it where it can never fire. Check branch order, not just branch content."
           }
         ]
       }

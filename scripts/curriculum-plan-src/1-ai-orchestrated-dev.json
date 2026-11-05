@@ -101,6 +101,7 @@
           "tier": "foundation",
           "bloom": "understand",
           "objective": "Reconstruct what a piece of code is trying to do before judging whether it does it.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["Read the signature, then the return, then the middle", 20, "low", "apply", true],
             ["Naming as evidence — and as misdirection", 25, "medium", "analyze", false],
@@ -117,6 +118,7 @@
           "tier": "foundation",
           "bloom": "analyze",
           "objective": "Trace every path through a piece of code, including the ones nobody thought about.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Tracing a happy path by hand", 20, "low", "apply", true],
             ["Every branch is a promise about a case that exists", 25, "medium", "analyze", false],
@@ -188,6 +190,7 @@
           "tier": "application",
           "bloom": "analyze",
           "objective": "Recognise the recurring defect patterns in generated code and know why the training data produces them.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["Off-by-one, inclusive bounds, and the fencepost that never dies", 20, "low", "analyze", true],
             ["Copy-paste symmetry errors the eye slides over", 25, "medium", "analyze", false],
@@ -204,6 +207,7 @@
           "tier": "application",
           "bloom": "analyze",
           "objective": "Find every place untrusted input reaches an interpreter, and close it the way that actually closes it.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["SQL injection: the bug generated database code writes by default", 25, "medium", "analyze", true],
             ["Parameterisation, and why escaping is not the same fix", 20, "medium", "apply", false],
@@ -275,6 +279,7 @@
           "tier": "application",
           "bloom": "create",
           "objective": "Break work into steps an agent can complete and you can verify one at a time.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["Why one big task fails and six small ones don't", 20, "low", "understand", true],
             ["A step is done when something checkable is true", 25, "medium", "apply", false],
@@ -291,6 +296,7 @@
           "tier": "application",
           "bloom": "evaluate",
           "objective": "Decide what an agent may touch, and make the worst case survivable.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["What the agent can reach is what it can break", 20, "low", "understand", true],
             ["Read, write, execute, network: granting the minimum", 25, "medium", "apply", false],

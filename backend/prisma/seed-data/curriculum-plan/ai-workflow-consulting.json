@@ -859,9 +859,10 @@
             "energy": "low",
             "badDayPath": true,
             "pulls": {
-              "thisModule": 4,
-              "previousModule": 4,
-              "olderModules": 2
+              "thisModule": 10,
+              "previousModule": 0,
+              "olderModules": 0,
+              "ownCourseOnly": true
             }
           }
         },
@@ -934,9 +935,10 @@
             "energy": "low",
             "badDayPath": true,
             "pulls": {
-              "thisModule": 4,
+              "thisModule": 6,
               "previousModule": 4,
-              "olderModules": 2
+              "olderModules": 0,
+              "ownCourseOnly": true
             }
           }
         },

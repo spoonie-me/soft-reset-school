@@ -724,10 +724,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Cognitive Accessibility",
-    "description": "Ten questions pulling across this module, the module before it, and further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve the module's core distinctions without looking them up",
+        "text": "Retrieve this module's distinctions on working memory, consistency, instructions, error recovery and time limits, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -812,14 +812,14 @@
               },
               {
                 "value": "b",
-                "label": "The placeholder disappears the moment the user starts typing, removing the instruction at exactly the point it would help"
+                "label": "Placeholders aren't supported in most modern browsers"
               },
               {
                 "value": "c",
-                "label": "Placeholders aren't supported in most modern browsers"
+                "label": "The placeholder disappears the moment the user starts typing, removing the instruction at exactly the point it would help"
               }
             ],
-            "correctValue": "b",
+            "correctValue": "c",
             "explanation": "A placeholder is designed to vanish on input, which guarantees it's gone right when someone would check their input against it — the fix is a persistent instruction, not removing the placeholder."
           },
           {
@@ -828,119 +828,119 @@
             "options": [
               {
                 "value": "a",
-                "label": "Both are defensible — any failed submission should clear all fields"
+                "label": "Clearing the CVV is a defensible security choice; clearing the unrelated shipping address is a state-management defect, not a security decision"
               },
               {
                 "value": "b",
-                "label": "Clearing the CVV is a defensible security choice; clearing the unrelated shipping address is a state-management defect, not a security decision"
+                "label": "Both are defensible — any failed submission should clear all fields"
               },
               {
                 "value": "c",
                 "label": "Neither should ever be cleared, under any circumstances"
               }
             ],
-            "correctValue": "b",
+            "correctValue": "a",
             "explanation": "Not persisting a sensitive value like a CVV is a real, narrow security decision. Clearing unrelated fields alongside it has no equivalent justification — it's an implementation shortcut."
           },
           {
-            "from": "Previous module — Switch Access and Voice Control",
-            "prompt": "A custom button has no accessible name a voice-control user could say to activate it. What's the actual mechanism behind this failure?",
+            "from": "This module — Cognitive Accessibility",
+            "prompt": "Under real-world load such as tiredness or interruption, roughly how many items does working memory reliably hold, per the lesson?",
             "options": [
               {
                 "value": "a",
-                "label": "Voice control software can only target elements that expose a name matching, or contained within, their visible label"
+                "label": "Roughly three or four items held at once"
               },
               {
                 "value": "b",
-                "label": "Voice control doesn't work with custom-styled buttons at all, regardless of markup"
+                "label": "Roughly seven items, give or take two"
               },
               {
                 "value": "c",
-                "label": "This only affects users with a speech disability, not motor-impairment voice-control users"
+                "label": "Roughly twelve items held at the same time"
               }
             ],
             "correctValue": "a",
-            "explanation": "Voice control tools like Voice Control (iOS) and Voice Access (Android) work by matching what the user says against each element's accessible name — an icon-only button with no aria-label has nothing sayable to target."
+            "explanation": "The lesson says working memory under load holds around three or four items, and that the often quoted 7 plus or minus 2 figure has been revised downward."
           },
           {
-            "from": "Previous module — Switch Access and Voice Control",
-            "prompt": "Why does switch scanning make every extra, unnecessary control on a screen cost real time, not just visual clutter?",
+            "from": "This module — Cognitive Accessibility",
+            "prompt": "Which re-entry does WCAG 3.3.7 Redundant Entry leave alone on purpose?",
             "options": [
               {
                 "value": "a",
-                "label": "Switch scanning moves sequentially through every focusable element at a fixed interval, so each additional control adds a fixed wait before reaching the one that's actually wanted"
+                "label": "A date of birth asked for again on each page of the form"
               },
               {
                 "value": "b",
-                "label": "It doesn't — switch users can jump directly to any control the way a mouse user can"
+                "label": "An email address typed again on the next screen of a form"
               },
               {
                 "value": "c",
-                "label": "Only true for switch devices with fewer than two buttons"
+                "label": "A password confirmation field that needs fresh typing"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Single-switch scanning is sequential and timed — every control the interface adds is a control the scan has to pass through, at a real cost in seconds, before it reaches the target."
+            "correctValue": "c",
+            "explanation": "Essential re-entry is carved out. A password confirmation needs an independent entry and a payment CVV should never be stored. The judgement call is whether re-entry is essential or nobody built the reuse."
           },
           {
-            "from": "Previous module — Switch Access and Voice Control",
-            "prompt": "A timed session gives no warning before logging a user out. Under what specific condition is a fixed time limit like this acceptable per WCAG 2.2.1?",
+            "from": "This module — Cognitive Accessibility",
+            "prompt": "Why does WCAG 3.2.4 Consistent Identification matter for people with limited energy?",
             "options": [
               {
                 "value": "a",
-                "label": "Never without a warning and a way to turn off, adjust, or extend it — except a small set of named exceptions like real-time auctions or genuinely essential limits"
+                "label": "Because it keeps brand colours the same across the whole site"
               },
               {
                 "value": "b",
-                "label": "Any time limit under 20 minutes is automatically acceptable"
+                "label": "Because users can act on habit instead of re-reading screens"
               },
               {
                 "value": "c",
-                "label": "It's acceptable as long as the limit is stated in the terms of service"
+                "label": "Because it shortens each page so there is less text to read"
               }
             ],
-            "correctValue": "a",
-            "explanation": "2.2.1's default is that time limits must be adjustable or extendable, with narrow, named exceptions — a benefits or signup form doesn't fall under any of them."
+            "correctValue": "b",
+            "explanation": "The same label and icon wherever the same thing happens means habit can carry the user. It is not about branding polish."
           },
           {
-            "from": "3+ modules back — Keyboard-Only Operation",
-            "prompt": "Tab order is determined by what, regardless of how CSS repositions elements visually?",
+            "from": "This module — Cognitive Accessibility",
+            "prompt": "A timed form session has no warning before it logs the user out. Which two fixes does the lesson name, and why both?",
             "options": [
               {
                 "value": "a",
-                "label": "DOM order — CSS layout properties like grid-column or flex order never affect the tab sequence"
+                "label": "A longer timeout for all users, plus a larger logout button"
               },
               {
                 "value": "b",
-                "label": "Visual left-to-right, top-to-bottom position on the rendered page"
+                "label": "A warning alone, since autosave is a security risk for forms"
               },
               {
                 "value": "c",
-                "label": "Whichever element has the highest z-index"
+                "label": "A warning with an extend option, plus autosave for missed ones"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Tab order always follows DOM order; grid-column, flex order, position: absolute and floats change where something is painted, never where it sits in the tab sequence."
+            "correctValue": "c",
+            "explanation": "The two fixes solve different halves of the problem. A form as effortful as a long application form warrants both, not either."
           },
           {
-            "from": "3+ modules back — Screen Readers: Actually Using One",
-            "prompt": "What distinguishes a genuine keyboard trap from correctly constrained focus inside a modal?",
+            "from": "This module — Cognitive Accessibility",
+            "prompt": "How does the lesson say cognitive barriers should be treated when no single WCAG criterion covers them?",
             "options": [
               {
                 "value": "a",
-                "label": "Whether there's any standard keyboard mechanism — Escape, a reachable close control, Shift+Tab escaping backwards — that gets focus back out"
+                "label": "They are left out because they cannot be tested pass or fail"
               },
               {
                 "value": "b",
-                "label": "Whether Tab cycles within the modal at all"
+                "label": "They are named as findings on their own evaluative merits"
               },
               {
                 "value": "c",
-                "label": "Whether the modal has more than five focusable elements"
+                "label": "They are reported if the client asks about them directly"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Cycling focus within an open modal is expected, correct behaviour. It only becomes a trap when every standard exit — Escape, a reachable close button, Shift+Tab — genuinely fails."
+            "correctValue": "b",
+            "explanation": "COGA guidance is largely advisory, and a lot of it does not fit a pass or fail criterion. That does not make it less real, so the report names the barrier anyway."
           }
         ]
       },
@@ -1762,10 +1762,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Content, Language and Reading",
-    "description": "Ten questions pulling across this module, the module before it, and further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions: five from this module and five from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve the module's core distinctions without looking them up",
+        "text": "Retrieve this module's content and language distinctions alongside the previous module's cognitive load distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1862,43 +1862,43 @@
           },
           {
             "from": "Previous module — Cognitive Accessibility",
-            "prompt": "A billing address field is blank with no checkbox to reuse the shipping address entered earlier. What does this violate?",
+            "prompt": "Under real-world load such as tiredness or interruption, roughly how many items does working memory reliably hold, per the lesson?",
             "options": [
               {
                 "value": "a",
-                "label": "WCAG 3.3.7 Redundant Entry — no mechanism to reuse or auto-populate the earlier value"
+                "label": "Roughly seven items, give or take two"
               },
               {
                 "value": "b",
-                "label": "Nothing — the user already typed the address once"
+                "label": "Roughly twelve items held at the same time"
               },
               {
                 "value": "c",
-                "label": "WCAG 2.1.2 No Keyboard Trap"
+                "label": "Roughly three or four items held at once"
               }
             ],
-            "correctValue": "a",
-            "explanation": "3.3.7 requires information already provided to be auto-populated or available to select, not simply theoretically re-typeable by the user."
+            "correctValue": "c",
+            "explanation": "The lesson says working memory under load holds around three or four items, and that the often quoted 7 plus or minus 2 figure has been revised downward."
           },
           {
             "from": "Previous module — Cognitive Accessibility",
-            "prompt": "A one-time verification code field blocks paste. Why does this tend to increase errors rather than reduce them?",
+            "prompt": "Why does WCAG 3.2.4 Consistent Identification matter for people with limited energy?",
             "options": [
               {
                 "value": "a",
-                "label": "It forces manual retention and retyping across an app switch, exactly the condition most likely to produce a transposed digit"
+                "label": "Because users can act on habit instead of re-reading screens"
               },
               {
                 "value": "b",
-                "label": "Paste never works reliably on mobile devices anyway"
+                "label": "Because it keeps brand colours the same across the whole site"
               },
               {
                 "value": "c",
-                "label": "It doesn't — this is a myth"
+                "label": "Because it shortens each page so there is less text to read"
               }
             ],
             "correctValue": "a",
-            "explanation": "The failure mode blocking paste prevents is minor; the failure mode it guarantees — retyping a number from memory under time pressure — is the larger one."
+            "explanation": "The same label and icon wherever the same thing happens means habit can carry the user. It is not about branding polish."
           },
           {
             "from": "Previous module — Cognitive Accessibility",
@@ -1921,64 +1921,64 @@
             "explanation": "A narrow security reason can justify not retaining a specific sensitive value; it never justifies clearing unrelated correct fields alongside it."
           },
           {
-            "from": "3+ modules back — Semantics, Roles and the Accessibility Tree",
-            "prompt": "A form field has both a correctly connected native label and a leftover aria-label with different text. Which one does a screen reader announce?",
+            "from": "Previous module — Cognitive Accessibility",
+            "prompt": "A button shifts position under a growing 'unsaved changes' banner, right as the user aims to click it. Which WCAG criterion covers this?",
             "options": [
               {
                 "value": "a",
-                "label": "The aria-label — it sits higher in the accessible name computation's priority order and wins even when the native label is completely correct"
+                "label": "3.2.2 On Input, since it covers unexpected layout changes on the page"
               },
               {
                 "value": "b",
-                "label": "The native label, because it's visually connected to the field"
+                "label": "1.4.3 Contrast Minimum, since the shifted button changes its contrast"
               },
               {
                 "value": "c",
-                "label": "Whichever one comes first in the HTML source"
+                "label": "None directly, as 3.2.1 and 3.2.2 cover context changes, not reflow"
+              }
+            ],
+            "correctValue": "c",
+            "explanation": "3.2.1 and 3.2.2 are scoped to context changes such as navigation, new windows and focus jumps, not layout reflow. This is a real barrier with no clean citation, which is exactly the kind of barrier this whole phase exists to name."
+          },
+          {
+            "from": "Previous module — Cognitive Accessibility",
+            "prompt": "A password field's only instructions are placeholder text. What's the core problem?",
+            "options": [
+              {
+                "value": "a",
+                "label": "It vanishes when typing starts, just when it would help"
+              },
+              {
+                "value": "b",
+                "label": "It is rendered in low contrast, which makes it hard to read"
+              },
+              {
+                "value": "c",
+                "label": "It is missing from most of the modern browsers people use"
               }
             ],
             "correctValue": "a",
-            "explanation": "aria-label overrides native labeling in the accessible name computation regardless of which one is visually correct — a stale aria-label left over from earlier markup silently defeats a properly connected label added later."
+            "explanation": "A placeholder is designed to vanish on input, so it is gone right when someone would check their input against it. The fix is a persistent instruction, not removing the placeholder."
           },
           {
-            "from": "3+ modules back — Magnification, Zoom and Low Vision",
-            "prompt": "A fifteen-column shift-schedule table requires horizontal scrolling at 400% zoom. Does this fail WCAG 1.4.10 Reflow?",
+            "from": "This module — Content, Language and Reading",
+            "prompt": "A size chart is published only as an image of a table. What is the real fix?",
             "options": [
               {
                 "value": "a",
-                "label": "Yes — any horizontal scrolling at 400% zoom is automatically a violation"
+                "label": "Write a long alt text that reads the table out cell by cell"
               },
               {
                 "value": "b",
-                "label": "No — genuinely tabular data is an explicit, principled exception to reflow, because forcing it into one column would destroy the row/column relationships that give it meaning"
+                "label": "Publish the data as an HTML table or text, not as alt text"
               },
               {
                 "value": "c",
-                "label": "Only if the table has more than twenty columns"
+                "label": "Mark the image as decorative so that screen readers skip it"
               }
             ],
             "correctValue": "b",
-            "explanation": "1.4.10's exception list is specific and principled — data tables genuinely requiring two-dimensional layout are exempt, though the exception gets over-claimed constantly for layouts that just weren't built responsively."
-          },
-          {
-            "from": "3+ modules back — Magnification, Zoom and Low Vision",
-            "prompt": "Green and red status text both individually pass a 4.5:1 contrast ratio against their background. Is that enough to guarantee the two states are distinguishable to every user?",
-            "options": [
-              {
-                "value": "a",
-                "label": "Yes — passing contrast is the whole requirement"
-              },
-              {
-                "value": "b",
-                "label": "No — contrast ratio and use of color are two separate criteria; a colorblind user may not distinguish the colors at all regardless of how each measures individually, so a non-color distinguisher is also required"
-              },
-              {
-                "value": "c",
-                "label": "No, because red specifically needs a higher ratio than green"
-              }
-            ],
-            "correctValue": "b",
-            "explanation": "1.4.1 Use of Color and the contrast-ratio criteria test different things entirely — passing one says nothing about the other, which is why the actual fix is adding an icon or label, not adjusting either color's ratio."
+            "explanation": "An image of tabular data can never be fully replaced by alt text. The real data should sit on the page as a table or text, with the image kept as a supplement if wanted."
           }
         ]
       },
@@ -2707,10 +2707,10 @@
     "duration": 10,
     "difficulty": "easy",
     "title": "Checkpoint — Motion, Sound and Sensory Load",
-    "description": "Ten questions pulling across this module, the module before it, and further back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions: four from this module, four from the module before it in this course, and two from the module two back in this course. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "learningObjectives": [
       {
-        "text": "Retrieve the module's core distinctions without looking them up",
+        "text": "Retrieve this module's motion, sound and sensory load distinctions alongside the previous module's content and language distinctions and the cognitive load distinctions two modules back, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2866,64 +2866,64 @@
             "explanation": "3.3.1 and 3.3.3 both concern content — a well-placed message naming no specific rule still fails to suggest an actual fix."
           },
           {
-            "from": "3+ modules back — Switch Access and Voice Control",
-            "prompt": "Two icon-only buttons, 18 by 18 pixels each, sit with zero gap between them. Does this meet WCAG 2.5.8 Target Size (Minimum)?",
+            "from": "Two modules back — Cognitive Accessibility",
+            "prompt": "How does the lesson say cognitive barriers should be treated when no single WCAG criterion covers them?",
             "options": [
               {
                 "value": "a",
-                "label": "No — both are under the 24px minimum with no spacing compensation to make up for it"
+                "label": "They are left out because they cannot be tested pass or fail"
               },
               {
                 "value": "b",
-                "label": "Yes — icon-only buttons are automatically exempt"
+                "label": "They are named as findings on their own evaluative merits"
               },
               {
                 "value": "c",
-                "label": "This criterion only applies to touchscreens"
-              }
-            ],
-            "correctValue": "a",
-            "explanation": "2.5.8's exceptions are a short, specific list — 'it's an icon' and 'this is desktop' aren't on it. Size is measured the same regardless of device class or what's rendered inside the target."
-          },
-          {
-            "from": "3+ modules back — Switch Access and Voice Control",
-            "prompt": "A checkout page shows a fixed 5-minute countdown timer with no pause, extend, or dismiss control anywhere. What's the actual defect under WCAG 2.2.1?",
-            "options": [
-              {
-                "value": "a",
-                "label": "Five minutes is generous enough for everyone, so there's no real issue"
-              },
-              {
-                "value": "b",
-                "label": "No mechanism to extend, turn off, or get warned before the limit expires — the missing mechanism is the defect, not the specific number of minutes chosen"
-              },
-              {
-                "value": "c",
-                "label": "This is only a problem if the timer is under sixty seconds"
+                "label": "They are reported if the client asks about them directly"
               }
             ],
             "correctValue": "b",
-            "explanation": "A fixed countdown with zero adjust/extend/warn mechanism fails 2.2.1 regardless of duration — a length that looks generous to whoever set it can still be mechanically impossible for a switch or voice user."
+            "explanation": "COGA guidance is largely advisory, and a lot of it does not fit a pass or fail criterion. That does not make it less real, so the report names the barrier anyway."
           },
           {
-            "from": "3+ modules back — Switch Access and Voice Control",
-            "prompt": "Why does a session timeout justified purely as 'for security' rarely survive WCAG 2.2.1's essential-exception test?",
+            "from": "Two modules back — Cognitive Accessibility",
+            "prompt": "A timed form session has no warning before it logs the user out. Which two fixes does the lesson name, and why both?",
             "options": [
               {
                 "value": "a",
-                "label": "Because warn-and-extend serves the same security goal as a silent hard cutoff, without excluding users whose input method is inherently slower"
+                "label": "A warning with an extend option, plus autosave for missed ones"
               },
               {
                 "value": "b",
-                "label": "Because security exceptions were removed from WCAG 2.2 entirely"
+                "label": "A longer timeout for all users, plus a larger logout button"
               },
               {
                 "value": "c",
-                "label": "Because 'essential' only applies to payment forms specifically"
+                "label": "A warning alone, since autosave is a security risk for forms"
               }
             ],
             "correctValue": "a",
-            "explanation": "A silent cutoff with no warning is a design choice, not a security requirement — warning the user and letting them extend doesn't meaningfully weaken the security property a timeout is meant to protect."
+            "explanation": "The two fixes solve different halves of the problem. A form as effortful as a long application form warrants both, not either."
+          },
+          {
+            "from": "Previous module — Content, Language and Reading",
+            "prompt": "An icon-only button shows a download arrow and downloads a spec sheet PDF. What should its text alternative carry?",
+            "options": [
+              {
+                "value": "a",
+                "label": "A description of the icon, such as a grey downward arrow"
+              },
+              {
+                "value": "b",
+                "label": "The action it performs, such as Download spec sheet (PDF)"
+              },
+              {
+                "value": "c",
+                "label": "An empty alt value, because the arrow is plain decoration"
+              }
+            ],
+            "correctValue": "b",
+            "explanation": "A functional image is a control, so its text alternative names what activating it does. An empty alt would leave the button with no accessible name, and a description of the arrow's shape does not say what pressing it does."
           }
         ]
       },

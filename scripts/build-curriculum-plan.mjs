@@ -40,6 +40,24 @@ function expandLesson([title, minutes, energy, bloom, badDayPath], order) {
   return { order, title, minutes, energy, bloom, badDayPath: Boolean(badDayPath) };
 }
 
+/**
+ * Each course is sold separately, so a checkpoint may only draw on modules in
+ * its own course. Where a module has fewer than three earlier modules in its
+ * course, the source file sets "courseSplitPulls": [this, previous, older] and
+ * the pulls carry ownCourseOnly: true, which is the only thing the audit
+ * accepts in place of the 40/40/20 rule.
+ */
+function checkpointPulls(mod, order, phaseOrder) {
+  if (mod.courseSplitPulls) {
+    const [thisModule, previousModule, olderModules] = mod.courseSplitPulls;
+    return { thisModule, previousModule, olderModules, ownCourseOnly: true };
+  }
+  // Phase 1 module 1 has nothing behind it yet; the audit knows.
+  if (phaseOrder === 1 && order === 1) return { thisModule: 10, previousModule: 0, olderModules: 0 };
+  if (phaseOrder === 1 && order === 2) return { thisModule: 5, previousModule: 5, olderModules: 0 };
+  return SHAPE.pulls;
+}
+
 function expandModule(mod, order, phaseOrder) {
   const lessons = mod.lessons.map((l, i) => expandLesson(l, i + 1));
   return {
@@ -71,13 +89,7 @@ function expandModule(mod, order, phaseOrder) {
       minutes: SHAPE.checkpointMinutes,
       energy: 'low',
       badDayPath: true,
-      // Phase 1 module 1 has nothing behind it yet; the audit knows.
-      pulls:
-        phaseOrder === 1 && order === 1
-          ? { thisModule: 10, previousModule: 0, olderModules: 0 }
-          : phaseOrder === 1 && order === 2
-            ? { thisModule: 5, previousModule: 5, olderModules: 0 }
-            : SHAPE.pulls,
+      pulls: checkpointPulls(mod, order, phaseOrder),
     },
   };
 }

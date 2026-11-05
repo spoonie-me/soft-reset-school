@@ -101,6 +101,7 @@
           "tier": "foundation",
           "bloom": "apply",
           "objective": "Complete real tasks with no pointing device, and diagnose what breaks when you can't.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["Tab, focus and the order nobody designed", 25, "low", "apply", true],
             ["Focus visibility, and the outline someone removed", 20, "medium", "analyze", false],
@@ -117,6 +118,7 @@
           "tier": "application",
           "bloom": "apply",
           "objective": "Navigate a page with a screen reader using the commands real users navigate with.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Setting up NVDA or VoiceOver and surviving the first hour", 25, "medium", "apply", true],
             ["Browse mode, focus mode, and why things stop responding", 20, "medium", "understand", false],
@@ -188,6 +190,7 @@
           "tier": "application",
           "bloom": "analyze",
           "objective": "Identify barriers created by memory demand, complexity and unpredictability.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["What a form asks you to hold in your head", 25, "low", "analyze", true],
             ["Consistency, predictability and the interface that moves", 20, "medium", "analyze", false],
@@ -204,6 +207,7 @@
           "tier": "application",
           "bloom": "evaluate",
           "objective": "Judge whether the words in an interface can be understood by the people who have to use it.",
+          "courseSplitPulls": [5, 5, 0],
           "lessons": [
             ["Plain language that isn't patronising", 25, "low", "evaluate", true],
             ["Link text, button text and \"click here\"", 20, "medium", "apply", false],
@@ -362,6 +366,7 @@
           "tier": "mastery",
           "bloom": "analyze",
           "objective": "Diagnose the organisational reasons an accurate audit produces no change.",
+          "courseSplitPulls": [10, 0, 0],
           "lessons": [
             ["The audit that sat in a drive for a year", 25, "low", "analyze", true],
             ["Nobody owns it: the accountability gap", 20, "medium", "analyze", false],
@@ -378,6 +383,7 @@
           "tier": "mastery",
           "bloom": "create",
           "objective": "Give feedback developers and designers can use, at the point where it's cheap to act on.",
+          "courseSplitPulls": [6, 4, 0],
           "lessons": [
             ["Meeting a team where their process already is", 25, "medium", "apply", true],
             ["Design review before anything is built", 20, "medium", "apply", false],

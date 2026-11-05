@@ -1082,12 +1082,12 @@
     "id": "awc-d1-cp",
     "moduleId": "awc-d1",
     "title": "Checkpoint — Choosing Tools You Can Defend",
-    "description": "Ten questions: four from this module, four from the previous module, two from three modules back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions, all from this module. Each course is sold separately, so nothing here draws on other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "duration": 10,
     "order": 8,
     "learningObjectives": [
       {
-        "text": "Retrieve this module's tool-selection distinctions, and earlier modules' capability and oversight distinctions, without looking them up",
+        "text": "Retrieve this module's tool-selection, total-cost, lock-in, and one-week evaluation distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -1183,124 +1183,124 @@
             "explanation": "The reassuring data-export clause hides the actual dependency in a second clause — months of field-mapping and exception-rule tuning don't come with you, which is real, underestimated exit cost."
           },
           {
-            "from": "Previous module — Naming the Risk Before You Commit",
-            "prompt": "Per the previous module, when should the failure modes of a proposed automation be named to a client?",
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "Per this module, what is the recurring weak point of RPA, which drives an existing system's screen the way a person would?",
             "options": [
               {
                 "value": "a",
-                "label": "After the engagement is signed, once real failures start appearing"
+                "label": "It cannot run on a system that offers no API to connect to"
               },
               {
                 "value": "b",
-                "label": "In the proposal, while the client can still say no"
+                "label": "It adds intelligence the other categories lack, which costs more"
               },
               {
                 "value": "c",
-                "label": "Only if the client specifically asks about risk"
+                "label": "It breaks when the layout of the target screen is changed"
+              }
+            ],
+            "correctValue": "c",
+            "explanation": "RPA is useful where no API exists, but it is fragile in one recurring way: a layout change breaks it. It does not add intelligence, and having no API is the case it is built for."
+          },
+          {
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "A client is sold an expensive orchestration platform with no model behind it. What have they bought, per the module?",
+            "options": [
+              {
+                "value": "a",
+                "label": "A model that reads their documents and pulls out the fields"
+              },
+              {
+                "value": "b",
+                "label": "A conveyor belt with no model placed on it to carry the work"
+              },
+              {
+                "value": "c",
+                "label": "A replacement for the claims system they already run today"
               }
             ],
             "correctValue": "b",
-            "explanation": "Naming what can go wrong, how badly, and who bears it belongs in the proposal itself, while the client still has a real choice — not discovered together after signing."
+            "explanation": "Orchestration tools route intelligence, they do not add it. The extraction capability still has to come from a model or other tool plugged into them."
           },
           {
-            "from": "Previous module — Naming the Risk Before You Commit",
-            "prompt": "Why does the previous module treat silent failure as worse than loud failure, even at the same underlying error rate?",
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "The input is dozens of broker templates that change without notice. Which of buy, wire or build fits best, and why?",
             "options": [
               {
                 "value": "a",
-                "label": "Silent failures are always more frequent"
+                "label": "Buy, because the vendor shares the upkeep across its customers"
               },
               {
                 "value": "b",
-                "label": "A loud failure gets caught and fixed quickly; a silent one can run for a long time doing damage nobody's positioned to notice"
+                "label": "Build, because one maintainer can track the template changes"
               },
               {
                 "value": "c",
-                "label": "Loud failures are more expensive to fix technically"
-              }
-            ],
-            "correctValue": "b",
-            "explanation": "Two designs with the same error rate carry different risk depending on whether the errors announce themselves — the whole reason silent failure gets its own category in the risk-framing module."
-          },
-          {
-            "from": "Previous module — Naming the Risk Before You Commit",
-            "prompt": "What does the previous module say about regulated processes specifically?",
-            "options": [
-              {
-                "value": "a",
-                "label": "Regulated processes should generally be avoided as clients entirely"
-              },
-              {
-                "value": "b",
-                "label": "There are specific questions worth asking before scoping a regulated process, because the risk profile is different from an unregulated one"
-              },
-              {
-                "value": "c",
-                "label": "Regulation doesn't meaningfully change how an automation should be scoped"
-              }
-            ],
-            "correctValue": "b",
-            "explanation": "Regulated processes carry questions worth asking before scoping begins, not after — the same 'ask before you're paid' logic the module's title states directly."
-          },
-          {
-            "from": "Previous module — Naming the Risk Before You Commit",
-            "prompt": "When is walking away from an engagement the right call, per the previous module?",
-            "options": [
-              {
-                "value": "a",
-                "label": "Never — a consultant should always find a way to deliver what's asked"
-              },
-              {
-                "value": "b",
-                "label": "When the honest risk assessment doesn't support what's being asked for, and it can be done professionally rather than dramatically"
-              },
-              {
-                "value": "c",
-                "label": "Only when the client can't pay"
-              }
-            ],
-            "correctValue": "b",
-            "explanation": "The module explicitly covers walking away as a professional skill, not a failure — when the honest answer is 'don't build this,' saying so is the job."
-          },
-          {
-            "from": "Three modules back — The Judgement You Can't Remove",
-            "prompt": "Per the module on judgement you can't remove, what's the difference between meaningful review and rubber-stamping?",
-            "options": [
-              {
-                "value": "a",
-                "label": "There's no real difference — any human review counts as meaningful"
-              },
-              {
-                "value": "b",
-                "label": "Meaningful review means the reviewer actually has the context and time to catch a wrong decision; rubber-stamping means approval happens regardless of what's shown"
-              },
-              {
-                "value": "c",
-                "label": "Meaningful review is simply review that happens faster"
-              }
-            ],
-            "correctValue": "b",
-            "explanation": "The distinction that module drew was about whether a review step could actually catch an error, not whether a human technically looked at the output — the same distinction that shows up again in this module's total-cost lesson about unbudgeted review labor."
-          },
-          {
-            "from": "Three modules back — The Judgement You Can't Remove",
-            "prompt": "Why does automation bias make a highly accurate system more dangerous in some ways, not less?",
-            "options": [
-              {
-                "value": "a",
-                "label": "Higher accuracy makes reviewers stop checking carefully, because the system is usually right"
-              },
-              {
-                "value": "b",
-                "label": "Accuracy has no relationship to automation bias"
-              },
-              {
-                "value": "c",
-                "label": "Higher accuracy always eliminates the need for review entirely"
+                "label": "Build, because a weekend script costs just the analyst's time"
               }
             ],
             "correctValue": "a",
-            "explanation": "A reviewer who's learned a system is usually right tends to stop actually checking it, which is exactly what lets the rare wrong decision through unreviewed — the mechanism behind that module's title."
+            "explanation": "A wide, drifting input is the case a maintained vendor tool is priced to absorb. A narrow, stable input is the reasonable build. Maintenance ownership and input variability decide it, not price this weekend."
+          },
+          {
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "Why does review labor belong in the total cost picture next to a vendor's quote?",
+            "options": [
+              {
+                "value": "a",
+                "label": "The vendor is contractually required to include it in the quote"
+              },
+              {
+                "value": "b",
+                "label": "Tools are rarely trusted to post unchecked, so review recurs"
+              },
+              {
+                "value": "c",
+                "label": "It is a one-off setup cost that ends once the tool launches"
+              }
+            ],
+            "correctValue": "b",
+            "explanation": "Review labor, exception handling, volume-scaling pricing and maintenance are the parts that rarely appear on a quote. Review time scales with volume the same way the subscription does."
+          },
+          {
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "Which single question, asked before signing, surfaces all four sources of lock-in?",
+            "options": [
+              {
+                "value": "a",
+                "label": "Can we export our data as a file when we decide to leave?"
+              },
+              {
+                "value": "b",
+                "label": "How many customers does the vendor have, and for how long?"
+              },
+              {
+                "value": "c",
+                "label": "If we left in a year, what would we actually take with us?"
+              }
+            ],
+            "correctValue": "c",
+            "explanation": "Lock-in comes from output format, workflow logic, tuned assets and institutional knowledge. Asking only about data export is necessary but not enough."
+          },
+          {
+            "from": "This module — Choosing Tools You Can Defend",
+            "prompt": "Under a one-week deadline, which step of the evaluation is not negotiable?",
+            "options": [
+              {
+                "value": "a",
+                "label": "Building a test set from your own documents, hard ones included"
+              },
+              {
+                "value": "b",
+                "label": "Letting the vendor run its demo on its own cleanest documents"
+              },
+              {
+                "value": "c",
+                "label": "Skipping the cost and exit questions to save time for testing"
+              }
+            ],
+            "correctValue": "a",
+            "explanation": "A demo is run on the vendor's cleanest documents by definition. A test set of your own real documents is the minimum, and the time you save should go to cost and exit questions, not skip them."
           }
         ]
       },
@@ -2064,12 +2064,12 @@
     "id": "awc-d2-cp",
     "moduleId": "awc-d2",
     "title": "Checkpoint — Designing the Pipeline",
-    "description": "Ten questions: four from this module, four from the previous module, two from three modules back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions: six from this module and four from the module before it in this course. Nothing is drawn from other courses. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "duration": 10,
     "order": 8,
     "learningObjectives": [
       {
-        "text": "Retrieve this module's pipeline-design distinctions, and earlier modules' tool-selection and data-readiness distinctions, without looking them up",
+        "text": "Retrieve this module's pipeline-design distinctions alongside the previous module's tool-selection distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -2245,44 +2245,44 @@
             "explanation": "A trimmed self-built test set is a real, defensible compromise; skipping the cost and lock-in questions isn't, since they cost almost no time to ask and leave exactly the exposure a rushed decision can't afford."
           },
           {
-            "from": "Three modules back — The Data You Actually Have",
-            "prompt": "Per the module on data readiness, what should be checked before assuming a data source can support a proposed automation?",
+            "from": "This module — Designing the Pipeline",
+            "prompt": "What does a step contract specify that a pipeline diagram does not?",
             "options": [
               {
                 "value": "a",
-                "label": "Where the data actually lives, whether there's enough of it labelled correctly, and whether it's wrong in a consistent, invisible way"
+                "label": "The order in which the steps run, from the first to the last"
               },
               {
                 "value": "b",
-                "label": "Only whether the data exists at all, in any form"
+                "label": "The inputs, outputs and what success and failure mean for a step"
               },
               {
                 "value": "c",
-                "label": "Only whether the client is willing to share it"
+                "label": "The colours and layout used to draw the diagram on the page"
               }
             ],
-            "correctValue": "a",
-            "explanation": "That module's core diagnostic went past 'does data exist' to volume, labelling, and a specific, consistent kind of wrongness that doesn't show up until it's relied on."
+            "correctValue": "b",
+            "explanation": "A diagram shows the sequence. A contract says what actually passes between two steps, so two working steps still connect."
           },
           {
-            "from": "Three modules back — The Data You Actually Have",
-            "prompt": "What does that module say about personal data specifically, when scoping an automation?",
+            "from": "This module — Designing the Pipeline",
+            "prompt": "What does an item that fails halfway need, so it does not silently stall?",
             "options": [
               {
                 "value": "a",
-                "label": "What may legally leave the building has to be checked — not every dataset that exists internally can be sent to an external vendor or model provider"
+                "label": "A distinct status, a retry-or-escalate call and a named owner"
               },
               {
                 "value": "b",
-                "label": "Personal data is never usable in an AI automation under any circumstances"
+                "label": "A timestamp that records when a step last updated the item"
               },
               {
                 "value": "c",
-                "label": "Personal data concerns only apply to healthcare and financial clients"
+                "label": "Automatic deletion so it cannot clog the queue for later items"
               }
             ],
             "correctValue": "a",
-            "explanation": "The module's framing was specifically about what may leave the building — a legal and contractual question about data movement, not a blanket prohibition."
+            "explanation": "A stalled item with only a timestamp that quietly stops updating is the failure the lesson describes. It needs a status, a decision by failure type and an owner who actually has a worklist."
           }
         ]
       },
@@ -3036,12 +3036,12 @@
     "id": "awc-d3-cp",
     "moduleId": "awc-d3",
     "title": "Checkpoint — Prompts as Production Components",
-    "description": "Ten questions: four from this module, four from the previous module, two from three modules back. Ungraded, untimed, and getting one wrong just means it comes back later.",
+    "description": "Ten questions: four from this module, four from the module before it in this course, and two from the module two back in this course. Ungraded, untimed, and getting one wrong just means it comes back later.",
     "duration": 10,
     "order": 8,
     "learningObjectives": [
       {
-        "text": "Retrieve this module's prompt-as-production distinctions, and earlier modules' pipeline-design and risk-framing distinctions, without looking them up",
+        "text": "Retrieve this module's prompt-as-production distinctions, and earlier modules' pipeline-design and tool-selection distinctions, without looking them up",
         "bloomLevel": "remember"
       }
     ],
@@ -3217,44 +3217,44 @@
             "explanation": "Matching the fallback to actual urgency meant the short outage didn't need an expensive manual fallback — but only because retry-and-queue was a deliberately designed behavior, not an assumption."
           },
           {
-            "from": "Three modules back — Naming the Risk Before You Commit",
-            "prompt": "Per the risk-framing module, why does a proposal's risk section listing only generic categories (\"model accuracy may vary,\" \"data privacy must be maintained\") fail to do its job?",
+            "from": "Two modules back — Choosing Tools You Can Defend",
+            "prompt": "Halsted's claims system turns out to already have an unused email-ingestion feature. What is the right order to check tool categories in?",
             "options": [
               {
                 "value": "a",
-                "label": "Because it doesn't name plausible, specific failure modes for this particular process and client — Anchorline's actual exclusion, buried in a document the model never saw, wasn't covered by either generic line"
+                "label": "The newest category first, since it is usually the most capable"
               },
               {
                 "value": "b",
-                "label": "Because risk sections should never be included in proposals at all"
+                "label": "A model API first, since it is the most flexible of the three"
               },
               {
                 "value": "c",
-                "label": "Because it was too short to be taken seriously"
+                "label": "Existing software, then orchestration or RPA, then a model last"
               }
             ],
-            "correctValue": "a",
-            "explanation": "Generic risk categories are true of almost any AI project and specific to none of them — they wouldn't have prompted anyone to check whether the model had actually been shown every policy exclusion, which is what let Anchorline's loan-modification tool wrongly approve an excluded loan type."
+            "correctValue": "c",
+            "explanation": "The existing claims system's unused ingestion module was the cheapest fix with no new vendor risk. Checking it first is what the whole first lesson turns on."
           },
           {
-            "from": "Three modules back — Naming the Risk Before You Commit",
-            "prompt": "Two designs for Anchorline's triage tool reach the same 3% measured error rate. Per that module, why aren't they equally risky?",
+            "from": "Two modules back — Choosing Tools You Can Defend",
+            "prompt": "A vendor quotes $600 a month and claims 95% accuracy. What did Halsted's own testing reveal that the quote did not?",
             "options": [
               {
                 "value": "a",
-                "label": "One fails loudly (a visible flag routes low-confidence cases to a monitored queue) and one fails silently (a wrong decision looks identical to a right one) — the silent design leaves errors uncaught for far longer"
+                "label": "24% of its real claim documents needed a human correction"
               },
               {
                 "value": "b",
-                "label": "They are equally risky, since the error rate is what determines risk"
+                "label": "The vendor's accuracy figure was made up for the sales deck"
               },
               {
                 "value": "c",
-                "label": "The louder design is riskier because it creates more visible complaints"
+                "label": "The tool's price fell once Halsted's volume was counted in"
               }
             ],
             "correctValue": "a",
-            "explanation": "Equal error rates can carry very different risk depending on whether a wrong decision announces itself — a distinction that also underlies this module's insistence on validating structured output rather than trusting it silently, so a bad value doesn't fall through to a default branch unnoticed."
+            "explanation": "The 95% figure was measured on the vendor's own benchmark. Halsted's actual mixed broker templates produced a 24% correction rate, which is the number that sets the review labor cost, along with the volume-scaling costs the quote never mentioned."
           }
         ]
       },
